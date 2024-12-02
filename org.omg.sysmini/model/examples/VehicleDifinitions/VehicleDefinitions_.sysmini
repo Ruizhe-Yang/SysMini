@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
+  <sysmini_child xsi:type="Package" sysmini_self="VehicleDefinitions">
+    <sysmini_child xsi:type="Documentation" sysmini_text="Example vehicle definitions model.&#xA;"/>
+    <sysmini_child xsi:type="NamespaceImport" sysmini_self="ScalarValues::*"/>
+    <sysmini_child xsi:type="NamespaceImport" sysmini_self="Quantities::*"/>
+    <sysmini_child xsi:type="NamespaceImport" sysmini_self="MeasurementReferences::*"/>
+    <sysmini_child xsi:type="NamespaceImport" sysmini_self="ISQ::*"/>
+    <sysmini_child xsi:type="NamespaceImport" sysmini_self="SI::*"/>
+    <sysmini_child xsi:type="Comment" sysmini_text="PART DEFINITIONS "/>
+    <sysmini_child xsi:type="PartDefinition" sysmini_self="Vehicle">
+      <sysmini_child xsi:type="AttributeUsage" sysmini_self="mass" sysmini_relationship="subsets" sysmini_object="ISQBase::mass"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="PartDefinition" sysmini_self="Transmission"/>
+    <sysmini_child xsi:type="PartDefinition" sysmini_self="AxleAssembly"/>
+    <sysmini_child xsi:type="PartDefinition" sysmini_self="Axle">
+      <sysmini_child xsi:type="PortUsage" sysmini_self="leftMountingPoint" sysmini_relationship="defined" sysmini_object="AxleMountIF"/>
+      <sysmini_child xsi:type="PortUsage" sysmini_self="rightMountingPoint" sysmini_relationship="defined" sysmini_object="AxleMountIF"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="PartDefinition" sysmini_self="Wheel">
+      <sysmini_child xsi:type="PortUsage" sysmini_self="hub" sysmini_relationship="defined" sysmini_object="WheelHubIF"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="PartDefinition" sysmini_self="Lugbolt">
+      <sysmini_child xsi:type="AttributeUsage" sysmini_self="tighteningTorque" sysmini_relationship="subsets" sysmini_object="ISQMechanics::torque"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="Comment" sysmini_text="PORT DEFINITIONS "/>
+    <sysmini_child xsi:type="PortDefinition" sysmini_self="DriveIF">
+      <sysmini_child xsi:type="ReferenceUsage" sysmini_self="driveTorque" sysmini_relationship="subsets" sysmini_object="ISQMechanics::torque" sysmini_direction="in"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="PortDefinition" sysmini_self="AxleMountIF">
+      <sysmini_child xsi:type="ReferenceUsage" sysmini_self="transferredTorque" sysmini_relationship="subsets" sysmini_object="ISQMechanics::torque" sysmini_direction="out"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="PortDefinition" sysmini_self="WheelHubIF">
+      <sysmini_child xsi:type="ReferenceUsage" sysmini_self="appliedTorque" sysmini_relationship="subsets" sysmini_object="ISQMechanics::torque" sysmini_direction="in"/>
+    </sysmini_child>
+    <sysmini_child xsi:type="Comment" sysmini_text="INTERFACE DEFINITIONS "/>
+    <sysmini_child xsi:type="InterfaceDefinition" sysmini_self="Mounting">
+      <sysmini_child xsi:type="Documentation" sysmini_text="The definition of the interface for mounting a Wheel to an Axle. "/>
+      <sysmini_child xsi:type="PortUsage" sysmini_self="axleMount" sysmini_relationship="defined" sysmini_object="AxleMountIF"/>
+      <sysmini_child xsi:type="PortUsage" sysmini_self="hub" sysmini_relationship="defined" sysmini_object="WheelHubIF"/>
+      <sysmini_child xsi:type="FlowConnectionUsage" sysmini_source="axleMount.transferredTorque" sysmini_target="hub.appliedTorque"/>
+    </sysmini_child>
+  </sysmini_child>
+</Namespace>

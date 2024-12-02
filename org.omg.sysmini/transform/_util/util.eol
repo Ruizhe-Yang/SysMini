@@ -1,0 +1,8 @@
+for (e in M!Element.all){
+	e.declaredName.println();
+//	if (e.type().name == "NamespaceImport"){
+//		e.eContainer.println();
+//	}
+}
+
+//M!Namespace.all.first().sysmini_child.first().println();

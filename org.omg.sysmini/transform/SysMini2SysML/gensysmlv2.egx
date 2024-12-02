@@ -1,0 +1,5 @@
+rule gen_sysmlv2
+	transform root : Namespace{
+	template : "gensysmlv2.egl"	
+	target : "gensysmlv2.sysml"
+}

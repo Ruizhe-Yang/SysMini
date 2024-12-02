@@ -1,0 +1,179 @@
+pre{
+	var rootNamespace = new SysMini!Namespace;
+}
+
+@abstract
+rule DeclarednameMapping
+	transform s : XMIni!Element
+	to t : SysMini!Element{
+		t.sysmini_self = s.declaredName;
+	}
+
+@abstract
+rule TextMapping
+	transform s : XMIni!Element
+	to t : SysMini!Element{
+		t.sysmini_text = s.body;
+	}
+
+@abstract
+rule TripletMapping
+	transform s : XMIni!Element
+	to t : SysMini!Element
+	extends DeclarednameMapping{
+		if (s.eContents().first().type().name == "Subsetting"){
+			t.sysmini_relationship = "subsets";
+			t.sysmini_object = s.eContents().first().declaredName;
+		}
+		else if(s.eContents().first().type().name == "FeatureTyping"){
+			t.sysmini_relationship = "defined";
+			t.sysmini_object = s.eContents().first().type.declaredName;
+		}
+		else if(s.eContents().first().type().name == "EndFeatureMembership"){
+			t.sysmini_source = s.eContents().first().eContents().first().eContents().first().referencedFeature.equivalent().sysmini_self;
+			t.sysmini_target = s.eContents().second().eContents().first().eContents().first().referencedFeature.equivalent().sysmini_self;
+			t.sysmini_source += ".";
+			t.sysmini_target += ".";
+			t.sysmini_source += s.eContents().first().eContents().first().eContents().second().eContents().first().eContents().first().redefinedFeature.equivalent().sysmini_self;
+			t.sysmini_target += s.eContents().second().eContents().first().eContents().second().eContents().first().eContents().first().redefinedFeature.equivalent().sysmini_self;	
+		}
+	}
+
+@lazy
+rule NamespaceImportMapping
+	transform s : XMIni!NamespaceImport
+	to t : SysMini!NamespaceImport {
+		var name = s.declaredName.split("::");
+		if (name.first() == name.second()){
+			t.sysmini_self = name.first() + "::*";
+		}
+	}
+
+@lazy
+rule AttributeUsageMapping
+	transform s : XMIni!AttributeUsage
+	to t : SysMini!AttributeUsage 
+	extends TripletMapping{
+	}
+
+@lazy
+rule ReferenceUsageMapping
+	transform s : XMIni!ReferenceUsage
+	to t : SysMini!ReferenceUsage 
+	extends TripletMapping{
+		t.sysmini_direction = s.direction.name.asString();
+	}
+	
+@lazy
+rule PortUsageMapping
+	transform s : XMIni!PortUsage
+	to t : SysMini!PortUsage 
+	extends TripletMapping{
+
+	}
+	
+@lazy
+rule FlowConnectionUsageMapping
+	transform s : XMIni!FlowConnectionUsage
+	to t : SysMini!FlowConnectionUsage 
+	extends TripletMapping{
+
+	}
+	
+
+@lazy	
+rule InterfaceDefinitionMapping
+	transform s : XMIni!InterfaceDefinition
+	to t : SysMini!InterfaceDefinition 
+	extends DeclarednameMapping{
+		for (son in s.eContents()){
+			for (child in son.eContents()){
+				if (child.type().name == "PortUsage"){
+					t.sysmini_child.add(child.equivalent());
+				}
+				else if (child.type().name == "Documentation"){
+					t.sysmini_child.add(child.equivalent());
+				}
+				else if (child.type().name == "FlowConnectionUsage"){
+					t.sysmini_child.add(child.equivalent());
+				}
+			}
+		}
+	}
+	
+@lazy	
+rule PartDefinitionMapping
+	transform s : XMIni!PartDefinition
+	to t : SysMini!PartDefinition 
+	extends DeclarednameMapping{
+		for (son in s.eContents()){
+			for (child in son.eContents()){
+				if (child.type().name == "AttributeUsage"){
+					t.sysmini_child.add(child.equivalent());
+				}
+				else if (child.type().name == "PortUsage"){
+					t.sysmini_child.add(child.equivalent());
+				}
+			}
+		}
+	}
+
+@lazy	
+rule PortDefinitionMapping
+	transform s : XMIni!PortDefinition
+	to t : SysMini!PortDefinition 
+	extends DeclarednameMapping{
+		for (child in s.eContents().first().eContents()){
+			if (child.type().name == "ReferenceUsage"){
+				t.sysmini_child.add(child.equivalent());
+			}
+		}
+	}
+	
+@lazy	
+rule CommentMapping
+	transform s : XMIni!Comment
+	to t : SysMini!Comment 
+	extends TextMapping{
+	}
+	
+@lazy
+rule DocumentationMapping
+	transform s : XMIni!Documentation
+	to t : SysMini!Documentation 
+	extends TextMapping{
+	}
+
+
+
+rule RootMapping
+	transform s : XMIni!Package
+	to t : SysMini!Package {
+		t.sysmini_self = s.declaredName;
+		rootNamespace.sysmini_child.add(t);
+		for (child in s.eContents()){
+			if (child.type().name == "NamespaceImport"){
+				t.sysmini_child.add(child.equivalent());
+			}
+			else if (child.eContents().first().type().name == "Documentation"){
+				t.sysmini_child.add(child.eContents().first().equivalent());
+			}
+			else if (child.eContents().first().type().name == "Comment"){
+				t.sysmini_child.add(child.eContents().first().equivalent());
+			}
+			else if (child.eContents().first().type().name == "InterfaceDefinition"){
+				t.sysmini_child.add(child.eContents().first().equivalent());
+			}
+			else if (child.eContents().first().type().name == "PortDefinition"){
+				t.sysmini_child.add(child.eContents().first().equivalent());
+			}
+			else if (child.eContents().first().type().name == "PartDefinition"){
+				t.sysmini_child.add(child.eContents().first().equivalent());
+			}
+		}
+	}
+	
+
+post{
+	"ETL Over".println();
+}
