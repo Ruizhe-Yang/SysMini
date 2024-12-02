@@ -31,7 +31,7 @@ public class SysML2XMIni {
 	//Directory path of 'types.ecore', 'kerml.ecore' and 'SysML.ecore'.
 	public static String ecoreDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini\\metamodel\\sysmlv2";
 	//Directory path of the 'sysml.library'.
-	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.examples\\sysml.library";
+	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
 	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini\\model\\examples\\VehicleDifinitions\\VehicleDefinitions.sysml";
 	//Generate file 'xxx_.sysmlx'.
