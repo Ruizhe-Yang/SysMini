@@ -38,7 +38,12 @@ operation Element getContent(content: String, layer: Integer){
 		content += self.getDirection() + " " + self.getTriplet();
 	}
 	else if (typeName == "PortUsage"){
-		content += "port " + self.getTriplet();
+		if (self.eContainer().type().name == "PartDefinition"){
+			content += "port " + self.getTriplet();
+		}
+		else if (self.eContainer().type().name == "InterfaceDefinition"){
+			content += "end " + self.getTriplet();
+		}
 	}
 	else if (typeName == "FlowConnectionUsage"){
 		content += "flow "+self.sysmini_source+" to "+self.sysmini_target;
