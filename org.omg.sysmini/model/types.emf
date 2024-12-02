@@ -1,0 +1,20 @@
+@"http://www.eclipse.org/uml2/2.0.0/UML"(originalName="primitiveTypes")
+@Ecore(settingDelegates="http://www.omg.org/spec/SysML", invocationDelegates="http://www.omg.org/spec/SysML")
+@namespace(uri="https://www.omg.org/spec/UML/20161101/PrimitiveTypes", prefix="primitives")
+package types;
+
+@GenModel(documentation="Boolean is used for logical expressions, consisting of the predefined values true and false.")
+datatype Boolean : boolean;
+
+@GenModel(documentation="Integer is a primitive type representing integer values.")
+datatype Integer : int;
+
+@GenModel(documentation="Real is a primitive type representing the mathematical concept of real.")
+datatype Real : double;
+
+@GenModel(documentation="UnlimitedNatural is a primitive type representing unlimited natural values.")
+datatype UnlimitedNatural : int;
+
+@GenModel(documentation="String is a sequence of characters in some suitable character set used to display information about the model. Character sets may include non-Roman alphabets and characters.")
+datatype String : java.lang.String;
+

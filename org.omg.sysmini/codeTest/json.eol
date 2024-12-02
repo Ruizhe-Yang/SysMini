@@ -1,0 +1,10 @@
+main();
+
+operation main(){
+//	for (e in J.root){
+//		e.payload.get('@type').println();
+//		
+//	}
+	J.root.first().payload.println();
+	J.root.first().identity.containers.first().payload.println();
+}

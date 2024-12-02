@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description">
+  <viewpoint:DAnalysis uid="_YRaIgKcAEe-IQKcWaFq5Zg" selectedViews="_YWyXwKcAEe-IQKcWaFq5Zg" version="15.4.1.202403191723">
+    <semanticResources>test.genmodel</semanticResources>
+    <semanticResources>SysML.ecore</semanticResources>
+    <semanticResources>types.ecore</semanticResources>
+    <semanticResources>kerml.ecore</semanticResources>
+    <semanticResources>VehicleDefinitions.model</semanticResources>
+    <semanticResources>SysML.emf</semanticResources>
+    <semanticResources>kerml.emf</semanticResources>
+    <semanticResources>VehicleDefinitions2.model</semanticResources>
+    <semanticResources>VehicleUsages.model</semanticResources>
+    <semanticResources>VehicleDefinitions3.sysmlx</semanticResources>
+    <semanticResources>ASimpleVehicleModel.sysmlx</semanticResources>
+    <semanticResources>VehicleDefinitions.sysmlx</semanticResources>
+    <semanticResources>VehicleDefinitions1.sysmlx</semanticResources>
+    <semanticResources>VehicleDefinitions_.sysmlx</semanticResources>
+    <semanticResources>SysML.genmodel</semanticResources>
+    <semanticResources>SysMini.emf</semanticResources>
+    <semanticResources>types.emf</semanticResources>
+    <semanticResources>../sysmini/SysMini_01.emf</semanticResources>
+    <semanticResources>../sysmini/SysMini_01.ecore</semanticResources>
+    <semanticResources>../sysmini/SysMini_00.emf</semanticResources>
+    <semanticResources>../metamodel/sysmini/sysmini.emf</semanticResources>
+    <semanticResources>../metamodel/sysmlv2/SysML.ecore</semanticResources>
+    <semanticResources>../metamodel/sysmlv2/types.ecore</semanticResources>
+    <semanticResources>../metamodel/sysmlv2/kerml.ecore</semanticResources>
+    <semanticResources>../metamodel/sysmini/sysmini.ecore</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_YWyXwKcAEe-IQKcWaFq5Zg">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_YX6ZIKcAEe-IQKcWaFq5Zg" name="test" repPath="#_YXjz0KcAEe-IQKcWaFq5Zg" changeId="1732080555058">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
+        <target xmi:type="ecore:EPackage" href="test.ecore#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_YXjz0KcAEe-IQKcWaFq5Zg">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_YYKQwKcAEe-IQKcWaFq5Zg" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_YYKQwacAEe-IQKcWaFq5Zg" type="Sirius" element="_YXjz0KcAEe-IQKcWaFq5Zg" measurementUnit="Pixel">
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_YYKQwqcAEe-IQKcWaFq5Zg"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_YZAlUKcAEe-IQKcWaFq5Zg" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_YZAlUacAEe-IQKcWaFq5Zg"/>
+    </ownedAnnotationEntries>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_YXzrcKcAEe-IQKcWaFq5Zg"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer"/>
+    <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']"/>
+    <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Validation']"/>
+    <target xmi:type="ecore:EPackage" href="test.ecore#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>
