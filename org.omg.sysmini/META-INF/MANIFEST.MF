@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.omg.sysmini
-Bundle-Name: my.sysml.test
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.omg.sysmini;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,

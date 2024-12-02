@@ -29,16 +29,20 @@ import java.util.List;
 public class SysML2XMIni {
 	
 	//Directory path of 'types.ecore', 'kerml.ecore' and 'SysML.ecore'.
-	public static String ecoreDirectoryPath = "D:\\EclipseInstallTest\\Sysml-v2-Pilot-Implementation-20241119\\ws\\my.sysml.test\\model";
+	public static String ecoreDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini\\metamodel\\sysmlv2";
 	//Directory path of the 'sysml.library'.
-	public static String libraryDirectoryPath = "D:\\EclipseInstallTest\\Sysml-v2-Pilot-Implementation-20241119\\git\\SysML-v2-Pilot-Implementation\\sysml.library";
+	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFilePath = "D:\\EclipseInstallTest\\Sysml-v2-Pilot-Implementation-20241119\\runtime-SysML\\yang.sysml.test2\\model\\vehicle example\\VehicleDefinitions.sysml";
+	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.examples\\model\\vehicle example\\VehicleDefinitions.sysml";
 	//Generate file 'xxx_.sysmlx'.
 	private static String fileName = null;
 	
 	
     public static void main(String[] args) throws IOException {
+    	run();
+    }
+    
+    public static void run() throws IOException {
         String[] result = findFiles(libraryDirectoryPath);
         String[] config = {"-g", targetFilePath};
         String[] arg = mergeArrays(config, result);
@@ -48,9 +52,8 @@ public class SysML2XMIni {
 		List<List<String>> ElementIDList = getAllElementHref(targetFile);
 		modifyXMI(libraryDirectory, ElementIDList);
 		deleteFiles(libraryDirectoryPath);
-    	System.out.println("-----------------------------OVER-----------------------------");
+    	System.out.println("SysML2XMIni.java runtime ends.");
     }
-    
     
     private static String[] mergeArrays(String[] array1, String[] array2) {
         String[] mergedArray = new String[array1.length + array2.length];
