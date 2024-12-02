@@ -1,0 +1,561 @@
+-------------------------------------------------------------------------
+Element: Namespace [elementId=a5027bc9-cd06-4223-91b9-57731982efda, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, ]
+Element DeclaredName: 
+Element ID: a5027bc9-cd06-4223-91b9-57731982efda
+Element Type: Namespace
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=6050e1d4-3974-463f-a2f3-a131c8eb076e, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 6050e1d4-3974-463f-a2f3-a131c8eb076e
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Package [elementId=4152ad8f-6e11-49b6-a879-44408cb2edff, aliasIds=[], declaredShortName=null, declaredName=VehicleDefinitions, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, ]
+Element DeclaredName: VehicleDefinitions
+Element ID: 4152ad8f-6e11-49b6-a879-44408cb2edff
+Element Type: Package
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=b8759f81-2d1f-4d5c-9039-949e73e88312, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: b8759f81-2d1f-4d5c-9039-949e73e88312
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Documentation [elementId=789f7bc3-c22a-443c-9cb1-ca866c1795f6, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, locale=null, body=Example vehicle definitions model.
+, ]
+Element DeclaredName: 
+Element ID: 789f7bc3-c22a-443c-9cb1-ca866c1795f6
+Element Type: Documentation
+-------------------------------------------------------------------------
+Element: NamespaceImport [elementId=2b4298ba-ff8d-4196-9f85-e36dda6b0fa9, aliasIds=[], declaredShortName=null, declaredName=, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, visibility=private, isRecursive=false, isImportAll=false, ]
+Element DeclaredName: 
+Element ID: 2b4298ba-ff8d-4196-9f85-e36dda6b0fa9
+Element Type: NamespaceImport
+-------------------------------------------------------------------------
+Element: NamespaceImport [elementId=068c9111-0439-42f7-9d45-c9f55d89c01b, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, visibility=private, isRecursive=false, isImportAll=false, ]
+Element DeclaredName: 
+Element ID: 068c9111-0439-42f7-9d45-c9f55d89c01b
+Element Type: NamespaceImport
+-------------------------------------------------------------------------
+Element: NamespaceImport [elementId=c29028b1-60a0-4608-be1c-9e1e04720396, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, visibility=private, isRecursive=false, isImportAll=false, ]
+Element DeclaredName: 
+Element ID: c29028b1-60a0-4608-be1c-9e1e04720396
+Element Type: NamespaceImport
+-------------------------------------------------------------------------
+Element: NamespaceImport [elementId=156abac5-f7c4-489e-a15e-d02ca48d06b3, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, visibility=private, isRecursive=false, isImportAll=false, ]
+Element DeclaredName: 
+Element ID: 156abac5-f7c4-489e-a15e-d02ca48d06b3
+Element Type: NamespaceImport
+-------------------------------------------------------------------------
+Element: NamespaceImport [elementId=e36221bd-2a89-4306-9f1a-c1d2d51b5472, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, visibility=private, isRecursive=false, isImportAll=false, ]
+Element DeclaredName: 
+Element ID: e36221bd-2a89-4306-9f1a-c1d2d51b5472
+Element Type: NamespaceImport
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=cc2b3468-47e7-4ccb-b858-350f94117b9f, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: cc2b3468-47e7-4ccb-b858-350f94117b9f
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Comment [elementId=69220744-2ab2-4110-a0d4-3ef82613c19d, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, locale=null, body=PART DEFINITIONS ]
+Element DeclaredName: 
+Element ID: 69220744-2ab2-4110-a0d4-3ef82613c19d
+Element Type: Comment
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=41b7e9a2-143c-445e-acf5-4fd1697b05b3, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 41b7e9a2-143c-445e-acf5-4fd1697b05b3
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PartDefinition [elementId=3fc99c64-104d-4e13-83ee-c69a2b8b4353, aliasIds=[], declaredShortName=null, declaredName=Vehicle, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false]
+Element DeclaredName: Vehicle
+Element ID: 3fc99c64-104d-4e13-83ee-c69a2b8b4353
+Element Type: PartDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=4abc0ac9-1ad2-4085-88a3-d3b1464b9c84, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 4abc0ac9-1ad2-4085-88a3-d3b1464b9c84
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: AttributeUsage [elementId=3a1255a3-fb20-4469-a40d-a0bfdb82248d, aliasIds=[], declaredShortName=null, declaredName=mass, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: mass
+Element ID: 3a1255a3-fb20-4469-a40d-a0bfdb82248d
+Element Type: AttributeUsage
+-------------------------------------------------------------------------
+Element: Subsetting [elementId=9e87292c-b189-469b-8002-2c79b4fd9232, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 9e87292c-b189-469b-8002-2c79b4fd9232
+Element Type: Subsetting
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=931a2eca-a3a4-492d-bb3b-429fdcbb821b, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 931a2eca-a3a4-492d-bb3b-429fdcbb821b
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=a06c686c-c669-44ba-9eec-e39ad1ef5c17, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: a06c686c-c669-44ba-9eec-e39ad1ef5c17
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=1a1694d4-37f4-4ce0-a91a-528294dbce2d, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: 1a1694d4-37f4-4ce0-a91a-528294dbce2d
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=f4eae332-86b7-4180-86d6-4f7cbb21a810, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: f4eae332-86b7-4180-86d6-4f7cbb21a810
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PartDefinition [elementId=e147d76f-1956-4715-9efb-fa302ab8c7d4, aliasIds=[], declaredShortName=null, declaredName=Transmission, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false]
+Element DeclaredName: Transmission
+Element ID: e147d76f-1956-4715-9efb-fa302ab8c7d4
+Element Type: PartDefinition
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=56c5dac4-456b-43ea-b719-293569f988e8, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 56c5dac4-456b-43ea-b719-293569f988e8
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PartDefinition [elementId=17c3aba3-faac-4ae0-b26f-fccfcc59b48c, aliasIds=[], declaredShortName=null, declaredName=AxleAssembly, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false]
+Element DeclaredName: AxleAssembly
+Element ID: 17c3aba3-faac-4ae0-b26f-fccfcc59b48c
+Element Type: PartDefinition
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=e24b12ba-9f0b-49bb-876d-3e4bc60eee3c, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: e24b12ba-9f0b-49bb-876d-3e4bc60eee3c
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PartDefinition [elementId=b5c63c79-16b3-4a39-bf60-b8d20844e62f, aliasIds=[], declaredShortName=null, declaredName=Axle, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false]
+Element DeclaredName: Axle
+Element ID: b5c63c79-16b3-4a39-bf60-b8d20844e62f
+Element Type: PartDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=51acd608-4035-446c-8720-380996820a98, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 51acd608-4035-446c-8720-380996820a98
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: PortUsage [elementId=7d6b7f10-00ca-4137-adea-262d78a020a3, aliasIds=[], declaredShortName=null, declaredName=leftMountingPoint, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, isIndividual=false, portionKind=timeslice, ]
+Element DeclaredName: leftMountingPoint
+Element ID: 7d6b7f10-00ca-4137-adea-262d78a020a3
+Element Type: PortUsage
+-------------------------------------------------------------------------
+Element: FeatureTyping [elementId=f55b2b30-27dd-42fc-9546-dea4773fcfd6, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: f55b2b30-27dd-42fc-9546-dea4773fcfd6
+Element Type: FeatureTyping
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=bdb3a4de-f961-4801-b9d3-d97e2caeece0, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: bdb3a4de-f961-4801-b9d3-d97e2caeece0
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=594bc756-54e3-4a62-8292-59f3c0077871, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 594bc756-54e3-4a62-8292-59f3c0077871
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=9df0952d-70fe-427a-ac2c-42b247ce302a, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: 9df0952d-70fe-427a-ac2c-42b247ce302a
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=df7d79db-bb3a-427e-a26a-03a0c21d5571, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: df7d79db-bb3a-427e-a26a-03a0c21d5571
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: PortUsage [elementId=d40f82b4-0640-40e8-8340-dc689d1eafc9, aliasIds=[], declaredShortName=null, declaredName=rightMountingPoint, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, isIndividual=false, portionKind=timeslice, ]
+Element DeclaredName: rightMountingPoint
+Element ID: d40f82b4-0640-40e8-8340-dc689d1eafc9
+Element Type: PortUsage
+-------------------------------------------------------------------------
+Element: FeatureTyping [elementId=3aded3b2-545f-4dc9-b5ca-3dc7091885dc, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 3aded3b2-545f-4dc9-b5ca-3dc7091885dc
+Element Type: FeatureTyping
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=852a1238-7339-4ebc-a5db-60e4e83d6caf, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 852a1238-7339-4ebc-a5db-60e4e83d6caf
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=ce702d63-1a8b-4840-adc6-2f1e3abdb190, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: ce702d63-1a8b-4840-adc6-2f1e3abdb190
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=1f49de5b-ddb1-4727-8102-235d33885fe3, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: 1f49de5b-ddb1-4727-8102-235d33885fe3
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=baab7287-ef65-45b8-959d-191d9c138f88, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: baab7287-ef65-45b8-959d-191d9c138f88
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PartDefinition [elementId=fce7f5ab-3218-40dc-aff8-3a39441beb35, aliasIds=[], declaredShortName=null, declaredName=Wheel, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false]
+Element DeclaredName: Wheel
+Element ID: fce7f5ab-3218-40dc-aff8-3a39441beb35
+Element Type: PartDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=617c2aa0-695c-4f23-9761-b688c873abe2, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 617c2aa0-695c-4f23-9761-b688c873abe2
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: PortUsage [elementId=03eff6b6-c031-4b6a-a4d2-519ac177a830, aliasIds=[], declaredShortName=null, declaredName=hub, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, isIndividual=false, portionKind=timeslice, ]
+Element DeclaredName: hub
+Element ID: 03eff6b6-c031-4b6a-a4d2-519ac177a830
+Element Type: PortUsage
+-------------------------------------------------------------------------
+Element: FeatureTyping [elementId=e0eb552d-7568-40f9-b1a6-da8ef9a72fab, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: e0eb552d-7568-40f9-b1a6-da8ef9a72fab
+Element Type: FeatureTyping
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=00552c39-5cba-4a6a-93e4-01f7bff7cf39, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 00552c39-5cba-4a6a-93e4-01f7bff7cf39
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=1103d42d-673b-4117-9dec-6f55744dd529, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 1103d42d-673b-4117-9dec-6f55744dd529
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=601a0d37-d1ab-44ef-9e24-d1ce5b5eb61c, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: 601a0d37-d1ab-44ef-9e24-d1ce5b5eb61c
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=e04d6493-6daa-41bf-8dfb-e207f9ee0ff9, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: e04d6493-6daa-41bf-8dfb-e207f9ee0ff9
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PartDefinition [elementId=2ffbd6cf-637a-4021-abe2-aa9c6e3ea782, aliasIds=[], declaredShortName=null, declaredName=Lugbolt, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false]
+Element DeclaredName: Lugbolt
+Element ID: 2ffbd6cf-637a-4021-abe2-aa9c6e3ea782
+Element Type: PartDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=d99f7833-24aa-4713-9b2b-7be5d8944a13, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: d99f7833-24aa-4713-9b2b-7be5d8944a13
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: AttributeUsage [elementId=84b6644c-f416-46c8-bd0f-c15533fdd817, aliasIds=[], declaredShortName=null, declaredName=tighteningTorque, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: tighteningTorque
+Element ID: 84b6644c-f416-46c8-bd0f-c15533fdd817
+Element Type: AttributeUsage
+-------------------------------------------------------------------------
+Element: Subsetting [elementId=9cc89941-2d06-4714-a6bf-daae6329decd, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 9cc89941-2d06-4714-a6bf-daae6329decd
+Element Type: Subsetting
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=b27a487f-b8eb-4cb1-b6ae-06fd21a70a9c, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: b27a487f-b8eb-4cb1-b6ae-06fd21a70a9c
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=98d44642-2a1a-4c9a-9a0e-22cb00882f07, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 98d44642-2a1a-4c9a-9a0e-22cb00882f07
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=61934f40-254b-4a3e-91f3-083930f91dc3, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: 61934f40-254b-4a3e-91f3-083930f91dc3
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=3ada01fa-9178-4a84-98df-4a26732d6211, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 3ada01fa-9178-4a84-98df-4a26732d6211
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Comment [elementId=a09d5f55-9ce8-4791-ac9d-2dc2404efa3b, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, locale=null, body=PORT DEFINITIONS ]
+Element DeclaredName: 
+Element ID: a09d5f55-9ce8-4791-ac9d-2dc2404efa3b
+Element Type: Comment
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=ccc886a4-6460-4d57-876e-830b1a54a97a, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: ccc886a4-6460-4d57-876e-830b1a54a97a
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PortDefinition [elementId=4c3acb28-856c-4e21-b546-1a02bf8a8b30, aliasIds=[], declaredShortName=null, declaredName=DriveIF, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, ]
+Element DeclaredName: DriveIF
+Element ID: 4c3acb28-856c-4e21-b546-1a02bf8a8b30
+Element Type: PortDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=1942b7bb-a7d0-4f04-91ec-0d33c9f19260, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 1942b7bb-a7d0-4f04-91ec-0d33c9f19260
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: ReferenceUsage [elementId=87b3cb2e-8e8b-4005-addb-877c66b67da4, aliasIds=[], declaredShortName=null, declaredName=driveTorque, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: driveTorque
+Element ID: 87b3cb2e-8e8b-4005-addb-877c66b67da4
+Element Type: ReferenceUsage
+-------------------------------------------------------------------------
+Element: Subsetting [elementId=a2fee0f0-b633-4fbf-8508-d31297b25772, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: a2fee0f0-b633-4fbf-8508-d31297b25772
+Element Type: Subsetting
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=3832ea83-fad3-4671-afd3-abdb995f7dae, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 3832ea83-fad3-4671-afd3-abdb995f7dae
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: ConjugatedPortDefinition [elementId=058787ae-7d94-4e60-a7ad-fed872c69d51, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, ]
+Element DeclaredName: 
+Element ID: 058787ae-7d94-4e60-a7ad-fed872c69d51
+Element Type: ConjugatedPortDefinition
+-------------------------------------------------------------------------
+Element: PortConjugation [elementId=48ee8398-1112-4e23-9933-841f99cadfea, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 48ee8398-1112-4e23-9933-841f99cadfea
+Element Type: PortConjugation
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=265b93dd-6efd-42c5-88b7-c2a4eb179730, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 265b93dd-6efd-42c5-88b7-c2a4eb179730
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PortDefinition [elementId=24c752b4-15c5-4aef-9b08-d16e722a4400, aliasIds=[], declaredShortName=null, declaredName=AxleMountIF, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, ]
+Element DeclaredName: AxleMountIF
+Element ID: 24c752b4-15c5-4aef-9b08-d16e722a4400
+Element Type: PortDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=76f825ec-0229-4654-8183-bb7f8bd4e562, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 76f825ec-0229-4654-8183-bb7f8bd4e562
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: ReferenceUsage [elementId=6b17db6d-3f15-47b9-adef-216ceed32af4, aliasIds=[], declaredShortName=null, declaredName=transferredTorque, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=out, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: transferredTorque
+Element ID: 6b17db6d-3f15-47b9-adef-216ceed32af4
+Element Type: ReferenceUsage
+-------------------------------------------------------------------------
+Element: Subsetting [elementId=729a6081-ff69-46c0-abd3-50be9fafd640, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 729a6081-ff69-46c0-abd3-50be9fafd640
+Element Type: Subsetting
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=86f14ef1-9971-483e-8bbc-e27a7f68c66c, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 86f14ef1-9971-483e-8bbc-e27a7f68c66c
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: ConjugatedPortDefinition [elementId=ca8f36ce-08a5-4e44-993c-2143129c2f2c, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, ]
+Element DeclaredName: 
+Element ID: ca8f36ce-08a5-4e44-993c-2143129c2f2c
+Element Type: ConjugatedPortDefinition
+-------------------------------------------------------------------------
+Element: PortConjugation [elementId=6f01caaf-3d1a-4ad7-ac40-3361937cff9e, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 6f01caaf-3d1a-4ad7-ac40-3361937cff9e
+Element Type: PortConjugation
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=01686f40-a24d-42d5-acdc-c61e68a8ef07, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 01686f40-a24d-42d5-acdc-c61e68a8ef07
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: PortDefinition [elementId=a307f045-dd5d-4144-b539-7da547b6528b, aliasIds=[], declaredShortName=null, declaredName=WheelHubIF, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, ]
+Element DeclaredName: WheelHubIF
+Element ID: a307f045-dd5d-4144-b539-7da547b6528b
+Element Type: PortDefinition
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=b7138fd0-7e37-4b00-a8d8-3dfd6df184e0, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: b7138fd0-7e37-4b00-a8d8-3dfd6df184e0
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: ReferenceUsage [elementId=38206e30-fed1-472b-9d45-432dc25610c7, aliasIds=[], declaredShortName=null, declaredName=appliedTorque, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: appliedTorque
+Element ID: 38206e30-fed1-472b-9d45-432dc25610c7
+Element Type: ReferenceUsage
+-------------------------------------------------------------------------
+Element: Subsetting [elementId=f5f07efc-c899-4691-aae1-015d41439b99, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: f5f07efc-c899-4691-aae1-015d41439b99
+Element Type: Subsetting
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=50337dac-4df4-4b04-9fdb-60188dbac7bd, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 50337dac-4df4-4b04-9fdb-60188dbac7bd
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: ConjugatedPortDefinition [elementId=bc801404-a77d-4d88-899f-9dde7d356a8f, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, ]
+Element DeclaredName: 
+Element ID: bc801404-a77d-4d88-899f-9dde7d356a8f
+Element Type: ConjugatedPortDefinition
+-------------------------------------------------------------------------
+Element: PortConjugation [elementId=686a1f7e-2187-4607-af78-39d7c45ab1a1, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 686a1f7e-2187-4607-af78-39d7c45ab1a1
+Element Type: PortConjugation
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=cbd6f4ce-91f0-4142-a4ce-b354551dfa67, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: cbd6f4ce-91f0-4142-a4ce-b354551dfa67
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Comment [elementId=218aa085-6caa-48b4-8063-7d6b11a6935a, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, locale=null, body=INTERFACE DEFINITIONS ]
+Element DeclaredName: 
+Element ID: 218aa085-6caa-48b4-8063-7d6b11a6935a
+Element Type: Comment
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=f4b12926-2876-41b1-96da-561d56a3244d, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: f4b12926-2876-41b1-96da-561d56a3244d
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: InterfaceDefinition [elementId=b2a58347-ce6f-46b0-94d0-bcb52037fd22, aliasIds=[], declaredShortName=null, declaredName=Mounting, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isVariation=false, isIndividual=false, isImplied=false, ]
+Element DeclaredName: Mounting
+Element ID: b2a58347-ce6f-46b0-94d0-bcb52037fd22
+Element Type: InterfaceDefinition
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=8fe85f0a-be1d-42de-9be5-5b1dcbbb8670, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 8fe85f0a-be1d-42de-9be5-5b1dcbbb8670
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Documentation [elementId=b6e49032-c283-427e-9898-c53e81cbda7a, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, locale=null, body=The definition of the interface for mounting a Wheel to an Axle. , ]
+Element DeclaredName: 
+Element ID: b6e49032-c283-427e-9898-c53e81cbda7a
+Element Type: Documentation
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=740ddbd8-b8b9-497c-9610-320e5af2c9e5, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 740ddbd8-b8b9-497c-9610-320e5af2c9e5
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: PortUsage [elementId=85a3b21d-6c4e-42a1-950d-38dbf860320d, aliasIds=[], declaredShortName=null, declaredName=axleMount, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=true, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, isIndividual=false, portionKind=timeslice, ]
+Element DeclaredName: axleMount
+Element ID: 85a3b21d-6c4e-42a1-950d-38dbf860320d
+Element Type: PortUsage
+-------------------------------------------------------------------------
+Element: FeatureTyping [elementId=96f38fe1-9d31-45a7-a8dc-15c00c0ddad8, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 96f38fe1-9d31-45a7-a8dc-15c00c0ddad8
+Element Type: FeatureTyping
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=5eedc4f2-c815-45a5-ae09-abe54817790f, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 5eedc4f2-c815-45a5-ae09-abe54817790f
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=29bd1a55-6614-4939-ba57-b41f12ace054, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 29bd1a55-6614-4939-ba57-b41f12ace054
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=194d4838-21aa-45f9-a9d9-cc0694ca5438, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: 194d4838-21aa-45f9-a9d9-cc0694ca5438
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=58fa7822-b04e-4d5b-b4bd-b03835549bed, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 58fa7822-b04e-4d5b-b4bd-b03835549bed
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: PortUsage [elementId=a73b5d99-feea-422f-9aaf-3ce1d8968005, aliasIds=[], declaredShortName=null, declaredName=hub, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=true, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, isIndividual=false, portionKind=timeslice, ]
+Element DeclaredName: hub
+Element ID: a73b5d99-feea-422f-9aaf-3ce1d8968005
+Element Type: PortUsage
+-------------------------------------------------------------------------
+Element: FeatureTyping [elementId=4fba5654-be3f-40f4-9bc9-b7a69585fbd9, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 4fba5654-be3f-40f4-9bc9-b7a69585fbd9
+Element Type: FeatureTyping
+-------------------------------------------------------------------------
+Element: OwningMembership [elementId=77abceb3-399b-47a1-9afd-ef4389680be3, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 77abceb3-399b-47a1-9afd-ef4389680be3
+Element Type: OwningMembership
+-------------------------------------------------------------------------
+Element: Multiplicity [elementId=4cc28bde-2bfe-4e9f-9ec7-058ee58a8885, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 4cc28bde-2bfe-4e9f-9ec7-058ee58a8885
+Element Type: Multiplicity
+-------------------------------------------------------------------------
+Element: TypeFeaturing [elementId=c27c5334-6002-4f5f-b6f9-e424e2518ac7, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=true, ]
+Element DeclaredName: 
+Element ID: c27c5334-6002-4f5f-b6f9-e424e2518ac7
+Element Type: TypeFeaturing
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=4a660c29-20f8-4ca4-b753-60ba5326b6e1, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 4a660c29-20f8-4ca4-b753-60ba5326b6e1
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: FlowConnectionUsage [elementId=69608c17-ef6a-482a-98b1-cf8b8c2a44d9, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=true, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, isImplied=false, isIndividual=false, portionKind=timeslice, ]
+Element DeclaredName: 
+Element ID: 69608c17-ef6a-482a-98b1-cf8b8c2a44d9
+Element Type: FlowConnectionUsage
+-------------------------------------------------------------------------
+Element: EndFeatureMembership [elementId=6aea46b2-008e-4665-88b3-e457ae3f06cd, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 6aea46b2-008e-4665-88b3-e457ae3f06cd
+Element Type: EndFeatureMembership
+-------------------------------------------------------------------------
+Element: ItemFlowEnd [elementId=124ac5f5-aa2c-4620-ad79-019c1bc03849, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=true, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 124ac5f5-aa2c-4620-ad79-019c1bc03849
+Element Type: ItemFlowEnd
+-------------------------------------------------------------------------
+Element: ReferenceSubsetting [elementId=a8ff9f61-42e3-43bc-bcea-4cf273191343, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: a8ff9f61-42e3-43bc-bcea-4cf273191343
+Element Type: ReferenceSubsetting
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=449428c4-4c8e-498c-99fd-b9952e8627ee, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 449428c4-4c8e-498c-99fd-b9952e8627ee
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: ReferenceUsage [elementId=a22aa5ad-b25f-44c2-aacb-db2dff917625, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=out, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: 
+Element ID: a22aa5ad-b25f-44c2-aacb-db2dff917625
+Element Type: ReferenceUsage
+-------------------------------------------------------------------------
+Element: Redefinition [elementId=e431405d-251e-42ee-903e-83f28e12f783, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: e431405d-251e-42ee-903e-83f28e12f783
+Element Type: Redefinition
+-------------------------------------------------------------------------
+Element: EndFeatureMembership [elementId=8f177de5-d015-4e1a-a9b2-f5e6a2348fb0, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 8f177de5-d015-4e1a-a9b2-f5e6a2348fb0
+Element Type: EndFeatureMembership
+-------------------------------------------------------------------------
+Element: ItemFlowEnd [elementId=772a69cf-b52b-4eb3-9cbe-7961e9fe0aa7, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=true, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false]
+Element DeclaredName: 
+Element ID: 772a69cf-b52b-4eb3-9cbe-7961e9fe0aa7
+Element Type: ItemFlowEnd
+-------------------------------------------------------------------------
+Element: ReferenceSubsetting [elementId=8ebc1499-0499-4f5b-b16b-c6934c5ab254, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 8ebc1499-0499-4f5b-b16b-c6934c5ab254
+Element Type: ReferenceSubsetting
+-------------------------------------------------------------------------
+Element: FeatureMembership [elementId=645cd832-1c19-4501-ad62-2779b4d6f68a, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, memberElementId=null, memberShortName=null, memberName=null, visibility=public, ownedMemberElementId=null, ownedMemberShortName=null, ownedMemberName=null, ]
+Element DeclaredName: 
+Element ID: 645cd832-1c19-4501-ad62-2779b4d6f68a
+Element Type: FeatureMembership
+-------------------------------------------------------------------------
+Element: ReferenceUsage [elementId=326e7abe-b44f-4a26-9c39-609b31ec452c, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=true, isLibraryElement=false, isAbstract=false, isSufficient=false, isConjugated=false, isUnique=true, isOrdered=false, isComposite=false, isEnd=false, isDerived=false, isReadOnly=false, isPortion=false, direction=in, isNonunique=false, isReference=false, isVariation=false, ]
+Element DeclaredName: 
+Element ID: 326e7abe-b44f-4a26-9c39-609b31ec452c
+Element Type: ReferenceUsage
+-------------------------------------------------------------------------
+Element: Redefinition [elementId=51259dd5-a446-4e05-a018-8d4ecd9e0923, aliasIds=[], declaredShortName=null, declaredName=null, shortName=null, name=null, qualifiedName=null, isImpliedIncluded=false, isLibraryElement=false, isImplied=false, ]
+Element DeclaredName: 
+Element ID: 51259dd5-a446-4e05-a018-8d4ecd9e0923
+Element Type: Redefinition
