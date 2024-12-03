@@ -1,179 +1,781 @@
 pre{
-	var rootNamespace = new SysMini!Namespace;
+	"ETL Start!".println();
 }
-
-@abstract
-rule DeclarednameMapping
-	transform s : XMIni!Element
-	to t : SysMini!Element{
-		t.sysmini_self = s.declaredName;
-	}
-
-@abstract
-rule TextMapping
-	transform s : XMIni!Element
-	to t : SysMini!Element{
-		t.sysmini_text = s.body;
-	}
-
-@abstract
-rule TripletMapping
-	transform s : XMIni!Element
-	to t : SysMini!Element
-	extends DeclarednameMapping{
-		if (s.eContents().first().type().name == "Subsetting"){
-			t.sysmini_relationship = "subsets";
-			t.sysmini_object = s.eContents().first().declaredName;
-		}
-		else if(s.eContents().first().type().name == "FeatureTyping"){
-			t.sysmini_relationship = "defined";
-			t.sysmini_object = s.eContents().first().type.declaredName;
-		}
-		else if(s.eContents().first().type().name == "EndFeatureMembership"){
-			t.sysmini_source = s.eContents().first().eContents().first().eContents().first().referencedFeature.equivalent().sysmini_self;
-			t.sysmini_target = s.eContents().second().eContents().first().eContents().first().referencedFeature.equivalent().sysmini_self;
-			t.sysmini_source += ".";
-			t.sysmini_target += ".";
-			t.sysmini_source += s.eContents().first().eContents().first().eContents().second().eContents().first().eContents().first().redefinedFeature.equivalent().sysmini_self;
-			t.sysmini_target += s.eContents().second().eContents().first().eContents().second().eContents().first().eContents().first().redefinedFeature.equivalent().sysmini_self;	
-		}
-	}
-
-@lazy
-rule NamespaceImportMapping
-	transform s : XMIni!NamespaceImport
-	to t : SysMini!NamespaceImport {
-		var name = s.declaredName.split("::");
-		if (name.first() == name.second()){
-			t.sysmini_self = name.first() + "::*";
-		}
-	}
-
-@lazy
-rule AttributeUsageMapping
-	transform s : XMIni!AttributeUsage
-	to t : SysMini!AttributeUsage 
-	extends TripletMapping{
-	}
-
-@lazy
-rule ReferenceUsageMapping
-	transform s : XMIni!ReferenceUsage
-	to t : SysMini!ReferenceUsage 
-	extends TripletMapping{
-		t.sysmini_direction = s.direction.name.asString();
-	}
-	
-@lazy
-rule PortUsageMapping
-	transform s : XMIni!PortUsage
-	to t : SysMini!PortUsage 
-	extends TripletMapping{
-
-	}
-	
-@lazy
-rule FlowConnectionUsageMapping
-	transform s : XMIni!FlowConnectionUsage
-	to t : SysMini!FlowConnectionUsage 
-	extends TripletMapping{
-
-	}
-	
-
-@lazy	
-rule InterfaceDefinitionMapping
-	transform s : XMIni!InterfaceDefinition
-	to t : SysMini!InterfaceDefinition 
-	extends DeclarednameMapping{
-		for (son in s.eContents()){
-			for (child in son.eContents()){
-				if (child.type().name == "PortUsage"){
-					t.sysmini_child.add(child.equivalent());
-				}
-				else if (child.type().name == "Documentation"){
-					t.sysmini_child.add(child.equivalent());
-				}
-				else if (child.type().name == "FlowConnectionUsage"){
-					t.sysmini_child.add(child.equivalent());
-				}
-			}
-		}
-	}
-	
-@lazy	
-rule PartDefinitionMapping
-	transform s : XMIni!PartDefinition
-	to t : SysMini!PartDefinition 
-	extends DeclarednameMapping{
-		for (son in s.eContents()){
-			for (child in son.eContents()){
-				if (child.type().name == "AttributeUsage"){
-					t.sysmini_child.add(child.equivalent());
-				}
-				else if (child.type().name == "PortUsage"){
-					t.sysmini_child.add(child.equivalent());
-				}
-			}
-		}
-	}
-
-@lazy	
-rule PortDefinitionMapping
-	transform s : XMIni!PortDefinition
-	to t : SysMini!PortDefinition 
-	extends DeclarednameMapping{
-		for (child in s.eContents().first().eContents()){
-			if (child.type().name == "ReferenceUsage"){
-				t.sysmini_child.add(child.equivalent());
-			}
-		}
-	}
-	
-@lazy	
-rule CommentMapping
-	transform s : XMIni!Comment
-	to t : SysMini!Comment 
-	extends TextMapping{
-	}
-	
-@lazy
-rule DocumentationMapping
-	transform s : XMIni!Documentation
-	to t : SysMini!Documentation 
-	extends TextMapping{
-	}
-
-
-
-rule RootMapping
-	transform s : XMIni!Package
-	to t : SysMini!Package {
-		t.sysmini_self = s.declaredName;
-		rootNamespace.sysmini_child.add(t);
-		for (child in s.eContents()){
-			if (child.type().name == "NamespaceImport"){
-				t.sysmini_child.add(child.equivalent());
-			}
-			else if (child.eContents().first().type().name == "Documentation"){
-				t.sysmini_child.add(child.eContents().first().equivalent());
-			}
-			else if (child.eContents().first().type().name == "Comment"){
-				t.sysmini_child.add(child.eContents().first().equivalent());
-			}
-			else if (child.eContents().first().type().name == "InterfaceDefinition"){
-				t.sysmini_child.add(child.eContents().first().equivalent());
-			}
-			else if (child.eContents().first().type().name == "PortDefinition"){
-				t.sysmini_child.add(child.eContents().first().equivalent());
-			}
-			else if (child.eContents().first().type().name == "PartDefinition"){
-				t.sysmini_child.add(child.eContents().first().equivalent());
-			}
-		}
-	}
-	
 
 post{
-	"ETL Over".println();
+	main();
+	"ETL Over!".println();
 }
+
+operation main(){
+	var rootNamespace = new SysMini!Namespace;
+	XMIni!Package.all.first().elementTransform(rootNamespace);
+}
+
+operation XMIni!Element elementTransform(rootNode : SysMini!Element){
+	for (relationship in self.relationships()){
+		switch (relationship.type().name){
+		
+			//Import
+			case "NamespaceImport": relationship.addRelationshipTo(rootNode);
+			case "MembershipImport": relationship.addRelationshipTo(rootNode);
+			
+			//Specialization
+			case "Subclassification": relationship.skipRelationshipTo(rootNode);
+			case "Subsetting": relationship.skipRelationshipTo(rootNode);
+			case "Redefinition": relationship.skipRelationshipTo(rootNode);
+			case "ReferenceSubsetting": relationship.skipRelationshipTo(rootNode);
+			case "FeatureTyping": relationship.skipRelationshipTo(rootNode);
+			case "ConjugatedPortTyping": relationship.skipRelationshipTo(rootNode);
+			
+			//Feature
+			case "TypeFeaturing": relationship.skipRelationshipTo(rootNode);
+			
+			//Membership
+			case "Membership": relationship.skipRelationshipTo(rootNode);
+			case "OwningMembership": relationship.skipRelationshipTo(rootNode);
+			case "FeatureMembership": relationship.skipRelationshipTo(rootNode);
+			case "ElementFilterMembership": relationship.skipRelationshipTo(rootNode);
+			case "FeatureValue": relationship.skipRelationshipTo(rootNode);
+			case "VariantMembership": relationship.skipRelationshipTo(rootNode);
+			case "EndFeatureMembership": relationship.skipRelationshipTo(rootNode);
+			case "ParameterMembership": relationship.skipRelationshipTo(rootNode);
+			case "ResultExpressionMembership": relationship.skipRelationshipTo(rootNode);
+			case "RequirementConstraintMembership": relationship.skipRelationshipTo(rootNode);
+			case "ObjectiveMembership": relationship.skipRelationshipTo(rootNode);
+			case "StateSubactionMembership": relationship.skipRelationshipTo(rootNode);
+			case "TransitionFeatureMembership": relationship.skipRelationshipTo(rootNode);
+			case "ViewRenderingMembership": relationship.skipRelationshipTo(rootNode);
+			case "ReturnParameterMembership": relationship.skipRelationshipTo(rootNode);
+			case "SubjectMembership": relationship.skipRelationshipTo(rootNode);
+			case "StakeholderMembership": relationship.skipRelationshipTo(rootNode);
+			case "ActorMembership": relationship.skipRelationshipTo(rootNode);
+			case "FramedConcernMembership": relationship.skipRelationshipTo(rootNode);
+			case "RequirementVerificationMembership": relationship.skipRelationshipTo(rootNode);
+			
+			//Others
+			case "Annotation": relationship.skipRelationshipTo(rootNode);
+			case "FeatureInverting": relationship.skipRelationshipTo(rootNode);
+			case "FeatureChaining": relationship.skipRelationshipTo(rootNode);
+			case "Conjugation": relationship.skipRelationshipTo(rootNode);
+			case "PortConjugation": relationship.skipRelationshipTo(rootNode);
+			case "Intersecting": relationship.skipRelationshipTo(rootNode);
+			case "Unioning": relationship.skipRelationshipTo(rootNode);
+			case "Disjoining": relationship.skipRelationshipTo(rootNode);
+			case "Differencing": relationship.skipRelationshipTo(rootNode);
+			case "Dependency": relationship.skipRelationshipTo(rootNode);
+			
+		}
+	}
+}
+
+operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
+	for (element in self.elements()){
+		switch (element.type().name){
+		
+			//Package
+			case "Package": element.addNodeTo(rootNode);
+			
+			//AnnotatingElement
+			case "Comment": element.addNodeTo(rootNode);
+			case "TextualRepresentation": element.addNodeTo(rootNode);
+			case "Documentation": element.addNodeTo(rootNode);
+			
+			//ItemFeature
+			case "ItemFeature": element.addNodeTo(rootNode);
+			//ItemFeature
+			case "ItemFlowEnd": element.addNodeTo(rootNode);
+			
+			//Definition
+			case "OccurrenceDefinition": element.addNodeTo(rootNode);
+			case "AttributeDefinition": element.addNodeTo(rootNode);
+			case "ItemDefinition": element.addNodeTo(rootNode);
+			case "PortDefinition": element.addNodeTo(rootNode);
+			case "ActionDefinition": element.addNodeTo(rootNode);
+			case "EnumerationDefinition": element.addNodeTo(rootNode);
+			case "PartDefinition": element.addNodeTo(rootNode);
+			case "MetadataDefinition": element.addNodeTo(rootNode);
+			case "ConjugatedPortDefinition": element.addNodeTo(rootNode);
+			case "CalculationDefinition": element.addNodeTo(rootNode);
+			case "StateDefinition": element.addNodeTo(rootNode);
+			case "ConnectionDefinition": element.addNodeTo(rootNode);
+			case "ViewDefinition": element.addNodeTo(rootNode);
+			case "RenderingDefinition": element.addNodeTo(rootNode);
+			case "CaseDefinition": element.addNodeTo(rootNode);
+			case "FlowConnectionDefinition": element.addNodeTo(rootNode);
+			case "InterfaceDefinition": element.addNodeTo(rootNode);
+			case "AllocationDefinition": element.addNodeTo(rootNode);
+			case "AnalysisCaseDefinition": element.addNodeTo(rootNode);
+			case "VerificationCaseDefinition": element.addNodeTo(rootNode);
+			case "UseCaseDefinition": element.addNodeTo(rootNode);
+			case "ConstraintDefinition": element.addNodeTo(rootNode);
+			case "RequirementDefinition": element.addNodeTo(rootNode);
+			case "ConcernDefinition": element.addNodeTo(rootNode);
+			case "ViewpointDefinition": element.addNodeTo(rootNode);
+			
+			//Usage
+			case "OccurrenceUsage": element.addNodeTo(rootNode);
+			case "ReferenceUsage": element.addNodeTo(rootNode);
+			case "AttributeUsage": element.addNodeTo(rootNode);
+			case "SuccessionAsUsage": element.addNodeTo(rootNode);
+			case "BindingConnectorAsUsage": element.addNodeTo(rootNode);
+			case "ItemUsage": element.addNodeTo(rootNode);
+			case "ActionUsage": element.addNodeTo(rootNode);
+			case "PortUsage": element.addNodeTo(rootNode);
+			case "EventOccurrenceUsage": element.addNodeTo(rootNode);
+			case "EnumerationUsage": element.addNodeTo(rootNode);
+			case "PartUsage": element.addNodeTo(rootNode);
+			case "MetadataUsage": element.addNodeTo(rootNode);
+			case "StateUsage": element.addNodeTo(rootNode);
+			case "TransitionUsage": element.addNodeTo(rootNode);
+			case "AcceptActionUsage": element.addNodeTo(rootNode);
+			case "CalculationUsage": element.addNodeTo(rootNode);
+			case "PerformActionUsage": element.addNodeTo(rootNode);
+			case "SendActionUsage": element.addNodeTo(rootNode);
+			case "IfActionUsage": element.addNodeTo(rootNode);
+			case "AssignmentActionUsage": element.addNodeTo(rootNode);
+			case "ConnectionUsage": element.addNodeTo(rootNode);
+			case "ViewUsage": element.addNodeTo(rootNode);
+			case "RenderingUsage": element.addNodeTo(rootNode);
+			case "ExhibitStateUsage": element.addNodeTo(rootNode);
+			case "CaseUsage": element.addNodeTo(rootNode);
+			case "WhileLoopActionUsage": element.addNodeTo(rootNode);
+			case "ForLoopActionUsage": element.addNodeTo(rootNode);
+			case "DecisionNode": element.addNodeTo(rootNode);
+			case "ForkNode": element.addNodeTo(rootNode);
+			case "MergeNode": element.addNodeTo(rootNode);
+			case "JoinNode": element.addNodeTo(rootNode);
+			case "FlowConnectionUsage": element.addNodeTo(rootNode);
+			case "InterfaceUsage": element.addNodeTo(rootNode);
+			case "AllocationUsage": element.addNodeTo(rootNode);
+			case "AnalysisCaseUsage": element.addNodeTo(rootNode);
+			case "VerificationCaseUsage": element.addNodeTo(rootNode);
+			case "UseCaseUsage": element.addNodeTo(rootNode);
+			case "SuccessionFlowConnectionUsage": element.addNodeTo(rootNode);
+			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
+//			case "ConstraintUsage": element.addNodeTo(rootNode);
+//			case "RequirementUsage": element.addNodeTo(rootNode);
+//			case "AssertConstraintUsage": element.addNodeTo(rootNode);
+//			case "ConcernUsage": element.addNodeTo(rootNode);
+//			case "ViewpointUsage": element.addNodeTo(rootNode);
+//			case "SatisfyRequirementUsage": element.addNodeTo(rootNode);
+
+
+		}
+	}
+}
+
+
+operation XMIni!Relationship addRelationshipTo(rootNode : SysMini!Element){
+	rootNode.contents.add(self.equivalent());
+	self.relationshipTransform(rootNode);
+}
+
+operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
+	self.relationshipTransform(rootNode);
+}
+
+operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
+	var node = self.equivalent();
+	rootNode.contents.add(node);
+	self.elementTransform(node);
+}
+
+operation XMIni!Element relationships(){
+	return self.ownedRelationship;
+}
+
+operation XMIni!Relationship elements(){
+	return self.ownedRelatedElement;
+}
+
+operation XMIni!Element isTypeOf(str : String){
+	return (self.type().name == str);
+}
+
+
+
+	
+//Import
+@abstract
+rule ImportTransform
+	transform s : XMIni!Import
+	to t : SysMini!Import {
+		if (s.declaredName != null){
+			var name = s.declaredName.split("::");
+			if (name.first() == name.second()){
+				t.text = name.first() + "::*";
+			}
+		}
+	}
+	
+@lazy
+rule NamespaceImportTransform
+	transform s : XMIni!NamespaceImport
+	to t : SysMini!NamespaceImport 
+	extends ImportTransform{
+	}
+
+@lazy
+rule MembershipImportTransform
+	transform s : XMIni!MembershipImport
+	to t : SysMini!MembershipImport 
+	extends ImportTransform{
+	}
+	
+//Package
+@lazy
+rule PackageTransform
+	transform s : XMIni!Package
+	to t : SysMini!Package {
+		t.text = s.declaredName;
+	}
+
+//AnnotatingElement
+@abstract
+rule AnnotatingElementTransform
+	transform s : XMIni!AnnotatingElement
+	to t : SysMini!AnnotatingElement {
+	}
+
+@lazy
+rule CommentTransform
+	transform s : XMIni!Comment
+	to t : SysMini!Comment
+	extends AnnotatingElementTransform{
+		t.text = s.body;
+	}
+
+@lazy
+rule TextualRepresentationTransform
+	transform s : XMIni!TextualRepresentation
+	to t : SysMini!TextualRepresentation
+	extends AnnotatingElementTransform{
+		t.text = s.body;
+	}
+	
+@lazy
+rule DocumentationTransform
+	transform s : XMIni!Documentation
+	to t : SysMini!Documentation
+	extends AnnotatingElementTransform{
+		t.text = s.body;
+	}
+
+//ItemFeature
+@lazy
+rule ItemFeatureTransform
+	transform s : XMIni!ItemFeature
+	to t : SysMini!ItemFeature{
+	}
+
+//ItemFlowEnd
+@lazy
+rule ItemFlowEndTransform
+	transform s : XMIni!ItemFlowEnd
+	to t : SysMini!ItemFlowEnd{
+	}
+	
+
+//Definition
+@abstract
+rule DefinitionTransform
+	transform s : XMIni!Definition
+	to t : SysMini!Definition{
+		t.text = s.declaredName;
+	}
+	
+@lazy
+rule OccurrenceDefinitionTransform
+	transform s : XMIni!OccurrenceDefinition
+	to t : SysMini!OccurrenceDefinition 
+	extends DefinitionTransform{
+	}
+	
+@lazy
+rule AttributeDefinitionTransform
+	transform s : XMIni!AttributeDefinition
+	to t : SysMini!AttributeDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ItemDefinitionTransform
+	transform s : XMIni!ItemDefinition
+	to t : SysMini!ItemDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule PortDefinitionTransform
+	transform s : XMIni!PortDefinition
+	to t : SysMini!PortDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ActionDefinitionTransform
+	transform s : XMIni!ActionDefinition
+	to t : SysMini!ActionDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule EnumerationDefinitionTransform
+	transform s : XMIni!EnumerationDefinition
+	to t : SysMini!EnumerationDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule PartDefinitionTransform
+	transform s : XMIni!PartDefinition
+	to t : SysMini!PartDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule MetadataDefinitionTransform
+	transform s : XMIni!MetadataDefinition
+	to t : SysMini!MetadataDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ConjugatedPortDefinitionTransform
+	transform s : XMIni!ConjugatedPortDefinition
+	to t : SysMini!ConjugatedPortDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule CalculationDefinitionTransform
+	transform s : XMIni!CalculationDefinition
+	to t : SysMini!CalculationDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule StateDefinitionTransform
+	transform s : XMIni!StateDefinition
+	to t : SysMini!StateDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ConnectionDefinitionTransform
+	transform s : XMIni!ConnectionDefinition
+	to t : SysMini!ConnectionDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ViewDefinitionTransform
+	transform s : XMIni!ViewDefinition
+	to t : SysMini!ViewDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule RenderingDefinitionTransform
+	transform s : XMIni!RenderingDefinition
+	to t : SysMini!RenderingDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule CaseDefinitionTransform
+	transform s : XMIni!CaseDefinition
+	to t : SysMini!CaseDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule FlowConnectionDefinitionTransform
+	transform s : XMIni!FlowConnectionDefinition
+	to t : SysMini!FlowConnectionDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule InterfaceDefinitionTransform
+	transform s : XMIni!InterfaceDefinition
+	to t : SysMini!InterfaceDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule AllocationDefinitionTransform
+	transform s : XMIni!AllocationDefinition
+	to t : SysMini!AllocationDefinition 
+	extends DefinitionTransform{
+	}
+	
+@lazy
+rule AnalysisCaseDefinitionTransform
+	transform s : XMIni!AnalysisCaseDefinition
+	to t : SysMini!AnalysisCaseDefinition 
+	extends DefinitionTransform{
+	}
+	
+@lazy
+rule VerificationCaseDefinitionTransform
+	transform s : XMIni!VerificationCaseDefinition
+	to t : SysMini!VerificationCaseDefinition 
+	extends DefinitionTransform{
+	}
+	
+@lazy
+rule UseCaseDefinitionTransform
+	transform s : XMIni!UseCaseDefinition
+	to t : SysMini!UseCaseDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ConstraintDefinitionTransform
+	transform s : XMIni!ConstraintDefinition
+	to t : SysMini!ConstraintDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule RequirementDefinitionTransform
+	transform s : XMIni!RequirementDefinition
+	to t : SysMini!RequirementDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ConcernDefinitionTransform
+	transform s : XMIni!ConcernDefinition
+	to t : SysMini!ConcernDefinition 
+	extends DefinitionTransform{
+	}
+
+@lazy
+rule ViewpointDefinitionTransform
+	transform s : XMIni!ViewpointDefinition
+	to t : SysMini!ViewpointDefinition 
+	extends DefinitionTransform{
+	}
+
+//Usage
+@abstract
+rule UsageTransform
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+		t.text = s.declaredName;
+	}
+	
+@lazy
+rule OccurrenceUsageTransform
+	transform s : XMIni!OccurrenceUsage
+	to t : SysMini!OccurrenceUsage
+	extends UsageTransform{
+	}
+
+@lazy
+rule ReferenceUsageTransform
+	transform s : XMIni!ReferenceUsage
+	to t : SysMini!ReferenceUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule AttributeUsageTransform
+	transform s : XMIni!AttributeUsage
+	to t : SysMini!AttributeUsage
+	extends UsageTransform{
+	}
+
+@lazy
+rule SuccessionAsUsageTransform
+	transform s : XMIni!SuccessionAsUsage
+	to t : SysMini!SuccessionAsUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule BindingConnectorAsUsageTransform
+	transform s : XMIni!BindingConnectorAsUsage
+	to t : SysMini!BindingConnectorAsUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ItemUsageTransform
+	transform s : XMIni!ItemUsage
+	to t : SysMini!ItemUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ActionUsageTransform
+	transform s : XMIni!ActionUsage
+	to t : SysMini!ActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule PortUsageTransform
+	transform s : XMIni!PortUsage
+	to t : SysMini!PortUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule EventOccurrenceUsageTransform
+	transform s : XMIni!EventOccurrenceUsage
+	to t : SysMini!EventOccurrenceUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule EnumerationUsageTransform
+	transform s : XMIni!EnumerationUsage
+	to t : SysMini!EnumerationUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule PartUsageTransform
+	transform s : XMIni!PartUsage
+	to t : SysMini!PartUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule MetadataUsageTransform
+	transform s : XMIni!MetadataUsage
+	to t : SysMini!MetadataUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule StateUsageTransform
+	transform s : XMIni!StateUsage
+	to t : SysMini!StateUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule TransitionUsageTransform
+	transform s : XMIni!TransitionUsage
+	to t : SysMini!TransitionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule AcceptActionUsageTransform
+	transform s : XMIni!AcceptActionUsage
+	to t : SysMini!AcceptActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule CalculationUsageTransform
+	transform s : XMIni!CalculationUsage
+	to t : SysMini!CalculationUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule PerformActionUsageTransform
+	transform s : XMIni!PerformActionUsage
+	to t : SysMini!PerformActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule SendActionUsageTransform
+	transform s : XMIni!SendActionUsage
+	to t : SysMini!SendActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule IfActionUsageTransform
+	transform s : XMIni!IfActionUsage
+	to t : SysMini!IfActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule AssignmentActionUsageTransform
+	transform s : XMIni!AssignmentActionUsage
+	to t : SysMini!AssignmentActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ConnectionUsageTransform
+	transform s : XMIni!ConnectionUsage
+	to t : SysMini!ConnectionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ViewUsageTransform
+	transform s : XMIni!ViewUsage
+	to t : SysMini!ViewUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule RenderingUsageTransform
+	transform s : XMIni!RenderingUsage
+	to t : SysMini!RenderingUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ExhibitStateUsageTransform
+	transform s : XMIni!ExhibitStateUsage
+	to t : SysMini!ExhibitStateUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule CaseUsageTransform
+	transform s : XMIni!CaseUsage
+	to t : SysMini!CaseUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule WhileLoopActionUsageTransform
+	transform s : XMIni!WhileLoopActionUsage
+	to t : SysMini!WhileLoopActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ForLoopActionUsageTransform
+	transform s : XMIni!ForLoopActionUsage
+	to t : SysMini!ForLoopActionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule DecisionNodeTransform
+	transform s : XMIni!DecisionNode
+	to t : SysMini!DecisionNode
+	extends UsageTransform{
+	}
+	
+@lazy
+rule ForkNodeTransform
+	transform s : XMIni!ForkNode
+	to t : SysMini!ForkNode
+	extends UsageTransform{
+	}
+	
+@lazy
+rule MergeNodeTransform
+	transform s : XMIni!MergeNode
+	to t : SysMini!MergeNode
+	extends UsageTransform{
+	}
+	
+@lazy
+rule JoinNodeTransform
+	transform s : XMIni!JoinNode
+	to t : SysMini!JoinNode
+	extends UsageTransform{
+	}
+	
+@lazy
+rule FlowConnectionUsageTransform
+	transform s : XMIni!FlowConnectionUsage
+	to t : SysMini!FlowConnectionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule InterfaceUsageTransform
+	transform s : XMIni!InterfaceUsage
+	to t : SysMini!InterfaceUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule AllocationUsageTransform
+	transform s : XMIni!AllocationUsage
+	to t : SysMini!AllocationUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule AnalysisCaseUsageTransform
+	transform s : XMIni!AnalysisCaseUsage
+	to t : SysMini!AnalysisCaseUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule VerificationCaseUsageTransform
+	transform s : XMIni!VerificationCaseUsage
+	to t : SysMini!VerificationCaseUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule UseCaseUsageTransform
+	transform s : XMIni!UseCaseUsage
+	to t : SysMini!UseCaseUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule SuccessionFlowConnectionUsageTransform
+	transform s : XMIni!SuccessionFlowConnectionUsage
+	to t : SysMini!SuccessionFlowConnectionUsage
+	extends UsageTransform{
+	}
+	
+@lazy
+rule IncludeUseCaseUsageTransform
+	transform s : XMIni!IncludeUseCaseUsage
+	to t : SysMini!IncludeUseCaseUsage
+	extends UsageTransform{
+	}
+	
+//@lazy
+//rule ConstraintUsageUsageTransform
+//	transform s : XMIni!ConstraintUsage
+//	to t : SysMini!ConstraintUsage{
+//	}
+//	
+//@lazy
+//rule RequirementUsageTransform
+//	transform s : XMIni!RequirementUsage
+//	to t : SysMini!RequirementUsage{
+//	}
+//	
+//@lazy
+//rule AssertConstraintUsageTransform
+//	transform s : XMIni!AssertConstraintUsage
+//	to t : SysMini!AssertConstraintUsage{
+//	}
+//	
+//@lazy
+//rule ConcernUsageTransform
+//	transform s : XMIni!ConcernUsage
+//	to t : SysMini!ConcernUsage{
+//	}
+//	
+//@lazy
+//rule ViewpointUsageTransform
+//	transform s : XMIni!ViewpointUsage
+//	to t : SysMini!ViewpointUsage{
+//	}
+//	
+//@lazy
+//rule SatisfyRequirementUsageTransform
+//	transform s : XMIni!SatisfyRequirementUsage
+//	to t : SysMini!SatisfyRequirementUsage{
+//	}
+
+
+

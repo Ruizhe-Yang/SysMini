@@ -1,0 +1,1855 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
+  <contents xsi:type="NamespaceImport"/>
+  <contents xsi:type="NamespaceImport" text="ISQ::*"/>
+  <contents xsi:type="Package" text="Definitions">
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="MembershipImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="Package" text="PartDefinitions">
+      <contents xsi:type="PartDefinition" text="Vehicle">
+        <contents xsi:type="AttributeUsage" text="mass"/>
+        <contents xsi:type="AttributeUsage" text="dryMass"/>
+        <contents xsi:type="AttributeUsage" text="cargoMass"/>
+        <contents xsi:type="AttributeUsage" text="position"/>
+        <contents xsi:type="AttributeUsage" text="velocity"/>
+        <contents xsi:type="AttributeUsage" text="acceleration"/>
+        <contents xsi:type="AttributeUsage" text="electricalPower"/>
+        <contents xsi:type="AttributeUsage" text="Tmax"/>
+        <contents xsi:type="AttributeUsage" text="maintenanceTime"/>
+        <contents xsi:type="AttributeUsage" text="brakePedalDepressed"/>
+        <contents xsi:type="PortUsage" text="ignitionCmdPort"/>
+        <contents xsi:type="PortUsage" text="pwrCmdPort"/>
+        <contents xsi:type="PortUsage" text="vehicleToRoadPort"/>
+        <contents xsi:type="PortUsage" text="statusPort"/>
+        <contents xsi:type="PerformActionUsage" text="providePower"/>
+        <contents xsi:type="PerformActionUsage" text="provideBraking"/>
+        <contents xsi:type="PerformActionUsage" text="controlDirection"/>
+        <contents xsi:type="PerformActionUsage" text="performSelfTest"/>
+        <contents xsi:type="PerformActionUsage" text="applyParkingBrake"/>
+        <contents xsi:type="PerformActionUsage" text="senseTemperature"/>
+        <contents xsi:type="ExhibitStateUsage" text="vehicleStates">
+          <contents xsi:type="ReferenceUsage" text="controller"/>
+          <contents xsi:type="StateUsage" text="operatingStates">
+            <contents xsi:type="PerformActionUsage" text="initial"/>
+            <contents xsi:type="StateUsage" text="off"/>
+            <contents xsi:type="StateUsage" text="starting"/>
+            <contents xsi:type="StateUsage" text="on">
+              <contents xsi:type="PerformActionUsage"/>
+              <contents xsi:type="PerformActionUsage"/>
+              <contents xsi:type="PerformActionUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="off_To_starting">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage" text="ignitionCmd"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage" text="ignitionCmd"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SendActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="starting_To_on">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="on_To_off">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SendActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+          </contents>
+          <contents xsi:type="StateUsage" text="healthStates">
+            <contents xsi:type="PerformActionUsage" text="initial"/>
+            <contents xsi:type="PerformActionUsage">
+              <contents xsi:type="ReferenceUsage" text="temp"/>
+            </contents>
+            <contents xsi:type="StateUsage" text="normal"/>
+            <contents xsi:type="StateUsage" text="maintenance"/>
+            <contents xsi:type="StateUsage" text="degraded"/>
+            <contents xsi:type="TransitionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="normal_To_maintenance">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="normal_To_degraded">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SendActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="maintenance_To_normal">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="degraded_To_normal">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Engine">
+        <contents xsi:type="AttributeUsage" text="mass"/>
+        <contents xsi:type="AttributeUsage" text="peakHorsePower"/>
+        <contents xsi:type="AttributeUsage" text="fuelEfficiency"/>
+        <contents xsi:type="AttributeUsage" text="cost"/>
+        <contents xsi:type="AttributeUsage" text="displacement"/>
+        <contents xsi:type="PortUsage" text="engineControlPort"/>
+        <contents xsi:type="PortUsage" text="fuelInPort"/>
+        <contents xsi:type="PortUsage" text="fuelCmdPort"/>
+        <contents xsi:type="PortUsage" text="drivePwrPort"/>
+        <contents xsi:type="PortUsage" text="ignitionCmdPort"/>
+        <contents xsi:type="PortUsage" text="flyWheelPort"/>
+        <contents xsi:type="PerformActionUsage" text="generateTorque"/>
+        <contents xsi:type="ExhibitStateUsage" text="engineStates">
+          <contents xsi:type="StateUsage" text="off"/>
+          <contents xsi:type="StateUsage" text="starting"/>
+          <contents xsi:type="StateUsage" text="on">
+            <contents xsi:type="PerformActionUsage"/>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="PartDefinition" text="StarterMotor">
+        <contents xsi:type="PortUsage" text="gearPort"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Cylinder"/>
+      <contents xsi:type="PartDefinition" text="Transmission">
+        <contents xsi:type="AttributeUsage" text="gearRatio"/>
+        <contents xsi:type="PortUsage" text="clutchPort"/>
+        <contents xsi:type="ExhibitStateUsage" text="transmissionStates"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Driveshaft"/>
+      <contents xsi:type="PartDefinition" text="AxleAssembly"/>
+      <contents xsi:type="PartDefinition" text="Axle">
+        <contents xsi:type="AttributeUsage" text="mass"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="FrontAxle">
+        <contents xsi:type="AttributeUsage" text="steeringAngle"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="HalfAxle">
+        <contents xsi:type="PortUsage" text="shankCompositePort"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Differential"/>
+      <contents xsi:type="PartDefinition" text="Wheel">
+        <contents xsi:type="AttributeUsage" text="diameter"/>
+        <contents xsi:type="PortUsage" text="lugNutCompositePort"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Hub">
+        <contents xsi:type="PortUsage" text="shankCompositePort"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Software"/>
+      <contents xsi:type="PartDefinition" text="VehicleSoftware"/>
+      <contents xsi:type="PartDefinition" text="VehicleController">
+        <contents xsi:type="PortUsage" text="controlPort"/>
+        <contents xsi:type="ExhibitStateUsage" text="controllerStates">
+          <contents xsi:type="StateUsage" text="operatingStates">
+            <contents xsi:type="PerformActionUsage" text="initial"/>
+            <contents xsi:type="StateUsage" text="off"/>
+            <contents xsi:type="StateUsage" text="on"/>
+            <contents xsi:type="TransitionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="off-on">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="TransitionUsage" text="on-off">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="AcceptActionUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="SuccessionAsUsage">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="PartDefinition" text="CruiseController">
+        <contents xsi:type="PortUsage" text="setSpeedPort"/>
+        <contents xsi:type="PortUsage" text="speedSensorPort"/>
+        <contents xsi:type="PortUsage" text="cruiseControlPort"/>
+        <contents xsi:type="ExhibitStateUsage" text="cruiseControllerStates"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="SpeedSensor">
+        <contents xsi:type="PortUsage" text="speedSensorPort"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="FuelTank">
+        <contents xsi:type="AttributeUsage" text="mass"/>
+        <contents xsi:type="ItemUsage" text="fuel">
+          <contents xsi:type="AttributeUsage"/>
+        </contents>
+        <contents xsi:type="AttributeUsage" text="fuelKind"/>
+        <contents xsi:type="AttributeUsage" text="fuelMassMax"/>
+        <contents xsi:type="PortUsage" text="fuelOutPort"/>
+        <contents xsi:type="PortUsage" text="fuelInPort"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="BodyAssy"/>
+      <contents xsi:type="PartDefinition" text="Body">
+        <contents xsi:type="AttributeUsage" text="color"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Thermostat"/>
+      <contents xsi:type="PartDefinition" text="WaterHose"/>
+      <contents xsi:type="PartDefinition" text="Road">
+        <contents xsi:type="AttributeUsage" text="incline"/>
+        <contents xsi:type="AttributeUsage" text="friction"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Engine4Cyl"/>
+      <contents xsi:type="PartDefinition" text="Engine6Cyl"/>
+      <contents xsi:type="PartDefinition" text="TransmissionChoices"/>
+      <contents xsi:type="PartDefinition" text="TransmissionAutomatic"/>
+      <contents xsi:type="PartDefinition" text="TransmissionManual"/>
+      <contents xsi:type="PartDefinition" text="Sunroof"/>
+      <contents xsi:type="PartDefinition" text="ElectricalGenerator"/>
+      <contents xsi:type="PartDefinition" text="TorqueGenerator"/>
+      <contents xsi:type="PartDefinition" text="SteeringSubsystem"/>
+      <contents xsi:type="PartDefinition" text="BrakingSubsystem"/>
+    </contents>
+    <contents xsi:type="Package" text="PortDefinitions">
+      <contents xsi:type="PortDefinition" text="IgnitionCmdPort">
+        <contents xsi:type="ItemUsage" text="ignitionCmd"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="StatusPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="GearPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="PwrCmdPort">
+        <contents xsi:type="ItemUsage" text="pwrCmd"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="FuelCmdPort">
+        <contents xsi:type="ItemUsage" text="fuelCmd"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="FuelPort">
+        <contents xsi:type="ItemUsage" text="fuel"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="DrivePwrPort">
+        <contents xsi:type="ReferenceUsage" text="torque"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ShaftPort_a">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ShaftPort_b">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ShaftPort_c">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ShaftPort_d">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="DiffPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="AxlePort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="AxleToWheelPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="WheelToAxlePort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="WheelToRoadPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="LugNutCompositePort">
+        <contents xsi:type="PortUsage" text="lugNutPort"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ShankCompositePort">
+        <contents xsi:type="PortUsage" text="shankPort"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="LugNutPort">
+        <contents xsi:type="AttributeUsage" text="threadDia"/>
+        <contents xsi:type="AttributeUsage" text="threadPitch"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ShankPort">
+        <contents xsi:type="AttributeUsage" text="threadDia"/>
+        <contents xsi:type="AttributeUsage" text="threadPitch"/>
+        <contents xsi:type="AttributeUsage" text="shaftLength"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="VehicleToRoadPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="ControlPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="CruiseControlPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="SpeedSensorPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="SetSpeedPort">
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="DriverCmdPort">
+        <contents xsi:type="ItemUsage" text="driverCmd"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+      <contents xsi:type="PortDefinition" text="HandPort">
+        <contents xsi:type="ItemUsage" text="ignitionCmd"/>
+        <contents xsi:type="ItemUsage" text="pwrCmd"/>
+        <contents xsi:type="ConjugatedPortDefinition"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="ItemDefinitions">
+      <contents xsi:type="ItemDefinition" text="PwrCmd">
+        <contents xsi:type="AttributeUsage" text="throttleLevel"/>
+      </contents>
+      <contents xsi:type="ItemDefinition" text="FuelCmd"/>
+      <contents xsi:type="ItemDefinition" text="Fuel">
+        <contents xsi:type="AttributeUsage" text="fuelMass"/>
+      </contents>
+      <contents xsi:type="ItemDefinition" text="SensedSpeed">
+        <contents xsi:type="AttributeUsage" text="speed"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="SignalDefinitions">
+      <contents xsi:type="ItemDefinition" text="Cmd"/>
+      <contents xsi:type="ItemDefinition" text="DriverCmd"/>
+      <contents xsi:type="ItemDefinition" text="IgnitionCmd">
+        <contents xsi:type="AttributeUsage" text="ignitionOnOff"/>
+      </contents>
+      <contents xsi:type="ItemDefinition" text="EngineStatus"/>
+      <contents xsi:type="AttributeDefinition" text="VehicleStartSignal"/>
+      <contents xsi:type="AttributeDefinition" text="VehicleOnSignal"/>
+      <contents xsi:type="AttributeDefinition" text="VehicleOffSignal"/>
+      <contents xsi:type="AttributeDefinition" text="StartSignal"/>
+      <contents xsi:type="AttributeDefinition" text="OffSignal"/>
+      <contents xsi:type="AttributeDefinition" text="OverTemp"/>
+      <contents xsi:type="AttributeDefinition" text="ReturnToNormal"/>
+      <contents xsi:type="AttributeDefinition" text="SetSpeed"/>
+    </contents>
+    <contents xsi:type="Package" text="InterfaceDefinitions">
+      <contents xsi:type="InterfaceDefinition" text="EngineToTransmissionInterface">
+        <contents xsi:type="PortUsage" text="p1"/>
+        <contents xsi:type="PortUsage" text="p2"/>
+        <contents xsi:type="FlowConnectionUsage">
+          <contents xsi:type="ItemFlowEnd">
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ItemFlowEnd">
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="InterfaceDefinition" text="FuelInterface">
+        <contents xsi:type="PortUsage" text="fuelOutPort"/>
+        <contents xsi:type="PortUsage" text="fuelInPort"/>
+        <contents xsi:type="FlowConnectionUsage">
+          <contents xsi:type="ItemFeature"/>
+          <contents xsi:type="ItemFlowEnd">
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ItemFlowEnd">
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="InterfaceDefinition" text="WheelFastenerInterface">
+        <contents xsi:type="PortUsage" text="lugNutPort"/>
+        <contents xsi:type="PortUsage" text="shankPort"/>
+        <contents xsi:type="AttributeUsage" text="maxTorque"/>
+      </contents>
+      <contents xsi:type="InterfaceDefinition" text="WheelHubInterface">
+        <contents xsi:type="PortUsage" text="lugNutCompositePort"/>
+        <contents xsi:type="PortUsage" text="shankCompositePort"/>
+        <contents xsi:type="InterfaceUsage" text="wheelFastenerInterface">
+          <contents xsi:type="PortUsage"/>
+          <contents xsi:type="PortUsage"/>
+        </contents>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="AllocationDefinitions">
+      <contents xsi:type="AllocationDefinition" text="LogicalToPhysical"/>
+    </contents>
+    <contents xsi:type="Package" text="ActionDefinitions">
+      <contents xsi:type="ActionDefinition" text="ProvidePower">
+        <contents xsi:type="ItemUsage" text="pwrCmd"/>
+        <contents xsi:type="ReferenceUsage" text="wheelToRoadTorque"/>
+      </contents>
+      <contents xsi:type="ActionDefinition" text="GenerateTorque">
+        <contents xsi:type="ItemUsage" text="fuelCmd"/>
+        <contents xsi:type="ReferenceUsage" text="engineTorque"/>
+      </contents>
+      <contents xsi:type="ActionDefinition" text="AmplifyTorque">
+        <contents xsi:type="ReferenceUsage" text="engineTorque"/>
+        <contents xsi:type="ReferenceUsage" text="transmissionTorque"/>
+      </contents>
+      <contents xsi:type="ActionDefinition" text="TransferTorque">
+        <contents xsi:type="ReferenceUsage" text="transmissionTorque"/>
+        <contents xsi:type="ReferenceUsage" text="driveshaftTorque"/>
+      </contents>
+      <contents xsi:type="ActionDefinition" text="DistributeTorque">
+        <contents xsi:type="ReferenceUsage" text="driveshaftTorque"/>
+        <contents xsi:type="ReferenceUsage" text="wheelToRoadTorque"/>
+      </contents>
+      <contents xsi:type="ActionDefinition" text="PerformSelfTest"/>
+      <contents xsi:type="ActionDefinition" text="ApplyParkingBrake"/>
+      <contents xsi:type="ActionDefinition" text="SenseTemperature">
+        <contents xsi:type="ReferenceUsage" text="temp"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="StateDefinitions">
+      <contents xsi:type="StateDefinition" text="VehicleStates"/>
+      <contents xsi:type="StateDefinition" text="ControllerStates"/>
+      <contents xsi:type="StateDefinition" text="CruiseControllerStates"/>
+    </contents>
+    <contents xsi:type="Package" text="RequirementDefinitions">
+      <contents xsi:type="RequirementDefinition" text="MassRequirement">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="Documentation" text="The actual mass shall be less than the required mass"/>
+        <contents xsi:type="AttributeUsage" text="massRequired"/>
+        <contents xsi:type="AttributeUsage" text="massActual"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="RequirementDefinition" text="ReliabilityRequirement">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="Documentation" text="The actual reliability shall be greater than the required reliability"/>
+        <contents xsi:type="AttributeUsage" text="reliabilityRequired"/>
+        <contents xsi:type="AttributeUsage" text="reliabilityActual"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="RequirementDefinition" text="TorqueGenerationRequirement">
+        <contents xsi:type="Documentation" text="The engine shall generate torque as a function of RPM as shown in Table 1. "/>
+        <contents xsi:type="ReferenceUsage" text="generateTorque"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="RequirementDefinition" text="DrivePowerOutputRequirement">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="Documentation" text="The engine shall provide a connection point to transfer torque to the transmission."/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="RequirementDefinition" text="FuelEconomyRequirement">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="Documentation" text="The vehicle shall maintain an average fuel economomy of at least x miles per gallon for the nominal &#xA;driving scenario "/>
+        <contents xsi:type="AttributeUsage" text="actualFuelEconomy"/>
+        <contents xsi:type="AttributeUsage" text="requiredFuelEconomy"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="AttributeDefinitions">
+      <contents xsi:type="NamespaceImport" text="ScalarValues::*"/>
+      <contents xsi:type="NamespaceImport" text="Quantities::*"/>
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="NamespaceImport" text="NumericalFunctions::*"/>
+      <contents xsi:type="NamespaceImport" text="SI::*"/>
+      <contents xsi:type="NamespaceImport" text="USCustomaryUnits::*"/>
+      <contents xsi:type="EnumerationDefinition" text="Colors">
+        <contents xsi:type="EnumerationUsage" text="black"/>
+        <contents xsi:type="EnumerationUsage" text="grey"/>
+        <contents xsi:type="EnumerationUsage" text="red"/>
+      </contents>
+      <contents xsi:type="EnumerationDefinition" text="DiameterChoices">
+        <contents xsi:type="EnumerationUsage"/>
+        <contents xsi:type="EnumerationUsage"/>
+        <contents xsi:type="EnumerationUsage"/>
+      </contents>
+      <contents xsi:type="AttributeUsage" text="cylinderDiameter"/>
+      <contents xsi:type="EnumerationDefinition" text="IgnitionOnOff">
+        <contents xsi:type="EnumerationUsage" text="on"/>
+        <contents xsi:type="EnumerationUsage" text="off"/>
+      </contents>
+      <contents xsi:type="EnumerationDefinition" text="FuelKind">
+        <contents xsi:type="EnumerationUsage" text="gas"/>
+        <contents xsi:type="EnumerationUsage" text="diesel"/>
+      </contents>
+      <contents xsi:type="ReferenceUsage" text="distancePerVolume"/>
+      <contents xsi:type="ReferenceUsage" text="timePerDistance"/>
+      <contents xsi:type="ReferenceUsage" text="volumePerDistance"/>
+      <contents xsi:type="ReferenceUsage" text="volumePerTime"/>
+      <contents xsi:type="ReferenceUsage" text="kpl"/>
+      <contents xsi:type="ReferenceUsage" text="rpm"/>
+      <contents xsi:type="ReferenceUsage" text="kW"/>
+    </contents>
+    <contents xsi:type="Package" text="IndividualDefinitions">
+      <contents xsi:type="OccurrenceDefinition" text="VehicleRoadContext_1"/>
+      <contents xsi:type="OccurrenceDefinition" text="Vehicle_1"/>
+      <contents xsi:type="OccurrenceDefinition" text="FrontAxleAssembly_1"/>
+      <contents xsi:type="OccurrenceDefinition" text="FrontAxle_1"/>
+      <contents xsi:type="OccurrenceDefinition" text="Wheel_1"/>
+      <contents xsi:type="OccurrenceDefinition" text="Wheel_2"/>
+      <contents xsi:type="OccurrenceDefinition" text="RearAxleAssembly_1"/>
+      <contents xsi:type="OccurrenceDefinition" text="Road_1"/>
+    </contents>
+    <contents xsi:type="Package" text="MetadataDefinitions">
+      <contents xsi:type="NamespaceImport" text="AnalysisTooling::*"/>
+      <contents xsi:type="MetadataDefinition" text="Safety">
+        <contents xsi:type="AttributeUsage" text="isMandatory"/>
+      </contents>
+      <contents xsi:type="MetadataDefinition" text="Security"/>
+    </contents>
+    <contents xsi:type="Package" text="KeyWord_MetadataDefinitions">
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="StateUsage" text="failureModes"/>
+      <contents xsi:type="MetadataDefinition" text="failureMode">
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="OccurrenceUsage" text="logicalOccurrences"/>
+      <contents xsi:type="MetadataDefinition" text="logical">
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="OccurrenceUsage" text="physicalOccurrences"/>
+      <contents xsi:type="MetadataDefinition" text="physical">
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="GenericContext">
+      <contents xsi:type="PartDefinition" text="Context">
+        <contents xsi:type="AttributeUsage" text="time"/>
+        <contents xsi:type="AttributeUsage" text="spatialCF">
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="AttributeUsage" text="velocityCF"/>
+        <contents xsi:type="AttributeUsage" text="accelarationCF"/>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleLogicalConfiguration">
+    <contents xsi:type="Package" text="PartsTree">
+      <contents xsi:type="PartUsage" text="vehicleLogical">
+        <contents xsi:type="MetadataUsage"/>
+        <contents xsi:type="PartUsage" text="torqueGenerator">
+          <contents xsi:type="ActionUsage" text="generateTorque"/>
+        </contents>
+        <contents xsi:type="PartUsage" text="electricalGenerator">
+          <contents xsi:type="ActionUsage" text="generateElectricity"/>
+        </contents>
+        <contents xsi:type="PartUsage" text="steeringSystem"/>
+        <contents xsi:type="PartUsage" text="brakingSubsystem"/>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleLogicalToPhysicalAllocation">
+    <contents xsi:type="MembershipImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="AllocationUsage" text="vehicleLogicalToPhysicalAllocation">
+      <contents xsi:type="ReferenceUsage"/>
+      <contents xsi:type="ReferenceUsage"/>
+      <contents xsi:type="AllocationUsage">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="AllocationUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+      </contents>
+      <contents xsi:type="AllocationUsage">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="AllocationUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleConfigurations">
+    <contents xsi:type="Package" text="VehicleConfiguration_a">
+      <contents xsi:type="Package" text="PartsTree">
+        <contents xsi:type="PartUsage" text="vehicle_a">
+          <contents xsi:type="AttributeUsage" text="mass"/>
+          <contents xsi:type="AttributeUsage" text="dryMass"/>
+          <contents xsi:type="AttributeUsage"/>
+          <contents xsi:type="AttributeUsage" text="partMasses"/>
+          <contents xsi:type="PartUsage" text="fuelTank">
+            <contents xsi:type="AttributeUsage"/>
+            <contents xsi:type="ItemUsage">
+              <contents xsi:type="AttributeUsage"/>
+            </contents>
+          </contents>
+          <contents xsi:type="PartUsage" text="frontAxleAssembly">
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="PartUsage" text="frontAxle"/>
+            <contents xsi:type="PartUsage" text="frontWheels"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="rearAxleAssembly">
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="AttributeUsage" text="driveTrainEfficiency"/>
+            <contents xsi:type="PartUsage" text="rearAxle"/>
+            <contents xsi:type="PartUsage" text="rearWheels">
+              <contents xsi:type="AttributeUsage"/>
+            </contents>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="Package" text="ActionTree"/>
+      <contents xsi:type="Package" text="Requirements"/>
+    </contents>
+    <contents xsi:type="Package" text="VehicleConfiguration_b">
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="NamespaceImport" text="ModelingMetadata::*"/>
+      <contents xsi:type="Package" text="PartsTree">
+        <contents xsi:type="PartUsage" text="vehicle_b">
+          <contents xsi:type="AttributeUsage" text="mass">
+            <contents xsi:type="MetadataUsage"/>
+          </contents>
+          <contents xsi:type="AttributeUsage" text="dryMass"/>
+          <contents xsi:type="AttributeUsage"/>
+          <contents xsi:type="AttributeUsage" text="partMasses"/>
+          <contents xsi:type="AttributeUsage" text="avgFuelEconomy"/>
+          <contents xsi:type="PortUsage" text="fuelCmdPort">
+            <contents xsi:type="ItemUsage" text="fuelCmd"/>
+          </contents>
+          <contents xsi:type="PortUsage" text="setSpeedPort"/>
+          <contents xsi:type="PortUsage" text="vehicleToRoadPort">
+            <contents xsi:type="PortUsage" text="wheelToRoadPort1"/>
+            <contents xsi:type="PortUsage" text="wheelToRoadPort2"/>
+          </contents>
+          <contents xsi:type="PerformActionUsage"/>
+          <contents xsi:type="PerformActionUsage"/>
+          <contents xsi:type="PerformActionUsage"/>
+          <contents xsi:type="PerformActionUsage"/>
+          <contents xsi:type="ExhibitStateUsage" text="vehicleStates"/>
+          <contents xsi:type="ItemUsage">
+            <contents xsi:type="ReferenceUsage" text="length1"/>
+            <contents xsi:type="ReferenceUsage" text="width1"/>
+            <contents xsi:type="ReferenceUsage" text="height1"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="fuelTank">
+            <contents xsi:type="AttributeUsage"/>
+            <contents xsi:type="ItemUsage">
+              <contents xsi:type="AttributeUsage"/>
+            </contents>
+            <contents xsi:type="AttributeUsage"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="frontAxleAssembly">
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="PortUsage" text="shaftPort_d"/>
+            <contents xsi:type="PartUsage" text="frontAxle"/>
+            <contents xsi:type="PartUsage" text="frontWheels"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="rearAxleAssembly">
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="AttributeUsage" text="driveTrainEfficiency"/>
+            <contents xsi:type="PortUsage" text="shaftPort_d"/>
+            <contents xsi:type="PerformActionUsage"/>
+            <contents xsi:type="PartUsage" text="rearWheel1">
+              <contents xsi:type="AttributeUsage"/>
+              <contents xsi:type="PortUsage" text="wheelToRoadPort"/>
+              <contents xsi:type="PortUsage" text="lugNutCompositePort">
+                <contents xsi:type="PortUsage" text="lugNutPort"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage" text="rearWheel2">
+              <contents xsi:type="AttributeUsage"/>
+              <contents xsi:type="PortUsage" text="wheelToRoadPort"/>
+              <contents xsi:type="PortUsage" text="lugNutCompositePort">
+                <contents xsi:type="PortUsage" text="lugNutPort"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage" text="differential">
+              <contents xsi:type="PortUsage" text="shaftPort_d"/>
+              <contents xsi:type="PortUsage" text="leftDiffPort"/>
+              <contents xsi:type="PortUsage" text="rightDiffPort"/>
+            </contents>
+            <contents xsi:type="PartUsage" text="rearAxle">
+              <contents xsi:type="PartUsage" text="leftHalfAxle">
+                <contents xsi:type="PortUsage" text="leftAxleToDiffPort"/>
+                <contents xsi:type="PortUsage" text="shankCompositePort">
+                  <contents xsi:type="PortUsage" text="shankPort"/>
+                </contents>
+              </contents>
+              <contents xsi:type="PartUsage" text="rightHalfAxle">
+                <contents xsi:type="PortUsage" text="rightAxleToDiffPort"/>
+                <contents xsi:type="PortUsage" text="shankCompositePort">
+                  <contents xsi:type="PortUsage" text="shankPort"/>
+                </contents>
+              </contents>
+            </contents>
+            <contents xsi:type="BindingConnectorAsUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ConnectionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ConnectionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="InterfaceUsage" text="wheelToleftHalAxleInterface">
+              <contents xsi:type="PortUsage"/>
+              <contents xsi:type="PortUsage"/>
+            </contents>
+            <contents xsi:type="InterfaceUsage" text="wheelTorightHalAxleInterface">
+              <contents xsi:type="PortUsage"/>
+              <contents xsi:type="PortUsage"/>
+            </contents>
+          </contents>
+          <contents xsi:type="PartUsage" text="starterMotor"/>
+          <contents xsi:type="PartUsage" text="engine">
+            <contents xsi:type="PerformActionUsage"/>
+            <contents xsi:type="PartUsage" text="cylinders"/>
+            <contents xsi:type="PartUsage" text="alternator">
+              <contents xsi:type="ActionUsage" text="generateElectricity"/>
+            </contents>
+          </contents>
+          <contents xsi:type="PartUsage" text="transmission">
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="PortUsage" text="shaftPort_a"/>
+            <contents xsi:type="PerformActionUsage"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="driveshaft">
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="PortUsage" text="shaftPort_b"/>
+            <contents xsi:type="PortUsage" text="shaftPort_c"/>
+            <contents xsi:type="PerformActionUsage"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="vehicleSoftware">
+            <contents xsi:type="PartUsage" text="vehicleController">
+              <contents xsi:type="ExhibitStateUsage" text="controllerStates"/>
+              <contents xsi:type="PartUsage" text="cruiseController"/>
+            </contents>
+          </contents>
+          <contents xsi:type="PartUsage" text="speedSensor"/>
+          <contents xsi:type="PartUsage" text="bodyAssy">
+            <contents xsi:type="PartUsage" text="body">
+              <contents xsi:type="AttributeUsage"/>
+            </contents>
+            <contents xsi:type="PartUsage" text="bumper">
+              <contents xsi:type="MetadataUsage">
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage" text="keylessEntry">
+              <contents xsi:type="MetadataUsage"/>
+            </contents>
+          </contents>
+          <contents xsi:type="PartUsage" text="interior">
+            <contents xsi:type="PartUsage" text="alarm">
+              <contents xsi:type="MetadataUsage"/>
+            </contents>
+            <contents xsi:type="PartUsage" text="seatBelt">
+              <contents xsi:type="MetadataUsage">
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage" text="frontSeat"/>
+            <contents xsi:type="PartUsage" text="driverAirBag">
+              <contents xsi:type="MetadataUsage">
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+            </contents>
+          </contents>
+          <contents xsi:type="BindingConnectorAsUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="InterfaceUsage" text="engineToTransmissionInterface">
+            <contents xsi:type="PortUsage"/>
+            <contents xsi:type="PortUsage"/>
+          </contents>
+          <contents xsi:type="InterfaceUsage" text="fuelInterface">
+            <contents xsi:type="PortUsage"/>
+            <contents xsi:type="PortUsage"/>
+          </contents>
+          <contents xsi:type="AllocationUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="BindingConnectorAsUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ConnectionUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ConnectionUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="BindingConnectorAsUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ConnectionUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="BindingConnectorAsUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ConnectionUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ConnectionUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="BindingConnectorAsUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="BindingConnectorAsUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="Package" text="ActionTree">
+        <contents xsi:type="ActionUsage" text="providePower">
+          <contents xsi:type="ItemUsage" text="fuelCmd"/>
+          <contents xsi:type="ReferenceUsage" text="wheelToRoadTorque"/>
+          <contents xsi:type="ActionUsage" text="generateTorque">
+            <contents xsi:type="ItemUsage"/>
+          </contents>
+          <contents xsi:type="ActionUsage" text="amplifyTorque"/>
+          <contents xsi:type="ActionUsage" text="transferTorque"/>
+          <contents xsi:type="ActionUsage" text="distributeTorque"/>
+          <contents xsi:type="FlowConnectionUsage" text="generateToAmplify">
+            <contents xsi:type="ItemFlowEnd">
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ItemFlowEnd">
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+          </contents>
+          <contents xsi:type="FlowConnectionUsage">
+            <contents xsi:type="ItemFlowEnd">
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ItemFlowEnd">
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+          </contents>
+          <contents xsi:type="FlowConnectionUsage">
+            <contents xsi:type="ItemFlowEnd">
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ItemFlowEnd">
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+          </contents>
+        </contents>
+        <contents xsi:type="ActionUsage" text="performSelfTest"/>
+        <contents xsi:type="ActionUsage" text="applyParkingBrake"/>
+        <contents xsi:type="ActionUsage" text="senseTemperature"/>
+      </contents>
+      <contents xsi:type="Package" text="DiscreteInteractions">
+        <contents xsi:type="Package" text="Sequence">
+          <contents xsi:type="PartDefinition" text="Driver">
+            <contents xsi:type="PortUsage" text="p1"/>
+            <contents xsi:type="PortUsage" text="p2"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="part0">
+            <contents xsi:type="PerformActionUsage" text="startVehicle">
+              <contents xsi:type="SendActionUsage" text="turnVehicleOn">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage" text="ignitionCmd"/>
+              </contents>
+              <contents xsi:type="AcceptActionUsage" text="trigger1">
+                <contents xsi:type="ReferenceUsage" text="ignitionCmd"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+              <contents xsi:type="FlowConnectionUsage">
+                <contents xsi:type="ItemFeature"/>
+                <contents xsi:type="ItemFlowEnd">
+                  <contents xsi:type="ReferenceUsage"/>
+                </contents>
+                <contents xsi:type="ItemFlowEnd">
+                  <contents xsi:type="ReferenceUsage"/>
+                </contents>
+              </contents>
+              <contents xsi:type="ActionUsage" text="startEngine">
+                <contents xsi:type="ItemUsage" text="ignitionCmd"/>
+                <contents xsi:type="ItemUsage" text="es"/>
+              </contents>
+              <contents xsi:type="FlowConnectionUsage">
+                <contents xsi:type="ItemFeature"/>
+                <contents xsi:type="ItemFlowEnd">
+                  <contents xsi:type="ReferenceUsage"/>
+                </contents>
+                <contents xsi:type="ItemFlowEnd">
+                  <contents xsi:type="ReferenceUsage"/>
+                </contents>
+              </contents>
+              <contents xsi:type="SendActionUsage" text="sendStatus">
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage"/>
+                <contents xsi:type="ReferenceUsage" text="es"/>
+              </contents>
+              <contents xsi:type="AcceptActionUsage" text="trigger2">
+                <contents xsi:type="ReferenceUsage" text="es"/>
+                <contents xsi:type="ReferenceUsage"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage" text="driver">
+              <contents xsi:type="PerformActionUsage"/>
+              <contents xsi:type="PerformActionUsage"/>
+              <contents xsi:type="EventOccurrenceUsage" text="driverReady"/>
+            </contents>
+            <contents xsi:type="PartUsage" text="vehicle">
+              <contents xsi:type="PerformActionUsage"/>
+              <contents xsi:type="PerformActionUsage"/>
+              <contents xsi:type="EventOccurrenceUsage" text="doorClosed"/>
+            </contents>
+            <contents xsi:type="SuccessionAsUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="FlowConnectionUsage">
+              <contents xsi:type="ItemFeature"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+            </contents>
+            <contents xsi:type="FlowConnectionUsage">
+              <contents xsi:type="ItemFeature"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+            </contents>
+          </contents>
+        </contents>
+        <contents xsi:type="OccurrenceUsage" text="CruiseControl1">
+          <contents xsi:type="PartUsage" text="vehicle_b">
+            <contents xsi:type="PortUsage">
+              <contents xsi:type="EventOccurrenceUsage" text="setSpeedReceived"/>
+            </contents>
+            <contents xsi:type="PartUsage">
+              <contents xsi:type="PortUsage">
+                <contents xsi:type="EventOccurrenceUsage" text="sensedSpeedSent"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage">
+              <contents xsi:type="PartUsage">
+                <contents xsi:type="PartUsage">
+                  <contents xsi:type="PortUsage">
+                    <contents xsi:type="EventOccurrenceUsage" text="setSpeedReceived"/>
+                  </contents>
+                  <contents xsi:type="PortUsage">
+                    <contents xsi:type="EventOccurrenceUsage" text="sensedSpeedReceived"/>
+                  </contents>
+                  <contents xsi:type="PortUsage">
+                    <contents xsi:type="EventOccurrenceUsage" text="fuelCmdSent"/>
+                  </contents>
+                </contents>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage">
+              <contents xsi:type="PortUsage">
+                <contents xsi:type="EventOccurrenceUsage" text="fuelCmdReceived"/>
+              </contents>
+            </contents>
+            <contents xsi:type="FlowConnectionUsage" text="sendSensedSpeed">
+              <contents xsi:type="ItemFeature"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+            </contents>
+            <contents xsi:type="FlowConnectionUsage" text="sendFuelCmd">
+              <contents xsi:type="ItemFeature"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+              <contents xsi:type="EventOccurrenceUsage"/>
+            </contents>
+          </contents>
+        </contents>
+        <contents xsi:type="OccurrenceUsage" text="CruiseControl2">
+          <contents xsi:type="PartUsage" text="vehicle_b">
+            <contents xsi:type="PortUsage">
+              <contents xsi:type="EventOccurrenceUsage" text="setSpeedReceived"/>
+            </contents>
+            <contents xsi:type="PartUsage">
+              <contents xsi:type="PortUsage">
+                <contents xsi:type="EventOccurrenceUsage"/>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage">
+              <contents xsi:type="PartUsage">
+                <contents xsi:type="PartUsage">
+                  <contents xsi:type="PortUsage">
+                    <contents xsi:type="EventOccurrenceUsage" text="setSpeedReceived"/>
+                  </contents>
+                  <contents xsi:type="PortUsage">
+                    <contents xsi:type="EventOccurrenceUsage" text="setSpeedReceived"/>
+                    <contents xsi:type="SuccessionAsUsage">
+                      <contents xsi:type="ReferenceUsage"/>
+                      <contents xsi:type="ReferenceUsage"/>
+                    </contents>
+                    <contents xsi:type="EventOccurrenceUsage"/>
+                  </contents>
+                  <contents xsi:type="PortUsage">
+                    <contents xsi:type="EventOccurrenceUsage"/>
+                  </contents>
+                </contents>
+              </contents>
+            </contents>
+            <contents xsi:type="PartUsage">
+              <contents xsi:type="PortUsage">
+                <contents xsi:type="EventOccurrenceUsage"/>
+              </contents>
+            </contents>
+            <contents xsi:type="FlowConnectionUsage" text="sendSensedSpeed">
+              <contents xsi:type="ItemFeature"/>
+            </contents>
+            <contents xsi:type="FlowConnectionUsage" text="sendFuelCmd">
+              <contents xsi:type="ItemFeature"/>
+            </contents>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="Package" text="Requirements">
+        <contents xsi:type="NamespaceImport" text="RequirementDerivation::*"/>
+        <contents xsi:type="NamespaceImport" text="ModelingMetadata::*"/>
+        <contents xsi:type="ItemUsage" text="marketSurvey"/>
+        <contents xsi:type="ConnectionUsage">
+          <contents xsi:type="MetadataUsage"/>
+        </contents>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="Engine4Cyl_Variant">
+      <contents xsi:type="NamespaceImport" text="ModelingMetadata::*"/>
+      <contents xsi:type="PartUsage" text="engine">
+        <contents xsi:type="PartUsage" text="cylinders"/>
+      </contents>
+      <contents xsi:type="PartUsage" text="engine4Cyl">
+        <contents xsi:type="PartUsage"/>
+        <contents xsi:type="PartUsage" text="cylinder1"/>
+        <contents xsi:type="PartUsage" text="cylinder2"/>
+        <contents xsi:type="PartUsage" text="cylinder3"/>
+        <contents xsi:type="PartUsage" text="cylinder4"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="WheelHubAssemblies">
+      <contents xsi:type="PartUsage" text="wheelHubAssy1">
+        <contents xsi:type="PartUsage" text="wheel1">
+          <contents xsi:type="PortUsage">
+            <contents xsi:type="PortUsage" text="lugNutPort"/>
+          </contents>
+        </contents>
+        <contents xsi:type="PartUsage" text="hub1">
+          <contents xsi:type="PortUsage">
+            <contents xsi:type="PortUsage" text="shankPort"/>
+          </contents>
+        </contents>
+        <contents xsi:type="InterfaceUsage" text="wheelHubInterface">
+          <contents xsi:type="PortUsage"/>
+          <contents xsi:type="PortUsage"/>
+        </contents>
+      </contents>
+      <contents xsi:type="PartUsage" text="wheelHubAssy2">
+        <contents xsi:type="PartUsage" text="wheel1">
+          <contents xsi:type="PortUsage">
+            <contents xsi:type="PortUsage" text="lugNutPort"/>
+          </contents>
+        </contents>
+        <contents xsi:type="PartUsage" text="hub1">
+          <contents xsi:type="PortUsage">
+            <contents xsi:type="PortUsage" text="shankPort"/>
+          </contents>
+        </contents>
+        <contents xsi:type="InterfaceUsage" text="wheelHubInterface">
+          <contents xsi:type="PortUsage" text="lugNutCompositePort"/>
+          <contents xsi:type="PortUsage" text="shankCompositePort"/>
+          <contents xsi:type="InterfaceUsage" text="wheelFastenerInterface1">
+            <contents xsi:type="PortUsage" text="lugNutPort"/>
+            <contents xsi:type="PortUsage" text="shankPort"/>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="PartUsage" text="wheelHubAssy3">
+        <contents xsi:type="PartUsage" text="wheel1">
+          <contents xsi:type="PortUsage" text="lugNutCompositePort">
+            <contents xsi:type="PortUsage" text="lugNutPort">
+              <contents xsi:type="AttributeUsage"/>
+              <contents xsi:type="AttributeUsage"/>
+            </contents>
+            <contents xsi:type="PortUsage" text="lugNutPort1"/>
+            <contents xsi:type="PortUsage" text="lugNutPort2"/>
+            <contents xsi:type="PortUsage" text="lugNutPort3"/>
+          </contents>
+        </contents>
+        <contents xsi:type="PartUsage" text="hub1">
+          <contents xsi:type="PortUsage" text="shankCompositePort">
+            <contents xsi:type="PortUsage" text="shankPort">
+              <contents xsi:type="AttributeUsage"/>
+              <contents xsi:type="AttributeUsage"/>
+              <contents xsi:type="AttributeUsage"/>
+            </contents>
+            <contents xsi:type="PortUsage" text="shankPort1"/>
+            <contents xsi:type="PortUsage" text="shankPort2"/>
+            <contents xsi:type="PortUsage" text="shankPort3"/>
+          </contents>
+        </contents>
+        <contents xsi:type="InterfaceUsage" text="wheelHubInterface">
+          <contents xsi:type="PortUsage" text="lugNutCompositePort"/>
+          <contents xsi:type="PortUsage" text="shankCompositePort"/>
+          <contents xsi:type="InterfaceUsage" text="wheelFastenerInterface1">
+            <contents xsi:type="PortUsage" text="lugNutPort"/>
+            <contents xsi:type="PortUsage" text="shankPort"/>
+            <contents xsi:type="AttributeUsage"/>
+          </contents>
+          <contents xsi:type="InterfaceUsage" text="wheelFastenerInterface2">
+            <contents xsi:type="PortUsage" text="lugNutPort"/>
+            <contents xsi:type="PortUsage" text="shankPort"/>
+            <contents xsi:type="AttributeUsage"/>
+          </contents>
+          <contents xsi:type="InterfaceUsage" text="wheelFastenerInterface3">
+            <contents xsi:type="PortUsage" text="lugNutPort"/>
+            <contents xsi:type="PortUsage" text="shankPort"/>
+            <contents xsi:type="AttributeUsage"/>
+          </contents>
+        </contents>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleAnalysis">
+    <contents xsi:type="NamespaceImport" text="RiskMetadata::*"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="MembershipImport"/>
+    <contents xsi:type="Package" text="FuelEconomyAnalysisModel">
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="Comment" text="This analysis model was provided by Hisashi Miyashita on January 27, 2021&#xA;We use the simplest fuel consumption analysis model introduced in:&#xA;Akcelik, R. &quot;Fuel efficiency and other objectives in traffic system management.&quot; Traffic Engineering and Control 22.2 (1981): 54-65. &#xA;&#xA;Fuel consumption rate f can be decomposed to:&#xA;f = f_a + f_b * tpd_avg,&#xA;where tpd_avg is average interrupted travel time per unit distance, actually the inverse of the average velocity [t/km];&#xA;f_a is the best fuel consumption per distance; and&#xA;f_b is the additional fuel consumption per distance and average travel time, which can be regarded as the idling fuel consumption.&#xA;Approximately, it is proportional to engine displacement and it ranges from 0.5 to 0.6 [l/hour/litre of engine displacement]&#xA;according to:&#xA;Review of the Incidence, Energy Use and Costs of Passenger Vehicle Idling; Gordon W. Taylor, P.Eng. Prepared for the Office of Energy Efficiency, Natural Resources Canada, 2003&#xA;&#xA;We assume f_a can be approximated to&#xA;fuel_consumption / distance = BSFC * SGG * required_power_avg * tpd_avg,&#xA;where required_power_avg is the required power, and it can be approximately derived from:&#xA;total_energy == P_req * tpd_avg * distance == 1/2 * mass / tpd_avg^2&#xA;This part is computed with BestFuelConsumptionPerDistance calc def.&#xA;&#xA;BSFC means Brake-Specific Fuel Consumption, defined as gram/power.  SGG is the specific gravity of gasoline.&#xA;The high octane gasoline is about 0.76[l/kg].&#xA;"/>
+      <contents xsi:type="AttributeDefinition" text="Scenario">
+        <contents xsi:type="AttributeUsage" text="wayPoint">
+          <contents xsi:type="AttributeUsage" text="elapseTime"/>
+          <contents xsi:type="AttributeUsage" text="position"/>
+        </contents>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="FuelConsumption">
+        <contents xsi:type="ReferenceUsage" text="bestFuelConsumption"/>
+        <contents xsi:type="ReferenceUsage" text="idlingFuelConsumption"/>
+        <contents xsi:type="ReferenceUsage" text="tpd_avg"/>
+        <contents xsi:type="AttributeUsage" text="f"/>
+        <contents xsi:type="ReferenceUsage" text="dpv"/>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="AverageTravelTimePerDistance">
+        <contents xsi:type="ReferenceUsage" text="scenario"/>
+        <contents xsi:type="ReferenceUsage" text="tpd_avg"/>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="TraveledDistance">
+        <contents xsi:type="ReferenceUsage" text="scenario"/>
+        <contents xsi:type="ReferenceUsage" text="distance"/>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="IdlingFuelConsumptionPerTime">
+        <contents xsi:type="ReferenceUsage" text="engine"/>
+        <contents xsi:type="AttributeUsage" text="idlingFuelConsumptionPerDisplacement"/>
+        <contents xsi:type="ReferenceUsage" text="f_a"/>
+      </contents>
+      <contents xsi:type="AttributeUsage" text="specificGravityOfGasoline"/>
+      <contents xsi:type="CalculationDefinition" text="BestFuelConsumptionPerDistance">
+        <contents xsi:type="ReferenceUsage" text="mass"/>
+        <contents xsi:type="ReferenceUsage" text="bsfc"/>
+        <contents xsi:type="ReferenceUsage" text="tpd_avg"/>
+        <contents xsi:type="ReferenceUsage" text="distance"/>
+        <contents xsi:type="AttributeUsage" text="required_power_avg"/>
+        <contents xsi:type="ReferenceUsage" text="f_b"/>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="ComputeBSFC">
+        <contents xsi:type="ReferenceUsage" text="engine"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="AnalysisCaseUsage" text="fuelEconomyAnalysis">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="AttributeUsage" text="scenario"/>
+        <contents xsi:type="AttributeUsage" text="distance"/>
+        <contents xsi:type="AttributeUsage" text="tpd_avg"/>
+        <contents xsi:type="AttributeUsage" text="bsfc"/>
+        <contents xsi:type="AttributeUsage" text="f_a"/>
+        <contents xsi:type="AttributeUsage" text="f_b"/>
+        <contents xsi:type="AttributeUsage" text="calculatedFuelEconomy"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="ElectricalPowerAnalysis"/>
+    <contents xsi:type="Package" text="ReliabilityAnalyis"/>
+    <contents xsi:type="Package" text="VehicleTradeOffAnalysis">
+      <contents xsi:type="Comment" text="The following example provides the rationale for selecting the engine4cyl. &#xA;The rationale and risk are contained in a metadata library. "/>
+      <contents xsi:type="MetadataUsage">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="MetadataUsage">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="MetadataUsage">
+        <contents xsi:type="ReferenceUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+      </contents>
+      <contents xsi:type="NamespaceImport" text="TradeStudies::*"/>
+      <contents xsi:type="CalculationDefinition" text="EngineEvaluation">
+        <contents xsi:type="ReferenceUsage" text="engineMass"/>
+        <contents xsi:type="ReferenceUsage" text="enginePower"/>
+        <contents xsi:type="ReferenceUsage" text="engineFuelEfficiency"/>
+        <contents xsi:type="ReferenceUsage" text="engineCost"/>
+        <contents xsi:type="ReferenceUsage" text="eval"/>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="EngineEvaluation_4cyl">
+        <contents xsi:type="ReferenceUsage" text="engineMass"/>
+        <contents xsi:type="ReferenceUsage" text="enginePower"/>
+        <contents xsi:type="ReferenceUsage" text="engineFuelEfficiency"/>
+        <contents xsi:type="ReferenceUsage" text="engineCost"/>
+        <contents xsi:type="ReferenceUsage" text="eval"/>
+      </contents>
+      <contents xsi:type="CalculationDefinition" text="EngineEvaluation_6cyl">
+        <contents xsi:type="ReferenceUsage" text="engineMass"/>
+        <contents xsi:type="ReferenceUsage" text="enginePower"/>
+        <contents xsi:type="ReferenceUsage" text="engineFuelEfficiency"/>
+        <contents xsi:type="ReferenceUsage" text="engineCost"/>
+        <contents xsi:type="ReferenceUsage" text="eval"/>
+      </contents>
+      <contents xsi:type="AnalysisCaseUsage" text="engineTradeOffAnalysis">
+        <contents xsi:type="ReferenceUsage" text="vehicleAlternatives"/>
+        <contents xsi:type="PartUsage" text="vehicle_b_engine4cyl">
+          <contents xsi:type="PartUsage" text="engine">
+            <contents xsi:type="PartUsage" text="cylinders"/>
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="AttributeUsage" text="peakHorsePower"/>
+            <contents xsi:type="AttributeUsage" text="fuelEfficiency"/>
+            <contents xsi:type="AttributeUsage" text="cost"/>
+          </contents>
+        </contents>
+        <contents xsi:type="PartUsage" text="vehicle_b_engine6cyl">
+          <contents xsi:type="PartUsage" text="engine">
+            <contents xsi:type="PartUsage" text="cylinders"/>
+            <contents xsi:type="AttributeUsage" text="mass"/>
+            <contents xsi:type="AttributeUsage" text="peakHorsePower"/>
+            <contents xsi:type="AttributeUsage" text="fuelEfficiency"/>
+            <contents xsi:type="AttributeUsage" text="cost"/>
+          </contents>
+        </contents>
+        <contents xsi:type="Comment" text="Select vehicle alternative with the engine whose evaluation function returns the max value"/>
+        <contents xsi:type="CalculationUsage">
+          <contents xsi:type="PartUsage" text="vehicle"/>
+          <contents xsi:type="AttributeUsage" text="eval"/>
+        </contents>
+        <contents xsi:type="CalculationUsage">
+          <contents xsi:type="PartUsage" text="vehicle"/>
+          <contents xsi:type="AttributeUsage" text="eval"/>
+        </contents>
+        <contents xsi:type="PartUsage" text="selectedVehicle"/>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleVerification">
+    <contents xsi:type="MembershipImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="NamespaceImport" text="VerificationCases::*"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="Package" text="VerificationCaseDefinitions">
+      <contents xsi:type="VerificationCaseDefinition" text="MassTest">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="VerificationCaseDefinition" text="AccelerationTest">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="VerificationCaseDefinition" text="ReliabilityTest">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="VerificationCases1">
+      <contents xsi:type="VerificationCaseUsage" text="massTests">
+        <contents xsi:type="ReferenceUsage" text="vehicle_uut"/>
+        <contents xsi:type="PartUsage" text="vehicleVerificationSubSystem_1"/>
+        <contents xsi:type="MetadataUsage">
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="weighVehicle">
+          <contents xsi:type="ReferenceUsage" text="massMeasured"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="evaluatePassFail">
+          <contents xsi:type="ReferenceUsage" text="massMeasured"/>
+          <contents xsi:type="ReferenceUsage" text="verdict"/>
+        </contents>
+        <contents xsi:type="FlowConnectionUsage">
+          <contents xsi:type="ItemFlowEnd">
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="ItemFlowEnd">
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+        </contents>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="VerificationSystem">
+      <contents xsi:type="PartUsage" text="verificationContext">
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PartUsage" text="vehicle_UnitUnderTest"/>
+        <contents xsi:type="PartUsage" text="massVerificationSystem">
+          <contents xsi:type="PartUsage" text="scale">
+            <contents xsi:type="PerformActionUsage"/>
+          </contents>
+          <contents xsi:type="PartUsage" text="operator">
+            <contents xsi:type="PerformActionUsage"/>
+          </contents>
+        </contents>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleIndividuals">
+    <contents xsi:type="OccurrenceUsage" text="a">
+      <contents xsi:type="OccurrenceUsage" text="t0_t2_a">
+        <contents xsi:type="OccurrenceUsage" text="t0_a">
+          <contents xsi:type="AttributeUsage" text="t0"/>
+          <contents xsi:type="OccurrenceUsage" text="t0_r">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="OccurrenceUsage" text="t0_v">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="OccurrenceUsage" text="t0_fa">
+              <contents xsi:type="OccurrenceUsage" text="t0_leftFront"/>
+              <contents xsi:type="OccurrenceUsage" text="t0_rightFront"/>
+            </contents>
+          </contents>
+        </contents>
+        <contents xsi:type="OccurrenceUsage" text="t1_a">
+          <contents xsi:type="AttributeUsage" text="t1"/>
+          <contents xsi:type="OccurrenceUsage" text="t1_r">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="OccurrenceUsage" text="t1_v">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="OccurrenceUsage" text="t1_fa">
+              <contents xsi:type="OccurrenceUsage" text="t1_leftFront"/>
+              <contents xsi:type="OccurrenceUsage" text="t1_rightFront"/>
+            </contents>
+          </contents>
+        </contents>
+        <contents xsi:type="OccurrenceUsage" text="t2_a">
+          <contents xsi:type="AttributeUsage" text="t2"/>
+          <contents xsi:type="OccurrenceUsage" text="t2_r">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="OccurrenceUsage" text="t2_v">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="OccurrenceUsage" text="t2_fa">
+              <contents xsi:type="OccurrenceUsage" text="t2_leftFront"/>
+              <contents xsi:type="OccurrenceUsage" text="t2_rightFront"/>
+            </contents>
+          </contents>
+        </contents>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="MissionContext">
+    <contents xsi:type="Comment" text="Define mission context with mission use cases for vehicle_b "/>
+    <contents xsi:type="MembershipImport"/>
+    <contents xsi:type="MembershipImport"/>
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="Package" text="ContextDefinitions">
+      <contents xsi:type="PartDefinition" text="MissionContext"/>
+      <contents xsi:type="PartDefinition" text="Road"/>
+      <contents xsi:type="PartDefinition" text="Driver">
+        <contents xsi:type="PortUsage" text="handPort"/>
+        <contents xsi:type="ExhibitStateUsage" text="driverStates">
+          <contents xsi:type="StateUsage" text="initial"/>
+          <contents xsi:type="StateUsage" text="wait"/>
+          <contents xsi:type="TransitionUsage">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="SuccessionAsUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="TransitionUsage" text="wait-wait-1">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="SendActionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="SuccessionAsUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+          <contents xsi:type="TransitionUsage" text="wait-wait-2">
+            <contents xsi:type="ReferenceUsage"/>
+            <contents xsi:type="SendActionUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="SuccessionAsUsage">
+              <contents xsi:type="ReferenceUsage"/>
+              <contents xsi:type="ReferenceUsage"/>
+            </contents>
+            <contents xsi:type="ReferenceUsage"/>
+          </contents>
+        </contents>
+      </contents>
+      <contents xsi:type="PartDefinition" text="Passenger"/>
+      <contents xsi:type="UseCaseDefinition" text="TransportPassenger">
+        <contents xsi:type="ReferenceUsage" text="vehicle"/>
+        <contents xsi:type="PartUsage" text="environment"/>
+        <contents xsi:type="PartUsage" text="road"/>
+        <contents xsi:type="PartUsage" text="driver"/>
+        <contents xsi:type="PartUsage" text="passenger"/>
+        <contents xsi:type="IncludeUseCaseUsage" text="getInVehicle_a">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="IncludeUseCaseUsage" text="getOutOfVehicle_a">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="UseCaseUsage" text="getInVehicle">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ActionUsage" text="unlockDoor_in"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="openDoor_in"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="enterVehicle"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="closeDoor_in"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="UseCaseDefinition" text="GetInVehicle">
+        <contents xsi:type="ReferenceUsage" text="vehicle"/>
+        <contents xsi:type="PartUsage" text="driver"/>
+        <contents xsi:type="PartUsage" text="passenger"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="UseCaseUsage" text="getOutOfVehicle">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ActionUsage" text="openDoor_out"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="exitVehicle"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="closeDoor_out"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="lockDoor_out"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="UseCaseDefinition" text="GetOutOfVehicle">
+        <contents xsi:type="ReferenceUsage" text="vehicle"/>
+        <contents xsi:type="PartUsage" text="driver"/>
+        <contents xsi:type="PartUsage" text="passenger"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="TransportPassengerScenario">
+      <contents xsi:type="MembershipImport"/>
+      <contents xsi:type="UseCaseUsage" text="transportPassenger">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="a">
+          <contents xsi:type="ActionUsage" text="driverGetInVehicle"/>
+          <contents xsi:type="ActionUsage" text="passenger1GetInVehicle"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="AcceptActionUsage" text="trigger">
+          <contents xsi:type="ReferenceUsage" text="ignitionCmd"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="b">
+          <contents xsi:type="ActionUsage" text="driveVehicleToDestination"/>
+          <contents xsi:type="ActionUsage" text="providePower"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ActionUsage" text="c">
+          <contents xsi:type="ActionUsage" text="driverGetOutOfVehicle"/>
+          <contents xsi:type="ActionUsage" text="passenger1GetOutOfVehicle"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="UseCaseUsage" text="transportPassenger_1">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ActionUsage" text="driverGetInVehicle"/>
+        <contents xsi:type="ActionUsage" text="passenger1GetInVehicle"/>
+        <contents xsi:type="ActionUsage" text="driverGetOutOfVehicle"/>
+        <contents xsi:type="ActionUsage" text="passenger1GetOutOfVehicle"/>
+        <contents xsi:type="ActionUsage" text="driveVehicleToDestination"/>
+        <contents xsi:type="ActionUsage" text="providePower"/>
+        <contents xsi:type="ItemDefinition" text="VehicleOnSignal"/>
+        <contents xsi:type="JoinNode" text="join1"/>
+        <contents xsi:type="JoinNode" text="join2"/>
+        <contents xsi:type="JoinNode" text="join3"/>
+        <contents xsi:type="AcceptActionUsage" text="trigger">
+          <contents xsi:type="ReferenceUsage" text="ignitionCmd"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ForkNode" text="fork1"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ForkNode" text="fork2"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ForkNode" text="fork3"/>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="SuccessionAsUsage">
+          <contents xsi:type="ReferenceUsage"/>
+          <contents xsi:type="ReferenceUsage"/>
+        </contents>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="PartUsage" text="missionContext">
+      <contents xsi:type="AttributeUsage" text="transportTime">
+        <contents xsi:type="MetadataUsage"/>
+      </contents>
+      <contents xsi:type="PerformActionUsage"/>
+      <contents xsi:type="PartUsage" text="road"/>
+      <contents xsi:type="PartUsage" text="driver">
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+      </contents>
+      <contents xsi:type="PartUsage" text="passenger1">
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+      </contents>
+      <contents xsi:type="PartUsage" text="vehicle_b_1">
+        <contents xsi:type="AttributeUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+        <contents xsi:type="PerformActionUsage"/>
+      </contents>
+      <contents xsi:type="ConnectionUsage">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="ConnectionUsage">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="VehicleSuperSetModel">
+    <contents xsi:type="Comment" text="all of vehicleFamily is included in the superset model to enable subsetting a specific vehicle configuration"/>
+    <contents xsi:type="Package" text="VariationPointDefinitions">
+      <contents xsi:type="PartDefinition" text="TransmissionChoices">
+        <contents xsi:type="PartUsage" text="transmissionAutomatic"/>
+        <contents xsi:type="PartUsage" text="transmissionManual"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="VehiclePartsTree">
+      <contents xsi:type="NamespaceImport"/>
+      <contents xsi:type="PartUsage" text="vehicleFamily">
+        <contents xsi:type="PartUsage" text="engine">
+          <contents xsi:type="PartUsage" text="engine4Cyl"/>
+          <contents xsi:type="PartUsage" text="engine6Cyl">
+            <contents xsi:type="PartUsage" text="cylinder">
+              <contents xsi:type="AttributeUsage" text="diameter">
+                <contents xsi:type="AttributeUsage" text="smallDiameter"/>
+                <contents xsi:type="AttributeUsage" text="largeDiagmeter"/>
+              </contents>
+            </contents>
+          </contents>
+        </contents>
+        <contents xsi:type="PartUsage" text="transmissionChoices"/>
+        <contents xsi:type="PartUsage" text="sunroof"/>
+        <contents xsi:type="PartUsage" text="driveshaft"/>
+        <contents xsi:type="PartUsage" text="frontAxleAssembly"/>
+        <contents xsi:type="PartUsage" text="rearAxleAssembly"/>
+      </contents>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="SafetyandSecurityGroups">
+    <contents xsi:type="NamespaceImport"/>
+    <contents xsi:type="Package" text="SafetyGroup">
+      <contents xsi:type="Comment" text="Parts that contribute to safety. "/>
+      <contents xsi:type="MembershipImport"/>
+    </contents>
+    <contents xsi:type="Package" text="SecurityGroup">
+      <contents xsi:type="Comment" text="Parts that contribute to security. "/>
+      <contents xsi:type="MembershipImport"/>
+    </contents>
+    <contents xsi:type="Package" text="SafetyandSecurityGroup">
+      <contents xsi:type="Comment" text="Parts that contribute to safety OR security. "/>
+      <contents xsi:type="MembershipImport"/>
+    </contents>
+    <contents xsi:type="Package" text="MandatorySafetyGroup">
+      <contents xsi:type="Comment" text="Parts that contribute to safety AND are mandatory. "/>
+      <contents xsi:type="MembershipImport"/>
+    </contents>
+  </contents>
+  <contents xsi:type="Package" text="Views_Viewpoints">
+    <contents xsi:type="Package" text="ViewpointDefinitions">
+      <contents xsi:type="ViewpointDefinition" text="BehaviorViewpoint">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="ViewpointDefinition" text="SafetyViewpoint">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+      <contents xsi:type="PartDefinition" text="SafetyEngineer"/>
+      <contents xsi:type="ConcernDefinition" text="VehicleSafety">
+        <contents xsi:type="ReferenceUsage"/>
+        <contents xsi:type="Documentation" text="identify system safety features "/>
+        <contents xsi:type="PartUsage" text="se"/>
+        <contents xsi:type="ReferenceUsage"/>
+      </contents>
+    </contents>
+    <contents xsi:type="Package" text="ViewDefinitions">
+      <contents xsi:type="NamespaceImport" text="Views::*"/>
+      <contents xsi:type="ViewDefinition" text="TreeView">
+        <contents xsi:type="RenderingUsage"/>
+      </contents>
+      <contents xsi:type="ViewDefinition" text="NestedView"/>
+      <contents xsi:type="ViewDefinition" text="RelationshipView"/>
+      <contents xsi:type="ViewDefinition" text="TableView"/>
+      <contents xsi:type="ViewDefinition" text="PartsTreeView"/>
+      <contents xsi:type="ViewDefinition" text="PartsInterconnection"/>
+    </contents>
+    <contents xsi:type="Package" text="VehicleViews">
+      <contents xsi:type="NamespaceImport"/>
+      <contents xsi:type="NamespaceImport"/>
+      <contents xsi:type="NamespaceImport"/>
+      <contents xsi:type="ViewUsage" text="vehiclePartsTree_Safety"/>
+    </contents>
+  </contents>
+</Namespace>

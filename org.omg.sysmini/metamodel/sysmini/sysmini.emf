@@ -45,15 +45,8 @@ abstract class Element {
 	attr boolean[1] isImpliedIncluded = "false";
 	attr boolean[1] isLibraryElement;
 	
-	attr boolean sysmini_visibility;
-	attr String sysmini_self;
-	attr String sysmini_relationship;
-	attr String sysmini_object;
-	attr String sysmini_text;
-	attr String sysmini_source;
-	attr String sysmini_target;
-	attr String sysmini_direction;
-	ordered val Element[*] sysmini_child;
+	attr String text;
+	ordered val Element[*] contents;
 }
 
 class OwningMembership extends Membership {
