@@ -153,6 +153,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "UseCaseUsage": element.addNodeTo(rootNode);
 			case "SuccessionFlowConnectionUsage": element.addNodeTo(rootNode);
 			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
+			
 //			case "ConstraintUsage": element.addNodeTo(rootNode);
 //			case "RequirementUsage": element.addNodeTo(rootNode);
 //			case "AssertConstraintUsage": element.addNodeTo(rootNode);
@@ -167,7 +168,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 
 
 operation XMIni!Relationship addRelationshipTo(rootNode : SysMini!Element){
-	rootNode.contents.add(self.equivalent());
+	rootNode.body.add(self.equivalent());
 	self.relationshipTransform(rootNode);
 }
 
@@ -177,7 +178,7 @@ operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
 
 operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
 	var node = self.equivalent();
-	rootNode.contents.add(node);
+	rootNode.body.add(node);
 	self.elementTransform(node);
 }
 
@@ -204,7 +205,7 @@ rule ImportTransform
 		if (s.declaredName != null){
 			var name = s.declaredName.split("::");
 			if (name.first() == name.second()){
-				t.text = name.first() + "::*";
+				t.sysmini_self = name.first() + "::*";
 			}
 		}
 	}
@@ -228,7 +229,9 @@ rule MembershipImportTransform
 rule PackageTransform
 	transform s : XMIni!Package
 	to t : SysMini!Package {
-		t.text = s.declaredName;
+		if(s.declaredName != null){
+			t.sysmini_self = s.declaredName;		
+		}
 	}
 
 //AnnotatingElement
@@ -243,7 +246,9 @@ rule CommentTransform
 	transform s : XMIni!Comment
 	to t : SysMini!Comment
 	extends AnnotatingElementTransform{
-		t.text = s.body;
+		if (s.body != null){
+			t.sysmini_self = s.body;	
+		}
 	}
 
 @lazy
@@ -251,7 +256,9 @@ rule TextualRepresentationTransform
 	transform s : XMIni!TextualRepresentation
 	to t : SysMini!TextualRepresentation
 	extends AnnotatingElementTransform{
-		t.text = s.body;
+		if (s.body != null){
+			t.sysmini_self = s.body;	
+		}
 	}
 	
 @lazy
@@ -259,7 +266,9 @@ rule DocumentationTransform
 	transform s : XMIni!Documentation
 	to t : SysMini!Documentation
 	extends AnnotatingElementTransform{
-		t.text = s.body;
+		if (s.body != null){
+			t.sysmini_self = s.body;	
+		}
 	}
 
 //ItemFeature
@@ -282,7 +291,7 @@ rule ItemFlowEndTransform
 rule DefinitionTransform
 	transform s : XMIni!Definition
 	to t : SysMini!Definition{
-		t.text = s.declaredName;
+		t.sysmini_self = s.declaredName;
 	}
 	
 @lazy
@@ -465,7 +474,7 @@ rule ViewpointDefinitionTransform
 rule UsageTransform
 	transform s : XMIni!Usage
 	to t : SysMini!Usage{
-		t.text = s.declaredName;
+		t.sysmini_self = s.declaredName;
 	}
 	
 @lazy
