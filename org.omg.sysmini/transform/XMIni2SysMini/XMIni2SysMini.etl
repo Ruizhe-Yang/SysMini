@@ -154,6 +154,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "SuccessionFlowConnectionUsage": element.addNodeTo(rootNode);
 			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
 			
+			
 //			case "ConstraintUsage": element.addNodeTo(rootNode);
 //			case "RequirementUsage": element.addNodeTo(rootNode);
 //			case "AssertConstraintUsage": element.addNodeTo(rootNode);
