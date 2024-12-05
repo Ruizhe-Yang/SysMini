@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
-  <body xsi:type="NamespaceImport"/>
-  <body xsi:type="NamespaceImport" sysmini_self="ISQ::*"/>
+  <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="Definitions"/>
+  <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ISQ::*"/>
   <body xsi:type="Package" sysmini_self="Definitions">
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="MembershipImport"/>
-    <body xsi:type="NamespaceImport"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="PartDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="PortDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ItemDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="SignalDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="InterfaceDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="AllocationDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ActionDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="StateDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="RequirementDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="AttributeDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="IndividualDefinitions"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="MetadataDefinitions" isRecursive="true"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="KeyWord_MetadataDefinitions"/>
     <body xsi:type="Package" sysmini_self="PartDefinitions">
       <body xsi:type="PartDefinition" sysmini_self="Vehicle">
         <body xsi:type="AttributeUsage" sysmini_self="mass"/>
@@ -48,6 +48,9 @@
               <body xsi:type="PerformActionUsage"/>
               <body xsi:type="PerformActionUsage"/>
               <body xsi:type="PerformActionUsage"/>
+              <body xsi:type="ConstraintUsage">
+                <body xsi:type="ReferenceUsage"/>
+              </body>
             </body>
             <body xsi:type="TransitionUsage">
               <body xsi:type="ReferenceUsage"/>
@@ -294,6 +297,9 @@
         </body>
         <body xsi:type="AttributeUsage" sysmini_self="fuelKind"/>
         <body xsi:type="AttributeUsage" sysmini_self="fuelMassMax"/>
+        <body xsi:type="AssertConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="PortUsage" sysmini_self="fuelOutPort"/>
         <body xsi:type="PortUsage" sysmini_self="fuelInPort"/>
       </body>
@@ -474,13 +480,20 @@
         <body xsi:type="PortUsage" sysmini_self="lugNutPort"/>
         <body xsi:type="PortUsage" sysmini_self="shankPort"/>
         <body xsi:type="AttributeUsage" sysmini_self="maxTorque"/>
+        <body xsi:type="ConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
       </body>
       <body xsi:type="InterfaceDefinition" sysmini_self="WheelHubInterface">
         <body xsi:type="PortUsage" sysmini_self="lugNutCompositePort"/>
         <body xsi:type="PortUsage" sysmini_self="shankCompositePort"/>
         <body xsi:type="InterfaceUsage" sysmini_self="wheelFastenerInterface">
-          <body xsi:type="PortUsage"/>
-          <body xsi:type="PortUsage"/>
+          <body xsi:type="PortUsage">
+            <body xsi:type="Feature"/>
+          </body>
+          <body xsi:type="PortUsage">
+            <body xsi:type="Feature"/>
+          </body>
         </body>
       </body>
     </body>
@@ -525,6 +538,9 @@
         <body xsi:type="Documentation" sysmini_self="The actual mass shall be less than the required mass"/>
         <body xsi:type="AttributeUsage" sysmini_self="massRequired"/>
         <body xsi:type="AttributeUsage" sysmini_self="massActual"/>
+        <body xsi:type="ConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="RequirementDefinition" sysmini_self="ReliabilityRequirement">
@@ -532,6 +548,9 @@
         <body xsi:type="Documentation" sysmini_self="The actual reliability shall be greater than the required reliability"/>
         <body xsi:type="AttributeUsage" sysmini_self="reliabilityRequired"/>
         <body xsi:type="AttributeUsage" sysmini_self="reliabilityActual"/>
+        <body xsi:type="ConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="RequirementDefinition" sysmini_self="TorqueGenerationRequirement">
@@ -549,17 +568,20 @@
         <body xsi:type="Documentation" sysmini_self="The vehicle shall maintain an average fuel economomy of at least x miles per gallon for the nominal &#xA;driving scenario "/>
         <body xsi:type="AttributeUsage" sysmini_self="actualFuelEconomy"/>
         <body xsi:type="AttributeUsage" sysmini_self="requiredFuelEconomy"/>
+        <body xsi:type="ConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
     </body>
     <body xsi:type="Package" sysmini_self="AttributeDefinitions">
-      <body xsi:type="NamespaceImport" sysmini_self="ScalarValues::*"/>
-      <body xsi:type="NamespaceImport" sysmini_self="Quantities::*"/>
-      <body xsi:type="MembershipImport"/>
-      <body xsi:type="MembershipImport"/>
-      <body xsi:type="NamespaceImport" sysmini_self="NumericalFunctions::*"/>
-      <body xsi:type="NamespaceImport" sysmini_self="SI::*"/>
-      <body xsi:type="NamespaceImport" sysmini_self="USCustomaryUnits::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ScalarValues::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="Quantities::*"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="MeasurementReferences::null"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="SIPrefixes::null"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="NumericalFunctions::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="SI::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="USCustomaryUnits::*"/>
       <body xsi:type="EnumerationDefinition" sysmini_self="Colors">
         <body xsi:type="EnumerationUsage" sysmini_self="black"/>
         <body xsi:type="EnumerationUsage" sysmini_self="grey"/>
@@ -598,14 +620,14 @@
       <body xsi:type="OccurrenceDefinition" sysmini_self="Road_1"/>
     </body>
     <body xsi:type="Package" sysmini_self="MetadataDefinitions">
-      <body xsi:type="NamespaceImport" sysmini_self="AnalysisTooling::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="AnalysisTooling::*"/>
       <body xsi:type="MetadataDefinition" sysmini_self="Safety">
         <body xsi:type="AttributeUsage" sysmini_self="isMandatory"/>
       </body>
       <body xsi:type="MetadataDefinition" sysmini_self="Security"/>
     </body>
     <body xsi:type="Package" sysmini_self="KeyWord_MetadataDefinitions">
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="Metaobjects::null"/>
       <body xsi:type="StateUsage" sysmini_self="failureModes"/>
       <body xsi:type="MetadataDefinition" sysmini_self="failureMode">
         <body xsi:type="ReferenceUsage"/>
@@ -646,25 +668,41 @@
     </body>
   </body>
   <body xsi:type="Package" sysmini_self="VehicleLogicalToPhysicalAllocation">
-    <body xsi:type="MembershipImport"/>
-    <body xsi:type="NamespaceImport"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="PartsTree" isRecursive="true"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="PartsTree"/>
     <body xsi:type="AllocationUsage" sysmini_self="vehicleLogicalToPhysicalAllocation">
       <body xsi:type="ReferenceUsage"/>
       <body xsi:type="ReferenceUsage"/>
       <body xsi:type="AllocationUsage">
-        <body xsi:type="ReferenceUsage"/>
-        <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
         <body xsi:type="AllocationUsage">
-          <body xsi:type="ReferenceUsage"/>
-          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage">
+            <body xsi:type="Feature"/>
+          </body>
+          <body xsi:type="ReferenceUsage">
+            <body xsi:type="Feature"/>
+          </body>
         </body>
       </body>
       <body xsi:type="AllocationUsage">
-        <body xsi:type="ReferenceUsage"/>
-        <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
         <body xsi:type="AllocationUsage">
-          <body xsi:type="ReferenceUsage"/>
-          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage">
+            <body xsi:type="Feature"/>
+          </body>
+          <body xsi:type="ReferenceUsage">
+            <body xsi:type="Feature"/>
+          </body>
         </body>
       </body>
     </body>
@@ -702,9 +740,9 @@
       <body xsi:type="Package" sysmini_self="Requirements"/>
     </body>
     <body xsi:type="Package" sysmini_self="VehicleConfiguration_b">
-      <body xsi:type="MembershipImport"/>
-      <body xsi:type="MembershipImport"/>
-      <body xsi:type="NamespaceImport" sysmini_self="ModelingMetadata::*"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="ShapeItems::null"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="ParametersOfInterestMetadata::null"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
       <body xsi:type="Package" sysmini_self="PartsTree">
         <body xsi:type="PartUsage" sysmini_self="vehicle_b">
           <body xsi:type="AttributeUsage" sysmini_self="mass">
@@ -749,7 +787,9 @@
             <body xsi:type="AttributeUsage" sysmini_self="mass"/>
             <body xsi:type="AttributeUsage" sysmini_self="driveTrainEfficiency"/>
             <body xsi:type="PortUsage" sysmini_self="shaftPort_d"/>
-            <body xsi:type="PerformActionUsage"/>
+            <body xsi:type="PerformActionUsage">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="PartUsage" sysmini_self="rearWheel1">
               <body xsi:type="AttributeUsage"/>
               <body xsi:type="PortUsage" sysmini_self="wheelToRoadPort"/>
@@ -785,43 +825,80 @@
             </body>
             <body xsi:type="BindingConnectorAsUsage">
               <body xsi:type="ReferenceUsage"/>
-              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage"/>
-              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage"/>
-              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="InterfaceUsage" sysmini_self="wheelToleftHalAxleInterface">
-              <body xsi:type="PortUsage"/>
-              <body xsi:type="PortUsage"/>
+              <body xsi:type="PortUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="PortUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="InterfaceUsage" sysmini_self="wheelTorightHalAxleInterface">
-              <body xsi:type="PortUsage"/>
-              <body xsi:type="PortUsage"/>
+              <body xsi:type="PortUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="PortUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
           </body>
           <body xsi:type="PartUsage" sysmini_self="starterMotor"/>
           <body xsi:type="PartUsage" sysmini_self="engine">
-            <body xsi:type="PerformActionUsage"/>
+            <body xsi:type="PerformActionUsage">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="PartUsage" sysmini_self="cylinders"/>
             <body xsi:type="PartUsage" sysmini_self="alternator">
               <body xsi:type="ActionUsage" sysmini_self="generateElectricity"/>
+            </body>
+            <body xsi:type="SatisfyRequirementUsage">
+              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="RequirementUsage">
+                <body xsi:type="ReferenceUsage" sysmini_self="generateTorque"/>
+                <body xsi:type="ReferenceUsage"/>
+              </body>
+              <body xsi:type="RequirementUsage">
+                <body xsi:type="ReferenceUsage"/>
+                <body xsi:type="PortUsage" sysmini_self="torqueOutPort"/>
+                <body xsi:type="ReferenceUsage"/>
+              </body>
+              <body xsi:type="ReferenceUsage"/>
             </body>
           </body>
           <body xsi:type="PartUsage" sysmini_self="transmission">
             <body xsi:type="AttributeUsage" sysmini_self="mass"/>
             <body xsi:type="PortUsage" sysmini_self="shaftPort_a"/>
-            <body xsi:type="PerformActionUsage"/>
+            <body xsi:type="PerformActionUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="PartUsage" sysmini_self="driveshaft">
             <body xsi:type="AttributeUsage" sysmini_self="mass"/>
             <body xsi:type="PortUsage" sysmini_self="shaftPort_b"/>
             <body xsi:type="PortUsage" sysmini_self="shaftPort_c"/>
-            <body xsi:type="PerformActionUsage"/>
+            <body xsi:type="PerformActionUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="PartUsage" sysmini_self="vehicleSoftware">
             <body xsi:type="PartUsage" sysmini_self="vehicleController">
@@ -860,59 +937,119 @@
             </body>
           </body>
           <body xsi:type="BindingConnectorAsUsage">
-            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="ReferenceUsage"/>
           </body>
           <body xsi:type="InterfaceUsage" sysmini_self="engineToTransmissionInterface">
-            <body xsi:type="PortUsage"/>
-            <body xsi:type="PortUsage"/>
+            <body xsi:type="PortUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="PortUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="InterfaceUsage" sysmini_self="fuelInterface">
-            <body xsi:type="PortUsage"/>
-            <body xsi:type="PortUsage"/>
+            <body xsi:type="PortUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="PortUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="AllocationUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
-          </body>
-          <body xsi:type="BindingConnectorAsUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
-          </body>
-          <body xsi:type="ConnectionUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
-          </body>
-          <body xsi:type="ConnectionUsage">
-            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="ReferenceUsage"/>
           </body>
           <body xsi:type="BindingConnectorAsUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
-          </body>
-          <body xsi:type="ConnectionUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
-          </body>
-          <body xsi:type="BindingConnectorAsUsage">
-            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="ReferenceUsage"/>
           </body>
           <body xsi:type="ConnectionUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="ConnectionUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="BindingConnectorAsUsage">
-            <body xsi:type="ReferenceUsage"/>
-            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="ConnectionUsage">
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="BindingConnectorAsUsage">
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="ConnectionUsage">
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="ConnectionUsage">
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="BindingConnectorAsUsage">
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="BindingConnectorAsUsage">
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="SatisfyRequirementUsage">
             <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="RequirementUsage">
+              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="AttributeUsage"/>
+              <body xsi:type="AttributeUsage"/>
+              <body xsi:type="ReferenceUsage"/>
+            </body>
             <body xsi:type="ReferenceUsage"/>
           </body>
         </body>
@@ -1008,28 +1145,48 @@
               </body>
             </body>
             <body xsi:type="PartUsage" sysmini_self="driver">
-              <body xsi:type="PerformActionUsage"/>
-              <body xsi:type="PerformActionUsage"/>
+              <body xsi:type="PerformActionUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="PerformActionUsage">
+                <body xsi:type="Feature"/>
+              </body>
               <body xsi:type="EventOccurrenceUsage" sysmini_self="driverReady"/>
             </body>
             <body xsi:type="PartUsage" sysmini_self="vehicle">
-              <body xsi:type="PerformActionUsage"/>
-              <body xsi:type="PerformActionUsage"/>
+              <body xsi:type="PerformActionUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="PerformActionUsage">
+                <body xsi:type="Feature"/>
+              </body>
               <body xsi:type="EventOccurrenceUsage" sysmini_self="doorClosed"/>
             </body>
             <body xsi:type="SuccessionAsUsage">
-              <body xsi:type="ReferenceUsage"/>
-              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="ReferenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="FlowConnectionUsage">
               <body xsi:type="ItemFeature"/>
-              <body xsi:type="EventOccurrenceUsage"/>
-              <body xsi:type="EventOccurrenceUsage"/>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="FlowConnectionUsage">
               <body xsi:type="ItemFeature"/>
-              <body xsi:type="EventOccurrenceUsage"/>
-              <body xsi:type="EventOccurrenceUsage"/>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
           </body>
         </body>
@@ -1065,13 +1222,21 @@
             </body>
             <body xsi:type="FlowConnectionUsage" sysmini_self="sendSensedSpeed">
               <body xsi:type="ItemFeature"/>
-              <body xsi:type="EventOccurrenceUsage"/>
-              <body xsi:type="EventOccurrenceUsage"/>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
             <body xsi:type="FlowConnectionUsage" sysmini_self="sendFuelCmd">
               <body xsi:type="ItemFeature"/>
-              <body xsi:type="EventOccurrenceUsage"/>
-              <body xsi:type="EventOccurrenceUsage"/>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
+              <body xsi:type="EventOccurrenceUsage">
+                <body xsi:type="Feature"/>
+              </body>
             </body>
           </body>
         </body>
@@ -1082,7 +1247,9 @@
             </body>
             <body xsi:type="PartUsage">
               <body xsi:type="PortUsage">
-                <body xsi:type="EventOccurrenceUsage"/>
+                <body xsi:type="EventOccurrenceUsage">
+                  <body xsi:type="Feature"/>
+                </body>
               </body>
             </body>
             <body xsi:type="PartUsage">
@@ -1097,17 +1264,23 @@
                       <body xsi:type="ReferenceUsage"/>
                       <body xsi:type="ReferenceUsage"/>
                     </body>
-                    <body xsi:type="EventOccurrenceUsage"/>
+                    <body xsi:type="EventOccurrenceUsage">
+                      <body xsi:type="Feature"/>
+                    </body>
                   </body>
                   <body xsi:type="PortUsage">
-                    <body xsi:type="EventOccurrenceUsage"/>
+                    <body xsi:type="EventOccurrenceUsage">
+                      <body xsi:type="Feature"/>
+                    </body>
                   </body>
                 </body>
               </body>
             </body>
             <body xsi:type="PartUsage">
               <body xsi:type="PortUsage">
-                <body xsi:type="EventOccurrenceUsage"/>
+                <body xsi:type="EventOccurrenceUsage">
+                  <body xsi:type="Feature"/>
+                </body>
               </body>
             </body>
             <body xsi:type="FlowConnectionUsage" sysmini_self="sendSensedSpeed">
@@ -1120,16 +1293,87 @@
         </body>
       </body>
       <body xsi:type="Package" sysmini_self="Requirements">
-        <body xsi:type="NamespaceImport" sysmini_self="RequirementDerivation::*"/>
-        <body xsi:type="NamespaceImport" sysmini_self="ModelingMetadata::*"/>
+        <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="RequirementDerivation::*"/>
+        <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
         <body xsi:type="ItemUsage" sysmini_self="marketSurvey"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage" sysmini_self="vehicle"/>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="Documentation" sysmini_self="The total mass of the vehicle shall be less than or equal to the required mass.&#xA;Assume total mass includes a full tank of gas of 60 kg"/>
+            <body xsi:type="AttributeUsage"/>
+            <body xsi:type="AttributeUsage"/>
+            <body xsi:type="AttributeUsage" sysmini_self="fuelMassActual"/>
+            <body xsi:type="AttributeUsage" sysmini_self="fuelMassMax"/>
+            <body xsi:type="ConstraintUsage">
+              <body xsi:type="ReferenceUsage"/>
+            </body>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="AllocationUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage">
+              <body xsi:type="Feature"/>
+            </body>
+          </body>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="Documentation" sysmini_self="fuel economy requirements group "/>
+            <body xsi:type="AttributeUsage" sysmini_self="assumedCargoMass"/>
+            <body xsi:type="RequirementUsage">
+              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ConstraintUsage">
+                <body xsi:type="ReferenceUsage"/>
+              </body>
+              <body xsi:type="ReferenceUsage"/>
+            </body>
+            <body xsi:type="RequirementUsage">
+              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ReferenceUsage"/>
+              <body xsi:type="ConstraintUsage">
+                <body xsi:type="ReferenceUsage"/>
+              </body>
+              <body xsi:type="MetadataUsage">
+                <body xsi:type="ReferenceUsage"/>
+                <body xsi:type="ReferenceUsage"/>
+                <body xsi:type="ReferenceUsage"/>
+              </body>
+              <body xsi:type="ReferenceUsage"/>
+            </body>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage" sysmini_self="engine1"/>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="Documentation" sysmini_self="The total mass of the engine shall be less than or equal to the required mass."/>
+            <body xsi:type="AttributeUsage"/>
+            <body xsi:type="AttributeUsage"/>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage" sysmini_self="generateTorque"/>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="PortUsage" sysmini_self="torqueOutPort">
+              <body xsi:type="ReferenceUsage" sysmini_self="torque"/>
+            </body>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ConnectionUsage">
           <body xsi:type="MetadataUsage"/>
         </body>
       </body>
     </body>
     <body xsi:type="Package" sysmini_self="Engine4Cyl_Variant">
-      <body xsi:type="NamespaceImport" sysmini_self="ModelingMetadata::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
       <body xsi:type="PartUsage" sysmini_self="engine">
         <body xsi:type="PartUsage" sysmini_self="cylinders"/>
       </body>
@@ -1154,8 +1398,12 @@
           </body>
         </body>
         <body xsi:type="InterfaceUsage" sysmini_self="wheelHubInterface">
-          <body xsi:type="PortUsage"/>
-          <body xsi:type="PortUsage"/>
+          <body xsi:type="PortUsage">
+            <body xsi:type="Feature"/>
+          </body>
+          <body xsi:type="PortUsage">
+            <body xsi:type="Feature"/>
+          </body>
         </body>
       </body>
       <body xsi:type="PartUsage" sysmini_self="wheelHubAssy2">
@@ -1170,11 +1418,19 @@
           </body>
         </body>
         <body xsi:type="InterfaceUsage" sysmini_self="wheelHubInterface">
-          <body xsi:type="PortUsage" sysmini_self="lugNutCompositePort"/>
-          <body xsi:type="PortUsage" sysmini_self="shankCompositePort"/>
+          <body xsi:type="PortUsage" sysmini_self="lugNutCompositePort">
+            <body xsi:type="Feature"/>
+          </body>
+          <body xsi:type="PortUsage" sysmini_self="shankCompositePort">
+            <body xsi:type="Feature"/>
+          </body>
           <body xsi:type="InterfaceUsage" sysmini_self="wheelFastenerInterface1">
-            <body xsi:type="PortUsage" sysmini_self="lugNutPort"/>
-            <body xsi:type="PortUsage" sysmini_self="shankPort"/>
+            <body xsi:type="PortUsage" sysmini_self="lugNutPort">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="PortUsage" sysmini_self="shankPort">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
         </body>
       </body>
@@ -1203,21 +1459,37 @@
           </body>
         </body>
         <body xsi:type="InterfaceUsage" sysmini_self="wheelHubInterface">
-          <body xsi:type="PortUsage" sysmini_self="lugNutCompositePort"/>
-          <body xsi:type="PortUsage" sysmini_self="shankCompositePort"/>
+          <body xsi:type="PortUsage" sysmini_self="lugNutCompositePort">
+            <body xsi:type="Feature"/>
+          </body>
+          <body xsi:type="PortUsage" sysmini_self="shankCompositePort">
+            <body xsi:type="Feature"/>
+          </body>
           <body xsi:type="InterfaceUsage" sysmini_self="wheelFastenerInterface1">
-            <body xsi:type="PortUsage" sysmini_self="lugNutPort"/>
-            <body xsi:type="PortUsage" sysmini_self="shankPort"/>
+            <body xsi:type="PortUsage" sysmini_self="lugNutPort">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="PortUsage" sysmini_self="shankPort">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="AttributeUsage"/>
           </body>
           <body xsi:type="InterfaceUsage" sysmini_self="wheelFastenerInterface2">
-            <body xsi:type="PortUsage" sysmini_self="lugNutPort"/>
-            <body xsi:type="PortUsage" sysmini_self="shankPort"/>
+            <body xsi:type="PortUsage" sysmini_self="lugNutPort">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="PortUsage" sysmini_self="shankPort">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="AttributeUsage"/>
           </body>
           <body xsi:type="InterfaceUsage" sysmini_self="wheelFastenerInterface3">
-            <body xsi:type="PortUsage" sysmini_self="lugNutPort"/>
-            <body xsi:type="PortUsage" sysmini_self="shankPort"/>
+            <body xsi:type="PortUsage" sysmini_self="lugNutPort">
+              <body xsi:type="Feature"/>
+            </body>
+            <body xsi:type="PortUsage" sysmini_self="shankPort">
+              <body xsi:type="Feature"/>
+            </body>
             <body xsi:type="AttributeUsage"/>
           </body>
         </body>
@@ -1225,11 +1497,11 @@
     </body>
   </body>
   <body xsi:type="Package" sysmini_self="VehicleAnalysis">
-    <body xsi:type="NamespaceImport" sysmini_self="RiskMetadata::*"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="MembershipImport"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="RiskMetadata::*"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="RiskMetadata::RiskLevelEnum"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="VehicleConfiguration_b" isRecursive="true"/>
     <body xsi:type="Package" sysmini_self="FuelEconomyAnalysisModel">
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="SampledFunctions::null"/>
       <body xsi:type="Comment" sysmini_self="This analysis model was provided by Hisashi Miyashita on January 27, 2021&#xA;We use the simplest fuel consumption analysis model introduced in:&#xA;Akcelik, R. &quot;Fuel efficiency and other objectives in traffic system management.&quot; Traffic Engineering and Control 22.2 (1981): 54-65. &#xA;&#xA;Fuel consumption rate f can be decomposed to:&#xA;f = f_a + f_b * tpd_avg,&#xA;where tpd_avg is average interrupted travel time per unit distance, actually the inverse of the average velocity [t/km];&#xA;f_a is the best fuel consumption per distance; and&#xA;f_b is the additional fuel consumption per distance and average travel time, which can be regarded as the idling fuel consumption.&#xA;Approximately, it is proportional to engine displacement and it ranges from 0.5 to 0.6 [l/hour/litre of engine displacement]&#xA;according to:&#xA;Review of the Incidence, Energy Use and Costs of Passenger Vehicle Idling; Gordon W. Taylor, P.Eng. Prepared for the Office of Energy Efficiency, Natural Resources Canada, 2003&#xA;&#xA;We assume f_a can be approximated to&#xA;fuel_consumption / distance = BSFC * SGG * required_power_avg * tpd_avg,&#xA;where required_power_avg is the required power, and it can be approximately derived from:&#xA;total_energy == P_req * tpd_avg * distance == 1/2 * mass / tpd_avg^2&#xA;This part is computed with BestFuelConsumptionPerDistance calc def.&#xA;&#xA;BSFC means Brake-Specific Fuel Consumption, defined as gram/power.  SGG is the specific gravity of gasoline.&#xA;The high octane gasoline is about 0.76[l/kg].&#xA;"/>
       <body xsi:type="AttributeDefinition" sysmini_self="Scenario">
         <body xsi:type="AttributeUsage" sysmini_self="wayPoint">
@@ -1264,6 +1536,9 @@
         <body xsi:type="ReferenceUsage" sysmini_self="tpd_avg"/>
         <body xsi:type="ReferenceUsage" sysmini_self="distance"/>
         <body xsi:type="AttributeUsage" sysmini_self="required_power_avg"/>
+        <body xsi:type="ConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage" sysmini_self="f_b"/>
       </body>
       <body xsi:type="CalculationDefinition" sysmini_self="ComputeBSFC">
@@ -1272,6 +1547,15 @@
       </body>
       <body xsi:type="AnalysisCaseUsage" sysmini_self="fuelEconomyAnalysis">
         <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="Documentation" sysmini_self="estimate the vehicle fuel economy"/>
+          <body xsi:type="ConstraintUsage">
+            <body xsi:type="Feature"/>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="AttributeUsage" sysmini_self="scenario"/>
         <body xsi:type="AttributeUsage" sysmini_self="distance"/>
         <body xsi:type="AttributeUsage" sysmini_self="tpd_avg"/>
@@ -1301,7 +1585,7 @@
           <body xsi:type="ReferenceUsage"/>
         </body>
       </body>
-      <body xsi:type="NamespaceImport" sysmini_self="TradeStudies::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="TradeStudies::*"/>
       <body xsi:type="CalculationDefinition" sysmini_self="EngineEvaluation">
         <body xsi:type="ReferenceUsage" sysmini_self="engineMass"/>
         <body xsi:type="ReferenceUsage" sysmini_self="enginePower"/>
@@ -1343,6 +1627,10 @@
             <body xsi:type="AttributeUsage" sysmini_self="cost"/>
           </body>
         </body>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="Comment" sysmini_self="Select vehicle alternative with the engine whose evaluation function returns the max value"/>
         <body xsi:type="CalculationUsage">
           <body xsi:type="PartUsage" sysmini_self="vehicle"/>
@@ -1357,22 +1645,34 @@
     </body>
   </body>
   <body xsi:type="Package" sysmini_self="VehicleVerification">
-    <body xsi:type="MembershipImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport"/>
-    <body xsi:type="NamespaceImport" sysmini_self="VerificationCases::*"/>
-    <body xsi:type="NamespaceImport"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="VehicleConfiguration_b" isRecursive="true"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VerificationCaseDefinitions"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VerificationCases1"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VerificationCases::*"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VerificationSystem"/>
     <body xsi:type="Package" sysmini_self="VerificationCaseDefinitions">
       <body xsi:type="VerificationCaseDefinition" sysmini_self="MassTest">
         <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="VerificationCaseDefinition" sysmini_self="AccelerationTest">
         <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="VerificationCaseDefinition" sysmini_self="ReliabilityTest">
         <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
     </body>
@@ -1380,6 +1680,16 @@
       <body xsi:type="VerificationCaseUsage" sysmini_self="massTests">
         <body xsi:type="ReferenceUsage" sysmini_self="vehicle_uut"/>
         <body xsi:type="PartUsage" sysmini_self="vehicleVerificationSubSystem_1"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="Feature"/>
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="MetadataUsage">
           <body xsi:type="ReferenceUsage"/>
         </body>
@@ -1411,10 +1721,14 @@
         <body xsi:type="PartUsage" sysmini_self="vehicle_UnitUnderTest"/>
         <body xsi:type="PartUsage" sysmini_self="massVerificationSystem">
           <body xsi:type="PartUsage" sysmini_self="scale">
-            <body xsi:type="PerformActionUsage"/>
+            <body xsi:type="PerformActionUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
           <body xsi:type="PartUsage" sysmini_self="operator">
-            <body xsi:type="PerformActionUsage"/>
+            <body xsi:type="PerformActionUsage">
+              <body xsi:type="Feature"/>
+            </body>
           </body>
         </body>
       </body>
@@ -1476,9 +1790,9 @@
   </body>
   <body xsi:type="Package" sysmini_self="MissionContext">
     <body xsi:type="Comment" sysmini_self="Define mission context with mission use cases for vehicle_b "/>
-    <body xsi:type="MembershipImport"/>
-    <body xsi:type="MembershipImport"/>
-    <body xsi:type="NamespaceImport"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="VehicleConfiguration_b" isRecursive="true"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="ParametersOfInterestMetadata::null"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="TransportPassengerScenario"/>
     <body xsi:type="Package" sysmini_self="ContextDefinitions">
       <body xsi:type="PartDefinition" sysmini_self="MissionContext"/>
       <body xsi:type="PartDefinition" sysmini_self="Road"/>
@@ -1524,7 +1838,19 @@
         </body>
       </body>
       <body xsi:type="PartDefinition" sysmini_self="Passenger"/>
+      <body xsi:type="RequirementUsage">
+        <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="ReferenceUsage"/>
+      </body>
       <body xsi:type="UseCaseDefinition" sysmini_self="TransportPassenger">
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="Documentation" sysmini_self="deliver passenger to destination safely, comfortably, and within acceptable time"/>
+          <body xsi:type="ConstraintUsage">
+            <body xsi:type="ReferenceUsage"/>
+          </body>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage" sysmini_self="vehicle"/>
         <body xsi:type="PartUsage" sysmini_self="environment"/>
         <body xsi:type="PartUsage" sysmini_self="road"/>
@@ -1532,10 +1858,18 @@
         <body xsi:type="PartUsage" sysmini_self="passenger"/>
         <body xsi:type="IncludeUseCaseUsage" sysmini_self="getInVehicle_a">
           <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
           <body xsi:type="ReferenceUsage"/>
         </body>
         <body xsi:type="IncludeUseCaseUsage" sysmini_self="getOutOfVehicle_a">
           <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="RequirementUsage">
+            <body xsi:type="ReferenceUsage"/>
+            <body xsi:type="ReferenceUsage"/>
+          </body>
           <body xsi:type="ReferenceUsage"/>
         </body>
         <body xsi:type="ReferenceUsage"/>
@@ -1558,12 +1892,23 @@
           <body xsi:type="ReferenceUsage"/>
         </body>
         <body xsi:type="ActionUsage" sysmini_self="closeDoor_in"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="UseCaseDefinition" sysmini_self="GetInVehicle">
         <body xsi:type="ReferenceUsage" sysmini_self="vehicle"/>
         <body xsi:type="PartUsage" sysmini_self="driver"/>
         <body xsi:type="PartUsage" sysmini_self="passenger"/>
+        <body xsi:type="AssertConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="UseCaseUsage" sysmini_self="getOutOfVehicle">
@@ -1584,17 +1929,28 @@
           <body xsi:type="ReferenceUsage"/>
         </body>
         <body xsi:type="ActionUsage" sysmini_self="lockDoor_out"/>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="UseCaseDefinition" sysmini_self="GetOutOfVehicle">
         <body xsi:type="ReferenceUsage" sysmini_self="vehicle"/>
         <body xsi:type="PartUsage" sysmini_self="driver"/>
         <body xsi:type="PartUsage" sysmini_self="passenger"/>
+        <body xsi:type="AssertConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
     </body>
     <body xsi:type="Package" sysmini_self="TransportPassengerScenario">
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="TransportPassenger"/>
       <body xsi:type="UseCaseUsage" sysmini_self="transportPassenger">
         <body xsi:type="ReferenceUsage"/>
         <body xsi:type="SuccessionAsUsage">
@@ -1630,6 +1986,10 @@
           <body xsi:type="ActionUsage" sysmini_self="passenger1GetOutOfVehicle"/>
         </body>
         <body xsi:type="SuccessionAsUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
+        <body xsi:type="RequirementUsage">
           <body xsi:type="ReferenceUsage"/>
           <body xsi:type="ReferenceUsage"/>
         </body>
@@ -1722,6 +2082,10 @@
           <body xsi:type="ReferenceUsage"/>
           <body xsi:type="ReferenceUsage"/>
         </body>
+        <body xsi:type="RequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
     </body>
@@ -1732,38 +2096,82 @@
       <body xsi:type="PerformActionUsage"/>
       <body xsi:type="PartUsage" sysmini_self="road"/>
       <body xsi:type="PartUsage" sysmini_self="driver">
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
       </body>
       <body xsi:type="PartUsage" sysmini_self="passenger1">
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
       </body>
       <body xsi:type="PartUsage" sysmini_self="vehicle_b_1">
         <body xsi:type="AttributeUsage"/>
-        <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PerformActionUsage"/>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="PerformActionUsage">
+          <body xsi:type="Feature"/>
+        </body>
+      </body>
+      <body xsi:type="ConnectionUsage">
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
       </body>
       <body xsi:type="ConnectionUsage">
         <body xsi:type="ReferenceUsage"/>
-        <body xsi:type="ReferenceUsage"/>
-      </body>
-      <body xsi:type="ConnectionUsage">
-        <body xsi:type="ReferenceUsage"/>
-        <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="ReferenceUsage">
+          <body xsi:type="Feature"/>
+        </body>
       </body>
     </body>
   </body>
@@ -1776,7 +2184,7 @@
       </body>
     </body>
     <body xsi:type="Package" sysmini_self="VehiclePartsTree">
-      <body xsi:type="NamespaceImport"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VariationPointDefinitions"/>
       <body xsi:type="PartUsage" sysmini_self="vehicleFamily">
         <body xsi:type="PartUsage" sysmini_self="engine">
           <body xsi:type="PartUsage" sysmini_self="engine4Cyl"/>
@@ -1791,6 +2199,9 @@
         </body>
         <body xsi:type="PartUsage" sysmini_self="transmissionChoices"/>
         <body xsi:type="PartUsage" sysmini_self="sunroof"/>
+        <body xsi:type="AssertConstraintUsage">
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="PartUsage" sysmini_self="driveshaft"/>
         <body xsi:type="PartUsage" sysmini_self="frontAxleAssembly"/>
         <body xsi:type="PartUsage" sysmini_self="rearAxleAssembly"/>
@@ -1798,22 +2209,22 @@
     </body>
   </body>
   <body xsi:type="Package" sysmini_self="SafetyandSecurityGroups">
-    <body xsi:type="NamespaceImport"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="PartsTree"/>
     <body xsi:type="Package" sysmini_self="SafetyGroup">
       <body xsi:type="Comment" sysmini_self="Parts that contribute to safety. "/>
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="vehicle_b" isRecursive="true"/>
     </body>
     <body xsi:type="Package" sysmini_self="SecurityGroup">
       <body xsi:type="Comment" sysmini_self="Parts that contribute to security. "/>
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="vehicle_b" isRecursive="true"/>
     </body>
     <body xsi:type="Package" sysmini_self="SafetyandSecurityGroup">
       <body xsi:type="Comment" sysmini_self="Parts that contribute to safety OR security. "/>
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="vehicle_b" isRecursive="true"/>
     </body>
     <body xsi:type="Package" sysmini_self="MandatorySafetyGroup">
       <body xsi:type="Comment" sysmini_self="Parts that contribute to safety AND are mandatory. "/>
-      <body xsi:type="MembershipImport"/>
+      <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="vehicle_b" isRecursive="true"/>
     </body>
   </body>
   <body xsi:type="Package" sysmini_self="Views_Viewpoints">
@@ -1824,6 +2235,10 @@
       </body>
       <body xsi:type="ViewpointDefinition" sysmini_self="SafetyViewpoint">
         <body xsi:type="ReferenceUsage"/>
+        <body xsi:type="ConcernUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
         <body xsi:type="ReferenceUsage"/>
       </body>
       <body xsi:type="PartDefinition" sysmini_self="SafetyEngineer"/>
@@ -1835,7 +2250,7 @@
       </body>
     </body>
     <body xsi:type="Package" sysmini_self="ViewDefinitions">
-      <body xsi:type="NamespaceImport" sysmini_self="Views::*"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="Views::*"/>
       <body xsi:type="ViewDefinition" sysmini_self="TreeView">
         <body xsi:type="RenderingUsage"/>
       </body>
@@ -1846,10 +2261,15 @@
       <body xsi:type="ViewDefinition" sysmini_self="PartsInterconnection"/>
     </body>
     <body xsi:type="Package" sysmini_self="VehicleViews">
-      <body xsi:type="NamespaceImport"/>
-      <body xsi:type="NamespaceImport"/>
-      <body xsi:type="NamespaceImport"/>
-      <body xsi:type="ViewUsage" sysmini_self="vehiclePartsTree_Safety"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ViewpointDefinitions"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ViewDefinitions"/>
+      <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VehicleConfiguration_b"/>
+      <body xsi:type="ViewUsage" sysmini_self="vehiclePartsTree_Safety">
+        <body xsi:type="SatisfyRequirementUsage">
+          <body xsi:type="ReferenceUsage"/>
+          <body xsi:type="ReferenceUsage"/>
+        </body>
+      </body>
     </body>
   </body>
 </Namespace>

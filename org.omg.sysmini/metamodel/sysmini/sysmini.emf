@@ -1,21 +1,24 @@
 package sysmini;
 
+abstract class Element {
+	attr boolean[1] hasVisibility = false;
+	attr VisibilityKind[1] visibility;
+	attr String declaredName;
+	attr String declaredShortName;
+	attr boolean[1] isWell = false;
+	attr String sysmini_self;
+	ref Element#body root;
+	ordered val Element[*]#root body;
+}
+
 class Subclassification extends Specialization {
+	attr String[*] superclassifier;
 }
 
 class Specialization extends Relationship {
 }
 
 abstract class Relationship extends Element {
-}
-
-abstract class Element {
-	attr String declaredShortName;
-	attr String declaredName;
-	attr String qualifiedName;
-	attr boolean[1] isWell = false;
-	attr String sysmini_self;
-	ordered val Element[*] body;
 }
 
 class DefinitionElement extends Element{
@@ -29,7 +32,6 @@ class OwningMembership extends Membership {
 }
 
 class Membership extends Relationship {
-	attr String[1] memberElementId;
 	attr String memberShortName;
 	attr String memberName;
 }
@@ -38,9 +40,8 @@ class Namespace extends Element {
 }
 
 abstract class Import extends Relationship {
-	attr VisibilityKind[1] visibility = "private";
-	attr boolean[1] isRecursive = "false";
-	attr boolean[1] isImportAll = "false";
+	attr boolean[1] isRecursive = false;
+	attr boolean[1] isImportAll = false;
 }
 
 enum VisibilityKind {
@@ -55,7 +56,7 @@ class Documentation extends Comment {
 
 class Comment extends AnnotatingElement {
 	attr boolean[1] isCommentName = false;
-	attr String[*] isAbout_;
+	attr String[*] isAbout;
 	attr String locale;
 }
 
@@ -73,8 +74,8 @@ class TextualRepresentation extends AnnotatingElement {
 }
 
 class Type extends Namespace {
-	attr boolean[1] isAbstract_ = "false";
-	attr boolean[1] isSufficient = "false";
+	attr boolean[1] isAbstract = false;
+	attr boolean[1] isSufficient = false;
 	attr boolean[1] isConjugated;
 }
 
@@ -85,21 +86,24 @@ abstract class Featuring extends Relationship {
 }
 
 class Feature extends Type {
-	attr boolean[1] isUnique = "true";
-	attr boolean[1] isOrdered = "false";
-	attr boolean[1] isComposite = "false";
-	attr boolean[1] isEnd = "false";
-	attr boolean[1] isDerived = "false";
-	attr boolean[1] isReadOnly = "false";
-	attr boolean[1] isPortion = "false";
-	attr boolean[1] isNonunique = "false";
+	attr boolean[1] isUnique = true;
+	attr boolean[1] isOrdered = false;
+	attr boolean[1] isComposite = false;
+	attr boolean[1] isEnd = false;
+	attr boolean[1] isDerived = false;
+	attr boolean[1] isReadOnly = false;
+	attr boolean[1] isPortion = false;
+	attr boolean[1] isNonunique = false;
+	attr FeatureDirectionKind direction;
 }
 
 class Redefinition extends Subsetting {
 }
 
 class Subsetting extends Specialization {
+	attr String feature;
 }
+
 class FeatureTyping extends Specialization {
 	attr String type_;
 }
@@ -147,6 +151,7 @@ class EndFeatureMembership extends FeatureMembership {
 }
 
 class Package extends Namespace {
+	attr String[*] type_;
 }
 
 class Expression extends Step {
@@ -167,7 +172,7 @@ class Function extends Behavior {
 }
 
 class LibraryPackage extends Package {
-	attr boolean[1] isStandard = "false";
+	attr boolean[1] isStandard = false;
 }
 
 class ElementFilterMembership extends OwningMembership {
@@ -269,12 +274,12 @@ class AssociationStructure extends Association, Structure {
 }
 
 class FeatureValue extends OwningMembership {
-	attr boolean[1] isInitial = "false";
-	attr boolean[1] isDefault = "false";
+	attr boolean[1] isInitial = false;
+	attr boolean[1] isDefault = false;
 }
 
 class Invariant extends BooleanExpression {
-	attr boolean[1] isNegated = "false";
+	attr boolean[1] isNegated = false;
 }
 
 class BooleanExpression extends Expression {
@@ -304,7 +309,7 @@ class ItemUsage extends OccurrenceUsage {
 }
 
 class OccurrenceUsage extends Usage {
-	attr boolean[1] isIndividual = "false";
+	attr boolean[1] isIndividual = false;
 	attr PortionKind portionKind;
 }
 
@@ -321,6 +326,8 @@ class Definition extends Classifier {
 }
 
 class ReferenceUsage extends Usage {
+	attr boolean[1] isRef = false;
+	attr boolean[1] isRedefines = false;
 }
 
 class AttributeUsage extends Usage {
@@ -345,7 +352,7 @@ class ItemDefinition extends OccurrenceDefinition, Structure {
 }
 
 class OccurrenceDefinition extends Definition, Class {
-	attr boolean[1] isIndividual = "false";
+	attr boolean[1] isIndividual = false;
 }
 
 class LifeClass extends Class {
@@ -391,7 +398,7 @@ class AllocationDefinition extends ConnectionDefinition {
 }
 
 class StateUsage extends ActionUsage {
-	attr boolean[1] isParallel = "false";
+	attr boolean[1] isParallel = false;
 }
 
 class TransitionUsage extends ActionUsage {
@@ -474,7 +481,7 @@ class RenderingDefinition extends PartDefinition {
 }
 
 class MetadataUsage extends ItemUsage, MetadataFeature {
-	attr String[*] type;
+	attr String[*] type_;
 	attr String[*] annotatedElement;
 }
 
@@ -554,7 +561,7 @@ enum StateSubactionKind {
 }
 
 class StateDefinition extends ActionDefinition {
-	attr boolean[1] isParallel = "false";
+	attr boolean[1] isParallel = false;
 }
 
 class TransitionFeatureMembership extends FeatureMembership {
@@ -577,7 +584,7 @@ class RequirementVerificationMembership extends RequirementConstraintMembership 
 }
 
 class MetadataDefinition extends ItemDefinition, Metaclass {
-	attr String[*] type;
+	attr String[*] type_;
 }
 
 class IncludeUseCaseUsage extends UseCaseUsage, PerformActionUsage {

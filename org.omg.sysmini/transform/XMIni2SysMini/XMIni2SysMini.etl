@@ -5,6 +5,9 @@ pre{
 post{
 	main();
 	"ETL Over!".println();
+//	for (m in SysMini!NamespaceImport.all){
+//		m.declaredName.println();
+//	}
 }
 
 operation main(){
@@ -33,9 +36,10 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			
 			//Membership
 			case "Membership": relationship.skipRelationshipTo(rootNode);
+			
+			case "ElementFilterMembership": relationship.skipRelationshipTo(rootNode);
 			case "OwningMembership": relationship.skipRelationshipTo(rootNode);
 			case "FeatureMembership": relationship.skipRelationshipTo(rootNode);
-			case "ElementFilterMembership": relationship.skipRelationshipTo(rootNode);
 			case "FeatureValue": relationship.skipRelationshipTo(rootNode);
 			case "VariantMembership": relationship.skipRelationshipTo(rootNode);
 			case "EndFeatureMembership": relationship.skipRelationshipTo(rootNode);
@@ -64,6 +68,8 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "Disjoining": relationship.skipRelationshipTo(rootNode);
 			case "Differencing": relationship.skipRelationshipTo(rootNode);
 			case "Dependency": relationship.skipRelationshipTo(rootNode);
+			case "MultiplicityRange": relationship.skipRelationshipTo(rootNode);
+			case "Multiplicity": relationship.skipRelationshipTo(rootNode);
 			
 		}
 	}
@@ -155,14 +161,16 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
 			
 			
-//			case "ConstraintUsage": element.addNodeTo(rootNode);
-//			case "RequirementUsage": element.addNodeTo(rootNode);
-//			case "AssertConstraintUsage": element.addNodeTo(rootNode);
-//			case "ConcernUsage": element.addNodeTo(rootNode);
-//			case "ViewpointUsage": element.addNodeTo(rootNode);
-//			case "SatisfyRequirementUsage": element.addNodeTo(rootNode);
-
-
+			case "ConstraintUsage": element.addNodeTo(rootNode);
+			case "RequirementUsage": element.addNodeTo(rootNode);
+			case "AssertConstraintUsage": element.addNodeTo(rootNode);
+			case "ConcernUsage": element.addNodeTo(rootNode);
+			case "ViewpointUsage": element.addNodeTo(rootNode);
+			case "SatisfyRequirementUsage": element.addNodeTo(rootNode);
+			
+			//Others
+			case "Classifier": element.addNodeTo(rootNode);
+			case "Feature": element.addNodeTo(rootNode);
 		}
 	}
 }
@@ -195,20 +203,33 @@ operation XMIni!Element isTypeOf(str : String){
 	return (self.type().name == str);
 }
 
+operation SysMini!Element setVisibility(s: XMIni!Element){
+	self.hasVisibility = true;
+	switch (s.visibility.value.asString()){
+		case "0": self.visibility = SysMini!VisibilityKind#private;
+		case "1": self.visibility = SysMini!VisibilityKind#protected;
+		case "2": self.visibility = SysMini!VisibilityKind#public;
+	}
+}
 
-
+//Import
+@abstract
+rule BaseTransform
+	transform s : XMIni!Element
+	to t : SysMini!Element {
+		t.declaredName = s.declaredName;
+		t.declaredShortName = s.declaredShortName;
+	}
 	
 //Import
 @abstract
 rule ImportTransform
 	transform s : XMIni!Import
-	to t : SysMini!Import {
-		if (s.declaredName != null){
-			var name = s.declaredName.split("::");
-			if (name.first() == name.second()){
-				t.sysmini_self = name.first() + "::*";
-			}
-		}
+	to t : SysMini!Import 
+	extends BaseTransform{
+		t.setVisibility(s);
+		t.isImportAll = s.isImportAll;
+		t.isRecursive = s.isRecursive;
 	}
 	
 @lazy
@@ -216,6 +237,22 @@ rule NamespaceImportTransform
 	transform s : XMIni!NamespaceImport
 	to t : SysMini!NamespaceImport 
 	extends ImportTransform{
+		if (s.declaredName == null){
+			if (s.importedNamespace != null){
+				t.declaredName = s.importedNamespace.declaredName;
+			}
+			else if(s.ownedRelationship != null){
+//				for (r in s.ownedRelationship){
+// TODO: Consider encountering the situation of a FilterPackage
+//				}
+			}
+		}
+		var n = t.declaredName.split("::");
+		if (n.size() == 2){
+			if (n.first() == n.second()){
+				t.declaredName = n.first()+"::*";
+			}
+		}
 	}
 
 @lazy
@@ -223,6 +260,9 @@ rule MembershipImportTransform
 	transform s : XMIni!MembershipImport
 	to t : SysMini!MembershipImport 
 	extends ImportTransform{
+		if (s.importedMembership != null){
+			t.declaredName = s.importedMembership.eContents().first().declaredName;
+		}
 	}
 	
 //Package
@@ -751,41 +791,51 @@ rule IncludeUseCaseUsageTransform
 	extends UsageTransform{
 	}
 	
-//@lazy
-//rule ConstraintUsageUsageTransform
-//	transform s : XMIni!ConstraintUsage
-//	to t : SysMini!ConstraintUsage{
-//	}
-//	
-//@lazy
-//rule RequirementUsageTransform
-//	transform s : XMIni!RequirementUsage
-//	to t : SysMini!RequirementUsage{
-//	}
-//	
-//@lazy
-//rule AssertConstraintUsageTransform
-//	transform s : XMIni!AssertConstraintUsage
-//	to t : SysMini!AssertConstraintUsage{
-//	}
-//	
-//@lazy
-//rule ConcernUsageTransform
-//	transform s : XMIni!ConcernUsage
-//	to t : SysMini!ConcernUsage{
-//	}
-//	
-//@lazy
-//rule ViewpointUsageTransform
-//	transform s : XMIni!ViewpointUsage
-//	to t : SysMini!ViewpointUsage{
-//	}
-//	
-//@lazy
-//rule SatisfyRequirementUsageTransform
-//	transform s : XMIni!SatisfyRequirementUsage
-//	to t : SysMini!SatisfyRequirementUsage{
-//	}
+@lazy
+rule ConstraintUsageUsageTransform
+	transform s : XMIni!ConstraintUsage
+	to t : SysMini!ConstraintUsage{
+	}
+	
+@lazy
+rule RequirementUsageTransform
+	transform s : XMIni!RequirementUsage
+	to t : SysMini!RequirementUsage{
+	}
+	
+@lazy
+rule AssertConstraintUsageTransform
+	transform s : XMIni!AssertConstraintUsage
+	to t : SysMini!AssertConstraintUsage{
+	}
+	
+@lazy
+rule ConcernUsageTransform
+	transform s : XMIni!ConcernUsage
+	to t : SysMini!ConcernUsage{
+	}
+	
+@lazy
+rule ViewpointUsageTransform
+	transform s : XMIni!ViewpointUsage
+	to t : SysMini!ViewpointUsage{
+	}
+	
+@lazy
+rule SatisfyRequirementUsageTransform
+	transform s : XMIni!SatisfyRequirementUsage
+	to t : SysMini!SatisfyRequirementUsage{
+	}
 
-
+@lazy
+rule ClassifierTransform
+	transform s : XMIni!Classifier
+	to t : SysMini!Classifier{
+	}
+	
+@lazy
+rule FeatureTransform
+	transform s : XMIni!Feature
+	to t : SysMini!Feature{
+	}
 
