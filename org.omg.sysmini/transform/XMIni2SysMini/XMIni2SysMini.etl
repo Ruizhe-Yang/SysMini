@@ -1,13 +1,14 @@
 pre{
-	"ETL Start!".println();
+	"------------------ ETL Start!------------------".println();
 }
 
 post{
 	main();
-	"ETL Over!".println();
-//	for (m in SysMini!NamespaceImport.all){
+	"------------------ ETL Over! ------------------".println();
+//	for (m in SysMini!LibraryPackage.all){
 //		m.declaredName.println();
 //	}
+	"------------------Print Over.------------------".println();
 }
 
 operation main(){
@@ -58,6 +59,8 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "RequirementVerificationMembership": relationship.skipRelationshipTo(rootNode);
 			
 			//Others
+			case "Dependency": relationship.addRelationshipTo(rootNode);
+			
 			case "Annotation": relationship.skipRelationshipTo(rootNode);
 			case "FeatureInverting": relationship.skipRelationshipTo(rootNode);
 			case "FeatureChaining": relationship.skipRelationshipTo(rootNode);
@@ -67,7 +70,6 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "Unioning": relationship.skipRelationshipTo(rootNode);
 			case "Disjoining": relationship.skipRelationshipTo(rootNode);
 			case "Differencing": relationship.skipRelationshipTo(rootNode);
-			case "Dependency": relationship.skipRelationshipTo(rootNode);
 			case "MultiplicityRange": relationship.skipRelationshipTo(rootNode);
 			case "Multiplicity": relationship.skipRelationshipTo(rootNode);
 			
@@ -81,6 +83,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 		
 			//Package
 			case "Package": element.addNodeTo(rootNode);
+			case "LibraryPackage": element.addNodeTo(rootNode);
 			
 			//AnnotatingElement
 			case "Comment": element.addNodeTo(rootNode);
@@ -212,38 +215,269 @@ operation SysMini!Element setVisibility(s: XMIni!Element){
 	}
 }
 
-//Import
+operation OrderedSet getElementOf(typeName : String){
+	return self.select(e|e.type().name == typeName);
+}
+
+
+//Element
 @abstract
-rule BaseTransform
+rule ElementRule
 	transform s : XMIni!Element
 	to t : SysMini!Element {
 		t.declaredName = s.declaredName;
 		t.declaredShortName = s.declaredShortName;
 	}
+
+@abstract
+rule PrefixMetadataAnnotation
+	transform s : XMIni!Element
+	to t : SysMini!Element
+	extends PrefixMetadataUsage{
+	}
+
+@abstract
+rule PrefixMetadataMember
+	transform s : XMIni!Element
+	to t : SysMini!Element
+	extends PrefixMetadataUsage{
+	}
+	
+@abstract
+rule BasicDefinitionPrefix
+	transform s : XMIni!Definition
+	to t : SysMini!Definition{
+		t.isAbstract = s.isAbstract;
+		t.isVariation = s.isVariation;
+	}
+
+@abstract
+rule DefinitionExtensionKeyword
+	transform s : XMIni!Definition
+	to t : SysMini!Definition{
+	}
+	
+@abstract
+rule DefinitionPrefix
+	transform s : XMIni!Definition
+	to t : SysMini!Definition
+	extends BasicDefinitionPrefix, DefinitionExtensionKeyword{
+	}
+
+@abstract
+rule Identification
+	transform s : XMIni!Element
+	to t : SysMini!Element
+	extends ElementRule{
+	}
+
+@abstract
+rule SubclassificationPart
+	transform s : XMIni!Classifier
+	to t : SysMini!Classifier{
+	}
+	
+@abstract
+rule DefinitionDeclaration
+	transform s : XMIni!Definition
+	to t : SysMini!Definition
+	extends Identification, SubclassificationPart{
+	}
+
+@abstract
+rule DefinitionBody
+	transform s : XMIni!Type
+	to t : SysMini!Type{
+	}
+	
+@abstract
+rule Definition
+	transform s : XMIni!Definition
+	to t : SysMini!Definition
+	extends DefinitionDeclaration, DefinitionBody{
+	}
+	
+@abstract
+rule AttributeDefinition
+	transform s : XMIni!AttributeDefinition
+	to t : SysMini!AttributeDefinition
+	extends DefinitionPrefix, Definition{
+	}
+	
+//PrefixMetadataUsage
+@abstract
+rule PrefixMetadataUsage
+	transform s : XMIni!Element
+	to t : SysMini!Element{
+//		for (e in s.ownedRelationship.getElementOf("OwningMembership")){
+//			for (metadataUsage in e.ownedRelatedElement.getElementOf("MetadataUsage")){
+//				s.println();
+//				"//".println();
+//				for (m in metadataUsage.ownedRelationship){
+//					"--------------".println();
+//					m.println();
+//					m.declaredName.println();
+//				}
+//				"--------------".println();
+//				var featureTyping = metadataUsage.ownedRelationship.getElementOf("FeatureTyping").first();
+////				featureTyping.println();
+//				if (metadataUsage.ownedRelationship.size() == 2 and featureTyping.declaredName != null){
+//					t.prefixMetadata = "#" + featureTyping.declaredName;
+//				}
+//				else{
+//					featureTyping.println();
+////					t.prefixMetadata = "#" + featureTyping.type.declaredName;
+//				}
+//				t.prefixMetadata.println();
+//			}
+//		}
+	}
 	
 //Import
 @abstract
-rule ImportTransform
+rule ImportRule
 	transform s : XMIni!Import
 	to t : SysMini!Import 
-	extends BaseTransform{
+	extends ElementRule{
 		t.setVisibility(s);
 		t.isImportAll = s.isImportAll;
 		t.isRecursive = s.isRecursive;
 	}
 	
+
+
+//Definition
+@abstract
+rule DefinitionRule
+	transform s : XMIni!Definition
+	to t : SysMini!Definition
+	extends ElementRule, PrefixMetadataMember{
+		t.isAbstract = s.isAbstract;
+		t.isVariation = s.isVariation;
+//		if (s.ownedRelationship != null){
+//          for (prefixMetadataMember in s.ownedRelationship){
+// TODO: prefixMetadataMember
+//					}
+//				}
+	}
+
+
+//Usage
+@abstract
+rule UsageRule
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends ElementRule, PrefixMetadataMember{
+	}
+	
+operation SysMini!Usage setFeatureDirection(s: XMIni!Usage){
+	switch (s.direction.value.asString()){
+//		case "0": self.direction = SysMini!FeatureDirectionKind#in;
+		case "1": self.direction = SysMini!FeatureDirectionKind#inout;
+		case "2": self.direction = SysMini!FeatureDirectionKind#out;
+	}
+}
+@abstract
+rule RefPrefix
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+		t.setFeatureDirection(s);
+		t.isAbstract = s.isAbstract;
+		t.isVariation = s.isVariation;
+		t.isReadOnly = s.isReadOnly;
+		t.isDerived = s.isDerived;
+		t.isEnd = s.isEnd;
+	}
+	
+@abstract
+rule BasicUsagePrefix
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends RefPrefix{
+		t.isReference = s.isReference;
+	}
+	
+@abstract
+rule UsageExtensionKeyword
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends PrefixMetadataMember{
+	}
+	
+@abstract
+rule UsagePrefix
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends BasicUsagePrefix, UsageExtensionKeyword{
+	}
+	
+@abstract
+rule Usage
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends UsageDeclaration, UsageCompletion{
+	}
+	
+@abstract
+rule UsageCompletion
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends ValuePart, UsageBody{
+	}
+	
+@abstract
+rule ValuePart
+	transform s : XMIni!Feature
+	to t : SysMini!Feature{
+	}
+	
+@abstract
+rule UsageBody
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends DefinitionBody{
+	}
+	
+@abstract
+rule UsageDeclaration
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends FeatureDeclaration{
+	}
+	
+@abstract
+rule UsageDeclaration
+	transform s : XMIni!Feature
+	to t : SysMini!Feature
+	extends Identification, FeatureSpecializationPart{
+	}
+	
+@abstract
+rule FeatureSpecializationPart
+	transform s : XMIni!Feature
+	to t : SysMini!Feature{
+	// 367行，还没看懂
+	}
+	
+@abstract
+rule AttributeUsage
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends UsagePrefix, Usage{
+	}
+	
 @lazy
-rule NamespaceImportTransform
+rule NamespaceImportRule
 	transform s : XMIni!NamespaceImport
 	to t : SysMini!NamespaceImport 
-	extends ImportTransform{
+	extends ImportRule{
 		if (s.declaredName == null){
 			if (s.importedNamespace != null){
 				t.declaredName = s.importedNamespace.declaredName;
 			}
 			else if(s.ownedRelationship != null){
 //				for (r in s.ownedRelationship){
-// TODO: Consider encountering the situation of a FilterPackage
+// TODO: FilterPackage
 //				}
 			}
 		}
@@ -256,10 +490,10 @@ rule NamespaceImportTransform
 	}
 
 @lazy
-rule MembershipImportTransform
+rule MembershipImportRule
 	transform s : XMIni!MembershipImport
 	to t : SysMini!MembershipImport 
-	extends ImportTransform{
+	extends ImportRule{
 		if (s.importedMembership != null){
 			t.declaredName = s.importedMembership.eContents().first().declaredName;
 		}
@@ -267,46 +501,71 @@ rule MembershipImportTransform
 	
 //Package
 @lazy
-rule PackageTransform
+rule PackageRule
 	transform s : XMIni!Package
-	to t : SysMini!Package {
-		if(s.declaredName != null){
-			t.sysmini_self = s.declaredName;		
-		}
+	to t : SysMini!Package 
+	extends ElementRule{
+//				if (s.ownedRelationship != null){
+//                  for (prefixMetadataMember in s.ownedRelationship){
+// TODO: prefixMetadataMember
+//					}
+//				}
 	}
 
+//Package
+@lazy
+rule DependencyRule
+	transform s : XMIni!Dependency
+	to t : SysMini!Dependency 
+	extends ElementRule{
+//				if (s.ownedRelationship != null){
+//                  for (prefixMetadataMember in s.ownedRelationship){
+// TODO: prefixMetadataMember
+//					}
+//				}
+	}
+	
+//Package
+@lazy
+rule LibraryPackageRule
+	transform s : XMIni!LibraryPackage
+	to t : SysMini!LibraryPackage 
+	extends PackageRule{
+		t.isStandard = s.isStandard;
+	}
+	
 //AnnotatingElement
 @abstract
-rule AnnotatingElementTransform
+rule AnnotatingElementRule
 	transform s : XMIni!AnnotatingElement
-	to t : SysMini!AnnotatingElement {
+	to t : SysMini!AnnotatingElement{
 	}
 
 @lazy
-rule CommentTransform
+rule CommentRule
 	transform s : XMIni!Comment
 	to t : SysMini!Comment
-	extends AnnotatingElementTransform{
+	extends AnnotatingElementRule{
 		if (s.body != null){
 			t.sysmini_self = s.body;	
 		}
 	}
 
 @lazy
-rule TextualRepresentationTransform
+rule TextualRepresentationRule
 	transform s : XMIni!TextualRepresentation
 	to t : SysMini!TextualRepresentation
-	extends AnnotatingElementTransform{
+	extends AnnotatingElementRule{
 		if (s.body != null){
 			t.sysmini_self = s.body;	
 		}
 	}
 	
 @lazy
-rule DocumentationTransform
+rule DocumentationRule
 	transform s : XMIni!Documentation
 	to t : SysMini!Documentation
-	extends AnnotatingElementTransform{
+	extends AnnotatingElementRule{
 		if (s.body != null){
 			t.sysmini_self = s.body;	
 		}
@@ -314,527 +573,525 @@ rule DocumentationTransform
 
 //ItemFeature
 @lazy
-rule ItemFeatureTransform
+rule ItemFeatureRule
 	transform s : XMIni!ItemFeature
 	to t : SysMini!ItemFeature{
 	}
 
 //ItemFlowEnd
 @lazy
-rule ItemFlowEndTransform
+rule ItemFlowEndRule
 	transform s : XMIni!ItemFlowEnd
 	to t : SysMini!ItemFlowEnd{
 	}
+		
 	
-
-//Definition
-@abstract
-rule DefinitionTransform
-	transform s : XMIni!Definition
-	to t : SysMini!Definition{
-		t.sysmini_self = s.declaredName;
-	}
+	
+	
+	
+	
+	
+/* @lazy */
+	
 	
 @lazy
-rule OccurrenceDefinitionTransform
+rule OccurrenceDefinitionRule
 	transform s : XMIni!OccurrenceDefinition
 	to t : SysMini!OccurrenceDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 	
 @lazy
-rule AttributeDefinitionTransform
+rule AttributeDefinitionRule
 	transform s : XMIni!AttributeDefinition
 	to t : SysMini!AttributeDefinition 
-	extends DefinitionTransform{
+	extends AttributeDefinition{
 	}
 
 @lazy
-rule ItemDefinitionTransform
+rule ItemDefinitionRule
 	transform s : XMIni!ItemDefinition
 	to t : SysMini!ItemDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule PortDefinitionTransform
+rule PortDefinitionRule
 	transform s : XMIni!PortDefinition
 	to t : SysMini!PortDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ActionDefinitionTransform
+rule ActionDefinitionRule
 	transform s : XMIni!ActionDefinition
 	to t : SysMini!ActionDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule EnumerationDefinitionTransform
+rule EnumerationDefinitionRule
 	transform s : XMIni!EnumerationDefinition
 	to t : SysMini!EnumerationDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule PartDefinitionTransform
+rule PartDefinitionRule
 	transform s : XMIni!PartDefinition
 	to t : SysMini!PartDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule MetadataDefinitionTransform
+rule MetadataDefinitionRule
 	transform s : XMIni!MetadataDefinition
 	to t : SysMini!MetadataDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ConjugatedPortDefinitionTransform
+rule ConjugatedPortDefinitionRule
 	transform s : XMIni!ConjugatedPortDefinition
 	to t : SysMini!ConjugatedPortDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule CalculationDefinitionTransform
+rule CalculationDefinitionRule
 	transform s : XMIni!CalculationDefinition
 	to t : SysMini!CalculationDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule StateDefinitionTransform
+rule StateDefinitionRule
 	transform s : XMIni!StateDefinition
 	to t : SysMini!StateDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ConnectionDefinitionTransform
+rule ConnectionDefinitionRule
 	transform s : XMIni!ConnectionDefinition
 	to t : SysMini!ConnectionDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ViewDefinitionTransform
+rule ViewDefinitionRule
 	transform s : XMIni!ViewDefinition
 	to t : SysMini!ViewDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule RenderingDefinitionTransform
+rule RenderingDefinitionRule
 	transform s : XMIni!RenderingDefinition
 	to t : SysMini!RenderingDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule CaseDefinitionTransform
+rule CaseDefinitionRule
 	transform s : XMIni!CaseDefinition
 	to t : SysMini!CaseDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule FlowConnectionDefinitionTransform
+rule FlowConnectionDefinitionRule
 	transform s : XMIni!FlowConnectionDefinition
 	to t : SysMini!FlowConnectionDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule InterfaceDefinitionTransform
+rule InterfaceDefinitionRule
 	transform s : XMIni!InterfaceDefinition
 	to t : SysMini!InterfaceDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule AllocationDefinitionTransform
+rule AllocationDefinitionRule
 	transform s : XMIni!AllocationDefinition
 	to t : SysMini!AllocationDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 	
 @lazy
-rule AnalysisCaseDefinitionTransform
+rule AnalysisCaseDefinitionRule
 	transform s : XMIni!AnalysisCaseDefinition
 	to t : SysMini!AnalysisCaseDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 	
 @lazy
-rule VerificationCaseDefinitionTransform
+rule VerificationCaseDefinitionRule
 	transform s : XMIni!VerificationCaseDefinition
 	to t : SysMini!VerificationCaseDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 	
 @lazy
-rule UseCaseDefinitionTransform
+rule UseCaseDefinitionRule
 	transform s : XMIni!UseCaseDefinition
 	to t : SysMini!UseCaseDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ConstraintDefinitionTransform
+rule ConstraintDefinitionRule
 	transform s : XMIni!ConstraintDefinition
 	to t : SysMini!ConstraintDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule RequirementDefinitionTransform
+rule RequirementDefinitionRule
 	transform s : XMIni!RequirementDefinition
 	to t : SysMini!RequirementDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ConcernDefinitionTransform
+rule ConcernDefinitionRule
 	transform s : XMIni!ConcernDefinition
 	to t : SysMini!ConcernDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
 
 @lazy
-rule ViewpointDefinitionTransform
+rule ViewpointDefinitionRule
 	transform s : XMIni!ViewpointDefinition
 	to t : SysMini!ViewpointDefinition 
-	extends DefinitionTransform{
+	extends DefinitionRule{
 	}
-
-//Usage
-@abstract
-rule UsageTransform
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
-		t.sysmini_self = s.declaredName;
-	}
-	
+		
 @lazy
-rule OccurrenceUsageTransform
+rule OccurrenceUsageRule
 	transform s : XMIni!OccurrenceUsage
 	to t : SysMini!OccurrenceUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 
 @lazy
-rule ReferenceUsageTransform
+rule ReferenceUsageRule
 	transform s : XMIni!ReferenceUsage
 	to t : SysMini!ReferenceUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule AttributeUsageTransform
+rule AttributeUsageRule
 	transform s : XMIni!AttributeUsage
 	to t : SysMini!AttributeUsage
-	extends UsageTransform{
+	extends AttributeUsage{
 	}
 
 @lazy
-rule SuccessionAsUsageTransform
+rule SuccessionAsUsageRule
 	transform s : XMIni!SuccessionAsUsage
 	to t : SysMini!SuccessionAsUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule BindingConnectorAsUsageTransform
+rule BindingConnectorAsUsageRule
 	transform s : XMIni!BindingConnectorAsUsage
 	to t : SysMini!BindingConnectorAsUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ItemUsageTransform
+rule ItemUsageRule
 	transform s : XMIni!ItemUsage
 	to t : SysMini!ItemUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ActionUsageTransform
+rule ActionUsageRule
 	transform s : XMIni!ActionUsage
 	to t : SysMini!ActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule PortUsageTransform
+rule PortUsageRule
 	transform s : XMIni!PortUsage
 	to t : SysMini!PortUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule EventOccurrenceUsageTransform
+rule EventOccurrenceUsageRule
 	transform s : XMIni!EventOccurrenceUsage
 	to t : SysMini!EventOccurrenceUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule EnumerationUsageTransform
+rule EnumerationUsageRule
 	transform s : XMIni!EnumerationUsage
 	to t : SysMini!EnumerationUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule PartUsageTransform
+rule PartUsageRule
 	transform s : XMIni!PartUsage
 	to t : SysMini!PartUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule MetadataUsageTransform
+rule MetadataUsageRule
 	transform s : XMIni!MetadataUsage
 	to t : SysMini!MetadataUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule StateUsageTransform
+rule StateUsageRule
 	transform s : XMIni!StateUsage
 	to t : SysMini!StateUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule TransitionUsageTransform
+rule TransitionUsageRule
 	transform s : XMIni!TransitionUsage
 	to t : SysMini!TransitionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule AcceptActionUsageTransform
+rule AcceptActionUsageRule
 	transform s : XMIni!AcceptActionUsage
 	to t : SysMini!AcceptActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule CalculationUsageTransform
+rule CalculationUsageRule
 	transform s : XMIni!CalculationUsage
 	to t : SysMini!CalculationUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule PerformActionUsageTransform
+rule PerformActionUsageRule
 	transform s : XMIni!PerformActionUsage
 	to t : SysMini!PerformActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule SendActionUsageTransform
+rule SendActionUsageRule
 	transform s : XMIni!SendActionUsage
 	to t : SysMini!SendActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule IfActionUsageTransform
+rule IfActionUsageRule
 	transform s : XMIni!IfActionUsage
 	to t : SysMini!IfActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule AssignmentActionUsageTransform
+rule AssignmentActionUsageRule
 	transform s : XMIni!AssignmentActionUsage
 	to t : SysMini!AssignmentActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ConnectionUsageTransform
+rule ConnectionUsageRule
 	transform s : XMIni!ConnectionUsage
 	to t : SysMini!ConnectionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ViewUsageTransform
+rule ViewUsageRule
 	transform s : XMIni!ViewUsage
 	to t : SysMini!ViewUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule RenderingUsageTransform
+rule RenderingUsageRule
 	transform s : XMIni!RenderingUsage
 	to t : SysMini!RenderingUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ExhibitStateUsageTransform
+rule ExhibitStateUsageRule
 	transform s : XMIni!ExhibitStateUsage
 	to t : SysMini!ExhibitStateUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule CaseUsageTransform
+rule CaseUsageRule
 	transform s : XMIni!CaseUsage
 	to t : SysMini!CaseUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule WhileLoopActionUsageTransform
+rule WhileLoopActionUsageRule
 	transform s : XMIni!WhileLoopActionUsage
 	to t : SysMini!WhileLoopActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ForLoopActionUsageTransform
+rule ForLoopActionUsageRule
 	transform s : XMIni!ForLoopActionUsage
 	to t : SysMini!ForLoopActionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule DecisionNodeTransform
+rule DecisionNodeRule
 	transform s : XMIni!DecisionNode
 	to t : SysMini!DecisionNode
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ForkNodeTransform
+rule ForkNodeRule
 	transform s : XMIni!ForkNode
 	to t : SysMini!ForkNode
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule MergeNodeTransform
+rule MergeNodeRule
 	transform s : XMIni!MergeNode
 	to t : SysMini!MergeNode
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule JoinNodeTransform
+rule JoinNodeRule
 	transform s : XMIni!JoinNode
 	to t : SysMini!JoinNode
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule FlowConnectionUsageTransform
+rule FlowConnectionUsageRule
 	transform s : XMIni!FlowConnectionUsage
 	to t : SysMini!FlowConnectionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule InterfaceUsageTransform
+rule InterfaceUsageRule
 	transform s : XMIni!InterfaceUsage
 	to t : SysMini!InterfaceUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule AllocationUsageTransform
+rule AllocationUsageRule
 	transform s : XMIni!AllocationUsage
 	to t : SysMini!AllocationUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule AnalysisCaseUsageTransform
+rule AnalysisCaseUsageRule
 	transform s : XMIni!AnalysisCaseUsage
 	to t : SysMini!AnalysisCaseUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule VerificationCaseUsageTransform
+rule VerificationCaseUsageRule
 	transform s : XMIni!VerificationCaseUsage
 	to t : SysMini!VerificationCaseUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule UseCaseUsageTransform
+rule UseCaseUsageRule
 	transform s : XMIni!UseCaseUsage
 	to t : SysMini!UseCaseUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule SuccessionFlowConnectionUsageTransform
+rule SuccessionFlowConnectionUsageRule
 	transform s : XMIni!SuccessionFlowConnectionUsage
 	to t : SysMini!SuccessionFlowConnectionUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule IncludeUseCaseUsageTransform
+rule IncludeUseCaseUsageRule
 	transform s : XMIni!IncludeUseCaseUsage
 	to t : SysMini!IncludeUseCaseUsage
-	extends UsageTransform{
+	extends UsageRule{
 	}
 	
 @lazy
-rule ConstraintUsageUsageTransform
+rule ConstraintUsageUsageRule
 	transform s : XMIni!ConstraintUsage
-	to t : SysMini!ConstraintUsage{
+	to t : SysMini!ConstraintUsage
+	extends UsageRule{
 	}
 	
 @lazy
-rule RequirementUsageTransform
+rule RequirementUsageRule
 	transform s : XMIni!RequirementUsage
-	to t : SysMini!RequirementUsage{
+	to t : SysMini!RequirementUsage
+	extends UsageRule{
 	}
 	
 @lazy
-rule AssertConstraintUsageTransform
+rule AssertConstraintUsageRule
 	transform s : XMIni!AssertConstraintUsage
-	to t : SysMini!AssertConstraintUsage{
+	to t : SysMini!AssertConstraintUsage
+	extends UsageRule{
 	}
 	
 @lazy
-rule ConcernUsageTransform
+rule ConcernUsageRule
 	transform s : XMIni!ConcernUsage
-	to t : SysMini!ConcernUsage{
+	to t : SysMini!ConcernUsage
+	extends UsageRule{
 	}
 	
 @lazy
-rule ViewpointUsageTransform
+rule ViewpointUsageRule
 	transform s : XMIni!ViewpointUsage
-	to t : SysMini!ViewpointUsage{
+	to t : SysMini!ViewpointUsage
+	extends UsageRule{
 	}
 	
 @lazy
-rule SatisfyRequirementUsageTransform
+rule SatisfyRequirementUsageRule
 	transform s : XMIni!SatisfyRequirementUsage
-	to t : SysMini!SatisfyRequirementUsage{
+	to t : SysMini!SatisfyRequirementUsage
+	extends UsageRule{
 	}
 
 @lazy
-rule ClassifierTransform
+rule ClassifierRule
 	transform s : XMIni!Classifier
 	to t : SysMini!Classifier{
 	}
 	
 @lazy
-rule FeatureTransform
+rule FeatureRule
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
 	}

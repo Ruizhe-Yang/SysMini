@@ -5,6 +5,7 @@ abstract class Element {
 	attr VisibilityKind[1] visibility;
 	attr String declaredName;
 	attr String declaredShortName;
+	attr String prefixMetadata;
 	attr boolean[1] isWell = false;
 	attr String sysmini_self;
 	ref Element#body root;

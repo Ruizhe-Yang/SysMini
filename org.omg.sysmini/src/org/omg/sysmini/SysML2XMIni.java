@@ -145,6 +145,13 @@ public class SysML2XMIni {
             	targetXMI.eSet(declaredNameAttribute, newDeclaredName);
 //            	System.out.println("targetXMI: "+targetXMI);
             }
+            EStructuralFeature declaredShortNameFeature = sourceXMI.eClass().getEStructuralFeature("declaredShortName");
+            String newDeclaredShortName = extractBetweenBackslashAndHash(sourceXMI.eResource().getURI().toFileString())+sourceXMI.eGet(declaredShortNameFeature);
+            EAttribute declaredShortNameAttribute = getDeclaredNameAttribute(targetXMI);
+            if (declaredShortNameAttribute != null) {
+            	targetXMI.eSet(declaredShortNameAttribute, newDeclaredShortName);
+//            	System.out.println("targetXMI: "+targetXMI);
+            }
             System.out.println("Delete id:'"+id.get(0)+"' and add '"+newDeclaredName+"'.");
     	}
     	saveXMIFile(resource);
