@@ -33,7 +33,7 @@ public class SysML2XMIni {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\VehicleModel.sysml";
+	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\VehicleDefinitions.sysml";
 	//Generate file 'xxx_.sysmlx'.
 	private static String fileName = null;
 	
@@ -138,13 +138,7 @@ public class SysML2XMIni {
 //                    System.out.println("Found element \"" + targetXMI + "\" in file: " + inputFile.getAbsolutePath());
                 }
             }
-            EStructuralFeature declaredNameFeature = sourceXMI.eClass().getEStructuralFeature("declaredName");
-            String newDeclaredName = extractBetweenBackslashAndHash(sourceXMI.eResource().getURI().toFileString())+sourceXMI.eGet(declaredNameFeature);
-            EAttribute declaredNameAttribute = getDeclaredNameAttribute(targetXMI);
-            if (declaredNameAttribute != null) {
-            	targetXMI.eSet(declaredNameAttribute, newDeclaredName);
-//            	System.out.println("targetXMI: "+targetXMI);
-            }
+            
             EStructuralFeature declaredShortNameFeature = sourceXMI.eClass().getEStructuralFeature("declaredShortName");
             String newDeclaredShortName = extractBetweenBackslashAndHash(sourceXMI.eResource().getURI().toFileString())+sourceXMI.eGet(declaredShortNameFeature);
             EAttribute declaredShortNameAttribute = getDeclaredNameAttribute(targetXMI);
@@ -152,6 +146,15 @@ public class SysML2XMIni {
             	targetXMI.eSet(declaredShortNameAttribute, newDeclaredShortName);
 //            	System.out.println("targetXMI: "+targetXMI);
             }
+            
+            EStructuralFeature declaredNameFeature = sourceXMI.eClass().getEStructuralFeature("declaredName");
+            String newDeclaredName = extractBetweenBackslashAndHash(sourceXMI.eResource().getURI().toFileString())+sourceXMI.eGet(declaredNameFeature);
+            EAttribute declaredNameAttribute = getDeclaredNameAttribute(targetXMI);
+            if (declaredNameAttribute != null) {
+            	targetXMI.eSet(declaredNameAttribute, newDeclaredName);
+//            	System.out.println("targetXMI: "+targetXMI);
+            }
+            
             System.out.println("Delete id:'"+id.get(0)+"' and add '"+newDeclaredName+"'.");
     	}
     	saveXMIFile(resource);

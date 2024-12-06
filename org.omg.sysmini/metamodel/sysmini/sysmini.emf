@@ -96,6 +96,8 @@ class Feature extends Type {
 	attr boolean[1] isPortion = false;
 	attr boolean[1] isNonunique = false;
 	attr FeatureDirectionKind direction;
+	attr String multiplicityRange;
+	attr String featureSpecialization;
 }
 
 class Redefinition extends Subsetting {

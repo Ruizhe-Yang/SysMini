@@ -163,7 +163,6 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "SuccessionFlowConnectionUsage": element.addNodeTo(rootNode);
 			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
 			
-			
 			case "ConstraintUsage": element.addNodeTo(rootNode);
 			case "RequirementUsage": element.addNodeTo(rootNode);
 			case "AssertConstraintUsage": element.addNodeTo(rootNode);
@@ -212,6 +211,13 @@ operation SysMini!Element setVisibility(s: XMIni!Element){
 		case "0": self.visibility = SysMini!VisibilityKind#private;
 		case "1": self.visibility = SysMini!VisibilityKind#protected;
 		case "2": self.visibility = SysMini!VisibilityKind#public;
+	}
+}
+
+operation SysMini!Element setPortionKind(s: XMIni!Element){
+	switch (s.portionKind.value.asString()){
+		case "0": self.portionKind = SysMini!PortionKind#timeslice;
+		case "1": self.portionKind = SysMini!PortionKind#snapshot;
 	}
 }
 
@@ -302,6 +308,47 @@ rule AttributeDefinition
 	transform s : XMIni!AttributeDefinition
 	to t : SysMini!AttributeDefinition
 	extends DefinitionPrefix, Definition{
+	}
+
+
+@abstract
+rule PartDefinition
+	transform s : XMIni!PartDefinition
+	to t : SysMini!PartDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+
+@abstract
+rule PortDefinition
+	transform s : XMIni!PortDefinition
+	to t : SysMini!PortDefinition
+	extends DefinitionPrefix, Definition, ConjugatedPortDefinitionMember{
+	}
+
+@abstract
+rule ConjugatedPortDefinitionMember
+	transform s : XMIni!Definition
+	to t : SysMini!Definition{
+	}
+	
+@abstract
+rule OccurrenceDefinitionPrefix
+	transform s : XMIni!OccurrenceDefinition
+	to t : SysMini!OccurrenceDefinition
+	extends BasicDefinitionPrefix, LifeClassMembership, DefinitionExtensionKeyword{
+		t.isIndividual = s.isIndividual;
+	}
+
+@abstract
+rule LifeClassMembership
+	transform s : XMIni!OccurrenceDefinition
+	to t : SysMini!OccurrenceDefinition{
+		for (ownedRelationship in s.ownedRelationship.getElementOf("OwningMembership")){
+			for (lifeClass in ownedRelationship.ownedRelatedElement.getElementOf("LifeClass")){
+				lifeClass.println();
+//				lifeClass.println();
+			}
+		}
 	}
 	
 //PrefixMetadataUsage
@@ -446,7 +493,7 @@ rule UsageDeclaration
 	}
 	
 @abstract
-rule UsageDeclaration
+rule FeatureDeclaration
 	transform s : XMIni!Feature
 	to t : SysMini!Feature
 	extends Identification, FeatureSpecializationPart{
@@ -455,17 +502,125 @@ rule UsageDeclaration
 @abstract
 rule FeatureSpecializationPart
 	transform s : XMIni!Feature
-	to t : SysMini!Feature{
-	// 367行，还没看懂
+	to t : SysMini!Feature
+	extends MultiplicityPart, FeatureSpecialization{
 	}
 	
+@abstract
+rule MultiplicityPart
+	transform s : XMIni!Feature
+	to t : SysMini!Feature{
+		t.isOrdered = s.isOrdered;
+		t.isNonunique = s.isNonunique;
+		t.multiplicityRange = s.getMultiplicityRange();
+	}
+
+operation XMIni!Feature getMultiplicityRange(){
+	for (owningMembership in self.ownedRelationship.getElementOf("OwningMembership")){
+		for (element in owningMembership.ownedRelatedElement){
+			if (element.isTypeOf("MultiplicityRange")){
+				for (e in element.ownedRelationship.getElementOf("OwningMembership")){
+					if (e.ownedRelatedElement.size() == 1 and e.ownedRelatedElement.first().isTypeOf("LiteralInteger")){
+						return "["+e.ownedRelatedElement.first().value.asString()+"]";
+					}
+					else if (e.ownedRelatedElement.size() == 1 and e.ownedRelatedElement.first().isTypeOf("LiteralInfinity")){
+						return "[*]";
+					}
+					else if (e.ownedRelatedElement.size() == 2 and e.ownedRelatedElement.second().isTypeOf("LiteralInteger")){
+						return "["+e.ownedRelatedElement.first().value.asString()+".."+e.ownedRelatedElement.second().value.asString()+"]";
+					}
+					else if (e.ownedRelatedElement.size() == 2 and e.ownedRelatedElement.second().isTypeOf("LiteralInfinity")){
+						return "["+e.ownedRelatedElement.first().value.asString()+"..*]";
+					}
+				}
+			}
+		}
+	}
+}
+
+@abstract
+rule FeatureSpecialization 
+	transform s : XMIni!Feature
+	to t : SysMini!Feature{
+		t.featureSpecialization = s.getFeatureSpecialization();
+
+	}
+	
+operation XMIni!Feature getFeatureSpecialization(){ //380
+	for (owningMembership in self.ownedRelationship.first()){
+		switch (owningMembership.type().name){
+			case "FeatureTyping":{
+				return ": "+owningMembership.getDeclaredName();
+			}
+			case "Subsetting":{
+				return ":> "+owningMembership.getDeclaredName();
+			}
+			case "OwnedReferenceSubsetting":{
+				return "::> "+owningMembership.getDeclaredName();			
+			}
+			case "Redefinition":{
+				return ":>> "+owningMembership.getDeclaredName();
+			}
+//			case "OwningMembership":{
+//				owningMembership.ownedRelationship.println();
+//			}
+		}
+	}
+}
+
+operation XMIni!Specialization getDeclaredName(){
+	if (self.declaredName != null){
+		return self.declaredName;
+	}
+	else if (self.type.name == null){
+		return self.type.declaredName;
+	}
+}
+
 @abstract
 rule AttributeUsage
 	transform s : XMIni!Usage
 	to t : SysMini!Usage
 	extends UsagePrefix, Usage{
 	}
+
+@abstract
+rule PortUsage
+	transform s : XMIni!PortUsage
+	to t : SysMini!PortUsage
+	extends OccurrenceUsagePrefix, Usage{
+	}
+
+@abstract
+rule PartUsage
+	transform s : XMIni!PartUsage
+	to t : SysMini!PartUsage
+	extends OccurrenceUsagePrefix, Usage{
+	}
 	
+@abstract
+rule OccurrenceUsagePrefix
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends BasicUsagePrefix, UsageExtensionKeyword{
+		t.isIndividual = s.isIndividual;
+		t.setPortionKind(s);
+	}
+
+
+	
+//AnnotatingElement
+@abstract
+rule AnnotatingElementRule
+	transform s : XMIni!AnnotatingElement
+	to t : SysMini!AnnotatingElement{
+	}
+
+
+
+	
+/* @lazy */
+
 @lazy
 rule NamespaceImportRule
 	transform s : XMIni!NamespaceImport
@@ -534,13 +689,6 @@ rule LibraryPackageRule
 		t.isStandard = s.isStandard;
 	}
 	
-//AnnotatingElement
-@abstract
-rule AnnotatingElementRule
-	transform s : XMIni!AnnotatingElement
-	to t : SysMini!AnnotatingElement{
-	}
-
 @lazy
 rule CommentRule
 	transform s : XMIni!Comment
@@ -584,14 +732,7 @@ rule ItemFlowEndRule
 	transform s : XMIni!ItemFlowEnd
 	to t : SysMini!ItemFlowEnd{
 	}
-		
-	
-	
-	
-	
-	
-	
-/* @lazy */
+
 	
 	
 @lazy
@@ -619,7 +760,7 @@ rule ItemDefinitionRule
 rule PortDefinitionRule
 	transform s : XMIni!PortDefinition
 	to t : SysMini!PortDefinition 
-	extends DefinitionRule{
+	extends PortDefinition{
 	}
 
 @lazy
@@ -640,7 +781,7 @@ rule EnumerationDefinitionRule
 rule PartDefinitionRule
 	transform s : XMIni!PartDefinition
 	to t : SysMini!PartDefinition 
-	extends DefinitionRule{
+	extends PartDefinition{
 	}
 
 @lazy
@@ -822,7 +963,7 @@ rule ActionUsageRule
 rule PortUsageRule
 	transform s : XMIni!PortUsage
 	to t : SysMini!PortUsage
-	extends UsageRule{
+	extends PortUsage{
 	}
 	
 @lazy
@@ -843,7 +984,7 @@ rule EnumerationUsageRule
 rule PartUsageRule
 	transform s : XMIni!PartUsage
 	to t : SysMini!PartUsage
-	extends UsageRule{
+	extends PartUsage{
 	}
 	
 @lazy
