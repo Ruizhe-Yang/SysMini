@@ -95,10 +95,15 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNonunique" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInitial" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//FeatureDirectionKind"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicityRange" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureSpecialization"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valuePart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Redefinition" eSuperTypes="#//Subsetting"/>
   <eClassifiers xsi:type="ecore:EClass" name="Subsetting" eSuperTypes="#//Specialization">
@@ -177,7 +182,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//Classifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="SuccessionItemFlow" eSuperTypes="#//ItemFlow #//Succession"/>
   <eClassifiers xsi:type="ecore:EClass" name="Succession" eSuperTypes="#//Connector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Connector" eSuperTypes="#//Feature #//Relationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector" eSuperTypes="#//Feature #//Relationship">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfacePart" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//Classifier #//Relationship"/>
   <eClassifiers xsi:type="ecore:EClass" name="ItemFlow" eSuperTypes="#//Connector #//Step"/>
   <eClassifiers xsi:type="ecore:EClass" name="ItemFlowEnd" eSuperTypes="#//Feature"/>
@@ -248,8 +256,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="ConjugatedPortDefinition" eSuperTypes="#//PortDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="PortConjugation" eSuperTypes="#//Conjugation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectorAsUsage" abstract="true" eSuperTypes="#//Usage #//Connector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FlowConnectionUsage" eSuperTypes="#//ConnectionUsage #//ActionUsage #//ItemFlow"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectionUsage" eSuperTypes="#//ConnectorAsUsage #//PartUsage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowConnectionUsage" eSuperTypes="#//ConnectionUsage #//ActionUsage #//ItemFlow">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flowConnectionDeclaration"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionUsage" eSuperTypes="#//ConnectorAsUsage #//PartUsage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorPart" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionUsage" eSuperTypes="#//OccurrenceUsage #//Step"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceUsage" eSuperTypes="#//ConnectionUsage"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceDefinition" eSuperTypes="#//ConnectionDefinition"/>

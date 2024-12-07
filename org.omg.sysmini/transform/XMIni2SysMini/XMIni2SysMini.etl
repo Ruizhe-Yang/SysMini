@@ -437,8 +437,8 @@ rule UseCaseDefinition
 	
 @abstract
 rule InterfaceBody
-	transform s : XMIni!InterfaceDefinition
-	to t : SysMini!InterfaceDefinition{
+	transform s : XMIni!Type
+	to t : SysMini!Type{
 	}
 	
 @abstract
@@ -678,8 +678,24 @@ rule UsageCompletion
 rule ValuePart
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
+		for (featureValue in s.ownedRelationship.getElementOf("FeatureValue")){
+			t.isInitial = featureValue.isInitial;
+			t.isDefault = featureValue.isDefault;
+			t.valuePart = featureValue.getFeatureValueOperator();
+		}
 	}
-	
+
+operation XMIni!FeatureValue getFeatureValueOperator(){
+	var conditionalExpression = self.ownedRelatedElement.first();
+	if (conditionalExpression.isTypeOf("OperatorExpression")){
+	//	conditionalExpression.operator.println();
+	//	conditionalExpression.operand.println();
+		return conditionalExpression.operator;
+	}
+	else {
+		return null;
+	}
+}
 @abstract
 rule UsageBody
 	transform s : XMIni!Usage
@@ -780,6 +796,230 @@ operation XMIni!Specialization getDeclaredName(){
 }
 
 @abstract
+rule ItemUsage
+	transform s : XMIni!ItemUsage
+	to t : SysMini!ItemUsage
+	extends OccurrenceUsagePrefix, Usage{
+	}
+
+@abstract
+rule PartUsage
+	transform s : XMIni!PartUsage
+	to t : SysMini!PartUsage
+	extends OccurrenceUsagePrefix, Usage{
+	}
+	
+@abstract
+rule ConnectionUsage
+	transform s : XMIni!ConnectionUsage
+	to t : SysMini!ConnectionUsage
+	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, ConnectorPart{
+	}
+
+@abstract
+rule ViewUsage
+	transform s : XMIni!ViewUsage
+	to t : SysMini!ViewUsage
+	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, ViewBody{
+	}
+	
+@abstract
+rule RenderingUsage
+	transform s : XMIni!RenderingUsage
+	to t : SysMini!RenderingUsage
+	extends OccurrenceUsagePrefix, Usage{
+	}
+
+@abstract
+rule FlowConnectionUsage
+	transform s : XMIni!FlowConnectionUsage
+	to t : SysMini!FlowConnectionUsage
+	extends OccurrenceUsagePrefix, FlowConnectionDeclaration, DefinitionBody{
+	}
+
+@abstract
+rule SuccessionFlowConnectionUsage
+	transform s : XMIni!SuccessionFlowConnectionUsage
+	to t : SysMini!SuccessionFlowConnectionUsage
+	extends OccurrenceUsagePrefix, FlowConnectionDeclaration, DefinitionBody{
+	}
+
+@abstract
+rule InterfaceUsage
+	transform s : XMIni!InterfaceUsage
+	to t : SysMini!InterfaceUsage
+	extends OccurrenceUsagePrefix, InterfaceUsageDeclaration, InterfaceBody{
+	}
+
+@abstract
+rule InterfaceUsageDeclaration
+	transform s : XMIni!InterfaceUsage
+	to t : SysMini!InterfaceUsage
+	extends UsageDeclaration, InterfacePart{
+	}
+
+@abstract
+rule InterfacePart
+	transform s : XMIni!InterfaceUsage
+	to t : SysMini!InterfaceUsage
+	extends BinaryInterfacePart, NaryInterfacePart{
+	}
+
+@abstract
+rule BinaryInterfacePart
+	transform s : XMIni!Connector
+	to t : SysMini!Connector{
+//		t.interfacePart.add(".");
+		s.ownedRelationship.size().println();
+//		for (endFeatureMembership in s.ownedRelationship.getElementOf("PortUsage")){
+//			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
+//			if (referenceUsage.declaredName != null){
+//				t.connectorPart.add(referenceUsage.declaredName);
+//			}
+//			else {
+//				t.connectorPart.add(referenceUsage.getConnectorEnd());
+//			}
+//		}
+	}
+
+@abstract
+rule NaryInterfacePart
+	transform s : XMIni!Connector
+	to t : SysMini!Connector{
+	
+	}
+	
+@abstract
+rule FlowConnectionDeclaration
+	transform s : XMIni!FlowConnectionUsage
+	to t : SysMini!FlowConnectionUsage
+	extends UsageDeclaration, ValuePart{
+		for (ownedRelationship in s.ownedRelationship){
+			var isIf = false;
+			var isFirst = true;
+			if (ownedRelationship.isTypeOf("FeatureMembership")){
+				isIf = true;
+				t.flowConnectionDeclaration += " of ";
+				t.flowConnectionDeclaration += ownedRelationship.getItemFeatureMember();
+				t.flowConnectionDeclaration += " ";
+			}
+			else if (ownedRelationship.isTypeOf("EndFeatureMembership")){
+				if (isIf){
+					t.flowConnectionDeclaration += " from ";
+				}
+				if (isFirst){
+					t.flowConnectionDeclaration += ownedRelationship.getFlowEndMember();
+					isFirst = false;
+				}
+				else{
+					t.flowConnectionDeclaration += " to ";
+					t.flowConnectionDeclaration += ownedRelationship.getFlowEndMember();
+				}
+			}
+		}
+	}
+
+operation XMIni!EndFeatureMembership getFlowEndMember(){
+	for (ownedRelationship in self.ownedRelatedElement){
+		if (ownedRelationship.isTypeOf("ItemFlowEnd")){
+			var itemFlowEnd = ownedRelationship;
+			var str = "";
+			for (o in itemFlowEnd.ownedRelationship){
+				if (o.isTypeOf("ReferenceSubsetting")){
+					str += o.referencedFeature.declaredName;
+					str += ".";
+				}
+				else if (o.isTypeOf("FeatureMembership") and o.ownedRelatedElement.size() == 1){
+					var featureChainPrefix = o.ownedRelatedElement.first();
+					str += featureChainPrefix.ownedRelationship.first().redefinedFeature.declaredName;
+				}
+			}
+			return str;
+		}
+		else {
+			return null;
+		}
+	}
+}
+
+operation XMIni!FeatureMembership getItemFeatureMember(){
+	var itemFeature = self.ownedRelatedElement.first();
+	for (ownedRelationship in itemFeature.ownedRelationship){
+		if (ownedRelationship.isTypeOf("FeatureTyping")){
+			return ownedRelationship.type.declaredName;
+		}
+		else {
+			return itemFeature.getMultiplicityRange();
+		}
+	}
+}
+
+@abstract
+rule ViewBody
+	transform s : XMIni!ViewUsage
+	to t : SysMini!ViewUsage{
+	}
+	
+@abstract
+rule ConnectorPart
+	transform s : XMIni!ConnectionUsage
+	to t : SysMini!ConnectionUsage
+	extends BinaryConnectorPart, NaryConnectorPart{
+	}
+
+@abstract
+rule BinaryConnectorPart
+	transform s : XMIni!Connector
+	to t : SysMini!Connector{
+		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
+			if (referenceUsage.declaredName != null){
+				t.connectorPart.add(referenceUsage.declaredName);
+			}
+			else {
+				t.connectorPart.add(referenceUsage.getConnectorEnd());
+			}
+		}
+	}
+	
+operation XMIni!ReferenceUsage getConnectorEnd(){
+	for (ownedRelationship in self.ownedRelationship){
+		if (ownedRelationship.isTypeOf("ReferenceSubsetting")){
+			var referenceSubsetting = ownedRelationship;
+			if (referenceSubsetting.referencedFeature.declaredName != null){
+				return referenceSubsetting.referencedFeature.declaredName;
+			}
+			else {
+				var str = "";
+				for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
+					str += featureChain.chainingFeature.declaredName;
+					str += ".";
+				}
+				return str.substring(0, str.length()-1);
+			}
+		}
+		else {
+			return null;
+		}
+	}
+}
+
+@abstract
+rule NaryConnectorPart
+	transform s : XMIni!Connector
+	to t : SysMini!Connector{
+		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
+			if (referenceUsage.declaredName != null){
+				t.connectorPart.add(referenceUsage.declaredName);
+			}
+			else {
+				t.connectorPart.add(referenceUsage.getConnectorEnd());
+			}
+		}
+	}
+	
+@abstract
 rule AttributeUsage
 	transform s : XMIni!Usage
 	to t : SysMini!Usage
@@ -793,12 +1033,6 @@ rule PortUsage
 	extends OccurrenceUsagePrefix, Usage{
 	}
 
-@abstract
-rule PartUsage
-	transform s : XMIni!PartUsage
-	to t : SysMini!PartUsage
-	extends OccurrenceUsagePrefix, Usage{
-	}
 	
 @abstract
 rule OccurrenceUsagePrefix
@@ -1149,7 +1383,7 @@ rule BindingConnectorAsUsageRule
 rule ItemUsageRule
 	transform s : XMIni!ItemUsage
 	to t : SysMini!ItemUsage
-	extends UsageRule{
+	extends ItemUsage{
 	}
 	
 @lazy
@@ -1254,21 +1488,21 @@ rule AssignmentActionUsageRule
 rule ConnectionUsageRule
 	transform s : XMIni!ConnectionUsage
 	to t : SysMini!ConnectionUsage
-	extends UsageRule{
+	extends ConnectionUsage{
 	}
 	
 @lazy
 rule ViewUsageRule
 	transform s : XMIni!ViewUsage
 	to t : SysMini!ViewUsage
-	extends UsageRule{
+	extends ViewUsage{
 	}
 	
 @lazy
 rule RenderingUsageRule
 	transform s : XMIni!RenderingUsage
 	to t : SysMini!RenderingUsage
-	extends UsageRule{
+	extends RenderingUsage{
 	}
 	
 @lazy
@@ -1331,14 +1565,14 @@ rule JoinNodeRule
 rule FlowConnectionUsageRule
 	transform s : XMIni!FlowConnectionUsage
 	to t : SysMini!FlowConnectionUsage
-	extends UsageRule{
+	extends FlowConnectionUsage{
 	}
 	
 @lazy
 rule InterfaceUsageRule
 	transform s : XMIni!InterfaceUsage
 	to t : SysMini!InterfaceUsage
-	extends UsageRule{
+	extends InterfaceUsage{
 	}
 	
 @lazy
@@ -1373,7 +1607,7 @@ rule UseCaseUsageRule
 rule SuccessionFlowConnectionUsageRule
 	transform s : XMIni!SuccessionFlowConnectionUsage
 	to t : SysMini!SuccessionFlowConnectionUsage
-	extends UsageRule{
+	extends SuccessionFlowConnectionUsage{
 	}
 	
 @lazy

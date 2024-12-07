@@ -95,9 +95,12 @@ class Feature extends Type {
 	attr boolean[1] isReadOnly = false;
 	attr boolean[1] isPortion = false;
 	attr boolean[1] isNonunique = false;
+	attr boolean[1] isInitial = false;
+	attr boolean[1] isDefault = false;
 	attr FeatureDirectionKind direction;
 	attr String multiplicityRange;
 	attr String featureSpecialization;
+	attr String valuePart;
 }
 
 class Redefinition extends Subsetting {
@@ -250,6 +253,7 @@ class Succession extends Connector {
 }
 
 class Connector extends Feature, Relationship {
+	attr String[*] interfacePart;
 }
 
 class Association extends Classifier, Relationship {
@@ -377,9 +381,11 @@ abstract class ConnectorAsUsage extends Usage, Connector {
 }
 
 class FlowConnectionUsage extends ConnectionUsage, ActionUsage, ItemFlow {
+	attr String flowConnectionDeclaration;
 }
 
 class ConnectionUsage extends ConnectorAsUsage, PartUsage {
+	attr String[*] connectorPart;
 }
 
 class ActionUsage extends OccurrenceUsage, Step {
