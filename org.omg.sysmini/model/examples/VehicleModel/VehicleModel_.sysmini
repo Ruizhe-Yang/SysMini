@@ -582,22 +582,22 @@
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="NumericalFunctions::*"/>
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="SI::*"/>
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="USCustomaryUnits::*"/>
-      <body xsi:type="EnumerationDefinition" declaredName="Colors">
+      <body xsi:type="EnumerationDefinition">
         <body xsi:type="EnumerationUsage" declaredName="black"/>
         <body xsi:type="EnumerationUsage" declaredName="grey"/>
         <body xsi:type="EnumerationUsage" declaredName="red"/>
       </body>
-      <body xsi:type="EnumerationDefinition" declaredName="DiameterChoices">
+      <body xsi:type="EnumerationDefinition">
         <body xsi:type="EnumerationUsage"/>
         <body xsi:type="EnumerationUsage"/>
         <body xsi:type="EnumerationUsage"/>
       </body>
       <body xsi:type="AttributeUsage" declaredName="cylinderDiameter" featureSpecialization=": DiameterChoices"/>
-      <body xsi:type="EnumerationDefinition" declaredName="IgnitionOnOff">
+      <body xsi:type="EnumerationDefinition">
         <body xsi:type="EnumerationUsage" declaredName="on"/>
         <body xsi:type="EnumerationUsage" declaredName="off"/>
       </body>
-      <body xsi:type="EnumerationDefinition" declaredName="FuelKind">
+      <body xsi:type="EnumerationDefinition">
         <body xsi:type="EnumerationUsage" declaredName="gas"/>
         <body xsi:type="EnumerationUsage" declaredName="diesel"/>
       </body>
@@ -610,14 +610,14 @@
       <body xsi:type="ReferenceUsage" declaredName="kW"/>
     </body>
     <body xsi:type="Package" declaredName="IndividualDefinitions">
-      <body xsi:type="OccurrenceDefinition" declaredName="VehicleRoadContext_1"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="Vehicle_1"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="FrontAxleAssembly_1"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="FrontAxle_1"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="Wheel_1"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="Wheel_2"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="RearAxleAssembly_1"/>
-      <body xsi:type="OccurrenceDefinition" declaredName="Road_1"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="VehicleRoadContext_1" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="Vehicle_1" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="FrontAxleAssembly_1" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="FrontAxle_1" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="Wheel_1" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="Wheel_2" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="RearAxleAssembly_1" isIndividual="true"/>
+      <body xsi:type="OccurrenceDefinition" declaredName="Road_1" isIndividual="true"/>
     </body>
     <body xsi:type="Package" declaredName="MetadataDefinitions">
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="AnalysisTooling::*"/>

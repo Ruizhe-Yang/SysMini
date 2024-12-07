@@ -310,7 +310,26 @@ rule AttributeDefinition
 	extends DefinitionPrefix, Definition{
 	}
 
+@abstract
+rule EnumerationDefinition
+	transform s : XMIni!EnumerationDefinition
+	to t : SysMini!EnumerationDefinition
+	extends DefinitionPrefix, EnumerationBody{
+	}
 
+@abstract
+rule OccurrenceDefinition
+	transform s : XMIni!OccurrenceDefinition
+	to t : SysMini!OccurrenceDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+	
+@abstract
+rule EnumerationBody
+	transform s : XMIni!AttributeDefinition
+	to t : SysMini!AttributeDefinition{
+	}
+	
 @abstract
 rule PartDefinition
 	transform s : XMIni!PartDefinition
@@ -319,12 +338,195 @@ rule PartDefinition
 	}
 
 @abstract
+rule MetadataDefinition
+	transform s : XMIni!MetadataDefinition
+	to t : SysMini!MetadataDefinition
+	extends DefinitionExtensionKeyword, Definition{
+		t.isAbstract = s.isAbstract;
+	}
+	
+@abstract
 rule PortDefinition
 	transform s : XMIni!PortDefinition
 	to t : SysMini!PortDefinition
 	extends DefinitionPrefix, Definition, ConjugatedPortDefinitionMember{
 	}
 
+@abstract
+rule ConjugatedPortDefinition
+	transform s : XMIni!ConjugatedPortDefinition
+	to t : SysMini!ConjugatedPortDefinition{
+	}
+	
+@abstract
+rule ItemDefinition
+	transform s : XMIni!ItemDefinition
+	to t : SysMini!ItemDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+	
+@abstract
+rule ActionDefinition
+	transform s : XMIni!ActionDefinition
+	to t : SysMini!ActionDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, ActionBody{
+	}
+	
+@abstract
+rule CalculationDefinition
+	transform s : XMIni!CalculationDefinition
+	to t : SysMini!CalculationDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, CalculationBody{
+	}
+
+@abstract
+rule StateDefinition
+	transform s : XMIni!StateDefinition
+	to t : SysMini!StateDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, StateDefBody{
+	}
+	
+@abstract
+rule ConnectionDefinition
+	transform s : XMIni!ConnectionDefinition
+	to t : SysMini!ConnectionDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+	
+@abstract
+rule FlowConnectionDefinition
+	transform s : XMIni!FlowConnectionDefinition
+	to t : SysMini!FlowConnectionDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+
+@abstract
+rule InterfaceDefinition
+	transform s : XMIni!InterfaceDefinition
+	to t : SysMini!InterfaceDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, InterfaceBody{
+	}
+
+@abstract
+rule AllocationDefinition
+	transform s : XMIni!AllocationDefinition
+	to t : SysMini!AllocationDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+
+@abstract
+rule AnalysisCaseDefinition
+	transform s : XMIni!AnalysisCaseDefinition
+	to t : SysMini!AnalysisCaseDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, CaseBody{
+	}
+	
+@abstract
+rule VerificationCaseDefinition
+	transform s : XMIni!VerificationCaseDefinition
+	to t : SysMini!VerificationCaseDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, CaseBody{
+	}
+	
+@abstract
+rule UseCaseDefinition
+	transform s : XMIni!UseCaseDefinition
+	to t : SysMini!UseCaseDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, CaseBody{
+	}
+	
+@abstract
+rule InterfaceBody
+	transform s : XMIni!InterfaceDefinition
+	to t : SysMini!InterfaceDefinition{
+	}
+	
+@abstract
+rule ViewDefinition
+	transform s : XMIni!ViewDefinition
+	to t : SysMini!ViewDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, ViewDefinitionBody{
+	}
+
+@abstract
+rule RenderingDefinition
+	transform s : XMIni!RenderingDefinition
+	to t : SysMini!RenderingDefinition
+	extends OccurrenceDefinitionPrefix, Definition{
+	}
+	
+@abstract
+rule CaseDefinition
+	transform s : XMIni!CaseDefinition
+	to t : SysMini!CaseDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, CaseBody{
+	}
+
+@abstract
+rule ConstraintDefinition
+	transform s : XMIni!ConstraintDefinition
+	to t : SysMini!ConstraintDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, CalculationBody{
+	}
+	
+@abstract
+rule RequirementDefinition
+	transform s : XMIni!RequirementDefinition
+	to t : SysMini!RequirementDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, RequirementBody{
+	}
+
+@abstract
+rule ConcernDefinition
+	transform s : XMIni!ConcernDefinition
+	to t : SysMini!ConcernDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, RequirementBody{
+	}
+
+@abstract
+rule ViewpointDefinition
+	transform s : XMIni!ViewpointDefinition
+	to t : SysMini!ViewpointDefinition
+	extends OccurrenceDefinitionPrefix, DefinitionDeclaration, RequirementBody{
+	}
+	
+@abstract
+rule CaseBody
+	transform s : XMIni!CaseDefinition
+	to t : SysMini!CaseDefinition{
+	}
+	
+@abstract
+rule ViewDefinitionBody
+	transform s : XMIni!ViewDefinition
+	to t : SysMini!ViewDefinition{
+	}
+	
+@abstract
+rule ActionBody
+	transform s : XMIni!ActionDefinition
+	to t : SysMini!ActionDefinition{
+	}
+
+@abstract
+rule StateDefBody
+	transform s : XMIni!StateDefinition
+	to t : SysMini!StateDefinition{
+		t.isParallel = s.isParallel;
+	}
+	
+@abstract
+rule CalculationBody
+	transform s : XMIni!CalculationDefinition
+	to t : SysMini!CalculationDefinition{
+	}
+
+@abstract
+rule RequirementBody
+	transform s : XMIni!RequirementDefinition
+	to t : SysMini!RequirementDefinition{
+	}
+	
 @abstract
 rule ConjugatedPortDefinitionMember
 	transform s : XMIni!Definition
@@ -345,7 +547,7 @@ rule LifeClassMembership
 	to t : SysMini!OccurrenceDefinition{
 		for (ownedRelationship in s.ownedRelationship.getElementOf("OwningMembership")){
 			for (lifeClass in ownedRelationship.ownedRelatedElement.getElementOf("LifeClass")){
-				lifeClass.println();
+//				lifeClass.println();
 //				lifeClass.println();
 			}
 		}
@@ -733,13 +935,11 @@ rule ItemFlowEndRule
 	to t : SysMini!ItemFlowEnd{
 	}
 
-	
-	
 @lazy
 rule OccurrenceDefinitionRule
 	transform s : XMIni!OccurrenceDefinition
 	to t : SysMini!OccurrenceDefinition 
-	extends DefinitionRule{
+	extends OccurrenceDefinition{
 	}
 	
 @lazy
@@ -753,7 +953,7 @@ rule AttributeDefinitionRule
 rule ItemDefinitionRule
 	transform s : XMIni!ItemDefinition
 	to t : SysMini!ItemDefinition 
-	extends DefinitionRule{
+	extends ItemDefinition{
 	}
 
 @lazy
@@ -767,14 +967,14 @@ rule PortDefinitionRule
 rule ActionDefinitionRule
 	transform s : XMIni!ActionDefinition
 	to t : SysMini!ActionDefinition 
-	extends DefinitionRule{
+	extends ActionDefinition{
 	}
 
 @lazy
 rule EnumerationDefinitionRule
 	transform s : XMIni!EnumerationDefinition
 	to t : SysMini!EnumerationDefinition 
-	extends DefinitionRule{
+	extends EnumerationDefinition{
 	}
 
 @lazy
@@ -788,126 +988,126 @@ rule PartDefinitionRule
 rule MetadataDefinitionRule
 	transform s : XMIni!MetadataDefinition
 	to t : SysMini!MetadataDefinition 
-	extends DefinitionRule{
+	extends MetadataDefinition{
 	}
 
 @lazy
 rule ConjugatedPortDefinitionRule
 	transform s : XMIni!ConjugatedPortDefinition
 	to t : SysMini!ConjugatedPortDefinition 
-	extends DefinitionRule{
+	extends ConjugatedPortDefinition{
 	}
 
 @lazy
 rule CalculationDefinitionRule
 	transform s : XMIni!CalculationDefinition
 	to t : SysMini!CalculationDefinition 
-	extends DefinitionRule{
+	extends CalculationDefinition{
 	}
 
 @lazy
 rule StateDefinitionRule
 	transform s : XMIni!StateDefinition
 	to t : SysMini!StateDefinition 
-	extends DefinitionRule{
+	extends StateDefinition{
 	}
 
 @lazy
 rule ConnectionDefinitionRule
 	transform s : XMIni!ConnectionDefinition
 	to t : SysMini!ConnectionDefinition 
-	extends DefinitionRule{
+	extends ConnectionDefinition{
 	}
 
 @lazy
 rule ViewDefinitionRule
 	transform s : XMIni!ViewDefinition
 	to t : SysMini!ViewDefinition 
-	extends DefinitionRule{
+	extends ViewDefinition{
 	}
 
 @lazy
 rule RenderingDefinitionRule
 	transform s : XMIni!RenderingDefinition
 	to t : SysMini!RenderingDefinition 
-	extends DefinitionRule{
+	extends RenderingDefinition{
 	}
 
 @lazy
 rule CaseDefinitionRule
 	transform s : XMIni!CaseDefinition
 	to t : SysMini!CaseDefinition 
-	extends DefinitionRule{
+	extends CaseDefinition{
 	}
 
 @lazy
 rule FlowConnectionDefinitionRule
 	transform s : XMIni!FlowConnectionDefinition
 	to t : SysMini!FlowConnectionDefinition 
-	extends DefinitionRule{
+	extends FlowConnectionDefinition{
 	}
 
 @lazy
 rule InterfaceDefinitionRule
 	transform s : XMIni!InterfaceDefinition
 	to t : SysMini!InterfaceDefinition 
-	extends DefinitionRule{
+	extends InterfaceDefinition{
 	}
 
 @lazy
 rule AllocationDefinitionRule
 	transform s : XMIni!AllocationDefinition
 	to t : SysMini!AllocationDefinition 
-	extends DefinitionRule{
+	extends AllocationDefinition{
 	}
 	
 @lazy
 rule AnalysisCaseDefinitionRule
 	transform s : XMIni!AnalysisCaseDefinition
 	to t : SysMini!AnalysisCaseDefinition 
-	extends DefinitionRule{
+	extends AnalysisCaseDefinition{
 	}
 	
 @lazy
 rule VerificationCaseDefinitionRule
 	transform s : XMIni!VerificationCaseDefinition
 	to t : SysMini!VerificationCaseDefinition 
-	extends DefinitionRule{
+	extends VerificationCaseDefinition{
 	}
 	
 @lazy
 rule UseCaseDefinitionRule
 	transform s : XMIni!UseCaseDefinition
 	to t : SysMini!UseCaseDefinition 
-	extends DefinitionRule{
+	extends UseCaseDefinition{
 	}
 
 @lazy
 rule ConstraintDefinitionRule
 	transform s : XMIni!ConstraintDefinition
 	to t : SysMini!ConstraintDefinition 
-	extends DefinitionRule{
+	extends ConstraintDefinition{
 	}
 
 @lazy
 rule RequirementDefinitionRule
 	transform s : XMIni!RequirementDefinition
 	to t : SysMini!RequirementDefinition 
-	extends DefinitionRule{
+	extends RequirementDefinition{
 	}
 
 @lazy
 rule ConcernDefinitionRule
 	transform s : XMIni!ConcernDefinition
 	to t : SysMini!ConcernDefinition 
-	extends DefinitionRule{
+	extends ConcernDefinition{
 	}
 
 @lazy
 rule ViewpointDefinitionRule
 	transform s : XMIni!ViewpointDefinition
 	to t : SysMini!ViewpointDefinition 
-	extends DefinitionRule{
+	extends ViewpointDefinition{
 	}
 		
 @lazy
