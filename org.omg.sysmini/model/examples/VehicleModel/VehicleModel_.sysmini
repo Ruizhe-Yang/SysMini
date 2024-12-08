@@ -494,6 +494,8 @@
           <body xsi:type="PortUsage" isEnd="true">
             <body xsi:type="Feature"/>
           </body>
+          <interfacePart>lugNutCompositePort.lugNutPort</interfacePart>
+          <interfacePart>shankCompositePort.shankPort</interfacePart>
         </body>
       </body>
     </body>
@@ -856,6 +858,8 @@
               <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]">
                 <body xsi:type="Feature"/>
               </body>
+              <interfacePart>rearWheel1.lugNutCompositePort[1]</interfacePart>
+              <interfacePart>rearAxle.leftHalfAxle.shankCompositePort[1]</interfacePart>
             </body>
             <body xsi:type="InterfaceUsage" declaredName="wheelTorightHalAxleInterface" featureSpecialization=": WheelHubInterface">
               <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]">
@@ -864,6 +868,8 @@
               <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]">
                 <body xsi:type="Feature"/>
               </body>
+              <interfacePart>rearWheel2.lugNutCompositePort[1]</interfacePart>
+              <interfacePart>rearAxle.rightHalfAxle.shankCompositePort[1]</interfacePart>
             </body>
           </body>
           <body xsi:type="PartUsage" declaredName="starterMotor" featureSpecialization=": StarterMotor"/>
@@ -953,6 +959,8 @@
             <body xsi:type="PortUsage" isEnd="true">
               <body xsi:type="Feature"/>
             </body>
+            <interfacePart>engine.drivePwrPort</interfacePart>
+            <interfacePart>transmission.clutchPort</interfacePart>
           </body>
           <body xsi:type="InterfaceUsage" declaredName="fuelInterface" featureSpecialization=": FuelInterface">
             <body xsi:type="PortUsage" isEnd="true">
@@ -961,6 +969,8 @@
             <body xsi:type="PortUsage" isEnd="true">
               <body xsi:type="Feature"/>
             </body>
+            <interfacePart>fuelTank.fuelOutPort</interfacePart>
+            <interfacePart>engine.fuelInPort</interfacePart>
           </body>
           <body xsi:type="AllocationUsage">
             <body xsi:type="ReferenceUsage">
@@ -1418,6 +1428,8 @@
           <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]">
             <body xsi:type="Feature"/>
           </body>
+          <interfacePart>wheel1.lugNutCompositePort[1]</interfacePart>
+          <interfacePart>hub1.shankCompositePort[1]</interfacePart>
         </body>
       </body>
       <body xsi:type="PartUsage" declaredName="wheelHubAssy2">
@@ -1445,7 +1457,11 @@
             <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true" multiplicityRange="[5]">
               <body xsi:type="Feature"/>
             </body>
+            <interfacePart>lugNutPort</interfacePart>
+            <interfacePart>shankPort</interfacePart>
           </body>
+          <interfacePart>lugNutCompositePort</interfacePart>
+          <interfacePart>shankCompositePort</interfacePart>
         </body>
       </body>
       <body xsi:type="PartUsage" declaredName="wheelHubAssy3">
@@ -1487,6 +1503,8 @@
               <body xsi:type="Feature"/>
             </body>
             <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="*"/>
+            <interfacePart>lugNutPort</interfacePart>
+            <interfacePart>shankPort</interfacePart>
           </body>
           <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface2" featureSpecialization=":> ">
             <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true">
@@ -1496,6 +1514,8 @@
               <body xsi:type="Feature"/>
             </body>
             <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="*"/>
+            <interfacePart>lugNutPort</interfacePart>
+            <interfacePart>shankPort</interfacePart>
           </body>
           <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface3" featureSpecialization=":> ">
             <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true">
@@ -1505,7 +1525,11 @@
               <body xsi:type="Feature"/>
             </body>
             <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="*"/>
+            <interfacePart>lugNutPort</interfacePart>
+            <interfacePart>shankPort</interfacePart>
           </body>
+          <interfacePart>lugNutCompositePort</interfacePart>
+          <interfacePart>shankCompositePort</interfacePart>
         </body>
       </body>
     </body>

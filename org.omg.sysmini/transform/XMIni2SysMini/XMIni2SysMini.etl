@@ -752,6 +752,9 @@ operation XMIni!Feature getMultiplicityRange(){
 					}
 				}
 			}
+			else {
+				return null;
+			}
 		}
 	}
 }
@@ -869,24 +872,40 @@ rule InterfacePart
 rule BinaryInterfacePart
 	transform s : XMIni!Connector
 	to t : SysMini!Connector{
-//		t.interfacePart.add(".");
-		s.ownedRelationship.size().println();
-//		for (endFeatureMembership in s.ownedRelationship.getElementOf("PortUsage")){
-//			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
-//			if (referenceUsage.declaredName != null){
-//				t.connectorPart.add(referenceUsage.declaredName);
-//			}
-//			else {
-//				t.connectorPart.add(referenceUsage.getConnectorEnd());
-//			}
-//		}
+		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+			var interfaceEnd  = endFeatureMembership.ownedRelatedElement.first();
+			if (interfaceEnd.declaredName != null){
+				t.interfacePart.add(interfaceEnd.declaredName);
+			}
+			else{
+				var str = "";
+				str += interfaceEnd.getReferenceSubsetting();
+				str += interfaceEnd.getMultiplicityRange();
+				t.interfacePart.add(str);
+			}
+		}
 	}
+	
+operation XMIni!PortUsage getReferenceSubsetting(){
+	return self.getConnectorEnd();
+}
 
 @abstract
 rule NaryInterfacePart
 	transform s : XMIni!Connector
 	to t : SysMini!Connector{
-	
+		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+			var interfaceEnd  = endFeatureMembership.ownedRelatedElement.first();
+			if (interfaceEnd.declaredName != null){
+				t.interfacePart.add(interfaceEnd.declaredName);
+			}
+			else{
+				var str = "";
+				str += interfaceEnd.getReferenceSubsetting();
+				str += interfaceEnd.getMultiplicityRange();
+				t.interfacePart.add(str);
+			}
+		}	
 	}
 	
 @abstract
@@ -982,7 +1001,7 @@ rule BinaryConnectorPart
 		}
 	}
 	
-operation XMIni!ReferenceUsage getConnectorEnd(){
+operation XMIni!Usage getConnectorEnd(){
 	for (ownedRelationship in self.ownedRelationship){
 		if (ownedRelationship.isTypeOf("ReferenceSubsetting")){
 			var referenceSubsetting = ownedRelationship;
@@ -992,8 +1011,16 @@ operation XMIni!ReferenceUsage getConnectorEnd(){
 			else {
 				var str = "";
 				for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
-					str += featureChain.chainingFeature.declaredName;
-					str += ".";
+					if (featureChain.chainingFeature.declaredName != null){
+						str += featureChain.chainingFeature.declaredName;
+						str += ".";
+					}
+					else {
+						if (featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){
+							str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+							str += ".";
+						}
+					}
 				}
 				return str.substring(0, str.length()-1);
 			}
