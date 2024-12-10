@@ -532,12 +532,14 @@ class ConjugatedPortTyping extends FeatureTyping {
 }
 
 class SuccessionAsUsage extends ConnectorAsUsage, Succession {
+	attr String[*] connectorEndMember;
 }
 
 class FlowConnectionDefinition extends ConnectionDefinition, ActionDefinition, Interaction {
 }
 
 class BindingConnectorAsUsage extends ConnectorAsUsage, BindingConnector {
+	attr String[*] connectorEndMember;
 }
 
 class SuccessionFlowConnectionUsage extends FlowConnectionUsage, SuccessionItemFlow {

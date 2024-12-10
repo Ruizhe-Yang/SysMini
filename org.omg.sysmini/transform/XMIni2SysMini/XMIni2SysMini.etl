@@ -5,9 +5,6 @@ pre{
 post{
 	main();
 	"------------------ ETL Over! ------------------".println();
-//	for (m in SysMini!LibraryPackage.all){
-//		m.declaredName.println();
-//	}
 	"------------------Print Over.------------------".println();
 }
 
@@ -799,6 +796,20 @@ operation XMIni!Specialization getDeclaredName(){
 }
 
 @abstract
+rule ActionUsage
+	transform s : XMIni!ActionUsage
+	to t : SysMini!ActionUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, ActionBody{
+	}
+
+@abstract
+rule ActionUsageDeclaration
+	transform s : XMIni!ActionUsage
+	to t : SysMini!ActionUsage
+	extends UsageDeclaration, ValuePart{
+	}
+	
+@abstract
 rule ItemUsage
 	transform s : XMIni!ItemUsage
 	to t : SysMini!ItemUsage
@@ -1019,24 +1030,33 @@ operation XMIni!Usage getConnectorEnd(){
 	for (ownedRelationship in self.ownedRelationship){
 		if (ownedRelationship.isTypeOf("ReferenceSubsetting")){
 			var referenceSubsetting = ownedRelationship;
+			if (referenceSubsetting.referencedFeature == null){
+				return "";	
+			}
 			if (referenceSubsetting.referencedFeature.declaredName != null){
 				return referenceSubsetting.referencedFeature.declaredName;
 			}
-			else {
+			else{
 				var str = "";
-				for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
-					if (featureChain.chainingFeature.declaredName != null){
-						str += featureChain.chainingFeature.declaredName;
-						str += ".";
-					}
-					else {
-						if (featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){
-							str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+				if (referenceSubsetting.ownedRelatedElement.first() == null){
+//					referenceSubsetting.referencedFeature.println("test:");
+					return "";
+				}
+				else{
+					for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
+						if (featureChain.chainingFeature.declaredName != null){
+							str += featureChain.chainingFeature.declaredName;
 							str += ".";
 						}
+						else {
+							if (featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){
+								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+								str += ".";
+							}
+						}
 					}
+					return str.substring(0, str.length()-1);
 				}
-				return str.substring(0, str.length()-1);
 			}
 		}
 		else {
@@ -1124,9 +1144,21 @@ rule SuccessionAsUsage
 	transform s : XMIni!SuccessionAsUsage
 	to t : SysMini!SuccessionAsUsage
 	extends UsagePrefix, UsageDeclaration, DefinitionBody{
-//		s.ownedRelationship.size().println();
+		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+			t.connectorEndMember.add(endFeatureMembership.ownedRelatedElement.first().getConnectorEnd());	
+		}
 	}
 
+@abstract
+rule BindingConnectorAsUsage
+	transform s : XMIni!BindingConnectorAsUsage
+	to t : SysMini!BindingConnectorAsUsage
+	extends UsagePrefix, UsageDeclaration, DefinitionBody{
+		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+			t.connectorEndMember.add(endFeatureMembership.ownedRelatedElement.first().getConnectorEnd());	
+		}
+	}
+	
 	
 /* @lazy */
 
@@ -1449,7 +1481,7 @@ rule SuccessionAsUsageRule
 rule BindingConnectorAsUsageRule
 	transform s : XMIni!BindingConnectorAsUsage
 	to t : SysMini!BindingConnectorAsUsage
-	extends UsageRule{
+	extends BindingConnectorAsUsage{
 	}
 	
 @lazy

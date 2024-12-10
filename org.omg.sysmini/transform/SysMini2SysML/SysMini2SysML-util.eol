@@ -70,12 +70,14 @@ operation SysMini!Definition DefinitionDeclaration() : String {
 }
 
 operation SysMini!Element Identification() : String {
-	if (self.declaredName != null){
-		return self.declaredName;
+	var str = "";
+	if (self.declaredShortName != null){
+		str += "<"+self.declaredShortName+"> ";
 	}
-	else {
-		return "";
+	if (self.declaredName != null) {
+		str += self.declaredName + " ";
 	}
+	return str;
 }
 
 operation SysMini!Classifier SubclassificationPart() : String {

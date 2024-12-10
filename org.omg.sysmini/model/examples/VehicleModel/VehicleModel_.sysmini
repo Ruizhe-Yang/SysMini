@@ -58,6 +58,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>initial</connectorEndMember>
+                  <connectorEndMember>off</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -76,6 +78,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>off</connectorEndMember>
+                  <connectorEndMember>starting</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -89,6 +93,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>starting</connectorEndMember>
+                  <connectorEndMember>on</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -107,6 +113,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>on</connectorEndMember>
+                  <connectorEndMember>off</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -124,6 +132,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>initial</connectorEndMember>
+                  <connectorEndMember>normal</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -137,6 +147,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>normal</connectorEndMember>
+                  <connectorEndMember>maintenance</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -155,6 +167,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>normal</connectorEndMember>
+                  <connectorEndMember>degraded</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -168,6 +182,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>maintenance</connectorEndMember>
+                  <connectorEndMember>normal</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -181,6 +197,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>degraded</connectorEndMember>
+                  <connectorEndMember>normal</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -250,6 +268,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>initial</connectorEndMember>
+                  <connectorEndMember>off</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -263,6 +283,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>off</connectorEndMember>
+                  <connectorEndMember>on</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -276,6 +298,8 @@
                 <body xsi:type="SuccessionAsUsage">
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <body xsi:type="ReferenceUsage" isEnd="true"/>
+                  <connectorEndMember>on</connectorEndMember>
+                  <connectorEndMember>off</connectorEndMember>
                 </body>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
               </body>
@@ -841,6 +865,8 @@
                 <body xsi:type="ReferenceUsage" isEnd="true">
                   <body xsi:type="Feature"/>
                 </body>
+                <connectorEndMember>shaftPort_d</connectorEndMember>
+                <connectorEndMember>differential.shaftPort_d</connectorEndMember>
               </body>
               <body xsi:type="ConnectionUsage">
                 <body xsi:type="ReferenceUsage" isEnd="true">
@@ -962,6 +988,8 @@
                 <body xsi:type="Feature"/>
               </body>
               <body xsi:type="ReferenceUsage" isEnd="true"/>
+              <connectorEndMember>engine.fuelCmdPort</connectorEndMember>
+              <connectorEndMember>fuelCmdPort</connectorEndMember>
             </body>
             <body xsi:type="InterfaceUsage" declaredName="engineToTransmissionInterface" featureSpecialization=": EngineToTransmissionInterface">
               <body xsi:type="PortUsage" isEnd="true">
@@ -996,6 +1024,8 @@
                 <body xsi:type="Feature"/>
               </body>
               <body xsi:type="ReferenceUsage" isEnd="true"/>
+              <connectorEndMember>engine.ignitionCmdPort</connectorEndMember>
+              <connectorEndMember>ignitionCmdPort</connectorEndMember>
             </body>
             <body xsi:type="ConnectionUsage">
               <body xsi:type="ReferenceUsage" isEnd="true">
@@ -1024,6 +1054,8 @@
               <body xsi:type="ReferenceUsage" isEnd="true">
                 <body xsi:type="Feature"/>
               </body>
+              <connectorEndMember>vehicle_b.setSpeedPort</connectorEndMember>
+              <connectorEndMember>vehicleSoftware.vehicleController.cruiseController.setSpeedPort</connectorEndMember>
             </body>
             <body xsi:type="ConnectionUsage">
               <body xsi:type="ReferenceUsage" isEnd="true">
@@ -1042,6 +1074,8 @@
               <body xsi:type="ReferenceUsage" isEnd="true">
                 <body xsi:type="Feature"/>
               </body>
+              <connectorEndMember>vehicleSoftware.vehicleController.cruiseController.cruiseControlPort</connectorEndMember>
+              <connectorEndMember>vehicleSoftware.vehicleController.controlPort</connectorEndMember>
             </body>
             <body xsi:type="ConnectionUsage">
               <body xsi:type="ReferenceUsage" isEnd="true">
@@ -1070,6 +1104,8 @@
               <body xsi:type="ReferenceUsage" isEnd="true">
                 <body xsi:type="Feature"/>
               </body>
+              <connectorEndMember>rearAxleAssembly.rearWheel1.wheelToRoadPort</connectorEndMember>
+              <connectorEndMember>vehicleToRoadPort.wheelToRoadPort1</connectorEndMember>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
               <body xsi:type="ReferenceUsage" isEnd="true">
@@ -1078,6 +1114,8 @@
               <body xsi:type="ReferenceUsage" isEnd="true">
                 <body xsi:type="Feature"/>
               </body>
+              <connectorEndMember>rearAxleAssembly.rearWheel2.wheelToRoadPort</connectorEndMember>
+              <connectorEndMember>vehicleToRoadPort.wheelToRoadPort2</connectorEndMember>
             </body>
             <body xsi:type="SatisfyRequirementUsage">
               <body xsi:type="ReferenceUsage"/>
@@ -1206,6 +1244,8 @@
                 <body xsi:type="ReferenceUsage" isEnd="true">
                   <body xsi:type="Feature"/>
                 </body>
+                <connectorEndMember>vehicle.doorClosed</connectorEndMember>
+                <connectorEndMember>driver.driverReady</connectorEndMember>
               </body>
               <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration=" of IgnitionCmd ">
                 <body xsi:type="ItemFeature"/>
@@ -1300,6 +1340,8 @@
                       <body xsi:type="SuccessionAsUsage">
                         <body xsi:type="ReferenceUsage" isEnd="true"/>
                         <body xsi:type="ReferenceUsage" isEnd="true"/>
+                        <connectorEndMember>setSpeedReceived</connectorEndMember>
+                        <connectorEndMember></connectorEndMember>
                       </body>
                       <body xsi:type="EventOccurrenceUsage">
                         <body xsi:type="Feature"/>
@@ -1752,6 +1794,8 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>weighVehicle</connectorEndMember>
+            <connectorEndMember>evaluatePassFail</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="evaluatePassFail">
             <body xsi:type="ReferenceUsage" declaredName="massMeasured" featureSpecialization=":> ISQBase::mass"/>
@@ -1859,6 +1903,8 @@
               <body xsi:type="SuccessionAsUsage">
                 <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <body xsi:type="ReferenceUsage" isEnd="true"/>
+                <connectorEndMember>initial</connectorEndMember>
+                <connectorEndMember>wait</connectorEndMember>
               </body>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
             </body>
@@ -1872,6 +1918,7 @@
               <body xsi:type="SuccessionAsUsage">
                 <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <body xsi:type="ReferenceUsage" isEnd="true"/>
+                <connectorEndMember>wait</connectorEndMember>
               </body>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
             </body>
@@ -1885,6 +1932,7 @@
               <body xsi:type="SuccessionAsUsage">
                 <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <body xsi:type="ReferenceUsage" isEnd="true"/>
+                <connectorEndMember>wait</connectorEndMember>
               </body>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
             </body>
@@ -1933,16 +1981,22 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>unlockDoor_in</connectorEndMember>
+            <connectorEndMember>openDoor_in</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="openDoor_in"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>openDoor_in</connectorEndMember>
+            <connectorEndMember>enterVehicle</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="enterVehicle"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>enterVehicle</connectorEndMember>
+            <connectorEndMember>closeDoor_in</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="closeDoor_in"/>
           <body xsi:type="RequirementUsage">
@@ -1970,16 +2024,22 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>openDoor_out</connectorEndMember>
+            <connectorEndMember>exitVehicle</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="exitVehicle"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>exitVehicle</connectorEndMember>
+            <connectorEndMember>closeDoor_out</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="closeDoor_out"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>closeDoor_out</connectorEndMember>
+            <connectorEndMember>lockDoor_out</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="lockDoor_out"/>
           <body xsi:type="RequirementUsage">
@@ -2009,6 +2069,8 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember></connectorEndMember>
+            <connectorEndMember>a</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="a">
             <body xsi:type="ActionUsage" declaredName="driverGetInVehicle"/>
@@ -2017,6 +2079,8 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>a</connectorEndMember>
+            <connectorEndMember>trigger</connectorEndMember>
           </body>
           <body xsi:type="AcceptActionUsage" declaredName="trigger">
             <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
@@ -2025,6 +2089,8 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>trigger</connectorEndMember>
+            <connectorEndMember>b</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="b">
             <body xsi:type="ActionUsage" declaredName="driveVehicleToDestination"/>
@@ -2033,6 +2099,8 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>b</connectorEndMember>
+            <connectorEndMember>c</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="c">
             <body xsi:type="ActionUsage" declaredName="driverGetOutOfVehicle"/>
@@ -2041,6 +2109,8 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>c</connectorEndMember>
+            <connectorEndMember></connectorEndMember>
           </body>
           <body xsi:type="RequirementUsage">
             <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
@@ -2067,73 +2137,107 @@
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember></connectorEndMember>
+            <connectorEndMember>fork1</connectorEndMember>
           </body>
           <body xsi:type="ForkNode" declaredName="fork1"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>fork1</connectorEndMember>
+            <connectorEndMember>driverGetInVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>fork1</connectorEndMember>
+            <connectorEndMember>passenger1GetInVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>driverGetInVehicle</connectorEndMember>
+            <connectorEndMember>join1</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>passenger1GetInVehicle</connectorEndMember>
+            <connectorEndMember>join1</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>join1</connectorEndMember>
+            <connectorEndMember>trigger</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>trigger</connectorEndMember>
+            <connectorEndMember>fork2</connectorEndMember>
           </body>
           <body xsi:type="ForkNode" declaredName="fork2"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>fork2</connectorEndMember>
+            <connectorEndMember>driveVehicleToDestination</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>fork2</connectorEndMember>
+            <connectorEndMember>providePower</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>driveVehicleToDestination</connectorEndMember>
+            <connectorEndMember>join2</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>providePower</connectorEndMember>
+            <connectorEndMember>join2</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>join2</connectorEndMember>
+            <connectorEndMember>fork3</connectorEndMember>
           </body>
           <body xsi:type="ForkNode" declaredName="fork3"/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>fork3</connectorEndMember>
+            <connectorEndMember>driverGetOutOfVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>fork3</connectorEndMember>
+            <connectorEndMember>passenger1GetOutOfVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>driverGetOutOfVehicle</connectorEndMember>
+            <connectorEndMember>join3</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>passenger1GetOutOfVehicle</connectorEndMember>
+            <connectorEndMember>join3</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
+            <connectorEndMember>join3</connectorEndMember>
+            <connectorEndMember></connectorEndMember>
           </body>
           <body xsi:type="RequirementUsage">
             <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
