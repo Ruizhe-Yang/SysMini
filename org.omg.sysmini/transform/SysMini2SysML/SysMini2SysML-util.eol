@@ -1,0 +1,87 @@
+operation SysMini!Package Package() : String {
+	return "Package " + self.declaredName;
+}
+
+operation SysMini!NamespaceImport NamespaceImport() : String {
+	return "import "+self.declaredName;
+}
+
+operation SysMini!PartDefinition PartDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + PartDefKeyword() + self.Definition();
+}
+
+operation SysMini!AttributeDefinition AttributeDefinition() : String {
+	return self.BasicDefinitionPrefix() + AttributeDefKeyword() + self.Definition();
+}
+
+operation SysMini!Definition DefinitionPrefix() : String {
+	return self.DefinitionPrefix() + self.DefinitionExtensionKeyword();
+}
+
+operation SysMini!Element root(){
+	
+}
+
+operation SysMini!Definition BasicDefinitionPrefix(): String {
+	var str = "";
+	if (self.isAbstract){
+		str += "abstract ";
+	}
+	if (self.isVariation){
+		str += "variation ";
+	}
+	return str;
+}
+
+operation SysMini!Definition DefinitionExtensionKeyword() : String {
+	return self.PrefixMetadataMember();
+}
+
+operation SysMini!Definition PrefixMetadataMember() : String {
+	return "";
+}
+
+operation AttributeDefKeyword() : String {
+	return AttributeKeyword()+"def ";
+}
+
+operation AttributeKeyword() : String {
+	return "attribute ";
+}
+
+operation PartKeyword() : String {
+	return "part ";
+}
+
+operation PartDefKeyword() : String {
+	return PartKeyword()+"def ";
+}
+
+operation SysMini!OccurrenceDefinition OccurrenceDefinitionPrefix() : String {
+	return "";
+}
+
+operation SysMini!Definition Definition() : String {
+	return self.DefinitionDeclaration() + self.DefinitionBody();
+}
+
+operation SysMini!Definition DefinitionDeclaration() : String {
+	return self.Identification() + self.SubclassificationPart();
+}
+
+operation SysMini!Element Identification() : String {
+	if (self.declaredName != null){
+		return self.declaredName;
+	}
+	else {
+		return "";
+	}
+}
+
+operation SysMini!Classifier SubclassificationPart() : String {
+	return "";
+}
+
+operation SysMini!Definition DefinitionBody() : String {
+	return "";
+}

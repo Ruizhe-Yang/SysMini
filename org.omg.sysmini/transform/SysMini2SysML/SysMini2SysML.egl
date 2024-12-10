@@ -1,3 +1,4 @@
+[% import "SysMini2SysML-util.eol"; %]
 package [%=root.body.first().declaredName%] {
 [%for (element in root.body.first().body){%]
 [%=element.getContent("", 1)%]
@@ -5,11 +6,11 @@ package [%=root.body.first().declaredName%] {
 }
 
 [%
-operation SysMini!Element getContent(content: String, layer: Integer){
+operation SysMini!Element getContent(content: String, layer: Integer) : String {
 	content += self.getTab(layer);
 	content += self.matchType();
 	if (self.body.size()>0){
-		content += " {\n";
+		content += "{\n";
 		for (child in self.body){
 			content = child.getContent(content, layer+1);
 			content += "\n";
@@ -22,7 +23,7 @@ operation SysMini!Element getContent(content: String, layer: Integer){
 	return content;
 }
 
-operation SysMini!Element getTab(layer : Integer){
+operation SysMini!Element getTab(layer : Integer) : String {
 	var tab = "";
 	for (i in 1.to(layer)){
 		tab += "\t";
@@ -30,21 +31,13 @@ operation SysMini!Element getTab(layer : Integer){
 	return tab;
 }
 
-operation SysMini!Element matchType(){
+operation SysMini!Element matchType() : String {
 	switch (self.type().name){
-		case "Package":             return self.package();
-		case "NamespaceImport":     return self.namespaceImport();
+		case "Package":               return self.Package();
+		case "NamespaceImport":       return self.NamespaceImport();
+		case "PartDefinition":        return self.PartDefinition();
+		case "AttributeDefinition":   return self.AttributeDefinition();
 	}
 	return "";
 }
-
-operation SysMini!Package package(){
-	return "Package " + self.declaredName;
-}
-
-operation SysMini!NamespaceImport namespaceImport(){
-	return "import "+self.declaredName;
-}
-
-
 %]
