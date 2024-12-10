@@ -16,7 +16,7 @@ package SimpleVehicleModel {
 		;
 		import KeyWord_MetadataDefinitions;
 		Package PartDefinitions{
-			part def Vehicle{
+			part def Vehicle {
 				;
 				;
 				;
@@ -185,7 +185,7 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			part def Engine{
+			part def Engine {
 				;
 				;
 				;
@@ -206,37 +206,37 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			part def StarterMotor{
+			part def StarterMotor {
 				;
 			}
-			part def Cylinder;
-			part def Transmission{
+			part def Cylinder ;
+			part def Transmission {
 				;
-				;
-				;
-			}
-			part def Driveshaft;
-			part def AxleAssembly;
-			part def Axle{
-				;
-			}
-			part def FrontAxle{
-				;
-			}
-			part def HalfAxle{
-				;
-			}
-			part def Differential;
-			part def Wheel{
 				;
 				;
 			}
-			part def Hub{
+			part def Driveshaft ;
+			part def AxleAssembly ;
+			part def Axle {
 				;
 			}
-			part def Software;
-			part def VehicleSoftware;
-			part def VehicleController{
+			part def FrontAxle {
+				;
+			}
+			part def HalfAxle {
+				;
+			}
+			part def Differential ;
+			part def Wheel {
+				;
+				;
+			}
+			part def Hub {
+				;
+			}
+			part def Software ;
+			part def VehicleSoftware ;
+			part def VehicleController {
 				;
 				{
 					{
@@ -280,16 +280,16 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			part def CruiseController{
+			part def CruiseController {
 				;
 				;
 				;
 				;
 			}
-			part def SpeedSensor{
+			part def SpeedSensor {
 				;
 			}
-			part def FuelTank{
+			part def FuelTank {
 				;
 				{
 					;
@@ -302,26 +302,26 @@ package SimpleVehicleModel {
 				;
 				;
 			}
-			part def BodyAssy;
-			part def Body{
+			part def BodyAssy ;
+			part def Body {
 				;
 			}
-			part def Thermostat;
-			part def WaterHose;
-			part def Road{
+			part def Thermostat ;
+			part def WaterHose ;
+			part def Road {
 				;
 				;
 			}
-			part def Engine4Cyl;
-			part def Engine6Cyl;
-			part def TransmissionChoices;
-			part def TransmissionAutomatic;
-			part def TransmissionManual;
-			part def Sunroof;
-			part def ElectricalGenerator;
-			part def TorqueGenerator;
-			part def SteeringSubsystem;
-			part def BrakingSubsystem;
+			part def Engine4Cyl ;
+			part def Engine6Cyl ;
+			part def TransmissionChoices ;
+			part def TransmissionAutomatic ;
+			part def TransmissionManual ;
+			part def Sunroof ;
+			part def ElectricalGenerator ;
+			part def TorqueGenerator ;
+			part def SteeringSubsystem ;
+			part def BrakingSubsystem ;
 		}
 		Package PortDefinitions{
 			{
@@ -440,40 +440,25 @@ package SimpleVehicleModel {
 				;
 			}
 			;
-			attribute def VehicleStartSignal;
-			attribute def VehicleOnSignal;
-			attribute def VehicleOffSignal;
-			attribute def StartSignal;
-			attribute def OffSignal;
-			attribute def OverTemp;
-			attribute def ReturnToNormal;
-			attribute def SetSpeed;
+			attribute def VehicleStartSignal ;
+			attribute def VehicleOnSignal ;
+			attribute def VehicleOffSignal ;
+			attribute def StartSignal ;
+			attribute def OffSignal ;
+			attribute def OverTemp ;
+			attribute def ReturnToNormal ;
+			attribute def SetSpeed ;
 		}
 		Package InterfaceDefinitions{
 			{
 				;
 				;
-				{
-					{
-						;
-					}
-					{
-						;
-					}
-				}
+				;
 			}
 			{
 				;
 				;
-				{
-					;
-					{
-						;
-					}
-					{
-						;
-					}
-				}
+				;
 			}
 			{
 				;
@@ -487,12 +472,8 @@ package SimpleVehicleModel {
 				;
 				;
 				{
-					{
-						;
-					}
-					{
-						;
-					}
+					;
+					;
 				}
 			}
 		}
@@ -641,7 +622,7 @@ package SimpleVehicleModel {
 			}
 		}
 		Package GenericContext{
-			part def Context{
+			part def Context {
 				;
 				{
 					;
@@ -673,35 +654,19 @@ package SimpleVehicleModel {
 			;
 			;
 			{
+				;
+				;
 				{
 					;
-				}
-				{
 					;
-				}
-				{
-					{
-						;
-					}
-					{
-						;
-					}
 				}
 			}
 			{
+				;
+				;
 				{
 					;
-				}
-				{
 					;
-				}
-				{
-					{
-						;
-					}
-					{
-						;
-					}
 				}
 			}
 		}
@@ -786,9 +751,7 @@ package SimpleVehicleModel {
 						;
 						;
 						;
-						{
-							;
-						}
+						;
 						{
 							;
 							;
@@ -824,48 +787,28 @@ package SimpleVehicleModel {
 						}
 						{
 							;
-							{
-								;
-							}
+							;
 						}
 						{
-							{
-								;
-							}
-							{
-								;
-							}
+							;
+							;
 						}
 						{
-							{
-								;
-							}
-							{
-								;
-							}
+							;
+							;
 						}
 						{
-							{
-								;
-							}
-							{
-								;
-							}
+							;
+							;
 						}
 						{
-							{
-								;
-							}
-							{
-								;
-							}
+							;
+							;
 						}
 					}
 					;
 					{
-						{
-							;
-						}
+						;
 						;
 						{
 							;
@@ -887,17 +830,13 @@ package SimpleVehicleModel {
 					{
 						;
 						;
-						{
-							;
-						}
+						;
 					}
 					{
 						;
 						;
 						;
-						{
-							;
-						}
+						;
 					}
 					{
 						{
@@ -936,110 +875,60 @@ package SimpleVehicleModel {
 						}
 					}
 					{
-						{
-							;
-						}
+						;
 						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
-					}
-					{
-						{
-							;
-						}
-						{
-							;
-						}
-					}
-					{
-						{
-							;
-						}
+						;
 						;
 					}
 					{
-						{
-							;
-						}
+						;
 						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
+					}
+					{
+						;
+						;
+					}
+					{
+						;
+						;
 					}
 					{
 						;
@@ -1063,30 +952,9 @@ package SimpleVehicleModel {
 					;
 					;
 					;
-					{
-						{
-							;
-						}
-						{
-							;
-						}
-					}
-					{
-						{
-							;
-						}
-						{
-							;
-						}
-					}
-					{
-						{
-							;
-						}
-						{
-							;
-						}
-					}
+					;
+					;
+					;
 				}
 				;
 				;
@@ -1094,7 +962,7 @@ package SimpleVehicleModel {
 			}
 			Package DiscreteInteractions{
 				Package Sequence{
-					part def Driver{
+					part def Driver {
 						;
 						;
 					}
@@ -1110,82 +978,44 @@ package SimpleVehicleModel {
 								;
 								;
 							}
+							;
 							{
 								;
-								{
-									;
-								}
-								{
-									;
-								}
-							}
-							{
-								;
-								;
-							}
-							{
-								;
-								{
-									;
-								}
-								{
-									;
-								}
-							}
-							{
-								;
-								;
-								;
-								;
-							}
-							{
-								;
-								;
-							}
-						}
-						{
-							{
-								;
-							}
-							{
 								;
 							}
 							;
-						}
-						{
 							{
+								;
+								;
+								;
 								;
 							}
 							{
 								;
-							}
-							;
-						}
-						{
-							{
-								;
-							}
-							{
 								;
 							}
 						}
 						{
 							;
-							{
-								;
-							}
-							{
-								;
-							}
+							;
+							;
 						}
 						{
 							;
-							{
-								;
-							}
-							{
-								;
-							}
+							;
+							;
+						}
+						{
+							;
+							;
+						}
+						{
+							;
+							;
+						}
+						{
+							;
+							;
 						}
 					}
 				}
@@ -1221,21 +1051,11 @@ package SimpleVehicleModel {
 						}
 						{
 							;
-							{
-								;
-							}
-							{
-								;
-							}
+							;
 						}
 						{
 							;
-							{
-								;
-							}
-							{
-								;
-							}
+							;
 						}
 					}
 				}
@@ -1246,9 +1066,7 @@ package SimpleVehicleModel {
 						}
 						{
 							{
-								{
-									;
-								}
+								;
 							}
 						}
 						{
@@ -1263,31 +1081,21 @@ package SimpleVehicleModel {
 											;
 											;
 										}
-										{
-											;
-										}
+										;
 									}
 									{
-										{
-											;
-										}
+										;
 									}
 								}
 							}
 						}
 						{
 							{
-								{
-									;
-								}
+								;
 							}
 						}
-						{
-							;
-						}
-						{
-							;
-						}
+						;
+						;
 					}
 				}
 			}
@@ -1311,9 +1119,7 @@ package SimpleVehicleModel {
 					}
 					{
 						;
-						{
-							;
-						}
+						;
 					}
 					{
 						;
@@ -1397,12 +1203,8 @@ package SimpleVehicleModel {
 					}
 				}
 				{
-					{
-						;
-					}
-					{
-						;
-					}
+					;
+					;
 				}
 			}
 			{
@@ -1417,19 +1219,11 @@ package SimpleVehicleModel {
 					}
 				}
 				{
+					;
+					;
 					{
 						;
-					}
-					{
 						;
-					}
-					{
-						{
-							;
-						}
-						{
-							;
-						}
 					}
 				}
 			}
@@ -1458,37 +1252,21 @@ package SimpleVehicleModel {
 					}
 				}
 				{
+					;
+					;
 					{
+						;
+						;
 						;
 					}
 					{
 						;
-					}
-					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
 						;
 					}
 					{
-						{
-							;
-						}
-						{
-							;
-						}
 						;
-					}
-					{
-						{
-							;
-						}
-						{
-							;
-						}
+						;
 						;
 					}
 				}
@@ -1502,7 +1280,7 @@ package SimpleVehicleModel {
 		Package FuelEconomyAnalysisModel{
 			;
 			;
-			attribute def Scenario{
+			attribute def Scenario {
 				{
 					;
 					;
@@ -1550,7 +1328,6 @@ package SimpleVehicleModel {
 					;
 					;
 					{
-						;
 						;
 					}
 					;
@@ -1685,7 +1462,6 @@ package SimpleVehicleModel {
 						;
 						;
 						;
-						;
 					}
 					;
 				}
@@ -1703,14 +1479,7 @@ package SimpleVehicleModel {
 					;
 					;
 				}
-				{
-					{
-						;
-					}
-					{
-						;
-					}
-				}
+				;
 				;
 			}
 		}
@@ -1720,14 +1489,10 @@ package SimpleVehicleModel {
 				;
 				{
 					{
-						{
-							;
-						}
+						;
 					}
 					{
-						{
-							;
-						}
+						;
 					}
 				}
 			}
@@ -1793,9 +1558,9 @@ package SimpleVehicleModel {
 		;
 		import TransportPassengerScenario;
 		Package ContextDefinitions{
-			part def MissionContext;
-			part def Road;
-			part def Driver{
+			part def MissionContext ;
+			part def Road ;
+			part def Driver {
 				;
 				{
 					;
@@ -1836,7 +1601,7 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			part def Passenger;
+			part def Passenger ;
 			{
 				;
 				;
@@ -2095,89 +1860,45 @@ package SimpleVehicleModel {
 			;
 			;
 			{
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-			}
-			{
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
-				{
-					;
-				}
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
 			}
 			{
 				;
-				{
-					;
-				}
-				{
-					;
-				}
-			}
-			{
-				{
-					;
-				}
-				{
-					;
-				}
+				;
+				;
+				;
+				;
+				;
+				;
+				;
 			}
 			{
 				;
-				{
-					;
-				}
+				;
+				;
+			}
+			{
+				;
+				;
+			}
+			{
+				;
+				;
 			}
 		}
 	}
 	Package VehicleSuperSetModel{
 		;
 		Package VariationPointDefinitions{
-			part def TransmissionChoices{
+			part def TransmissionChoices {
 				;
 				;
 			}
@@ -2240,7 +1961,7 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			part def SafetyEngineer;
+			part def SafetyEngineer ;
 			{
 				;
 				;
@@ -2268,6 +1989,7 @@ package SimpleVehicleModel {
 					;
 					;
 				}
+				;
 			}
 		}
 	}

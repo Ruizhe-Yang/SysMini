@@ -17,9 +17,12 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 	for (relationship in self.relationships()){
 		switch (relationship.type().name){
 		
-			//Import
+			//Relationship Entity
+			case "Dependency": relationship.addRelationshipTo(rootNode);
 			case "NamespaceImport": relationship.addRelationshipTo(rootNode);
 			case "MembershipImport": relationship.addRelationshipTo(rootNode);
+			case "NamespaceExpose": relationship.addRelationshipTo(rootNode);
+			case "MembershipExpose": relationship.addRelationshipTo(rootNode);
 			
 			//Specialization
 			case "Subclassification": relationship.skipRelationshipTo(rootNode);
@@ -34,7 +37,6 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			
 			//Membership
 			case "Membership": relationship.skipRelationshipTo(rootNode);
-			
 			case "ElementFilterMembership": relationship.skipRelationshipTo(rootNode);
 			case "OwningMembership": relationship.skipRelationshipTo(rootNode);
 			case "FeatureMembership": relationship.skipRelationshipTo(rootNode);
@@ -56,8 +58,6 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "RequirementVerificationMembership": relationship.skipRelationshipTo(rootNode);
 			
 			//Others
-			case "Dependency": relationship.addRelationshipTo(rootNode);
-			
 			case "Annotation": relationship.skipRelationshipTo(rootNode);
 			case "FeatureInverting": relationship.skipRelationshipTo(rootNode);
 			case "FeatureChaining": relationship.skipRelationshipTo(rootNode);
@@ -69,7 +69,6 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "Differencing": relationship.skipRelationshipTo(rootNode);
 			case "MultiplicityRange": relationship.skipRelationshipTo(rootNode);
 			case "Multiplicity": relationship.skipRelationshipTo(rootNode);
-			
 		}
 	}
 }
@@ -86,11 +85,6 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "Comment": element.addNodeTo(rootNode);
 			case "TextualRepresentation": element.addNodeTo(rootNode);
 			case "Documentation": element.addNodeTo(rootNode);
-			
-			//ItemFeature
-			case "ItemFeature": element.addNodeTo(rootNode);
-			//ItemFeature
-			case "ItemFlowEnd": element.addNodeTo(rootNode);
 			
 			//Definition
 			case "OccurrenceDefinition": element.addNodeTo(rootNode);
@@ -167,9 +161,6 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "ViewpointUsage": element.addNodeTo(rootNode);
 			case "SatisfyRequirementUsage": element.addNodeTo(rootNode);
 			
-			//Others
-			case "Classifier": element.addNodeTo(rootNode);
-			case "Feature": element.addNodeTo(rootNode);
 		}
 	}
 }
@@ -581,7 +572,7 @@ rule PrefixMetadataUsage
 	
 //Import
 @abstract
-rule ImportRule
+rule Import
 	transform s : XMIni!Import
 	to t : SysMini!Import 
 	extends ElementRule{
@@ -1162,11 +1153,11 @@ rule BindingConnectorAsUsage
 	
 /* @lazy */
 
-@lazy
-rule NamespaceImportRule
+@abstract
+rule NamespaceImport
 	transform s : XMIni!NamespaceImport
 	to t : SysMini!NamespaceImport 
-	extends ImportRule{
+	extends Import{
 		if (s.declaredName == null){
 			if (s.importedNamespace != null){
 				t.declaredName = s.importedNamespace.declaredName;
@@ -1184,15 +1175,57 @@ rule NamespaceImportRule
 			}
 		}
 	}
+	
+@abstract
+rule NamespaceExpose
+	transform s : XMIni!NamespaceExpose
+	to t : SysMini!NamespaceExpose
+	extends NamespaceImport{
+	}
+
+@abstract
+rule MembershipExpose
+	transform s : XMIni!MembershipExpose
+	to t : SysMini!MembershipExpose
+	extends MembershipImport{
+	}
+	
+@lazy
+rule NamespaceImportRule
+	transform s : XMIni!NamespaceImport
+	to t : SysMini!NamespaceImport 
+	extends NamespaceImport{
+	}
+
+@lazy
+rule NamespaceExposeRule
+	transform s : XMIni!NamespaceExpose
+	to t : SysMini!NamespaceExpose 
+	extends NamespaceExpose{
+	}
+
+@lazy
+rule MembershipExposeRule
+	transform s : XMIni!MembershipExpose
+	to t : SysMini!MembershipExpose 
+	extends MembershipExpose{
+	}
+	
+@abstract
+rule MembershipImport
+	transform s : XMIni!MembershipImport
+	to t : SysMini!MembershipImport 
+	extends Import{
+		if (s.importedMembership != null){
+			t.declaredName = s.importedMembership.eContents().first().declaredName;
+		}
+	}
 
 @lazy
 rule MembershipImportRule
 	transform s : XMIni!MembershipImport
 	to t : SysMini!MembershipImport 
-	extends ImportRule{
-		if (s.importedMembership != null){
-			t.declaredName = s.importedMembership.eContents().first().declaredName;
-		}
+	extends MembershipImport{
 	}
 	
 //Package
