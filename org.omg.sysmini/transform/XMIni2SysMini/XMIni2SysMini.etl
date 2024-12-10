@@ -13,7 +13,7 @@ post{
 
 operation main(){
 	var rootNamespace = new SysMini!Namespace;
-	XMIni!Package.all.first().elementTransform(rootNamespace);
+	XMIni!Package.all.first().addNodeTo(rootNamespace);
 }
 
 operation XMIni!Element elementTransform(rootNode : SysMini!Element){
@@ -1204,7 +1204,7 @@ rule CommentRule
 	to t : SysMini!Comment
 	extends AnnotatingElementRule{
 		if (s.body != null){
-			t.sysmini_self = s.body;	
+//			t.sysmini_self = s.body;	
 		}
 	}
 
@@ -1214,7 +1214,7 @@ rule TextualRepresentationRule
 	to t : SysMini!TextualRepresentation
 	extends AnnotatingElementRule{
 		if (s.body != null){
-			t.sysmini_self = s.body;	
+//			t.sysmini_self = s.body;	
 		}
 	}
 	
@@ -1224,7 +1224,7 @@ rule DocumentationRule
 	to t : SysMini!Documentation
 	extends AnnotatingElementRule{
 		if (s.body != null){
-			t.sysmini_self = s.body;	
+//			t.sysmini_self = s.body;	
 		}
 	}
 

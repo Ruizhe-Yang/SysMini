@@ -7,7 +7,6 @@ abstract class Element {
 	attr String declaredShortName;
 	attr String prefixMetadata;
 	attr boolean[1] isWell = false;
-	attr String sysmini_self;
 	ref Element#body root;
 	ordered val Element[*]#root body;
 }

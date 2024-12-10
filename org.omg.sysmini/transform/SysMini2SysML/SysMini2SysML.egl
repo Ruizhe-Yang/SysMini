@@ -1,0 +1,50 @@
+package [%=root.body.first().declaredName%] {
+[%for (element in root.body.first().body){%]
+[%=element.getContent("", 1)%]
+[%}%]
+}
+
+[%
+operation SysMini!Element getContent(content: String, layer: Integer){
+	content += self.getTab(layer);
+	content += self.matchType();
+	if (self.body.size()>0){
+		content += " {\n";
+		for (child in self.body){
+			content = child.getContent(content, layer+1);
+			content += "\n";
+		}
+		content += self.getTab(layer)+"}";
+	}
+	else {
+		content += ";";
+	}
+	return content;
+}
+
+operation SysMini!Element getTab(layer : Integer){
+	var tab = "";
+	for (i in 1.to(layer)){
+		tab += "\t";
+	}
+	return tab;
+}
+
+operation SysMini!Element matchType(){
+	switch (self.type().name){
+		case "Package":             return self.package();
+		case "NamespaceImport":     return self.namespaceImport();
+	}
+	return "";
+}
+
+operation SysMini!Package package(){
+	return "Package " + self.declaredName;
+}
+
+operation SysMini!NamespaceImport namespaceImport(){
+	return "import "+self.declaredName;
+}
+
+
+%]
