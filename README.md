@@ -1,2 +1,3 @@
 # SysMini
-**SysMini: An automated approach to integrating SysML v2 and domain-specific language**
+
+**SysMini: Enhanced Parsing in SysML v2 Metamodel for Domain-Specific Languages**
