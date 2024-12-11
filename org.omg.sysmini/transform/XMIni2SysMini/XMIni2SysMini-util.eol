@@ -1,0 +1,229 @@
+operation init(){
+	for (e in XMIni!Element){
+		e.name = "";
+	}
+}
+
+operation XMIni!Relationship addRelationshipTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		rootNode.body.add(self.equivalent());
+		self.relationshipTransform(rootNode);
+	}
+}
+
+operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		self.relationshipTransform(rootNode);
+	}
+}
+
+operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		self.elementTransform(node);
+	}
+}
+
+operation XMIni!Element isEntity(){
+	return (self.name != "*");
+}
+
+operation XMIni!Element tag(){
+	self.name = "*";
+}
+
+operation XMIni!Element relationships(){
+	return self.ownedRelationship;
+}
+
+operation XMIni!Relationship elements(){
+	return self.ownedRelatedElement;
+}
+
+operation XMIni!Element isTypeOf(str : String){
+	return (self.type().name == str);
+}
+
+operation SysMini!Element setVisibility(s: XMIni!Element){
+	self.hasVisibility = true;
+	switch (s.visibility.value.asString()){
+		case "0": self.visibility = SysMini!VisibilityKind#private;
+		case "1": self.visibility = SysMini!VisibilityKind#protected;
+		case "2": self.visibility = SysMini!VisibilityKind#public;
+	}
+}
+
+operation SysMini!Element setPortionKind(s: XMIni!Element){
+	switch (s.portionKind.value.asString()){
+		case "0": self.portionKind = SysMini!PortionKind#timeslice;
+		case "1": self.portionKind = SysMini!PortionKind#snapshot;
+	}
+}
+
+operation OrderedSet getElementOf(typeName : String){
+	return self.select(e|e.type().name == typeName);
+}
+
+operation SysMini!Usage setFeatureDirection(s: XMIni!Usage){
+	switch (s.direction.value.asString()){
+//		case "0": self.direction = SysMini!FeatureDirectionKind#in;
+		case "1": self.direction = SysMini!FeatureDirectionKind#inout;
+		case "2": self.direction = SysMini!FeatureDirectionKind#out;
+	}
+}
+
+operation XMIni!FeatureValue getFeatureValueOperator(){
+	var conditionalExpression = self.ownedRelatedElement.first();
+	if (conditionalExpression.isTypeOf("OperatorExpression")){
+	//	conditionalExpression.operator.println();
+	//	conditionalExpression.operand.println();
+		conditionalExpression.tag();
+		return conditionalExpression.operator;
+	}
+	else {
+		return null;
+	}
+}
+
+operation XMIni!Feature getMultiplicityRange(){
+	for (owningMembership in self.ownedRelationship.getElementOf("OwningMembership")){
+		for (element in owningMembership.ownedRelatedElement){
+			if (element.isTypeOf("MultiplicityRange")){
+				for (e in element.ownedRelationship.getElementOf("OwningMembership")){
+					if (e.ownedRelatedElement.size() == 1 and e.ownedRelatedElement.first().isTypeOf("LiteralInteger")){
+						return "["+e.ownedRelatedElement.first().value.asString()+"]";
+					}
+					else if (e.ownedRelatedElement.size() == 1 and e.ownedRelatedElement.first().isTypeOf("LiteralInfinity")){
+						return "[*]";
+					}
+					else if (e.ownedRelatedElement.size() == 2 and e.ownedRelatedElement.second().isTypeOf("LiteralInteger")){
+						return "["+e.ownedRelatedElement.first().value.asString()+".."+e.ownedRelatedElement.second().value.asString()+"]";
+					}
+					else if (e.ownedRelatedElement.size() == 2 and e.ownedRelatedElement.second().isTypeOf("LiteralInfinity")){
+						return "["+e.ownedRelatedElement.first().value.asString()+"..*]";
+					}
+				}
+			}
+			else {
+				return null;
+			}
+		}
+	}
+}
+
+operation XMIni!Feature getFeatureSpecialization(){
+	for (owningMembership in self.ownedRelationship.first()){
+		switch (owningMembership.type().name){
+			case "FeatureTyping":{
+				return ": "+owningMembership.getDeclaredName();
+			}
+			case "Subsetting":{
+				return ":> "+owningMembership.getDeclaredName();
+			}
+			case "OwnedReferenceSubsetting":{
+				return "::> "+owningMembership.getDeclaredName();			
+			}
+			case "Redefinition":{
+				return ":>> "+owningMembership.getDeclaredName();
+			}
+//			case "OwningMembership":{
+//				owningMembership.ownedRelationship.println();
+//			}
+		}
+	}
+}
+
+operation XMIni!Specialization getDeclaredName(){
+	if (self.declaredName != null){
+		return self.declaredName;
+	}
+	else if (self.type.name == null){
+		return self.type.declaredName;
+	}
+}
+
+operation XMIni!PortUsage getReferenceSubsetting(){
+	return self.getConnectorEnd();
+}
+
+operation XMIni!EndFeatureMembership getFlowEndMember(){
+	for (ownedRelationship in self.ownedRelatedElement){
+		if (ownedRelationship.isTypeOf("ItemFlowEnd")){
+			var itemFlowEnd = ownedRelationship;
+			var str = "";
+			for (o in itemFlowEnd.ownedRelationship){
+				if (o.isTypeOf("ReferenceSubsetting")){
+					str += o.referencedFeature.declaredName;
+					str += ".";
+					o.tag();
+				}
+				else if (o.isTypeOf("FeatureMembership") and o.ownedRelatedElement.size() == 1){
+					var featureChainPrefix = o.ownedRelatedElement.first();
+					str += featureChainPrefix.ownedRelationship.first().redefinedFeature.declaredName;
+					featureChainPrefix.tag();
+				}
+			}
+			return str;
+		}
+		else {
+			return null;
+		}
+	}
+}
+
+operation XMIni!FeatureMembership getItemFeatureMember(){
+	var itemFeature = self.ownedRelatedElement.first();
+	for (ownedRelationship in itemFeature.ownedRelationship){
+		if (ownedRelationship.isTypeOf("FeatureTyping")){
+			ownedRelationship.tag();
+			return ownedRelationship.type.declaredName;
+		}
+		else {
+			itemFeature.tag();
+			return itemFeature.getMultiplicityRange();
+		}
+	}
+}
+
+operation XMIni!Usage getConnectorEnd(){
+	for (ownedRelationship in self.ownedRelationship){
+		if (ownedRelationship.isTypeOf("ReferenceSubsetting")){
+			var referenceSubsetting = ownedRelationship;
+			if (referenceSubsetting.referencedFeature == null){
+				return "";
+			}
+			if (referenceSubsetting.referencedFeature.declaredName != null){
+				self.tag();
+				return referenceSubsetting.referencedFeature.declaredName;
+			}
+			else{
+				var str = "";
+				if (referenceSubsetting.ownedRelatedElement.first() == null){
+//					referenceSubsetting.referencedFeature.println("test:");
+					return "";
+				}
+				else{
+					for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
+						if (featureChain.chainingFeature.declaredName != null){
+							str += featureChain.chainingFeature.declaredName;
+							str += ".";
+						}
+						else {
+							if (featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){
+								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+								str += ".";
+							}
+						}
+					}
+					self.tag();
+					return str.substring(0, str.length()-1);
+				}
+			}
+		}
+		else {
+			return null;
+		}
+	}
+}
+

@@ -27,10 +27,10 @@ package SimpleVehicleModel {
 				attribute Tmax :> ISQBase::thermodynamicTemperature;
 				attribute maintenanceTime : Time::DateTime;
 				attribute brakePedalDepressed : ScalarValues::Boolean;
-				port ignitionCmdPort : IgnitionCmdPort;
-				port pwrCmdPort : PwrCmdPort;
-				port vehicleToRoadPort : VehicleToRoadPort;
-				port statusPort : StatusPort;
+				port ignitionCmdPort : ;
+				port pwrCmdPort : ;
+				port vehicleToRoadPort : ;
+				port statusPort : ;
 				;
 				;
 				;
@@ -38,7 +38,7 @@ package SimpleVehicleModel {
 				;
 				;
 				{
-					ref controller : VehicleController;
+					ref controller : ;
 					{
 						;
 						;
@@ -60,7 +60,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref ignitionCmd :> ;
 							{
-								ref ignitionCmd : IgnitionCmd;
+								ref ignitionCmd : ;
 								ref;
 							}
 							{
@@ -75,7 +75,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref :> ;
 							{
-								ref : VehicleOnSignal;
+								ref : ;
 								ref :>> Transfers::receiver;
 							}
 							;
@@ -85,7 +85,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref :> ;
 							{
-								ref : VehicleOffSignal;
+								ref : ;
 								ref :>> Transfers::receiver;
 							}
 							{
@@ -139,7 +139,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref :> ;
 							{
-								ref : ReturnToNormal;
+								ref : ;
 								ref :>> Transfers::receiver;
 							}
 							;
@@ -149,7 +149,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref :> ;
 							{
-								ref : ReturnToNormal;
+								ref : ;
 								ref :>> Transfers::receiver;
 							}
 							;
@@ -166,9 +166,9 @@ package SimpleVehicleModel {
 				attribute displacement :> ISQSpaceTime::volume;
 				port engineControlPort;
 				port fuelInPort;
-				port fuelCmdPort : FuelCmdPort;
-				port drivePwrPort : DrivePwrPort;
-				port ignitionCmdPort : IgnitionCmdPort;
+				port fuelCmdPort : ;
+				port drivePwrPort : ;
+				port ignitionCmdPort : ;
 				port flyWheelPort;
 				;
 				{
@@ -180,7 +180,7 @@ package SimpleVehicleModel {
 				}
 			}
 			part def StarterMotor {
-				port gearPort : GearPort;
+				port gearPort : ;
 			}
 			part def Cylinder;
 			part def Transmission {
@@ -197,20 +197,20 @@ package SimpleVehicleModel {
 				attribute steeringAngle :> ISQSpaceTime::angularMeasure;
 			}
 			part def HalfAxle {
-				port shankCompositePort : ShankCompositePort;
+				port shankCompositePort : ;
 			}
 			part def Differential;
 			part def Wheel {
 				attribute diameter : ISQBase::LengthValue;
-				port lugNutCompositePort : LugNutCompositePort;
+				port lugNutCompositePort : ;
 			}
 			part def Hub {
-				port shankCompositePort : ShankCompositePort;
+				port shankCompositePort : ;
 			}
 			abstract part def Software;
 			part def VehicleSoftware;
 			part def VehicleController {
-				port controlPort : ControlPort;
+				port controlPort : ;
 				{
 					{
 						;
@@ -225,7 +225,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref :> ;
 							{
-								ref : StartSignal;
+								ref : ;
 								ref :>> Transfers::receiver;
 							}
 							;
@@ -235,7 +235,7 @@ package SimpleVehicleModel {
 							ref :>> States::transitionLinkSource;
 							ref :> ;
 							{
-								ref : OffSignal;
+								ref : ;
 								ref :>> Transfers::receiver;
 							}
 							;
@@ -247,28 +247,28 @@ package SimpleVehicleModel {
 			part def CruiseController {
 				port setSpeedPort;
 				port speedSensorPort;
-				port cruiseControlPort : CruiseControlPort;
+				port cruiseControlPort : ;
 				;
 			}
 			part def SpeedSensor {
-				port speedSensorPort : SpeedSensorPort;
+				port speedSensorPort : ;
 			}
 			part def FuelTank {
 				attribute mass :> ISQBase::mass;
-				item fuel : Fuel {
+				item fuel :  {
 					attribute :>> ;
 				}
-				attribute fuelKind : FuelKind;
+				attribute fuelKind : ;
 				attribute fuelMassMax :> ISQBase::mass;
 				{
 					out ref :>> Constraints::null;
 				}
-				port fuelOutPort : FuelPort;
+				port fuelOutPort : ;
 				port fuelInPort;
 			}
 			part def BodyAssy;
 			part def Body {
-				attribute color : Colors;
+				attribute color : ;
 			}
 			part def Thermostat;
 			part def WaterHose;
@@ -289,7 +289,7 @@ package SimpleVehicleModel {
 		}
 		package PortDefinitions {
 			port def IgnitionCmdPort {
-				item ignitionCmd : IgnitionCmd;
+				item ignitionCmd : ;
 				;
 			}
 			port def StatusPort {
@@ -299,15 +299,15 @@ package SimpleVehicleModel {
 				;
 			}
 			port def PwrCmdPort {
-				item pwrCmd : PwrCmd;
+				item pwrCmd : ;
 				;
 			}
 			port def FuelCmdPort {
-				item fuelCmd : FuelCmd;
+				item fuelCmd : ;
 				;
 			}
 			port def FuelPort {
-				out item fuel : Fuel;
+				out item fuel : ;
 				;
 			}
 			port def DrivePwrPort {
@@ -342,11 +342,11 @@ package SimpleVehicleModel {
 				;
 			}
 			port def LugNutCompositePort {
-				port lugNutPort [*] : LugNutPort;
+				port lugNutPort [*] : ;
 				;
 			}
 			port def ShankCompositePort {
-				port shankPort [*] : ShankPort;
+				port shankPort [*] : ;
 				;
 			}
 			port def LugNutPort {
@@ -380,8 +380,8 @@ package SimpleVehicleModel {
 				;
 			}
 			port def HandPort {
-				out item ignitionCmd : IgnitionCmd;
-				out item pwrCmd : PwrCmd;
+				out item ignitionCmd : ;
+				out item pwrCmd : ;
 				;
 			}
 		}
@@ -401,7 +401,7 @@ package SimpleVehicleModel {
 			item def Cmd;
 			item def DriverCmd;
 			item def IgnitionCmd {
-				attribute ignitionOnOff : IgnitionOnOff;
+				attribute ignitionOnOff : ;
 			}
 			item def EngineStatus;
 			attribute def VehicleStartSignal;
@@ -415,26 +415,26 @@ package SimpleVehicleModel {
 		}
 		package InterfaceDefinitions {
 			interface def EngineToTransmissionInterface {
-				end port p1 : DrivePwrPort;
+				end port p1 : ;
 				end port p2;
 				;
 			}
 			interface def FuelInterface {
-				end port fuelOutPort : FuelPort;
+				end port fuelOutPort : ;
 				end port fuelInPort;
 				;
 			}
 			interface def WheelFastenerInterface {
-				end port lugNutPort : LugNutPort;
-				end port shankPort : ShankPort;
+				end port lugNutPort : ;
+				end port shankPort : ;
 				attribute maxTorque : ISQMechanics::TorqueValue;
 				{
 					out ref :>> Items::null;
 				}
 			}
 			interface def WheelHubInterface {
-				end port lugNutCompositePort : LugNutCompositePort;
-				end port shankCompositePort : ShankCompositePort;
+				end port lugNutCompositePort : ;
+				end port shankCompositePort : ;
 				interface;
 			}
 		}
@@ -443,11 +443,11 @@ package SimpleVehicleModel {
 		}
 		package ActionDefinitions {
 			action def ProvidePower {
-				item pwrCmd : PwrCmd;
+				item pwrCmd : ;
 				out ref wheelToRoadTorque [2] : ISQMechanics::TorqueValue;
 			}
 			action def GenerateTorque {
-				item fuelCmd : FuelCmd;
+				item fuelCmd : ;
 				out ref engineTorque : ISQMechanics::TorqueValue;
 			}
 			action def AmplifyTorque {
@@ -496,7 +496,7 @@ package SimpleVehicleModel {
 			}
 			requirement def TorqueGenerationRequirement {
 				doc \* The engine shall generate torque as a function of RPM as shown in Table 1. *\
-				ref generateTorque : GenerateTorque;
+				ref generateTorque : ;
 				out ref :>> Requirements::null;
 			}
 			requirement def DrivePowerOutputRequirement {
@@ -525,23 +525,23 @@ driving scenario *\
 			public import SI::*;
 			public import USCustomaryUnits::*;
 			enum def {
-				enum black : Colors;
-				enum grey : Colors;
-				enum red : Colors;
+				enum black : ;
+				enum grey : ;
+				enum red : ;
 			}
 			enum def {
 				enum [;
 				enum [;
 				enum [;
 			}
-			attribute cylinderDiameter : DiameterChoices [;
+			attribute cylinderDiameter :  [;
 			enum def {
-				enum on : IgnitionOnOff;
-				enum off : IgnitionOnOff;
+				enum on : ;
+				enum off : ;
 			}
 			enum def {
-				enum gas : FuelKind;
-				enum diesel : FuelKind;
+				enum gas : ;
+				enum diesel : ;
 			}
 			ref distancePerVolume :> Quantities::scalarQuantities /;
 			ref timePerDistance :> Quantities::scalarQuantities /;
@@ -598,14 +598,14 @@ driving scenario *\
 		package PartsTree {
 			part vehicleLogical {
 				;
-				part torqueGenerator : TorqueGenerator {
+				part torqueGenerator :  {
 					;
 				}
-				part electricalGenerator : ElectricalGenerator {
+				part electricalGenerator :  {
 					;
 				}
-				part steeringSystem : SteeringSubsystem;
-				part brakingSubsystem : BrakingSubsystem;
+				part steeringSystem : ;
+				part brakingSubsystem : ;
 			}
 		}
 	}
@@ -624,27 +624,27 @@ driving scenario *\
 	package VehicleConfigurations {
 		package VehicleConfiguration_a {
 			package PartsTree {
-				part vehicle_a : Vehicle {
+				part vehicle_a :  {
 					attribute mass :>>  +;
 					attribute dryMass :>> ;
 					attribute :>>  [;
 					attribute partMasses [*];
-					part fuelTank : FuelTank {
+					part fuelTank :  {
 						attribute :>>  [;
 						item :>>  {
 							attribute :>>  [;
 						}
 					}
-					part frontAxleAssembly : AxleAssembly {
+					part frontAxleAssembly :  {
 						attribute mass :> ISQBase::mass [;
-						part frontAxle : Axle;
-						part frontWheels [2] : Wheel;
+						part frontAxle : ;
+						part frontWheels [2] : ;
 					}
-					part rearAxleAssembly : AxleAssembly {
+					part rearAxleAssembly :  {
 						attribute mass :> ISQBase::mass [;
 						attribute driveTrainEfficiency : ScalarValues::Real;
-						part rearAxle : Axle;
-						part rearWheels [2] : Wheel {
+						part rearAxle : ;
+						part rearWheels [2] :  {
 							attribute :>> ;
 						}
 					}
@@ -658,7 +658,7 @@ driving scenario *\
 			public import ParametersOfInterestMetadata::null;
 			public import ModelingMetadata::*;
 			package PartsTree {
-				part vehicle_b : Vehicle {
+				part vehicle_b :  {
 					attribute mass + {
 						;
 					}
@@ -666,13 +666,13 @@ driving scenario *\
 					attribute :>>  [;
 					attribute partMasses ,;
 					attribute avgFuelEconomy :> ;
-					port fuelCmdPort : FuelCmdPort {
+					port fuelCmdPort :  {
 						item fuelCmd :>> ;
 					}
 					port setSpeedPort;
 					port vehicleToRoadPort :>>  {
-						port wheelToRoadPort1 : WheelToRoadPort;
-						port wheelToRoadPort2 : WheelToRoadPort;
+						port wheelToRoadPort1 : ;
+						port wheelToRoadPort2 : ;
 					}
 					;
 					;
@@ -684,52 +684,52 @@ driving scenario *\
 						ref width1 :>> ShapeItems::null [;
 						ref height1 :>> ShapeItems::null [;
 					}
-					part fuelTank : FuelTank {
+					part fuelTank :  {
 						attribute :>>  [;
 						item :>>  {
 							attribute :>>  [;
 						}
 						attribute :>>  [;
 					}
-					part frontAxleAssembly : AxleAssembly {
+					part frontAxleAssembly :  {
 						attribute mass :> ISQBase::mass [;
-						port shaftPort_d : ShaftPort_d;
-						part frontAxle : FrontAxle;
-						part frontWheels [2] : Wheel;
+						port shaftPort_d : ;
+						part frontAxle : ;
+						part frontWheels [2] : ;
 					}
-					part rearAxleAssembly : AxleAssembly {
+					part rearAxleAssembly :  {
 						attribute mass :> ISQBase::mass [;
 						attribute driveTrainEfficiency : ScalarValues::Real;
-						port shaftPort_d : ShaftPort_d;
+						port shaftPort_d : ;
 						;
-						part rearWheel1 : Wheel {
+						part rearWheel1 :  {
 							attribute :>> ;
-							port wheelToRoadPort : WheelToRoadPort;
+							port wheelToRoadPort : ;
 							port lugNutCompositePort :>>  {
 								port lugNutPort [5] :>> ;
 							}
 						}
-						part rearWheel2 : Wheel {
+						part rearWheel2 :  {
 							attribute :>> ;
-							port wheelToRoadPort : WheelToRoadPort;
+							port wheelToRoadPort : ;
 							port lugNutCompositePort :>>  {
 								port lugNutPort [5] :>> ;
 							}
 						}
-						part differential : Differential {
-							port shaftPort_d : ShaftPort_d;
-							port leftDiffPort : DiffPort;
-							port rightDiffPort : DiffPort;
+						part differential :  {
+							port shaftPort_d : ;
+							port leftDiffPort : ;
+							port rightDiffPort : ;
 						}
 						part rearAxle {
-							part leftHalfAxle : HalfAxle {
-								port leftAxleToDiffPort : AxlePort;
+							part leftHalfAxle :  {
+								port leftAxleToDiffPort : ;
 								port shankCompositePort :>>  {
 									port shankPort [5] :>> ;
 								}
 							}
-							part rightHalfAxle : HalfAxle {
-								port rightAxleToDiffPort : AxlePort;
+							part rightHalfAxle :  {
+								port rightAxleToDiffPort : ;
 								port shankCompositePort :>>  {
 									port shankPort [5] :>> ;
 								}
@@ -741,10 +741,10 @@ driving scenario *\
 						interface;
 						interface;
 					}
-					part starterMotor : StarterMotor;
-					part engine : Engine {
+					part starterMotor : ;
+					part engine :  {
 						;
-						part cylinders [4] : Cylinder;
+						part cylinders [4] : ;
 						part alternator {
 							;
 						}
@@ -762,26 +762,26 @@ driving scenario *\
 							out ref :>> ;
 						}
 					}
-					part transmission : Transmission {
+					part transmission :  {
 						attribute mass :> ISQBase::mass [;
-						port shaftPort_a : ShaftPort_a;
+						port shaftPort_a : ;
 						;
 					}
-					part driveshaft : Driveshaft {
+					part driveshaft :  {
 						attribute mass :> ISQBase::mass [;
-						port shaftPort_b : ShaftPort_b;
-						port shaftPort_c : ShaftPort_c;
+						port shaftPort_b : ;
+						port shaftPort_c : ;
 						;
 					}
-					part vehicleSoftware : VehicleSoftware {
-						part vehicleController : VehicleController {
+					part vehicleSoftware :  {
+						part vehicleController :  {
 							;
-							part cruiseController : CruiseController;
+							part cruiseController : ;
 						}
 					}
-					part speedSensor : SpeedSensor;
-					part bodyAssy : BodyAssy {
-						part body : Body {
+					part speedSensor : ;
+					part bodyAssy :  {
+						part body :  {
 							attribute :>> ;
 						}
 						part bumper {
@@ -837,7 +837,7 @@ driving scenario *\
 			}
 			package ActionTree {
 				{
-					item fuelCmd : FuelCmd;
+					item fuelCmd : ;
 					out ref wheelToRoadTorque [2] :>> ;
 					{
 						item;
@@ -865,35 +865,35 @@ driving scenario *\
 								ref;
 								ref;
 								ref :>> Transfers::receiver;
-								ref ignitionCmd : IgnitionCmd;
+								ref ignitionCmd : ;
 							}
 							{
-								ref ignitionCmd : IgnitionCmd;
+								ref ignitionCmd : ;
 								ref;
 							}
 							;
 							{
-								item ignitionCmd : IgnitionCmd;
-								out item es : EngineStatus;
+								item ignitionCmd : ;
+								out item es : ;
 							}
 							;
 							{
 								ref;
 								ref;
 								ref :>> Transfers::receiver;
-								ref es : EngineStatus;
+								ref es : ;
 							}
 							{
-								ref es : EngineStatus;
+								ref es : ;
 								ref;
 							}
 						}
-						part driver : Driver {
+						part driver :  {
 							;
 							;
 							;
 						}
-						part vehicle : Vehicle {
+						part vehicle :  {
 							;
 							;
 							;
@@ -993,7 +993,7 @@ driving scenario *\
 				public import ModelingMetadata::*;
 				item marketSurvey :> Items::items;
 				{
-					ref vehicle : Vehicle;
+					ref vehicle : ;
 					{
 						ref :>> ;
 						doc \* The total mass of the vehicle shall be less than or equal to the required mass.
@@ -1038,7 +1038,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					out ref :>> Requirements::null;
 				}
 				{
-					ref engine1 : Engine;
+					ref engine1 : ;
 					{
 						ref :>> ;
 						doc \* The total mass of the engine shall be less than or equal to the required mass.*\
@@ -1066,8 +1066,8 @@ Assume total mass includes a full tank of gas of 60 kg*\
 		}
 		package Engine4Cyl_Variant {
 			public import ModelingMetadata::*;
-			part engine : Engine {
-				part cylinders [4] : Cylinder;
+			part engine :  {
+				part cylinders [4] : ;
 			}
 			part engine4Cyl :>  {
 				part [4] :>> ;
@@ -1079,12 +1079,12 @@ Assume total mass includes a full tank of gas of 60 kg*\
 		}
 		package WheelHubAssemblies {
 			part wheelHubAssy1 {
-				part wheel1 : Wheel {
+				part wheel1 :  {
 					port :>>  {
 						port lugNutPort [5] :>> ;
 					}
 				}
-				part hub1 : Hub {
+				part hub1 :  {
 					port :>>  {
 						port shankPort [5] :>> ;
 					}
@@ -1092,12 +1092,12 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				interface;
 			}
 			part wheelHubAssy2 {
-				part wheel1 : Wheel {
+				part wheel1 :  {
 					port :>>  {
 						port lugNutPort [5] :>> ;
 					}
 				}
-				part hub1 : Hub {
+				part hub1 :  {
 					port :>>  {
 						port shankPort [5] :>> ;
 					}
@@ -1107,7 +1107,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				}
 			}
 			part wheelHubAssy3 {
-				part wheel1 : Wheel {
+				part wheel1 :  {
 					port lugNutCompositePort :>>  {
 						port lugNutPort [5] {
 							attribute :>>  [;
@@ -1118,7 +1118,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port lugNutPort3 [1];
 					}
 				}
-				part hub1 : Hub {
+				part hub1 :  {
 					port shankCompositePort :>>  {
 						port shankPort [5] {
 							attribute :>>  [;
@@ -1186,15 +1186,15 @@ The high octane gasoline is about 0.76[l/kg].
 				out ref dpv :>  /;
 			}
 			calc def AverageTravelTimePerDistance {
-				ref scenario : Scenario;
+				ref scenario : ;
 				out ref tpd_avg :> ;
 			}
 			calc def TraveledDistance {
-				ref scenario : Scenario;
+				ref scenario : ;
 				out ref distance :> ISQBase::length;
 			}
 			calc def IdlingFuelConsumptionPerTime {
-				ref engine : Engine;
+				ref engine : ;
 				attribute idlingFuelConsumptionPerDisplacement : ScalarValues::Real;
 				out ref f_a : ScalarValues::Real *;
 			}
@@ -1211,7 +1211,7 @@ The high octane gasoline is about 0.76[l/kg].
 				out ref f_b : ScalarValues::Real *;
 			}
 			calc def ComputeBSFC {
-				ref engine : Engine;
+				ref engine : ;
 				out ref : ScalarValues::Real;
 			}
 			{
@@ -1224,7 +1224,7 @@ The high octane gasoline is about 0.76[l/kg].
 					}
 					out ref :>> AnalysisCases::null;
 				}
-				attribute scenario : Scenario;
+				attribute scenario : ;
 				attribute distance;
 				attribute tpd_avg;
 				attribute bsfc;
@@ -1389,53 +1389,53 @@ The rationale and risk are contained in a metadata library. *\
 		}
 	}
 	package VehicleIndividuals {
-		individual occurrence a : VehicleRoadContext_1 {
+		individual occurrence a :  {
 			occurrence t0_t2_a {
 				snapshot occurrence t0_a {
 					attribute t0 :>>  [;
-					snapshot occurrence t0_r : Road_1 {
+					snapshot occurrence t0_r :  {
 						ref :>> ;
 						ref :>> ;
 					}
-					snapshot occurrence t0_v : Vehicle_1 {
+					snapshot occurrence t0_v :  {
 						ref :>>  [;
 						ref :>>  [;
 						ref :>>  [;
-						snapshot occurrence t0_fa : FrontAxleAssembly_1 {
-							snapshot occurrence t0_leftFront : Wheel_1;
-							snapshot occurrence t0_rightFront : Wheel_2;
+						snapshot occurrence t0_fa :  {
+							snapshot occurrence t0_leftFront : ;
+							snapshot occurrence t0_rightFront : ;
 						}
 					}
 				}
 				snapshot occurrence t1_a {
 					attribute t1 :>>  [;
-					snapshot occurrence t1_r : Road_1 {
+					snapshot occurrence t1_r :  {
 						ref :>> ;
 						ref :>> ;
 					}
-					snapshot occurrence t1_v : Vehicle_1 {
+					snapshot occurrence t1_v :  {
 						ref :>>  [;
 						ref :>>  [;
 						ref :>>  [;
-						snapshot occurrence t1_fa : FrontAxleAssembly_1 {
-							snapshot occurrence t1_leftFront : Wheel_1;
-							snapshot occurrence t1_rightFront : Wheel_2;
+						snapshot occurrence t1_fa :  {
+							snapshot occurrence t1_leftFront : ;
+							snapshot occurrence t1_rightFront : ;
 						}
 					}
 				}
 				snapshot occurrence t2_a {
 					attribute t2 :>>  [;
-					snapshot occurrence t2_r : Road_1 {
+					snapshot occurrence t2_r :  {
 						ref :>> ;
 						ref :>> ;
 					}
-					snapshot occurrence t2_v : Vehicle_1 {
+					snapshot occurrence t2_v :  {
 						ref :>>  [;
 						ref :>>  [;
 						ref :>>  [;
-						snapshot occurrence t2_fa : FrontAxleAssembly_1 {
-							snapshot occurrence t2_leftFront : Wheel_1;
-							snapshot occurrence t2_rightFront : Wheel_2;
+						snapshot occurrence t2_fa :  {
+							snapshot occurrence t2_leftFront : ;
+							snapshot occurrence t2_rightFront : ;
 						}
 					}
 				}
@@ -1451,7 +1451,7 @@ The rationale and risk are contained in a metadata library. *\
 			part def MissionContext;
 			part def Road;
 			part def Driver {
-				port handPort : HandPort;
+				port handPort : ;
 				{
 					;
 					;
@@ -1496,7 +1496,7 @@ The rationale and risk are contained in a metadata library. *\
 					}
 					out ref :>> UseCases::null;
 				}
-				ref vehicle : Vehicle;
+				ref vehicle : ;
 				part environment;
 				part road;
 				part driver;
@@ -1535,7 +1535,7 @@ The rationale and risk are contained in a metadata library. *\
 				out ref :>> ;
 			}
 			use case def GetInVehicle {
-				ref vehicle : Vehicle;
+				ref vehicle : ;
 				part driver [0];
 				part passenger [0];
 				{
@@ -1563,7 +1563,7 @@ The rationale and risk are contained in a metadata library. *\
 				out ref :>> ;
 			}
 			use case def GetOutOfVehicle {
-				ref vehicle : Vehicle;
+				ref vehicle : ;
 				part driver [0];
 				part passenger [0];
 				{
@@ -1589,7 +1589,7 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				;
 				{
-					ref ignitionCmd : IgnitionCmd;
+					ref ignitionCmd : ;
 					ref :>> Transfers::receiver;
 				}
 				;
@@ -1624,7 +1624,7 @@ The rationale and risk are contained in a metadata library. *\
 				;
 				;
 				{
-					ref ignitionCmd : IgnitionCmd;
+					ref ignitionCmd : ;
 					ref :>> Transfers::receiver;
 				}
 				{
@@ -1658,13 +1658,13 @@ The rationale and risk are contained in a metadata library. *\
 				out ref :>> ;
 			}
 		}
-		part missionContext : MissionContext {
+		part missionContext :  {
 			attribute transportTime {
 				;
 			}
 			;
-			part road : Road;
-			part driver : Driver {
+			part road : ;
+			part driver :  {
 				;
 				;
 				;
@@ -1675,7 +1675,7 @@ The rationale and risk are contained in a metadata library. *\
 				;
 				;
 			}
-			part passenger1 : Passenger {
+			part passenger1 :  {
 				;
 				;
 				;
@@ -1698,17 +1698,17 @@ The rationale and risk are contained in a metadata library. *\
 		comment about \* all of vehicleFamily is included in the superset model to enable subsetting a specific vehicle configuration*\
 		package VariationPointDefinitions {
 			variation part def TransmissionChoices {
-				part transmissionAutomatic : TransmissionAutomatic;
-				part transmissionManual : TransmissionManual;
+				part transmissionAutomatic : ;
+				part transmissionManual : ;
 			}
 		}
 		package VehiclePartsTree {
 			public import VariationPointDefinitions;
 			abstract part vehicleFamily {
-				variation part engine : Engine {
-					part engine4Cyl : Engine4Cyl;
-					part engine6Cyl : Engine6Cyl {
-						part cylinder [6] : Cylinder {
+				variation part engine :  {
+					part engine4Cyl : ;
+					part engine6Cyl :  {
+						part cylinder [6] :  {
 							variation attribute diameter : ISQBase::LengthValue {
 								attribute smallDiameter : ISQBase::LengthValue;
 								attribute largeDiagmeter : ISQBase::LengthValue;
@@ -1716,8 +1716,8 @@ The rationale and risk are contained in a metadata library. *\
 						}
 					}
 				}
-				part transmissionChoices : TransmissionChoices;
-				part sunroof [0] : Sunroof;
+				part transmissionChoices : ;
+				part sunroof [0] : ;
 				{
 					out ref :>> Constraints::null;
 				}
@@ -1764,7 +1764,7 @@ The rationale and risk are contained in a metadata library. *\
 			concern def VehicleSafety {
 				ref :>> Requirements::null;
 				doc \* identify system safety features *\
-				part se : SafetyEngineer;
+				part se : ;
 				out ref :>> Requirements::null;
 			}
 		}
@@ -1783,7 +1783,7 @@ The rationale and risk are contained in a metadata library. *\
 			public import ViewpointDefinitions;
 			public import ViewDefinitions;
 			public import VehicleConfiguration_b;
-			view vehiclePartsTree_Safety : PartsTreeView {
+			view vehiclePartsTree_Safety :  {
 				{
 					ref :>> ;
 					out ref :>> ;
