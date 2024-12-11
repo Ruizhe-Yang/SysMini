@@ -29,10 +29,10 @@
           <body xsi:type="AttributeUsage" declaredName="Tmax" featureSpecialization=":> ISQBase::thermodynamicTemperature"/>
           <body xsi:type="AttributeUsage" declaredName="maintenanceTime" featureSpecialization=": Time::DateTime"/>
           <body xsi:type="AttributeUsage" declaredName="brakePedalDepressed" featureSpecialization=": ScalarValues::Boolean"/>
-          <body xsi:type="PortUsage" declaredName="ignitionCmdPort" featureSpecialization=": IgnitionCmdPort"/>
-          <body xsi:type="PortUsage" declaredName="pwrCmdPort" featureSpecialization=": PwrCmdPort"/>
-          <body xsi:type="PortUsage" declaredName="vehicleToRoadPort" featureSpecialization=": VehicleToRoadPort"/>
-          <body xsi:type="PortUsage" declaredName="statusPort" featureSpecialization=": StatusPort"/>
+          <body xsi:type="PortUsage" declaredName="ignitionCmdPort" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="pwrCmdPort" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="vehicleToRoadPort" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="statusPort" featureSpecialization=": "/>
           <body xsi:type="PerformActionUsage" declaredName="providePower"/>
           <body xsi:type="PerformActionUsage" declaredName="provideBraking"/>
           <body xsi:type="PerformActionUsage" declaredName="controlDirection"/>
@@ -40,7 +40,7 @@
           <body xsi:type="PerformActionUsage" declaredName="applyParkingBrake"/>
           <body xsi:type="PerformActionUsage" declaredName="senseTemperature"/>
           <body xsi:type="ExhibitStateUsage" declaredName="vehicleStates" isParallel="true">
-            <body xsi:type="ReferenceUsage" declaredName="controller" featureSpecialization=": VehicleController"/>
+            <body xsi:type="ReferenceUsage" declaredName="controller" featureSpecialization=": "/>
             <body xsi:type="StateUsage" declaredName="operatingStates">
               <body xsi:type="PerformActionUsage" declaredName="initial"/>
               <body xsi:type="StateUsage" declaredName="off" featureSpecialization=":> States::exclusiveStates"/>
@@ -56,8 +56,6 @@
               <body xsi:type="TransitionUsage">
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>initial</connectorEndMember>
                   <connectorEndMember>off</connectorEndMember>
                 </body>
@@ -67,7 +65,7 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
+                  <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage"/>
                 </body>
                 <body xsi:type="SendActionUsage">
@@ -76,8 +74,6 @@
                   <body xsi:type="ReferenceUsage"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>off</connectorEndMember>
                   <connectorEndMember>starting</connectorEndMember>
                 </body>
@@ -87,12 +83,10 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" featureSpecialization=": VehicleOnSignal"/>
+                  <body xsi:type="ReferenceUsage" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>starting</connectorEndMember>
                   <connectorEndMember>on</connectorEndMember>
                 </body>
@@ -102,7 +96,7 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" featureSpecialization=": VehicleOffSignal"/>
+                  <body xsi:type="ReferenceUsage" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SendActionUsage">
@@ -111,8 +105,6 @@
                   <body xsi:type="ReferenceUsage"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>on</connectorEndMember>
                   <connectorEndMember>off</connectorEndMember>
                 </body>
@@ -130,8 +122,6 @@
               <body xsi:type="TransitionUsage">
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>initial</connectorEndMember>
                   <connectorEndMember>normal</connectorEndMember>
                 </body>
@@ -145,8 +135,6 @@
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>normal</connectorEndMember>
                   <connectorEndMember>maintenance</connectorEndMember>
                 </body>
@@ -165,8 +153,6 @@
                   <body xsi:type="ReferenceUsage"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>normal</connectorEndMember>
                   <connectorEndMember>degraded</connectorEndMember>
                 </body>
@@ -176,12 +162,10 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" featureSpecialization=": ReturnToNormal"/>
+                  <body xsi:type="ReferenceUsage" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>maintenance</connectorEndMember>
                   <connectorEndMember>normal</connectorEndMember>
                 </body>
@@ -191,12 +175,10 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" featureSpecialization=": ReturnToNormal"/>
+                  <body xsi:type="ReferenceUsage" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>degraded</connectorEndMember>
                   <connectorEndMember>normal</connectorEndMember>
                 </body>
@@ -213,9 +195,9 @@
           <body xsi:type="AttributeUsage" declaredName="displacement" featureSpecialization=":> ISQSpaceTime::volume"/>
           <body xsi:type="PortUsage" declaredName="engineControlPort"/>
           <body xsi:type="PortUsage" declaredName="fuelInPort"/>
-          <body xsi:type="PortUsage" declaredName="fuelCmdPort" featureSpecialization=": FuelCmdPort"/>
-          <body xsi:type="PortUsage" declaredName="drivePwrPort" featureSpecialization=": DrivePwrPort"/>
-          <body xsi:type="PortUsage" declaredName="ignitionCmdPort" featureSpecialization=": IgnitionCmdPort"/>
+          <body xsi:type="PortUsage" declaredName="fuelCmdPort" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="drivePwrPort" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="ignitionCmdPort" featureSpecialization=": "/>
           <body xsi:type="PortUsage" declaredName="flyWheelPort"/>
           <body xsi:type="PerformActionUsage" declaredName="generateTorque"/>
           <body xsi:type="ExhibitStateUsage" declaredName="engineStates">
@@ -227,7 +209,7 @@
           </body>
         </body>
         <body xsi:type="PartDefinition" declaredName="StarterMotor">
-          <body xsi:type="PortUsage" declaredName="gearPort" featureSpecialization=": GearPort"/>
+          <body xsi:type="PortUsage" declaredName="gearPort" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Cylinder"/>
         <body xsi:type="PartDefinition" declaredName="Transmission">
@@ -244,20 +226,20 @@
           <body xsi:type="AttributeUsage" declaredName="steeringAngle" featureSpecialization=":> ISQSpaceTime::angularMeasure"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="HalfAxle">
-          <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=": ShankCompositePort"/>
+          <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Differential"/>
         <body xsi:type="PartDefinition" declaredName="Wheel">
           <body xsi:type="AttributeUsage" declaredName="diameter" featureSpecialization=": ISQBase::LengthValue"/>
-          <body xsi:type="PortUsage" declaredName="lugNutCompositePort" featureSpecialization=": LugNutCompositePort"/>
+          <body xsi:type="PortUsage" declaredName="lugNutCompositePort" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Hub">
-          <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=": ShankCompositePort"/>
+          <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Software" isAbstract="true"/>
         <body xsi:type="PartDefinition" declaredName="VehicleSoftware"/>
         <body xsi:type="PartDefinition" declaredName="VehicleController">
-          <body xsi:type="PortUsage" declaredName="controlPort" featureSpecialization=": ControlPort"/>
+          <body xsi:type="PortUsage" declaredName="controlPort" featureSpecialization=": "/>
           <body xsi:type="ExhibitStateUsage" declaredName="controllerStates" isParallel="true">
             <body xsi:type="StateUsage" declaredName="operatingStates">
               <body xsi:type="PerformActionUsage" declaredName="initial"/>
@@ -266,8 +248,6 @@
               <body xsi:type="TransitionUsage">
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>initial</connectorEndMember>
                   <connectorEndMember>off</connectorEndMember>
                 </body>
@@ -277,12 +257,10 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" featureSpecialization=": StartSignal"/>
+                  <body xsi:type="ReferenceUsage" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>off</connectorEndMember>
                   <connectorEndMember>on</connectorEndMember>
                 </body>
@@ -292,12 +270,10 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
                 <body xsi:type="ReferenceUsage" featureSpecialization=":> "/>
                 <body xsi:type="AcceptActionUsage">
-                  <body xsi:type="ReferenceUsage" featureSpecialization=": OffSignal"/>
+                  <body xsi:type="ReferenceUsage" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
                 </body>
                 <body xsi:type="SuccessionAsUsage">
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
-                  <body xsi:type="ReferenceUsage" isEnd="true"/>
                   <connectorEndMember>on</connectorEndMember>
                   <connectorEndMember>off</connectorEndMember>
                 </body>
@@ -309,28 +285,28 @@
         <body xsi:type="PartDefinition" declaredName="CruiseController">
           <body xsi:type="PortUsage" declaredName="setSpeedPort"/>
           <body xsi:type="PortUsage" declaredName="speedSensorPort"/>
-          <body xsi:type="PortUsage" declaredName="cruiseControlPort" featureSpecialization=": CruiseControlPort"/>
+          <body xsi:type="PortUsage" declaredName="cruiseControlPort" featureSpecialization=": "/>
           <body xsi:type="ExhibitStateUsage" declaredName="cruiseControllerStates" featureSpecialization=":> Parts::exhibitedStates"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="SpeedSensor">
-          <body xsi:type="PortUsage" declaredName="speedSensorPort" featureSpecialization=": SpeedSensorPort"/>
+          <body xsi:type="PortUsage" declaredName="speedSensorPort" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartDefinition" declaredName="FuelTank">
           <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass"/>
-          <body xsi:type="ItemUsage" declaredName="fuel" featureSpecialization=": Fuel">
+          <body xsi:type="ItemUsage" declaredName="fuel" featureSpecialization=": ">
             <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
           </body>
-          <body xsi:type="AttributeUsage" declaredName="fuelKind" featureSpecialization=": FuelKind"/>
+          <body xsi:type="AttributeUsage" declaredName="fuelKind" featureSpecialization=": "/>
           <body xsi:type="AttributeUsage" declaredName="fuelMassMax" featureSpecialization=":> ISQBase::mass"/>
           <body xsi:type="AssertConstraintUsage" declaredName="fuelConstraint">
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Constraints::null"/>
           </body>
-          <body xsi:type="PortUsage" declaredName="fuelOutPort" featureSpecialization=": FuelPort"/>
+          <body xsi:type="PortUsage" declaredName="fuelOutPort" featureSpecialization=": "/>
           <body xsi:type="PortUsage" declaredName="fuelInPort"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="BodyAssy"/>
         <body xsi:type="PartDefinition" declaredName="Body">
-          <body xsi:type="AttributeUsage" declaredName="color" featureSpecialization=": Colors"/>
+          <body xsi:type="AttributeUsage" declaredName="color" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Thermostat"/>
         <body xsi:type="PartDefinition" declaredName="WaterHose"/>
@@ -351,7 +327,7 @@
       </body>
       <body xsi:type="Package" declaredName="PortDefinitions">
         <body xsi:type="PortDefinition" declaredName="IgnitionCmdPort">
-          <body xsi:type="ItemUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
+          <body xsi:type="ItemUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="StatusPort">
@@ -361,15 +337,15 @@
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="PwrCmdPort">
-          <body xsi:type="ItemUsage" declaredName="pwrCmd" featureSpecialization=": PwrCmd"/>
+          <body xsi:type="ItemUsage" declaredName="pwrCmd" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="FuelCmdPort">
-          <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=": FuelCmd"/>
+          <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="FuelPort">
-          <body xsi:type="ItemUsage" declaredName="fuel" direction="out" featureSpecialization=": Fuel"/>
+          <body xsi:type="ItemUsage" declaredName="fuel" direction="out" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="DrivePwrPort">
@@ -404,11 +380,11 @@
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="LugNutCompositePort">
-          <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[*]" featureSpecialization=": LugNutPort"/>
+          <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[*]" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="ShankCompositePort">
-          <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[*]" featureSpecialization=": ShankPort"/>
+          <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[*]" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="LugNutPort">
@@ -442,8 +418,8 @@
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="HandPort">
-          <body xsi:type="ItemUsage" declaredName="ignitionCmd" direction="out" featureSpecialization=": IgnitionCmd"/>
-          <body xsi:type="ItemUsage" declaredName="pwrCmd" direction="out" featureSpecialization=": PwrCmd"/>
+          <body xsi:type="ItemUsage" declaredName="ignitionCmd" direction="out" featureSpecialization=": "/>
+          <body xsi:type="ItemUsage" declaredName="pwrCmd" direction="out" featureSpecialization=": "/>
           <body xsi:type="ConjugatedPortDefinition"/>
         </body>
       </body>
@@ -463,7 +439,7 @@
         <body xsi:type="ItemDefinition" declaredName="Cmd"/>
         <body xsi:type="ItemDefinition" declaredName="DriverCmd"/>
         <body xsi:type="ItemDefinition" declaredName="IgnitionCmd">
-          <body xsi:type="AttributeUsage" declaredName="ignitionOnOff" featureSpecialization=": IgnitionOnOff"/>
+          <body xsi:type="AttributeUsage" declaredName="ignitionOnOff" featureSpecialization=": "/>
         </body>
         <body xsi:type="ItemDefinition" declaredName="EngineStatus"/>
         <body xsi:type="AttributeDefinition" declaredName="VehicleStartSignal"/>
@@ -477,29 +453,27 @@
       </body>
       <body xsi:type="Package" declaredName="InterfaceDefinitions">
         <body xsi:type="InterfaceDefinition" declaredName="EngineToTransmissionInterface">
-          <body xsi:type="PortUsage" declaredName="p1" isEnd="true" featureSpecialization=": DrivePwrPort"/>
+          <body xsi:type="PortUsage" declaredName="p1" isEnd="true" featureSpecialization=": "/>
           <body xsi:type="PortUsage" declaredName="p2" isEnd="true"/>
           <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration="p1.torquep2.torque"/>
         </body>
         <body xsi:type="InterfaceDefinition" declaredName="FuelInterface">
-          <body xsi:type="PortUsage" declaredName="fuelOutPort" isEnd="true" featureSpecialization=": FuelPort"/>
+          <body xsi:type="PortUsage" declaredName="fuelOutPort" isEnd="true" featureSpecialization=": "/>
           <body xsi:type="PortUsage" declaredName="fuelInPort" isEnd="true"/>
           <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration=" of Fuel fuelOutPort.fuelfuelInPort.fuel"/>
         </body>
         <body xsi:type="InterfaceDefinition" declaredName="WheelFastenerInterface">
-          <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true" featureSpecialization=": LugNutPort"/>
-          <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true" featureSpecialization=": ShankPort"/>
+          <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true" featureSpecialization=": "/>
           <body xsi:type="AttributeUsage" declaredName="maxTorque" featureSpecialization=": ISQMechanics::TorqueValue"/>
           <body xsi:type="ConstraintUsage">
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Items::null"/>
           </body>
         </body>
         <body xsi:type="InterfaceDefinition" declaredName="WheelHubInterface">
-          <body xsi:type="PortUsage" declaredName="lugNutCompositePort" isEnd="true" featureSpecialization=": LugNutCompositePort"/>
-          <body xsi:type="PortUsage" declaredName="shankCompositePort" isEnd="true" featureSpecialization=": ShankCompositePort"/>
-          <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface" multiplicityRange="[5]" featureSpecialization=": WheelFastenerInterface">
-            <body xsi:type="PortUsage" isEnd="true"/>
-            <body xsi:type="PortUsage" isEnd="true"/>
+          <body xsi:type="PortUsage" declaredName="lugNutCompositePort" isEnd="true" featureSpecialization=": "/>
+          <body xsi:type="PortUsage" declaredName="shankCompositePort" isEnd="true" featureSpecialization=": "/>
+          <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface" multiplicityRange="[5]" featureSpecialization=": ">
             <interfacePart>lugNutCompositePort.lugNutPort</interfacePart>
             <interfacePart>shankCompositePort.shankPort</interfacePart>
           </body>
@@ -510,11 +484,11 @@
       </body>
       <body xsi:type="Package" declaredName="ActionDefinitions">
         <body xsi:type="ActionDefinition" declaredName="ProvidePower">
-          <body xsi:type="ItemUsage" declaredName="pwrCmd" featureSpecialization=": PwrCmd"/>
+          <body xsi:type="ItemUsage" declaredName="pwrCmd" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" declaredName="wheelToRoadTorque" direction="out" multiplicityRange="[2]" featureSpecialization=": ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="GenerateTorque">
-          <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=": FuelCmd"/>
+          <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" declaredName="engineTorque" direction="out" featureSpecialization=": ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="AmplifyTorque">
@@ -563,7 +537,7 @@
         </body>
         <body xsi:type="RequirementDefinition" declaredName="TorqueGenerationRequirement">
           <body xsi:type="Documentation" text="The engine shall generate torque as a function of RPM as shown in Table 1. "/>
-          <body xsi:type="ReferenceUsage" declaredName="generateTorque" featureSpecialization=": GenerateTorque"/>
+          <body xsi:type="ReferenceUsage" declaredName="generateTorque" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Requirements::null"/>
         </body>
         <body xsi:type="RequirementDefinition" declaredName="DrivePowerOutputRequirement">
@@ -591,23 +565,23 @@
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="SI::*"/>
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="USCustomaryUnits::*"/>
         <body xsi:type="EnumerationDefinition">
-          <body xsi:type="EnumerationUsage" declaredName="black" featureSpecialization=": Colors"/>
-          <body xsi:type="EnumerationUsage" declaredName="grey" featureSpecialization=": Colors"/>
-          <body xsi:type="EnumerationUsage" declaredName="red" featureSpecialization=": Colors"/>
+          <body xsi:type="EnumerationUsage" declaredName="black" featureSpecialization=": "/>
+          <body xsi:type="EnumerationUsage" declaredName="grey" featureSpecialization=": "/>
+          <body xsi:type="EnumerationUsage" declaredName="red" featureSpecialization=": "/>
         </body>
         <body xsi:type="EnumerationDefinition">
           <body xsi:type="EnumerationUsage" valuePart="["/>
           <body xsi:type="EnumerationUsage" valuePart="["/>
           <body xsi:type="EnumerationUsage" valuePart="["/>
         </body>
-        <body xsi:type="AttributeUsage" declaredName="cylinderDiameter" featureSpecialization=": DiameterChoices" valuePart="["/>
+        <body xsi:type="AttributeUsage" declaredName="cylinderDiameter" featureSpecialization=": " valuePart="["/>
         <body xsi:type="EnumerationDefinition">
-          <body xsi:type="EnumerationUsage" declaredName="on" featureSpecialization=": IgnitionOnOff"/>
-          <body xsi:type="EnumerationUsage" declaredName="off" featureSpecialization=": IgnitionOnOff"/>
+          <body xsi:type="EnumerationUsage" declaredName="on" featureSpecialization=": "/>
+          <body xsi:type="EnumerationUsage" declaredName="off" featureSpecialization=": "/>
         </body>
         <body xsi:type="EnumerationDefinition">
-          <body xsi:type="EnumerationUsage" declaredName="gas" featureSpecialization=": FuelKind"/>
-          <body xsi:type="EnumerationUsage" declaredName="diesel" featureSpecialization=": FuelKind"/>
+          <body xsi:type="EnumerationUsage" declaredName="gas" featureSpecialization=": "/>
+          <body xsi:type="EnumerationUsage" declaredName="diesel" featureSpecialization=": "/>
         </body>
         <body xsi:type="ReferenceUsage" declaredName="distancePerVolume" featureSpecialization=":> Quantities::scalarQuantities" valuePart="/"/>
         <body xsi:type="ReferenceUsage" declaredName="timePerDistance" featureSpecialization=":> Quantities::scalarQuantities" valuePart="/"/>
@@ -664,29 +638,23 @@
       <body xsi:type="Package" declaredName="PartsTree">
         <body xsi:type="PartUsage" declaredName="vehicleLogical">
           <body xsi:type="MetadataUsage" declaredName="logical"/>
-          <body xsi:type="PartUsage" declaredName="torqueGenerator" featureSpecialization=": TorqueGenerator">
+          <body xsi:type="PartUsage" declaredName="torqueGenerator" featureSpecialization=": ">
             <body xsi:type="ActionUsage" declaredName="generateTorque" featureSpecialization=":> Parts::ownedActions"/>
           </body>
-          <body xsi:type="PartUsage" declaredName="electricalGenerator" featureSpecialization=": ElectricalGenerator">
+          <body xsi:type="PartUsage" declaredName="electricalGenerator" featureSpecialization=": ">
             <body xsi:type="ActionUsage" declaredName="generateElectricity" featureSpecialization=":> Parts::ownedActions"/>
           </body>
-          <body xsi:type="PartUsage" declaredName="steeringSystem" featureSpecialization=": SteeringSubsystem"/>
-          <body xsi:type="PartUsage" declaredName="brakingSubsystem" featureSpecialization=": BrakingSubsystem"/>
+          <body xsi:type="PartUsage" declaredName="steeringSystem" featureSpecialization=": "/>
+          <body xsi:type="PartUsage" declaredName="brakingSubsystem" featureSpecialization=": "/>
         </body>
       </body>
     </body>
     <body xsi:type="Package" declaredName="VehicleLogicalToPhysicalAllocation">
       <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="PartsTree" isRecursive="true"/>
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="PartsTree"/>
-      <body xsi:type="AllocationUsage" declaredName="vehicleLogicalToPhysicalAllocation" featureSpecialization=": LogicalToPhysical">
-        <body xsi:type="ReferenceUsage" isEnd="true"/>
-        <body xsi:type="ReferenceUsage" isEnd="true"/>
+      <body xsi:type="AllocationUsage" declaredName="vehicleLogicalToPhysicalAllocation" featureSpecialization=": ">
         <body xsi:type="AllocationUsage">
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
           <body xsi:type="AllocationUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorPart>vehicleLogical.torqueGenerator.generateTorque</connectorPart>
             <connectorPart>vehicle_b.engine</connectorPart>
           </body>
@@ -694,11 +662,7 @@
           <connectorPart>vehicle_b.engine</connectorPart>
         </body>
         <body xsi:type="AllocationUsage">
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
           <body xsi:type="AllocationUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorPart>vehicleLogical.electricalGenerator.generateElectricity</connectorPart>
             <connectorPart>vehicle_b.engine.alternator.generateElectricity</connectorPart>
           </body>
@@ -712,27 +676,27 @@
     <body xsi:type="Package" declaredName="VehicleConfigurations">
       <body xsi:type="Package" declaredName="VehicleConfiguration_a">
         <body xsi:type="Package" declaredName="PartsTree">
-          <body xsi:type="PartUsage" declaredName="vehicle_a" featureSpecialization=": Vehicle">
+          <body xsi:type="PartUsage" declaredName="vehicle_a" featureSpecialization=": ">
             <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":>> " valuePart="+"/>
             <body xsi:type="AttributeUsage" declaredName="dryMass" featureSpecialization=":>> "/>
             <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
             <body xsi:type="AttributeUsage" declaredName="partMasses" multiplicityRange="[*]"/>
-            <body xsi:type="PartUsage" declaredName="fuelTank" featureSpecialization=": FuelTank">
+            <body xsi:type="PartUsage" declaredName="fuelTank" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ItemUsage" featureSpecialization=":>> ">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
               </body>
             </body>
-            <body xsi:type="PartUsage" declaredName="frontAxleAssembly" featureSpecialization=": AxleAssembly">
+            <body xsi:type="PartUsage" declaredName="frontAxleAssembly" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass" valuePart="["/>
-              <body xsi:type="PartUsage" declaredName="frontAxle" featureSpecialization=": Axle"/>
-              <body xsi:type="PartUsage" declaredName="frontWheels" multiplicityRange="[2]" featureSpecialization=": Wheel"/>
+              <body xsi:type="PartUsage" declaredName="frontAxle" featureSpecialization=": "/>
+              <body xsi:type="PartUsage" declaredName="frontWheels" multiplicityRange="[2]" featureSpecialization=": "/>
             </body>
-            <body xsi:type="PartUsage" declaredName="rearAxleAssembly" featureSpecialization=": AxleAssembly">
+            <body xsi:type="PartUsage" declaredName="rearAxleAssembly" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass" valuePart="["/>
               <body xsi:type="AttributeUsage" declaredName="driveTrainEfficiency" featureSpecialization=": ScalarValues::Real"/>
-              <body xsi:type="PartUsage" declaredName="rearAxle" featureSpecialization=": Axle"/>
-              <body xsi:type="PartUsage" declaredName="rearWheels" multiplicityRange="[2]" featureSpecialization=": Wheel">
+              <body xsi:type="PartUsage" declaredName="rearAxle" featureSpecialization=": "/>
+              <body xsi:type="PartUsage" declaredName="rearWheels" multiplicityRange="[2]" featureSpecialization=": ">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
               </body>
             </body>
@@ -746,7 +710,7 @@
         <body xsi:type="MembershipImport" hasVisibility="true" visibility="public" declaredName="ParametersOfInterestMetadata::null"/>
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
         <body xsi:type="Package" declaredName="PartsTree">
-          <body xsi:type="PartUsage" declaredName="vehicle_b" featureSpecialization=": Vehicle">
+          <body xsi:type="PartUsage" declaredName="vehicle_b" featureSpecialization=": ">
             <body xsi:type="AttributeUsage" declaredName="mass" valuePart="+">
               <body xsi:type="MetadataUsage" declaredName="ParametersOfInterestMetadata::MeasureOfPerformance"/>
             </body>
@@ -754,13 +718,13 @@
             <body xsi:type="AttributeUsage" isDefault="true" featureSpecialization=":>> " valuePart="["/>
             <body xsi:type="AttributeUsage" declaredName="partMasses" valuePart=","/>
             <body xsi:type="AttributeUsage" declaredName="avgFuelEconomy" featureSpecialization=":> "/>
-            <body xsi:type="PortUsage" declaredName="fuelCmdPort" featureSpecialization=": FuelCmdPort">
+            <body xsi:type="PortUsage" declaredName="fuelCmdPort" featureSpecialization=": ">
               <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=":>> "/>
             </body>
             <body xsi:type="PortUsage" declaredName="setSpeedPort"/>
             <body xsi:type="PortUsage" declaredName="vehicleToRoadPort" featureSpecialization=":>> ">
-              <body xsi:type="PortUsage" declaredName="wheelToRoadPort1" featureSpecialization=": WheelToRoadPort"/>
-              <body xsi:type="PortUsage" declaredName="wheelToRoadPort2" featureSpecialization=": WheelToRoadPort"/>
+              <body xsi:type="PortUsage" declaredName="wheelToRoadPort1" featureSpecialization=": "/>
+              <body xsi:type="PortUsage" declaredName="wheelToRoadPort2" featureSpecialization=": "/>
             </body>
             <body xsi:type="PerformActionUsage"/>
             <body xsi:type="PerformActionUsage"/>
@@ -772,92 +736,82 @@
               <body xsi:type="ReferenceUsage" declaredName="width1" featureSpecialization=":>> ShapeItems::null" valuePart="["/>
               <body xsi:type="ReferenceUsage" declaredName="height1" featureSpecialization=":>> ShapeItems::null" valuePart="["/>
             </body>
-            <body xsi:type="PartUsage" declaredName="fuelTank" featureSpecialization=": FuelTank">
+            <body xsi:type="PartUsage" declaredName="fuelTank" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ItemUsage" featureSpecialization=":>> ">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
               </body>
               <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
             </body>
-            <body xsi:type="PartUsage" declaredName="frontAxleAssembly" featureSpecialization=": AxleAssembly">
+            <body xsi:type="PartUsage" declaredName="frontAxleAssembly" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass" valuePart="["/>
-              <body xsi:type="PortUsage" declaredName="shaftPort_d" featureSpecialization=": ShaftPort_d"/>
-              <body xsi:type="PartUsage" declaredName="frontAxle" featureSpecialization=": FrontAxle"/>
-              <body xsi:type="PartUsage" declaredName="frontWheels" multiplicityRange="[2]" featureSpecialization=": Wheel"/>
+              <body xsi:type="PortUsage" declaredName="shaftPort_d" featureSpecialization=": "/>
+              <body xsi:type="PartUsage" declaredName="frontAxle" featureSpecialization=": "/>
+              <body xsi:type="PartUsage" declaredName="frontWheels" multiplicityRange="[2]" featureSpecialization=": "/>
             </body>
-            <body xsi:type="PartUsage" declaredName="rearAxleAssembly" featureSpecialization=": AxleAssembly">
+            <body xsi:type="PartUsage" declaredName="rearAxleAssembly" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass" valuePart="["/>
               <body xsi:type="AttributeUsage" declaredName="driveTrainEfficiency" featureSpecialization=": ScalarValues::Real"/>
-              <body xsi:type="PortUsage" declaredName="shaftPort_d" featureSpecialization=": ShaftPort_d"/>
+              <body xsi:type="PortUsage" declaredName="shaftPort_d" featureSpecialization=": "/>
               <body xsi:type="PerformActionUsage"/>
-              <body xsi:type="PartUsage" declaredName="rearWheel1" featureSpecialization=": Wheel">
+              <body xsi:type="PartUsage" declaredName="rearWheel1" featureSpecialization=": ">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
-                <body xsi:type="PortUsage" declaredName="wheelToRoadPort" featureSpecialization=": WheelToRoadPort"/>
+                <body xsi:type="PortUsage" declaredName="wheelToRoadPort" featureSpecialization=": "/>
                 <body xsi:type="PortUsage" declaredName="lugNutCompositePort" featureSpecialization=":>> ">
                   <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
                 </body>
               </body>
-              <body xsi:type="PartUsage" declaredName="rearWheel2" featureSpecialization=": Wheel">
+              <body xsi:type="PartUsage" declaredName="rearWheel2" featureSpecialization=": ">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
-                <body xsi:type="PortUsage" declaredName="wheelToRoadPort" featureSpecialization=": WheelToRoadPort"/>
+                <body xsi:type="PortUsage" declaredName="wheelToRoadPort" featureSpecialization=": "/>
                 <body xsi:type="PortUsage" declaredName="lugNutCompositePort" featureSpecialization=":>> ">
                   <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
                 </body>
               </body>
-              <body xsi:type="PartUsage" declaredName="differential" featureSpecialization=": Differential">
-                <body xsi:type="PortUsage" declaredName="shaftPort_d" featureSpecialization=": ShaftPort_d"/>
-                <body xsi:type="PortUsage" declaredName="leftDiffPort" featureSpecialization=": DiffPort"/>
-                <body xsi:type="PortUsage" declaredName="rightDiffPort" featureSpecialization=": DiffPort"/>
+              <body xsi:type="PartUsage" declaredName="differential" featureSpecialization=": ">
+                <body xsi:type="PortUsage" declaredName="shaftPort_d" featureSpecialization=": "/>
+                <body xsi:type="PortUsage" declaredName="leftDiffPort" featureSpecialization=": "/>
+                <body xsi:type="PortUsage" declaredName="rightDiffPort" featureSpecialization=": "/>
               </body>
               <body xsi:type="PartUsage" declaredName="rearAxle">
-                <body xsi:type="PartUsage" declaredName="leftHalfAxle" featureSpecialization=": HalfAxle">
-                  <body xsi:type="PortUsage" declaredName="leftAxleToDiffPort" featureSpecialization=": AxlePort"/>
+                <body xsi:type="PartUsage" declaredName="leftHalfAxle" featureSpecialization=": ">
+                  <body xsi:type="PortUsage" declaredName="leftAxleToDiffPort" featureSpecialization=": "/>
                   <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=":>> ">
                     <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
                   </body>
                 </body>
-                <body xsi:type="PartUsage" declaredName="rightHalfAxle" featureSpecialization=": HalfAxle">
-                  <body xsi:type="PortUsage" declaredName="rightAxleToDiffPort" featureSpecialization=": AxlePort"/>
+                <body xsi:type="PartUsage" declaredName="rightHalfAxle" featureSpecialization=": ">
+                  <body xsi:type="PortUsage" declaredName="rightAxleToDiffPort" featureSpecialization=": "/>
                   <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=":>> ">
                     <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
                   </body>
                 </body>
               </body>
               <body xsi:type="BindingConnectorAsUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorEndMember>shaftPort_d</connectorEndMember>
                 <connectorEndMember>differential.shaftPort_d</connectorEndMember>
               </body>
               <body xsi:type="ConnectionUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorPart>differential.leftDiffPort</connectorPart>
                 <connectorPart>rearAxle.leftHalfAxle.leftAxleToDiffPort</connectorPart>
               </body>
               <body xsi:type="ConnectionUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorPart>differential.rightDiffPort</connectorPart>
                 <connectorPart>rearAxle.rightHalfAxle.rightAxleToDiffPort</connectorPart>
               </body>
-              <body xsi:type="InterfaceUsage" declaredName="wheelToleftHalAxleInterface" featureSpecialization=": WheelHubInterface">
-                <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]"/>
-                <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]"/>
+              <body xsi:type="InterfaceUsage" declaredName="wheelToleftHalAxleInterface" featureSpecialization=": ">
                 <interfacePart>rearWheel1.lugNutCompositePort[1]</interfacePart>
                 <interfacePart>rearAxle.leftHalfAxle.shankCompositePort[1]</interfacePart>
               </body>
-              <body xsi:type="InterfaceUsage" declaredName="wheelTorightHalAxleInterface" featureSpecialization=": WheelHubInterface">
-                <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]"/>
-                <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]"/>
+              <body xsi:type="InterfaceUsage" declaredName="wheelTorightHalAxleInterface" featureSpecialization=": ">
                 <interfacePart>rearWheel2.lugNutCompositePort[1]</interfacePart>
                 <interfacePart>rearAxle.rightHalfAxle.shankCompositePort[1]</interfacePart>
               </body>
             </body>
-            <body xsi:type="PartUsage" declaredName="starterMotor" featureSpecialization=": StarterMotor"/>
-            <body xsi:type="PartUsage" declaredName="engine" featureSpecialization=": Engine">
+            <body xsi:type="PartUsage" declaredName="starterMotor" featureSpecialization=": "/>
+            <body xsi:type="PartUsage" declaredName="engine" featureSpecialization=": ">
               <body xsi:type="PerformActionUsage"/>
-              <body xsi:type="PartUsage" declaredName="cylinders" multiplicityRange="[4]" featureSpecialization=": Cylinder"/>
+              <body xsi:type="PartUsage" declaredName="cylinders" multiplicityRange="[4]" featureSpecialization=": "/>
               <body xsi:type="PartUsage" declaredName="alternator">
                 <body xsi:type="ActionUsage" declaredName="generateElectricity" featureSpecialization=":> Parts::ownedActions"/>
               </body>
@@ -875,26 +829,26 @@
                 <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
               </body>
             </body>
-            <body xsi:type="PartUsage" declaredName="transmission" featureSpecialization=": Transmission">
+            <body xsi:type="PartUsage" declaredName="transmission" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass" valuePart="["/>
-              <body xsi:type="PortUsage" declaredName="shaftPort_a" featureSpecialization=": ShaftPort_a"/>
+              <body xsi:type="PortUsage" declaredName="shaftPort_a" featureSpecialization=": "/>
               <body xsi:type="PerformActionUsage"/>
             </body>
-            <body xsi:type="PartUsage" declaredName="driveshaft" featureSpecialization=": Driveshaft">
+            <body xsi:type="PartUsage" declaredName="driveshaft" featureSpecialization=": ">
               <body xsi:type="AttributeUsage" declaredName="mass" featureSpecialization=":> ISQBase::mass" valuePart="["/>
-              <body xsi:type="PortUsage" declaredName="shaftPort_b" featureSpecialization=": ShaftPort_b"/>
-              <body xsi:type="PortUsage" declaredName="shaftPort_c" featureSpecialization=": ShaftPort_c"/>
+              <body xsi:type="PortUsage" declaredName="shaftPort_b" featureSpecialization=": "/>
+              <body xsi:type="PortUsage" declaredName="shaftPort_c" featureSpecialization=": "/>
               <body xsi:type="PerformActionUsage"/>
             </body>
-            <body xsi:type="PartUsage" declaredName="vehicleSoftware" featureSpecialization=": VehicleSoftware">
-              <body xsi:type="PartUsage" declaredName="vehicleController" featureSpecialization=": VehicleController">
+            <body xsi:type="PartUsage" declaredName="vehicleSoftware" featureSpecialization=": ">
+              <body xsi:type="PartUsage" declaredName="vehicleController" featureSpecialization=": ">
                 <body xsi:type="ExhibitStateUsage" declaredName="controllerStates" featureSpecialization=":>> "/>
-                <body xsi:type="PartUsage" declaredName="cruiseController" featureSpecialization=": CruiseController"/>
+                <body xsi:type="PartUsage" declaredName="cruiseController" featureSpecialization=": "/>
               </body>
             </body>
-            <body xsi:type="PartUsage" declaredName="speedSensor" featureSpecialization=": SpeedSensor"/>
-            <body xsi:type="PartUsage" declaredName="bodyAssy" featureSpecialization=": BodyAssy">
-              <body xsi:type="PartUsage" declaredName="body" featureSpecialization=": Body">
+            <body xsi:type="PartUsage" declaredName="speedSensor" featureSpecialization=": "/>
+            <body xsi:type="PartUsage" declaredName="bodyAssy" featureSpecialization=": ">
+              <body xsi:type="PartUsage" declaredName="body" featureSpecialization=": ">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
               </body>
               <body xsi:type="PartUsage" declaredName="bumper">
@@ -923,86 +877,58 @@
               </body>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorEndMember>engine.fuelCmdPort</connectorEndMember>
               <connectorEndMember>fuelCmdPort</connectorEndMember>
             </body>
-            <body xsi:type="InterfaceUsage" declaredName="engineToTransmissionInterface" featureSpecialization=": EngineToTransmissionInterface">
-              <body xsi:type="PortUsage" isEnd="true"/>
-              <body xsi:type="PortUsage" isEnd="true"/>
+            <body xsi:type="InterfaceUsage" declaredName="engineToTransmissionInterface" featureSpecialization=": ">
               <interfacePart>engine.drivePwrPort</interfacePart>
               <interfacePart>transmission.clutchPort</interfacePart>
             </body>
-            <body xsi:type="InterfaceUsage" declaredName="fuelInterface" featureSpecialization=": FuelInterface">
-              <body xsi:type="PortUsage" isEnd="true"/>
-              <body xsi:type="PortUsage" isEnd="true"/>
+            <body xsi:type="InterfaceUsage" declaredName="fuelInterface" featureSpecialization=": ">
               <interfacePart>fuelTank.fuelOutPort</interfacePart>
               <interfacePart>engine.fuelInPort</interfacePart>
             </body>
             <body xsi:type="AllocationUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>providePower.generateToAmplify</connectorPart>
               <connectorPart>engineToTransmissionInterface</connectorPart>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorEndMember>engine.ignitionCmdPort</connectorEndMember>
               <connectorEndMember>ignitionCmdPort</connectorEndMember>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>starterMotor.gearPort</connectorPart>
               <connectorPart>engine.flyWheelPort</connectorPart>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>vehicleSoftware.vehicleController.controlPort</connectorPart>
               <connectorPart>engine.engineControlPort</connectorPart>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorEndMember>vehicle_b.setSpeedPort</connectorEndMember>
               <connectorEndMember>vehicleSoftware.vehicleController.cruiseController.setSpeedPort</connectorEndMember>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>speedSensor.speedSensorPort</connectorPart>
               <connectorPart>vehicleSoftware.vehicleController.cruiseController.speedSensorPort</connectorPart>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorEndMember>vehicleSoftware.vehicleController.cruiseController.cruiseControlPort</connectorEndMember>
               <connectorEndMember>vehicleSoftware.vehicleController.controlPort</connectorEndMember>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>transmission.shaftPort_a</connectorPart>
               <connectorPart>driveshaft.shaftPort_b</connectorPart>
             </body>
             <body xsi:type="ConnectionUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>driveshaft.shaftPort_c</connectorPart>
               <connectorPart>rearAxleAssembly.shaftPort_d</connectorPart>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorEndMember>rearAxleAssembly.rearWheel1.wheelToRoadPort</connectorEndMember>
               <connectorEndMember>vehicleToRoadPort.wheelToRoadPort1</connectorEndMember>
             </body>
             <body xsi:type="BindingConnectorAsUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorEndMember>rearAxleAssembly.rearWheel2.wheelToRoadPort</connectorEndMember>
               <connectorEndMember>vehicleToRoadPort.wheelToRoadPort2</connectorEndMember>
             </body>
@@ -1019,22 +945,22 @@
           </body>
         </body>
         <body xsi:type="Package" declaredName="ActionTree">
-          <body xsi:type="ActionUsage" declaredName="providePower" featureSpecialization=": ProvidePower">
-            <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=": FuelCmd"/>
+          <body xsi:type="ActionUsage" declaredName="providePower" featureSpecialization=": ">
+            <body xsi:type="ItemUsage" declaredName="fuelCmd" featureSpecialization=": "/>
             <body xsi:type="ReferenceUsage" declaredName="wheelToRoadTorque" direction="out" multiplicityRange="[2]" featureSpecialization=":>> "/>
-            <body xsi:type="ActionUsage" declaredName="generateTorque" featureSpecialization=": GenerateTorque">
+            <body xsi:type="ActionUsage" declaredName="generateTorque" featureSpecialization=": ">
               <body xsi:type="ItemUsage"/>
             </body>
-            <body xsi:type="ActionUsage" declaredName="amplifyTorque" featureSpecialization=": AmplifyTorque"/>
-            <body xsi:type="ActionUsage" declaredName="transferTorque" featureSpecialization=": TransferTorque"/>
-            <body xsi:type="ActionUsage" declaredName="distributeTorque" featureSpecialization=": DistributeTorque"/>
+            <body xsi:type="ActionUsage" declaredName="amplifyTorque" featureSpecialization=": "/>
+            <body xsi:type="ActionUsage" declaredName="transferTorque" featureSpecialization=": "/>
+            <body xsi:type="ActionUsage" declaredName="distributeTorque" featureSpecialization=": "/>
             <body xsi:type="FlowConnectionUsage" declaredName="generateToAmplify" flowConnectionDeclaration="generateTorque.engineTorqueamplifyTorque.engineTorque"/>
             <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration="amplifyTorque.transmissionTorquetransferTorque.transmissionTorque"/>
             <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration="transferTorque.driveshaftTorquedistributeTorque.driveshaftTorque"/>
           </body>
-          <body xsi:type="ActionUsage" declaredName="performSelfTest" featureSpecialization=": PerformSelfTest"/>
-          <body xsi:type="ActionUsage" declaredName="applyParkingBrake" featureSpecialization=": ApplyParkingBrake"/>
-          <body xsi:type="ActionUsage" declaredName="senseTemperature" featureSpecialization=": SenseTemperature"/>
+          <body xsi:type="ActionUsage" declaredName="performSelfTest" featureSpecialization=": "/>
+          <body xsi:type="ActionUsage" declaredName="applyParkingBrake" featureSpecialization=": "/>
+          <body xsi:type="ActionUsage" declaredName="senseTemperature" featureSpecialization=": "/>
         </body>
         <body xsi:type="Package" declaredName="DiscreteInteractions">
           <body xsi:type="Package" declaredName="Sequence">
@@ -1048,42 +974,40 @@
                   <body xsi:type="ReferenceUsage"/>
                   <body xsi:type="ReferenceUsage"/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
-                  <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
+                  <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
                 </body>
                 <body xsi:type="AcceptActionUsage" declaredName="trigger1">
-                  <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
+                  <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage"/>
                 </body>
                 <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration=" of IgnitionCmd trigger1.ignitionCmdstartEngine.ignitionCmd"/>
                 <body xsi:type="ActionUsage" declaredName="startEngine">
-                  <body xsi:type="ItemUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
-                  <body xsi:type="ItemUsage" declaredName="es" direction="out" featureSpecialization=": EngineStatus"/>
+                  <body xsi:type="ItemUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
+                  <body xsi:type="ItemUsage" declaredName="es" direction="out" featureSpecialization=": "/>
                 </body>
                 <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration=" of EngineStatus startEngine.essendStatus.es"/>
                 <body xsi:type="SendActionUsage" declaredName="sendStatus">
                   <body xsi:type="ReferenceUsage"/>
                   <body xsi:type="ReferenceUsage"/>
                   <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
-                  <body xsi:type="ReferenceUsage" declaredName="es" featureSpecialization=": EngineStatus"/>
+                  <body xsi:type="ReferenceUsage" declaredName="es" featureSpecialization=": "/>
                 </body>
                 <body xsi:type="AcceptActionUsage" declaredName="trigger2">
-                  <body xsi:type="ReferenceUsage" declaredName="es" featureSpecialization=": EngineStatus"/>
+                  <body xsi:type="ReferenceUsage" declaredName="es" featureSpecialization=": "/>
                   <body xsi:type="ReferenceUsage"/>
                 </body>
               </body>
-              <body xsi:type="PartUsage" declaredName="driver" featureSpecialization=": Driver">
+              <body xsi:type="PartUsage" declaredName="driver" featureSpecialization=": ">
                 <body xsi:type="PerformActionUsage"/>
                 <body xsi:type="PerformActionUsage"/>
                 <body xsi:type="EventOccurrenceUsage" featureSpecialization=":> Occurrences::timeEnclosedOccurrences"/>
               </body>
-              <body xsi:type="PartUsage" declaredName="vehicle" featureSpecialization=": Vehicle">
+              <body xsi:type="PartUsage" declaredName="vehicle" featureSpecialization=": ">
                 <body xsi:type="PerformActionUsage"/>
                 <body xsi:type="PerformActionUsage"/>
                 <body xsi:type="EventOccurrenceUsage" featureSpecialization=":> Occurrences::timeEnclosedOccurrences"/>
               </body>
               <body xsi:type="SuccessionAsUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorEndMember>vehicle.doorClosed</connectorEndMember>
                 <connectorEndMember>driver.driverReady</connectorEndMember>
               </body>
@@ -1157,7 +1081,6 @@
                       <body xsi:type="EventOccurrenceUsage"/>
                       <body xsi:type="SuccessionAsUsage">
                         <body xsi:type="ReferenceUsage" isEnd="true"/>
-                        <body xsi:type="ReferenceUsage" isEnd="true"/>
                         <connectorEndMember>setSpeedReceived</connectorEndMember>
                         <connectorEndMember></connectorEndMember>
                       </body>
@@ -1184,7 +1107,7 @@
           <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
           <body xsi:type="ItemUsage" declaredName="marketSurvey" featureSpecialization=":> Items::items"/>
           <body xsi:type="RequirementUsage" declaredName="vehicleSpecification">
-            <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": Vehicle"/>
+            <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": "/>
             <body xsi:type="RequirementUsage" declaredName="vehicleMassRequirement">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
               <body xsi:type="Documentation" text="The total mass of the vehicle shall be less than or equal to the required mass.&#xA;Assume total mass includes a full tank of gas of 60 kg"/>
@@ -1198,8 +1121,6 @@
               <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
             </body>
             <body xsi:type="AllocationUsage">
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
-              <body xsi:type="ReferenceUsage" isEnd="true"/>
               <connectorPart>vehicleMassRequirement</connectorPart>
               <connectorPart>vehicle_b.mass</connectorPart>
             </body>
@@ -1233,7 +1154,7 @@
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Requirements::null"/>
           </body>
           <body xsi:type="RequirementUsage" declaredName="engineSpecification">
-            <body xsi:type="ReferenceUsage" declaredName="engine1" featureSpecialization=": Engine"/>
+            <body xsi:type="ReferenceUsage" declaredName="engine1" featureSpecialization=": "/>
             <body xsi:type="RequirementUsage" declaredName="engineMassRequirement">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
               <body xsi:type="Documentation" text="The total mass of the engine shall be less than or equal to the required mass."/>
@@ -1241,7 +1162,7 @@
               <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
               <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
             </body>
-            <body xsi:type="RequirementUsage" declaredName="torqueGenerationRequirement" featureSpecialization=": TorqueGenerationRequirement">
+            <body xsi:type="RequirementUsage" declaredName="torqueGenerationRequirement" featureSpecialization=": ">
               <body xsi:type="ReferenceUsage" declaredName="generateTorque" isDefault="true"/>
               <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
             </body>
@@ -1261,8 +1182,8 @@
       </body>
       <body xsi:type="Package" declaredName="Engine4Cyl_Variant">
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
-        <body xsi:type="PartUsage" declaredName="engine" featureSpecialization=": Engine">
-          <body xsi:type="PartUsage" declaredName="cylinders" isOrdered="true" multiplicityRange="[4]" featureSpecialization=": Cylinder"/>
+        <body xsi:type="PartUsage" declaredName="engine" featureSpecialization=": ">
+          <body xsi:type="PartUsage" declaredName="cylinders" isOrdered="true" multiplicityRange="[4]" featureSpecialization=": "/>
         </body>
         <body xsi:type="PartUsage" declaredName="engine4Cyl" featureSpecialization=":> ">
           <body xsi:type="PartUsage" multiplicityRange="[4]" featureSpecialization=":>> "/>
@@ -1274,40 +1195,34 @@
       </body>
       <body xsi:type="Package" declaredName="WheelHubAssemblies">
         <body xsi:type="PartUsage" declaredName="wheelHubAssy1">
-          <body xsi:type="PartUsage" declaredName="wheel1" featureSpecialization=": Wheel">
+          <body xsi:type="PartUsage" declaredName="wheel1" featureSpecialization=": ">
             <body xsi:type="PortUsage" featureSpecialization=":>> ">
               <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
             </body>
           </body>
-          <body xsi:type="PartUsage" declaredName="hub1" featureSpecialization=": Hub">
+          <body xsi:type="PartUsage" declaredName="hub1" featureSpecialization=": ">
             <body xsi:type="PortUsage" featureSpecialization=":>> ">
               <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
             </body>
           </body>
-          <body xsi:type="InterfaceUsage" declaredName="wheelHubInterface" featureSpecialization=": WheelHubInterface">
-            <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]"/>
-            <body xsi:type="PortUsage" isEnd="true" multiplicityRange="[1]"/>
+          <body xsi:type="InterfaceUsage" declaredName="wheelHubInterface" featureSpecialization=": ">
             <interfacePart>wheel1.lugNutCompositePort[1]</interfacePart>
             <interfacePart>hub1.shankCompositePort[1]</interfacePart>
           </body>
         </body>
         <body xsi:type="PartUsage" declaredName="wheelHubAssy2">
-          <body xsi:type="PartUsage" declaredName="wheel1" featureSpecialization=": Wheel">
+          <body xsi:type="PartUsage" declaredName="wheel1" featureSpecialization=": ">
             <body xsi:type="PortUsage" featureSpecialization=":>> ">
               <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
             </body>
           </body>
-          <body xsi:type="PartUsage" declaredName="hub1" featureSpecialization=": Hub">
+          <body xsi:type="PartUsage" declaredName="hub1" featureSpecialization=": ">
             <body xsi:type="PortUsage" featureSpecialization=":>> ">
               <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[5]" featureSpecialization=":>> "/>
             </body>
           </body>
-          <body xsi:type="InterfaceUsage" declaredName="wheelHubInterface" featureSpecialization=": WheelHubInterface">
-            <body xsi:type="PortUsage" declaredName="lugNutCompositePort" isEnd="true" multiplicityRange="[1]"/>
-            <body xsi:type="PortUsage" declaredName="shankCompositePort" isEnd="true" multiplicityRange="[1]"/>
+          <body xsi:type="InterfaceUsage" declaredName="wheelHubInterface" featureSpecialization=": ">
             <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface1" featureSpecialization=":> ">
-              <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true" multiplicityRange="[5]"/>
-              <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true" multiplicityRange="[5]"/>
               <interfacePart>lugNutPort</interfacePart>
               <interfacePart>shankPort</interfacePart>
             </body>
@@ -1316,7 +1231,7 @@
           </body>
         </body>
         <body xsi:type="PartUsage" declaredName="wheelHubAssy3">
-          <body xsi:type="PartUsage" declaredName="wheel1" featureSpecialization=": Wheel">
+          <body xsi:type="PartUsage" declaredName="wheel1" featureSpecialization=": ">
             <body xsi:type="PortUsage" declaredName="lugNutCompositePort" featureSpecialization=":>> ">
               <body xsi:type="PortUsage" declaredName="lugNutPort" multiplicityRange="[5]">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
@@ -1327,7 +1242,7 @@
               <body xsi:type="PortUsage" declaredName="lugNutPort3" multiplicityRange="[1]"/>
             </body>
           </body>
-          <body xsi:type="PartUsage" declaredName="hub1" featureSpecialization=": Hub">
+          <body xsi:type="PartUsage" declaredName="hub1" featureSpecialization=": ">
             <body xsi:type="PortUsage" declaredName="shankCompositePort" featureSpecialization=":>> ">
               <body xsi:type="PortUsage" declaredName="shankPort" multiplicityRange="[5]">
                 <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="["/>
@@ -1339,26 +1254,18 @@
               <body xsi:type="PortUsage" declaredName="shankPort3" multiplicityRange="[1]"/>
             </body>
           </body>
-          <body xsi:type="InterfaceUsage" declaredName="wheelHubInterface" featureSpecialization=": WheelHubInterface">
-            <body xsi:type="PortUsage" declaredName="lugNutCompositePort" isEnd="true" multiplicityRange="[1]"/>
-            <body xsi:type="PortUsage" declaredName="shankCompositePort" isEnd="true" multiplicityRange="[1]"/>
+          <body xsi:type="InterfaceUsage" declaredName="wheelHubInterface" featureSpecialization=": ">
             <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface1" featureSpecialization=":> ">
-              <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true"/>
-              <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true"/>
               <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="*"/>
               <interfacePart>lugNutPort</interfacePart>
               <interfacePart>shankPort</interfacePart>
             </body>
             <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface2" featureSpecialization=":> ">
-              <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true"/>
-              <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true"/>
               <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="*"/>
               <interfacePart>lugNutPort</interfacePart>
               <interfacePart>shankPort</interfacePart>
             </body>
             <body xsi:type="InterfaceUsage" declaredName="wheelFastenerInterface3" featureSpecialization=":> ">
-              <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true"/>
-              <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true"/>
               <body xsi:type="AttributeUsage" featureSpecialization=":>> " valuePart="*"/>
               <interfacePart>lugNutPort</interfacePart>
               <interfacePart>shankPort</interfacePart>
@@ -1390,15 +1297,15 @@
           <body xsi:type="ReferenceUsage" declaredName="dpv" direction="out" featureSpecialization=":> " valuePart="/"/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="AverageTravelTimePerDistance">
-          <body xsi:type="ReferenceUsage" declaredName="scenario" featureSpecialization=": Scenario"/>
+          <body xsi:type="ReferenceUsage" declaredName="scenario" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" declaredName="tpd_avg" direction="out" featureSpecialization=":> "/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="TraveledDistance">
-          <body xsi:type="ReferenceUsage" declaredName="scenario" featureSpecialization=": Scenario"/>
+          <body xsi:type="ReferenceUsage" declaredName="scenario" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" declaredName="distance" direction="out" featureSpecialization=":> ISQBase::length"/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="IdlingFuelConsumptionPerTime">
-          <body xsi:type="ReferenceUsage" declaredName="engine" featureSpecialization=": Engine"/>
+          <body xsi:type="ReferenceUsage" declaredName="engine" featureSpecialization=": "/>
           <body xsi:type="AttributeUsage" declaredName="idlingFuelConsumptionPerDisplacement" featureSpecialization=": ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="f_a" direction="out" featureSpecialization=": ScalarValues::Real" valuePart="*"/>
         </body>
@@ -1415,7 +1322,7 @@
           <body xsi:type="ReferenceUsage" declaredName="f_b" direction="out" featureSpecialization=": ScalarValues::Real" valuePart="*"/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="ComputeBSFC">
-          <body xsi:type="ReferenceUsage" declaredName="engine" featureSpecialization=": Engine"/>
+          <body xsi:type="ReferenceUsage" declaredName="engine" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=": ScalarValues::Real"/>
         </body>
         <body xsi:type="AnalysisCaseUsage" declaredName="fuelEconomyAnalysis">
@@ -1428,7 +1335,7 @@
             </body>
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> AnalysisCases::null"/>
           </body>
-          <body xsi:type="AttributeUsage" declaredName="scenario" featureSpecialization=": Scenario"/>
+          <body xsi:type="AttributeUsage" declaredName="scenario" featureSpecialization=": "/>
           <body xsi:type="AttributeUsage" declaredName="distance"/>
           <body xsi:type="AttributeUsage" declaredName="tpd_avg"/>
           <body xsi:type="AttributeUsage" declaredName="bsfc"/>
@@ -1568,8 +1475,6 @@
             <body xsi:type="ReferenceUsage" declaredName="massMeasured" direction="out" featureSpecialization=":> ISQBase::mass"/>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>weighVehicle</connectorEndMember>
             <connectorEndMember>evaluatePassFail</connectorEndMember>
           </body>
@@ -1597,53 +1502,53 @@
       </body>
     </body>
     <body xsi:type="Package" declaredName="VehicleIndividuals">
-      <body xsi:type="OccurrenceUsage" declaredName="a" featureSpecialization=": VehicleRoadContext_1" isIndividual="true">
+      <body xsi:type="OccurrenceUsage" declaredName="a" featureSpecialization=": " isIndividual="true">
         <body xsi:type="OccurrenceUsage" declaredName="t0_t2_a">
           <body xsi:type="OccurrenceUsage" declaredName="t0_a" portionKind="snapshot">
             <body xsi:type="AttributeUsage" declaredName="t0" featureSpecialization=":>> " valuePart="["/>
-            <body xsi:type="OccurrenceUsage" declaredName="t0_r" featureSpecialization=": Road_1" portionKind="snapshot">
+            <body xsi:type="OccurrenceUsage" declaredName="t0_r" featureSpecialization=": " portionKind="snapshot">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
             </body>
-            <body xsi:type="OccurrenceUsage" declaredName="t0_v" featureSpecialization=": Vehicle_1" portionKind="snapshot">
+            <body xsi:type="OccurrenceUsage" declaredName="t0_v" featureSpecialization=": " portionKind="snapshot">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
-              <body xsi:type="OccurrenceUsage" declaredName="t0_fa" featureSpecialization=": FrontAxleAssembly_1" portionKind="snapshot">
-                <body xsi:type="OccurrenceUsage" declaredName="t0_leftFront" featureSpecialization=": Wheel_1" portionKind="snapshot"/>
-                <body xsi:type="OccurrenceUsage" declaredName="t0_rightFront" featureSpecialization=": Wheel_2" portionKind="snapshot"/>
+              <body xsi:type="OccurrenceUsage" declaredName="t0_fa" featureSpecialization=": " portionKind="snapshot">
+                <body xsi:type="OccurrenceUsage" declaredName="t0_leftFront" featureSpecialization=": " portionKind="snapshot"/>
+                <body xsi:type="OccurrenceUsage" declaredName="t0_rightFront" featureSpecialization=": " portionKind="snapshot"/>
               </body>
             </body>
           </body>
           <body xsi:type="OccurrenceUsage" declaredName="t1_a" portionKind="snapshot">
             <body xsi:type="AttributeUsage" declaredName="t1" featureSpecialization=":>> " valuePart="["/>
-            <body xsi:type="OccurrenceUsage" declaredName="t1_r" featureSpecialization=": Road_1" portionKind="snapshot">
+            <body xsi:type="OccurrenceUsage" declaredName="t1_r" featureSpecialization=": " portionKind="snapshot">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
             </body>
-            <body xsi:type="OccurrenceUsage" declaredName="t1_v" featureSpecialization=": Vehicle_1" portionKind="snapshot">
+            <body xsi:type="OccurrenceUsage" declaredName="t1_v" featureSpecialization=": " portionKind="snapshot">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
-              <body xsi:type="OccurrenceUsage" declaredName="t1_fa" featureSpecialization=": FrontAxleAssembly_1" portionKind="snapshot">
-                <body xsi:type="OccurrenceUsage" declaredName="t1_leftFront" featureSpecialization=": Wheel_1" portionKind="snapshot"/>
-                <body xsi:type="OccurrenceUsage" declaredName="t1_rightFront" featureSpecialization=": Wheel_2" portionKind="snapshot"/>
+              <body xsi:type="OccurrenceUsage" declaredName="t1_fa" featureSpecialization=": " portionKind="snapshot">
+                <body xsi:type="OccurrenceUsage" declaredName="t1_leftFront" featureSpecialization=": " portionKind="snapshot"/>
+                <body xsi:type="OccurrenceUsage" declaredName="t1_rightFront" featureSpecialization=": " portionKind="snapshot"/>
               </body>
             </body>
           </body>
           <body xsi:type="OccurrenceUsage" declaredName="t2_a" portionKind="snapshot">
             <body xsi:type="AttributeUsage" declaredName="t2" featureSpecialization=":>> " valuePart="["/>
-            <body xsi:type="OccurrenceUsage" declaredName="t2_r" featureSpecialization=": Road_1" portionKind="snapshot">
+            <body xsi:type="OccurrenceUsage" declaredName="t2_r" featureSpecialization=": " portionKind="snapshot">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
             </body>
-            <body xsi:type="OccurrenceUsage" declaredName="t2_v" featureSpecialization=": Vehicle_1" portionKind="snapshot">
+            <body xsi:type="OccurrenceUsage" declaredName="t2_v" featureSpecialization=": " portionKind="snapshot">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> " valuePart="["/>
-              <body xsi:type="OccurrenceUsage" declaredName="t2_fa" featureSpecialization=": FrontAxleAssembly_1" portionKind="snapshot">
-                <body xsi:type="OccurrenceUsage" declaredName="t2_leftFront" featureSpecialization=": Wheel_1" portionKind="snapshot"/>
-                <body xsi:type="OccurrenceUsage" declaredName="t2_rightFront" featureSpecialization=": Wheel_2" portionKind="snapshot"/>
+              <body xsi:type="OccurrenceUsage" declaredName="t2_fa" featureSpecialization=": " portionKind="snapshot">
+                <body xsi:type="OccurrenceUsage" declaredName="t2_leftFront" featureSpecialization=": " portionKind="snapshot"/>
+                <body xsi:type="OccurrenceUsage" declaredName="t2_rightFront" featureSpecialization=": " portionKind="snapshot"/>
               </body>
             </body>
           </body>
@@ -1659,15 +1564,13 @@
         <body xsi:type="PartDefinition" declaredName="MissionContext"/>
         <body xsi:type="PartDefinition" declaredName="Road"/>
         <body xsi:type="PartDefinition" declaredName="Driver">
-          <body xsi:type="PortUsage" declaredName="handPort" featureSpecialization=": HandPort"/>
+          <body xsi:type="PortUsage" declaredName="handPort" featureSpecialization=": "/>
           <body xsi:type="ExhibitStateUsage" declaredName="driverStates">
             <body xsi:type="StateUsage" declaredName="initial" featureSpecialization=":> States::exclusiveStates"/>
             <body xsi:type="StateUsage" declaredName="wait" featureSpecialization=":> States::exclusiveStates"/>
             <body xsi:type="TransitionUsage">
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> States::transitionLinkSource"/>
               <body xsi:type="SuccessionAsUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorEndMember>initial</connectorEndMember>
                 <connectorEndMember>wait</connectorEndMember>
               </body>
@@ -1681,8 +1584,6 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
               </body>
               <body xsi:type="SuccessionAsUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorEndMember>wait</connectorEndMember>
               </body>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
@@ -1695,8 +1596,6 @@
                 <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
               </body>
               <body xsi:type="SuccessionAsUsage">
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
-                <body xsi:type="ReferenceUsage" isEnd="true"/>
                 <connectorEndMember>wait</connectorEndMember>
               </body>
               <body xsi:type="ReferenceUsage" featureSpecialization=":>> TransitionPerformances::transitionLink"/>
@@ -1717,7 +1616,7 @@
             </body>
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> UseCases::null"/>
           </body>
-          <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": Vehicle"/>
+          <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": "/>
           <body xsi:type="PartUsage" declaredName="environment"/>
           <body xsi:type="PartUsage" declaredName="road"/>
           <body xsi:type="PartUsage" declaredName="driver"/>
@@ -1744,22 +1643,16 @@
           <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
           <body xsi:type="ActionUsage" declaredName="unlockDoor_in" multiplicityRange="[0]"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>unlockDoor_in</connectorEndMember>
             <connectorEndMember>openDoor_in</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="openDoor_in" featureSpecialization=":> Actions::subactions"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>openDoor_in</connectorEndMember>
             <connectorEndMember>enterVehicle</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="enterVehicle" featureSpecialization=":> Actions::subactions"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>enterVehicle</connectorEndMember>
             <connectorEndMember>closeDoor_in</connectorEndMember>
           </body>
@@ -1771,7 +1664,7 @@
           <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
         </body>
         <body xsi:type="UseCaseDefinition" declaredName="GetInVehicle">
-          <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": Vehicle"/>
+          <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": "/>
           <body xsi:type="PartUsage" declaredName="driver" multiplicityRange="[0]"/>
           <body xsi:type="PartUsage" declaredName="passenger" multiplicityRange="[0]"/>
           <body xsi:type="AssertConstraintUsage">
@@ -1787,22 +1680,16 @@
           <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
           <body xsi:type="ActionUsage" declaredName="openDoor_out" featureSpecialization=":> Actions::subactions"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>openDoor_out</connectorEndMember>
             <connectorEndMember>exitVehicle</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="exitVehicle" featureSpecialization=":> Actions::subactions"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>exitVehicle</connectorEndMember>
             <connectorEndMember>closeDoor_out</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="closeDoor_out" featureSpecialization=":> Actions::subactions"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>closeDoor_out</connectorEndMember>
             <connectorEndMember>lockDoor_out</connectorEndMember>
           </body>
@@ -1814,7 +1701,7 @@
           <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
         </body>
         <body xsi:type="UseCaseDefinition" declaredName="GetOutOfVehicle">
-          <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": Vehicle"/>
+          <body xsi:type="ReferenceUsage" declaredName="vehicle" featureSpecialization=": "/>
           <body xsi:type="PartUsage" declaredName="driver" multiplicityRange="[0]"/>
           <body xsi:type="PartUsage" declaredName="passenger" multiplicityRange="[0]"/>
           <body xsi:type="AssertConstraintUsage">
@@ -1833,7 +1720,6 @@
           <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember></connectorEndMember>
             <connectorEndMember>a</connectorEndMember>
           </body>
@@ -1842,18 +1728,14 @@
             <body xsi:type="ActionUsage" declaredName="passenger1GetInVehicle" multiplicityRange="[1]" featureSpecialization=":> "/>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>a</connectorEndMember>
             <connectorEndMember>trigger</connectorEndMember>
           </body>
           <body xsi:type="AcceptActionUsage" declaredName="trigger">
-            <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
+            <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
             <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>trigger</connectorEndMember>
             <connectorEndMember>b</connectorEndMember>
           </body>
@@ -1862,8 +1744,6 @@
             <body xsi:type="ActionUsage" declaredName="providePower" featureSpecialization=":> Actions::subactions"/>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>b</connectorEndMember>
             <connectorEndMember>c</connectorEndMember>
           </body>
@@ -1872,7 +1752,6 @@
             <body xsi:type="ActionUsage" declaredName="passenger1GetOutOfVehicle" multiplicityRange="[1]" featureSpecialization=":> "/>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>c</connectorEndMember>
             <connectorEndMember></connectorEndMember>
@@ -1896,110 +1775,78 @@
           <body xsi:type="JoinNode" declaredName="join2"/>
           <body xsi:type="JoinNode" declaredName="join3"/>
           <body xsi:type="AcceptActionUsage" declaredName="trigger">
-            <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": IgnitionCmd"/>
+            <body xsi:type="ReferenceUsage" declaredName="ignitionCmd" featureSpecialization=": "/>
             <body xsi:type="ReferenceUsage" featureSpecialization=":>> Transfers::receiver"/>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember></connectorEndMember>
             <connectorEndMember>fork1</connectorEndMember>
           </body>
           <body xsi:type="ForkNode" declaredName="fork1"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>fork1</connectorEndMember>
             <connectorEndMember>driverGetInVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>fork1</connectorEndMember>
             <connectorEndMember>passenger1GetInVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>driverGetInVehicle</connectorEndMember>
             <connectorEndMember>join1</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>passenger1GetInVehicle</connectorEndMember>
             <connectorEndMember>join1</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>join1</connectorEndMember>
             <connectorEndMember>trigger</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>trigger</connectorEndMember>
             <connectorEndMember>fork2</connectorEndMember>
           </body>
           <body xsi:type="ForkNode" declaredName="fork2"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>fork2</connectorEndMember>
             <connectorEndMember>driveVehicleToDestination</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>fork2</connectorEndMember>
             <connectorEndMember>providePower</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>driveVehicleToDestination</connectorEndMember>
             <connectorEndMember>join2</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>providePower</connectorEndMember>
             <connectorEndMember>join2</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>join2</connectorEndMember>
             <connectorEndMember>fork3</connectorEndMember>
           </body>
           <body xsi:type="ForkNode" declaredName="fork3"/>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>fork3</connectorEndMember>
             <connectorEndMember>driverGetOutOfVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>fork3</connectorEndMember>
             <connectorEndMember>passenger1GetOutOfVehicle</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>driverGetOutOfVehicle</connectorEndMember>
             <connectorEndMember>join3</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>passenger1GetOutOfVehicle</connectorEndMember>
             <connectorEndMember>join3</connectorEndMember>
           </body>
           <body xsi:type="SuccessionAsUsage">
-            <body xsi:type="ReferenceUsage" isEnd="true"/>
             <body xsi:type="ReferenceUsage" isEnd="true"/>
             <connectorEndMember>join3</connectorEndMember>
             <connectorEndMember></connectorEndMember>
@@ -2011,13 +1858,13 @@
           <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
         </body>
       </body>
-      <body xsi:type="PartUsage" declaredName="missionContext" featureSpecialization=": MissionContext">
+      <body xsi:type="PartUsage" declaredName="missionContext" featureSpecialization=": ">
         <body xsi:type="AttributeUsage" declaredName="transportTime">
           <body xsi:type="MetadataUsage" declaredName="ParametersOfInterestMetadata::MeasureOfEffectiveness"/>
         </body>
         <body xsi:type="PerformActionUsage"/>
-        <body xsi:type="PartUsage" declaredName="road" featureSpecialization=": Road"/>
-        <body xsi:type="PartUsage" declaredName="driver" featureSpecialization=": Driver">
+        <body xsi:type="PartUsage" declaredName="road" featureSpecialization=": "/>
+        <body xsi:type="PartUsage" declaredName="driver" featureSpecialization=": ">
           <body xsi:type="PerformActionUsage"/>
           <body xsi:type="PerformActionUsage"/>
           <body xsi:type="PerformActionUsage"/>
@@ -2028,7 +1875,7 @@
           <body xsi:type="PerformActionUsage"/>
           <body xsi:type="PerformActionUsage"/>
         </body>
-        <body xsi:type="PartUsage" declaredName="passenger1" featureSpecialization=": Passenger">
+        <body xsi:type="PartUsage" declaredName="passenger1" featureSpecialization=": ">
           <body xsi:type="PerformActionUsage"/>
           <body xsi:type="PerformActionUsage"/>
           <body xsi:type="PerformActionUsage"/>
@@ -2044,14 +1891,10 @@
           <body xsi:type="PerformActionUsage"/>
         </body>
         <body xsi:type="ConnectionUsage">
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
           <connectorPart>driver.handPort</connectorPart>
           <connectorPart>vehicle_b_1.ignitionCmdPort</connectorPart>
         </body>
         <body xsi:type="ConnectionUsage">
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
-          <body xsi:type="ReferenceUsage" isEnd="true"/>
           <connectorPart>road</connectorPart>
           <connectorPart>vehicle_b_1.vehicleToRoadPort</connectorPart>
         </body>
@@ -2061,17 +1904,17 @@
       <body xsi:type="Comment" text="all of vehicleFamily is included in the superset model to enable subsetting a specific vehicle configuration"/>
       <body xsi:type="Package" declaredName="VariationPointDefinitions">
         <body xsi:type="PartDefinition" declaredName="TransmissionChoices" isVariation="true">
-          <body xsi:type="PartUsage" declaredName="transmissionAutomatic" featureSpecialization=": TransmissionAutomatic"/>
-          <body xsi:type="PartUsage" declaredName="transmissionManual" featureSpecialization=": TransmissionManual"/>
+          <body xsi:type="PartUsage" declaredName="transmissionAutomatic" featureSpecialization=": "/>
+          <body xsi:type="PartUsage" declaredName="transmissionManual" featureSpecialization=": "/>
         </body>
       </body>
       <body xsi:type="Package" declaredName="VehiclePartsTree">
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VariationPointDefinitions"/>
         <body xsi:type="PartUsage" declaredName="vehicleFamily" isAbstract="true">
-          <body xsi:type="PartUsage" declaredName="engine" featureSpecialization=": Engine" isVariation="true">
-            <body xsi:type="PartUsage" declaredName="engine4Cyl" featureSpecialization=": Engine4Cyl"/>
-            <body xsi:type="PartUsage" declaredName="engine6Cyl" featureSpecialization=": Engine6Cyl">
-              <body xsi:type="PartUsage" declaredName="cylinder" multiplicityRange="[6]" featureSpecialization=": Cylinder">
+          <body xsi:type="PartUsage" declaredName="engine" featureSpecialization=": " isVariation="true">
+            <body xsi:type="PartUsage" declaredName="engine4Cyl" featureSpecialization=": "/>
+            <body xsi:type="PartUsage" declaredName="engine6Cyl" featureSpecialization=": ">
+              <body xsi:type="PartUsage" declaredName="cylinder" multiplicityRange="[6]" featureSpecialization=": ">
                 <body xsi:type="AttributeUsage" declaredName="diameter" featureSpecialization=": ISQBase::LengthValue" isVariation="true">
                   <body xsi:type="AttributeUsage" declaredName="smallDiameter" featureSpecialization=": ISQBase::LengthValue"/>
                   <body xsi:type="AttributeUsage" declaredName="largeDiagmeter" featureSpecialization=": ISQBase::LengthValue"/>
@@ -2079,8 +1922,8 @@
               </body>
             </body>
           </body>
-          <body xsi:type="PartUsage" declaredName="transmissionChoices" featureSpecialization=": TransmissionChoices"/>
-          <body xsi:type="PartUsage" declaredName="sunroof" multiplicityRange="[0]" featureSpecialization=": Sunroof"/>
+          <body xsi:type="PartUsage" declaredName="transmissionChoices" featureSpecialization=": "/>
+          <body xsi:type="PartUsage" declaredName="sunroof" multiplicityRange="[0]" featureSpecialization=": "/>
           <body xsi:type="AssertConstraintUsage" declaredName="selectionConstraint">
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Constraints::null"/>
           </body>
@@ -2127,7 +1970,7 @@
         <body xsi:type="ConcernDefinition" declaredName="VehicleSafety">
           <body xsi:type="ReferenceUsage" featureSpecialization=":>> Requirements::null"/>
           <body xsi:type="Documentation" text="identify system safety features "/>
-          <body xsi:type="PartUsage" declaredName="se" featureSpecialization=": SafetyEngineer"/>
+          <body xsi:type="PartUsage" declaredName="se" featureSpecialization=": "/>
           <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Requirements::null"/>
         </body>
       </body>
@@ -2146,7 +1989,7 @@
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ViewpointDefinitions"/>
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ViewDefinitions"/>
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VehicleConfiguration_b"/>
-        <body xsi:type="ViewUsage" declaredName="vehiclePartsTree_Safety" featureSpecialization=": PartsTreeView">
+        <body xsi:type="ViewUsage" declaredName="vehiclePartsTree_Safety" featureSpecialization=": ">
           <body xsi:type="SatisfyRequirementUsage" declaredName="sv">
             <body xsi:type="ReferenceUsage" featureSpecialization=":>> "/>
             <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>

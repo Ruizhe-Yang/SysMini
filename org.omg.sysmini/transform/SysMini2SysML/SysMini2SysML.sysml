@@ -53,10 +53,7 @@ package SimpleVehicleModel {
 						}
 						{
 							ref :>> States::transitionLinkSource;
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -71,10 +68,7 @@ package SimpleVehicleModel {
 								ref :>> Transfers::sender;
 								ref;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -84,10 +78,7 @@ package SimpleVehicleModel {
 								ref : VehicleOnSignal;
 								ref :>> Transfers::receiver;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -102,10 +93,7 @@ package SimpleVehicleModel {
 								ref :>> Transfers::sender;
 								ref;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 					}
@@ -119,10 +107,7 @@ package SimpleVehicleModel {
 						;
 						{
 							ref :>> States::transitionLinkSource;
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -132,10 +117,7 @@ package SimpleVehicleModel {
 								ref;
 								ref :>> Transfers::receiver;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -150,10 +132,7 @@ package SimpleVehicleModel {
 								ref :>> Transfers::sender;
 								ref;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -163,10 +142,7 @@ package SimpleVehicleModel {
 								ref : ReturnToNormal;
 								ref :>> Transfers::receiver;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -176,10 +152,7 @@ package SimpleVehicleModel {
 								ref : ReturnToNormal;
 								ref :>> Transfers::receiver;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 					}
@@ -245,10 +218,7 @@ package SimpleVehicleModel {
 						;
 						{
 							ref :>> States::transitionLinkSource;
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -258,10 +228,7 @@ package SimpleVehicleModel {
 								ref : StartSignal;
 								ref :>> Transfers::receiver;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 						{
@@ -271,10 +238,7 @@ package SimpleVehicleModel {
 								ref : OffSignal;
 								ref :>> Transfers::receiver;
 							}
-							{
-								end ref;
-								end ref;
-							}
+							;
 							ref :>> TransitionPerformances::transitionLink;
 						}
 					}
@@ -471,10 +435,7 @@ package SimpleVehicleModel {
 			interface def WheelHubInterface {
 				end port lugNutCompositePort : LugNutCompositePort;
 				end port shankCompositePort : ShankCompositePort;
-				interface {
-					end port;
-					end port;
-				}
+				interface;
 			}
 		}
 		package AllocationDefinitions {
@@ -652,23 +613,11 @@ driving scenario *\
 		public import PartsTree;
 		public import PartsTree;
 		{
-			end ref;
-			end ref;
 			{
-				end ref;
-				end ref;
-				{
-					end ref;
-					end ref;
-				}
+				;
 			}
 			{
-				end ref;
-				end ref;
-				{
-					end ref;
-					end ref;
-				}
+				;
 			}
 		}
 	}
@@ -786,26 +735,11 @@ driving scenario *\
 								}
 							}
 						}
-						{
-							end ref;
-							end ref;
-						}
-						{
-							end ref;
-							end ref;
-						}
-						{
-							end ref;
-							end ref;
-						}
-						interface {
-							end port [1];
-							end port [1];
-						}
-						interface {
-							end port [1];
-							end port [1];
-						}
+						;
+						;
+						;
+						interface;
+						interface;
 					}
 					part starterMotor : StarterMotor;
 					part engine : Engine {
@@ -875,62 +809,20 @@ driving scenario *\
 							}
 						}
 					}
-					{
-						end ref;
-						end ref;
-					}
-					interface {
-						end port;
-						end port;
-					}
-					interface {
-						end port;
-						end port;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
+					;
+					interface;
+					interface;
+					;
+					;
+					;
+					;
+					;
+					;
+					;
+					;
+					;
+					;
+					;
 					{
 						ref;
 						{
@@ -1006,10 +898,7 @@ driving scenario *\
 							;
 							;
 						}
-						{
-							end ref;
-							end ref;
-						}
+						;
 						{
 							;
 							;
@@ -1080,7 +969,6 @@ driving scenario *\
 										;
 										{
 											end ref;
-											end ref;
 										}
 										;
 									}
@@ -1119,10 +1007,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						}
 						out ref :>> ;
 					}
-					{
-						end ref;
-						end ref;
-					}
+					;
 					{
 						ref :>> Requirements::null;
 						doc \* fuel economy requirements group *\
@@ -1204,10 +1089,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port shankPort [5] :>> ;
 					}
 				}
-				interface {
-					end port [1];
-					end port [1];
-				}
+				interface;
 			}
 			part wheelHubAssy2 {
 				part wheel1 : Wheel {
@@ -1221,12 +1103,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					}
 				}
 				interface {
-					end port lugNutCompositePort [1];
-					end port shankCompositePort [1];
-					interface {
-						end port lugNutPort [5];
-						end port shankPort [5];
-					}
+					interface;
 				}
 			}
 			part wheelHubAssy3 {
@@ -1254,21 +1131,13 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					}
 				}
 				interface {
-					end port lugNutCompositePort [1];
-					end port shankCompositePort [1];
 					interface {
-						end port lugNutPort;
-						end port shankPort;
 						attribute :>>  *;
 					}
 					interface {
-						end port lugNutPort;
-						end port shankPort;
 						attribute :>>  *;
 					}
 					interface {
-						end port lugNutPort;
-						end port shankPort;
 						attribute :>>  *;
 					}
 				}
@@ -1495,10 +1364,7 @@ The rationale and risk are contained in a metadata library. *\
 				{
 					out ref massMeasured :> ISQBase::mass;
 				}
-				{
-					end ref;
-					end ref;
-				}
+				;
 				{
 					ref massMeasured :> ISQBase::mass;
 					out ref verdict;
@@ -1591,10 +1457,7 @@ The rationale and risk are contained in a metadata library. *\
 					;
 					{
 						ref :>> States::transitionLinkSource;
-						{
-							end ref;
-							end ref;
-						}
+						;
 						ref :>> TransitionPerformances::transitionLink;
 					}
 					{
@@ -1604,10 +1467,7 @@ The rationale and risk are contained in a metadata library. *\
 							ref;
 							ref :>> Transfers::receiver;
 						}
-						{
-							end ref;
-							end ref;
-						}
+						;
 						ref :>> TransitionPerformances::transitionLink;
 					}
 					{
@@ -1617,10 +1477,7 @@ The rationale and risk are contained in a metadata library. *\
 							ref;
 							ref :>> Transfers::receiver;
 						}
-						{
-							end ref;
-							end ref;
-						}
+						;
 						ref :>> TransitionPerformances::transitionLink;
 					}
 				}
@@ -1665,20 +1522,11 @@ The rationale and risk are contained in a metadata library. *\
 			{
 				ref :>> ;
 				;
-				{
-					end ref;
-					end ref;
-				}
 				;
-				{
-					end ref;
-					end ref;
-				}
 				;
-				{
-					end ref;
-					end ref;
-				}
+				;
+				;
+				;
 				;
 				{
 					ref :>> ;
@@ -1702,20 +1550,11 @@ The rationale and risk are contained in a metadata library. *\
 			{
 				ref :>> ;
 				;
-				{
-					end ref;
-					end ref;
-				}
 				;
-				{
-					end ref;
-					end ref;
-				}
 				;
-				{
-					end ref;
-					end ref;
-				}
+				;
+				;
+				;
 				;
 				{
 					ref :>> ;
@@ -1743,38 +1582,27 @@ The rationale and risk are contained in a metadata library. *\
 				ref :>> ;
 				{
 					end ref;
-					end ref;
 				}
 				{
 					;
 					;
 				}
-				{
-					end ref;
-					end ref;
-				}
+				;
 				{
 					ref ignitionCmd : IgnitionCmd;
 					ref :>> Transfers::receiver;
 				}
+				;
 				{
-					end ref;
-					end ref;
+					;
+					;
 				}
+				;
 				{
 					;
 					;
 				}
 				{
-					end ref;
-					end ref;
-				}
-				{
-					;
-					;
-				}
-				{
-					end ref;
 					end ref;
 				}
 				{
@@ -1801,73 +1629,26 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				{
 					end ref;
-					end ref;
 				}
 				;
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
+				;
 				;
 				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				;
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
 					end ref;
 				}
 				{
@@ -1909,14 +1690,8 @@ The rationale and risk are contained in a metadata library. *\
 				;
 				;
 			}
-			{
-				end ref;
-				end ref;
-			}
-			{
-				end ref;
-				end ref;
-			}
+			;
+			;
 		}
 	}
 	package VehicleSuperSetModel {

@@ -1,4 +1,7 @@
 pre{
+	for (e in XMIni!Element){
+		e.name = "";
+	}
 	"------------------ ETL Start!------------------".println();
 }
 
@@ -167,18 +170,32 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 
 
 operation XMIni!Relationship addRelationshipTo(rootNode : SysMini!Element){
-	rootNode.body.add(self.equivalent());
-	self.relationshipTransform(rootNode);
+	if (self.isEntity()){
+		rootNode.body.add(self.equivalent());
+		self.relationshipTransform(rootNode);
+	}
 }
 
 operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
-	self.relationshipTransform(rootNode);
+	if (self.isEntity()){
+		self.relationshipTransform(rootNode);
+	}
 }
 
 operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
-	var node = self.equivalent();
-	rootNode.body.add(node);
-	self.elementTransform(node);
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		self.elementTransform(node);
+	}
+}
+
+operation XMIni!Element isEntity(){
+	return (self.name != "*");
+}
+
+operation XMIni!Element tag(){
+	self.name = "*";
 }
 
 operation XMIni!Element relationships(){
@@ -283,7 +300,7 @@ rule DefinitionBody
 	transform s : XMIni!Type
 	to t : SysMini!Type{
 	}
-	
+
 @abstract
 rule Definition
 	transform s : XMIni!Definition
@@ -535,7 +552,7 @@ rule LifeClassMembership
 	to t : SysMini!OccurrenceDefinition{
 		for (ownedRelationship in s.ownedRelationship.getElementOf("OwningMembership")){
 			for (lifeClass in ownedRelationship.ownedRelatedElement.getElementOf("LifeClass")){
-//				lifeClass.println();
+				lifeClass.tag();
 //				lifeClass.println();
 			}
 		}
@@ -580,7 +597,6 @@ rule Import
 		t.isImportAll = s.isImportAll;
 		t.isRecursive = s.isRecursive;
 	}
-	
 
 
 //Definition
@@ -606,6 +622,7 @@ rule UsageRule
 	to t : SysMini!Usage
 	extends ElementRule, PrefixMetadataMember{
 	}
+	
 	
 operation SysMini!Usage setFeatureDirection(s: XMIni!Usage){
 	switch (s.direction.value.asString()){
@@ -678,6 +695,7 @@ operation XMIni!FeatureValue getFeatureValueOperator(){
 	if (conditionalExpression.isTypeOf("OperatorExpression")){
 	//	conditionalExpression.operator.println();
 	//	conditionalExpression.operand.println();
+		conditionalExpression.tag();
 		return conditionalExpression.operator;
 	}
 	else {
@@ -754,7 +772,7 @@ rule FeatureSpecialization
 		t.featureSpecialization = s.getFeatureSpecialization();
 	}
 	
-operation XMIni!Feature getFeatureSpecialization(){ //380
+operation XMIni!Feature getFeatureSpecialization(){
 	for (owningMembership in self.ownedRelationship.first()){
 		switch (owningMembership.type().name){
 			case "FeatureTyping":{
@@ -818,6 +836,7 @@ rule OwnedReferenceSubsetting
 	transform s : XMIni!Element
 	to t : SysMini!Element{
 		for (referenceSubsetting in s.ownedRelationship.getElementOf("ReferenceSubsetting")){
+			referenceSubsetting.tag();
 			referenceSubsetting.println();
 		}
 	}
@@ -1018,6 +1037,7 @@ rule BinaryInterfacePart
 				str += interfaceEnd.getMultiplicityRange();
 				t.interfacePart.add(str);
 			}
+			interfaceEnd.tag();
 		}
 	}
 	
@@ -1040,6 +1060,7 @@ rule NaryInterfacePart
 				str += interfaceEnd.getMultiplicityRange();
 				t.interfacePart.add(str);
 			}
+			interfaceEnd.tag();
 		}	
 	}
 	
@@ -1056,6 +1077,7 @@ rule FlowConnectionDeclaration
 				t.flowConnectionDeclaration += " of ";
 				t.flowConnectionDeclaration += ownedRelationship.getItemFeatureMember();
 				t.flowConnectionDeclaration += " ";
+				ownedRelationship.tag();
 			}
 			else if (ownedRelationship.isTypeOf("EndFeatureMembership")){
 				if (isIf){
@@ -1082,10 +1104,12 @@ operation XMIni!EndFeatureMembership getFlowEndMember(){
 				if (o.isTypeOf("ReferenceSubsetting")){
 					str += o.referencedFeature.declaredName;
 					str += ".";
+					o.tag();
 				}
 				else if (o.isTypeOf("FeatureMembership") and o.ownedRelatedElement.size() == 1){
 					var featureChainPrefix = o.ownedRelatedElement.first();
 					str += featureChainPrefix.ownedRelationship.first().redefinedFeature.declaredName;
+					featureChainPrefix.tag();
 				}
 			}
 			return str;
@@ -1100,9 +1124,11 @@ operation XMIni!FeatureMembership getItemFeatureMember(){
 	var itemFeature = self.ownedRelatedElement.first();
 	for (ownedRelationship in itemFeature.ownedRelationship){
 		if (ownedRelationship.isTypeOf("FeatureTyping")){
+			ownedRelationship.tag();
 			return ownedRelationship.type.declaredName;
 		}
 		else {
+			itemFeature.tag();
 			return itemFeature.getMultiplicityRange();
 		}
 	}
@@ -1129,6 +1155,7 @@ rule BinaryConnectorPart
 			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
 			if (referenceUsage.declaredName != null){
 				t.connectorPart.add(referenceUsage.declaredName);
+				referenceUsage.tag();
 			}
 			else {
 				t.connectorPart.add(referenceUsage.getConnectorEnd());
@@ -1141,9 +1168,10 @@ operation XMIni!Usage getConnectorEnd(){
 		if (ownedRelationship.isTypeOf("ReferenceSubsetting")){
 			var referenceSubsetting = ownedRelationship;
 			if (referenceSubsetting.referencedFeature == null){
-				return "";	
+				return "";
 			}
 			if (referenceSubsetting.referencedFeature.declaredName != null){
+				self.tag();
 				return referenceSubsetting.referencedFeature.declaredName;
 			}
 			else{
@@ -1165,6 +1193,7 @@ operation XMIni!Usage getConnectorEnd(){
 							}
 						}
 					}
+					self.tag();
 					return str.substring(0, str.length()-1);
 				}
 			}
@@ -1183,6 +1212,7 @@ rule NaryConnectorPart
 			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
 			if (referenceUsage.declaredName != null){
 				t.connectorPart.add(referenceUsage.declaredName);
+				referenceUsage.tag();
 			}
 			else {
 				t.connectorPart.add(referenceUsage.getConnectorEnd());
@@ -1254,6 +1284,7 @@ rule MetadataTyping
 		else{
 			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().declaredName;
 		}
+		s.ownedRelationship.getElementOf("FeatureTyping").first().tag();
 	}
 	
 @abstract
@@ -1355,7 +1386,6 @@ rule NamespaceImport
 				t.declaredName = n.first()+"::*";
 			}
 		}
-		t.declaredName.println();
 	}
 	
 @abstract
@@ -1378,7 +1408,7 @@ rule MembershipImport
 	to t : SysMini!MembershipImport 
 	extends Import{
 		if (s.importedMembership != null){
-			t.declaredName = s.importedMembership.eContents().first().declaredName;
+			t.declaredName = s.importedMembership.ownedRelatedElement.first().declaredName;
 		}
 	}
 	
