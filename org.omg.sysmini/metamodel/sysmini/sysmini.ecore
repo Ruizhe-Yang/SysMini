@@ -45,14 +45,9 @@
     <eLiterals name="protected" value="1"/>
     <eLiterals name="public" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Documentation" eSuperTypes="#//Comment">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDoc" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Documentation" eSuperTypes="#//Comment"/>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//AnnotatingElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCommentName" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbout" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="annotation" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locale" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -63,8 +58,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextualRepresentation" eSuperTypes="#//AnnotatingElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRep" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//Namespace">

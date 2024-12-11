@@ -492,8 +492,8 @@ rule ViewDefinitionBody
 	
 @abstract
 rule ActionBody
-	transform s : XMIni!ActionDefinition
-	to t : SysMini!ActionDefinition{
+	transform s : XMIni!Type
+	to t : SysMini!Type{
 	}
 
 @abstract
@@ -752,7 +752,6 @@ rule FeatureSpecialization
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
 		t.featureSpecialization = s.getFeatureSpecialization();
-
 	}
 	
 operation XMIni!Feature getFeatureSpecialization(){ //380
@@ -793,6 +792,86 @@ rule ActionUsage
 	extends OccurrenceUsagePrefix, ActionUsageDeclaration, ActionBody{
 	}
 
+@abstract
+rule StateUsage
+	transform s : XMIni!StateUsage
+	to t : SysMini!StateUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, StateUsageBody{
+	}
+
+@abstract
+rule StateUsageBody
+	transform s : XMIni!StateUsage
+	to t : SysMini!StateUsage{
+		t.isParallel = s.isParallel;
+	}
+
+@abstract
+rule ExhibitStateUsage
+	transform s : XMIni!ExhibitStateUsage
+	to t : SysMini!ExhibitStateUsage
+	extends OccurrenceUsagePrefix, OwnedReferenceSubsetting, UsageDeclaration, ValuePart, StateUsageBody{
+	}
+
+@abstract
+rule OwnedReferenceSubsetting
+	transform s : XMIni!Element
+	to t : SysMini!Element{
+		for (referenceSubsetting in s.ownedRelationship.getElementOf("ReferenceSubsetting")){
+			referenceSubsetting.println();
+		}
+	}
+
+@abstract
+rule TransitionUsage
+	transform s : XMIni!TransitionUsage
+	to t : SysMini!TransitionUsage
+	extends UsageDeclaration,
+			ActionBody,
+			TransitionSourceMember, 
+			EmptyParameterMember, 
+			TriggerActionMember, 
+			GuardExpressionMember,
+			EffectBehaviorMember,
+			TransitionSuccessionMember{
+	}
+
+@abstract
+rule TransitionSourceMember
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+	}
+	
+@abstract
+rule EmptyParameterMember
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+	}
+
+@abstract
+rule TriggerActionMember
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+	}
+
+@abstract
+rule GuardExpressionMember
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+	}
+
+@abstract
+rule EffectBehaviorMember
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+	}
+
+@abstract
+rule TransitionSuccessionMember
+	transform s : XMIni!Usage
+	to t : SysMini!Usage{
+	}
+	
 @abstract
 rule ActionUsageDeclaration
 	transform s : XMIni!ActionUsage
@@ -1070,12 +1149,77 @@ rule NaryConnectorPart
 			}
 		}
 	}
+
+@abstract
+rule Comment
+	transform s : XMIni!Comment
+	to t : SysMini!Comment
+	extends Identification, Annotation{
+		t.locale = s.locale;
+		t.text = s.body;
+	}
+
+@abstract
+rule Documentation
+	transform s : XMIni!Documentation
+	to t : SysMini!Documentation
+	extends Identification{
+		t.locale = s.locale;
+		t.text = s.body;
+	}
+
+@abstract
+rule TextualRepresentation
+	transform s : XMIni!TextualRepresentation
+	to t : SysMini!TextualRepresentation
+	extends Identification{
+		t.language = s.language;
+		t.text = s.body;
+	}
 	
+@abstract
+rule Annotation
+	transform s : XMIni!AnnotatingElement
+	to t : SysMini!AnnotatingElement{
+	}
+		
 @abstract
 rule AttributeUsage
 	transform s : XMIni!AttributeUsage
 	to t : SysMini!AttributeUsage
 	extends UsagePrefix, Usage{
+	}
+
+@abstract
+rule MetadataUsage
+	transform s : XMIni!MetadataUsage
+	to t : SysMini!MetadataUsage
+	extends UsageExtensionKeyword, MetadataUsageDeclaration, Annotation, MetadataBody{
+	}
+
+@abstract
+rule MetadataUsageDeclaration
+	transform s : XMIni!MetadataUsage
+	to t : SysMini!MetadataUsage
+	extends Identification, MetadataTyping{
+	}
+
+@abstract
+rule MetadataTyping
+	transform s : XMIni!MetadataUsage
+	to t : SysMini!MetadataUsage{
+		if (s.ownedRelationship.getElementOf("FeatureTyping").first().type != null){
+			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().type.declaredName;
+		}
+		else{
+			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().declaredName;
+		}
+	}
+	
+@abstract
+rule MetadataBody
+	transform s : XMIni!MetadataUsage
+	to t : SysMini!MetadataUsage{
 	}
 	
 @abstract
@@ -1149,9 +1293,6 @@ rule BindingConnectorAsUsage
 			t.connectorEndMember.add(endFeatureMembership.ownedRelatedElement.first().getConnectorEnd());	
 		}
 	}
-	
-	
-/* @lazy */
 
 @abstract
 rule NamespaceImport
@@ -1189,7 +1330,18 @@ rule MembershipExpose
 	to t : SysMini!MembershipExpose
 	extends MembershipImport{
 	}
+
+@abstract
+rule MembershipImport
+	transform s : XMIni!MembershipImport
+	to t : SysMini!MembershipImport 
+	extends Import{
+		if (s.importedMembership != null){
+			t.declaredName = s.importedMembership.eContents().first().declaredName;
+		}
+	}
 	
+/* @lazy */
 @lazy
 rule NamespaceImportRule
 	transform s : XMIni!NamespaceImport
@@ -1210,16 +1362,7 @@ rule MembershipExposeRule
 	to t : SysMini!MembershipExpose 
 	extends MembershipExpose{
 	}
-	
-@abstract
-rule MembershipImport
-	transform s : XMIni!MembershipImport
-	to t : SysMini!MembershipImport 
-	extends Import{
-		if (s.importedMembership != null){
-			t.declaredName = s.importedMembership.eContents().first().declaredName;
-		}
-	}
+
 
 @lazy
 rule MembershipImportRule
@@ -1267,30 +1410,21 @@ rule LibraryPackageRule
 rule CommentRule
 	transform s : XMIni!Comment
 	to t : SysMini!Comment
-	extends AnnotatingElementRule{
-		if (s.body != null){
-//			t.sysmini_self = s.body;	
-		}
+	extends Comment{
 	}
 
 @lazy
 rule TextualRepresentationRule
 	transform s : XMIni!TextualRepresentation
 	to t : SysMini!TextualRepresentation
-	extends AnnotatingElementRule{
-		if (s.body != null){
-//			t.sysmini_self = s.body;	
-		}
+	extends TextualRepresentation{
 	}
 	
 @lazy
 rule DocumentationRule
 	transform s : XMIni!Documentation
 	to t : SysMini!Documentation
-	extends AnnotatingElementRule{
-		if (s.body != null){
-//			t.sysmini_self = s.body;	
-		}
+	extends Documentation{
 	}
 
 //ItemFeature
@@ -1528,7 +1662,7 @@ rule ItemUsageRule
 rule ActionUsageRule
 	transform s : XMIni!ActionUsage
 	to t : SysMini!ActionUsage
-	extends UsageRule{
+	extends ActionUsage{
 	}
 	
 @lazy
@@ -1563,21 +1697,21 @@ rule PartUsageRule
 rule MetadataUsageRule
 	transform s : XMIni!MetadataUsage
 	to t : SysMini!MetadataUsage
-	extends UsageRule{
+	extends MetadataUsage{
 	}
 	
 @lazy
 rule StateUsageRule
 	transform s : XMIni!StateUsage
 	to t : SysMini!StateUsage
-	extends UsageRule{
+	extends StateUsage{
 	}
 	
 @lazy
 rule TransitionUsageRule
 	transform s : XMIni!TransitionUsage
 	to t : SysMini!TransitionUsage
-	extends UsageRule{
+	extends TransitionUsage{
 	}
 	
 @lazy
@@ -1647,7 +1781,7 @@ rule RenderingUsageRule
 rule ExhibitStateUsageRule
 	transform s : XMIni!ExhibitStateUsage
 	to t : SysMini!ExhibitStateUsage
-	extends UsageRule{
+	extends ExhibitStateUsage{
 	}
 	
 @lazy

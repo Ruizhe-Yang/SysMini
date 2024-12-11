@@ -51,12 +51,10 @@ enum VisibilityKind {
 }
 
 class Documentation extends Comment {
-	attr boolean[1] isDoc = false;
 }
 
 class Comment extends AnnotatingElement {
-	attr boolean[1] isCommentName = false;
-	attr String[*] isAbout;
+	attr String[*] annotation;
 	attr String locale;
 }
 
@@ -69,7 +67,6 @@ class Annotation extends Relationship {
 }
 
 class TextualRepresentation extends AnnotatingElement {
-	attr boolean[1] isRep = false;
 	attr String language;
 }
 
