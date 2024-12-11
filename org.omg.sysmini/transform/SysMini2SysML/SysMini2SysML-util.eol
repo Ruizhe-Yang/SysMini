@@ -1,3 +1,4 @@
+
 /* Package */
 operation SysMini!Package Package() : String {
 	return self.PrefixMetadataMember() + 
@@ -12,6 +13,7 @@ operation SysMini!LibraryPackage LibraryPackage() : String {
 			self.PackageDeclaration() + 
 			self.PackageBody();
 }
+
 
 /* Import */
 operation SysMini!NamespaceImport NamespaceImport() : String {
@@ -35,6 +37,13 @@ operation SysMini!MembershipExpose MembershipExpose() : String {
 	return self.ExposePrefix() + 
 			self.ImportedMembership();
 }
+
+
+/* Dependency */
+operation SysMini!Dependency Dependency() : String {
+	return "";
+}
+
 
 /* AnnotatingElement */
 operation SysMini!Comment Comment() : String {
@@ -78,6 +87,7 @@ operation SysMini!TextualRepresentation TextualRepresentation() : String {
 	str += "\\*".space() + self.text + "*\\".space();
 	return str;
 }
+
 
 /* Definitions */
 operation SysMini!AttributeDefinition AttributeDefinition() : String {
@@ -256,6 +266,169 @@ operation SysMini!ExtendedDefinition ExtendedDefinition() : String {
 			self.Definition();
 }
 
+
+/* Usage */
+/* Usage(NonOccurrenceUsageElement) */
+operation SysMini!ReferenceUsage ReferenceUsage() : String {
+	return self.RefPrefix() + 
+			ReferenceUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!AttributeUsage AttributeUsage() : String {
+	return self.UsagePrefix() +
+			AttributeUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!EnumerationUsage EnumerationUsage() : String {
+	return self.UsagePrefix() +
+			EnumerationUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!BindingConnectorAsUsage BindingConnectorAsUsage() : String {
+	return "";
+}
+
+operation SysMini!SuccessionAsUsage SuccessionAsUsage() : String {
+	return "";
+}
+
+
+/* Usage(OccurrenceUsageElement/StructureUsageElement) */
+operation SysMini!OccurrenceUsage OccurrenceUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			OccurrenceUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!EventOccurrenceUsage EventOccurrenceUsage() : String {
+	return "";
+}
+
+operation SysMini!ItemUsage ItemUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			ItemUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!PartUsage PartUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			PartUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!ViewUsage ViewUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			ViewUsageKeyword() + 
+			self.UsageDeclaration() + 
+			self.ValuePart() + 
+			self.ViewBody();
+}
+
+operation SysMini!RenderingUsage RenderingUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			RenderingUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!PortUsage PortUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			PortUsageKeyword() + 
+			self.Usage();
+}
+
+operation SysMini!ConnectionUsage ConnectionUsage() : String {
+	return "";
+}
+
+operation SysMini!InterfaceUsage InterfaceUsage() : String {
+	return self.OccurrenceUsagePrefix() + 
+			InterfaceUsageKeyword() + 
+			self.InterfaceUsageDeclaration() + 
+			self.InterfaceBody();
+}
+
+operation SysMini!AllocationUsage AllocationUsage() : String {
+	return "";
+}
+
+operation SysMini!FlowConnectionUsage FlowConnectionUsage() : String {
+	return "";
+}
+
+operation SysMini!SuccessionFlowConnectionUsage SuccessionFlowConnectionUsage() : String {
+	return "";
+}
+
+
+/* Usage(OccurrenceUsageElement/BehaviorUsageElement) */
+operation SysMini!ActionUsage ActionUsage() : String {
+	return "";
+}
+
+operation SysMini!CalculationUsage CalculationUsage() : String {
+	return "";
+}
+
+operation SysMini!StateUsage StateUsage() : String {
+	return "";
+}
+
+operation SysMini!ConstraintUsage ConstraintUsage() : String {
+	return "";
+}
+
+operation SysMini!RequirementUsage RequirementUsage() : String {
+	return "";
+}
+
+operation SysMini!ConcernUsage ConcernUsage() : String {
+	return "";
+}
+
+operation SysMini!CaseUsage CaseUsage() : String {
+	return "";
+}
+
+operation SysMini!AnalysisCaseUsage AnalysisCaseUsage() : String {
+	return "";
+}
+
+operation SysMini!VerificationCaseUsage VerificationCaseUsage() : String {
+	return "";
+}
+
+operation SysMini!UseCaseUsage UseCaseUsage() : String {
+	return "";
+}
+
+operation SysMini!ViewpointUsage ViewpointUsage() : String {
+	return "";
+}
+
+operation SysMini!PerformActionUsage PerformActionUsage() : String {
+	return "";
+}
+
+operation SysMini!ExhibitStateUsage ExhibitStateUsage() : String {
+	return "";
+}
+
+operation SysMini!IncludeUseCaseUsage IncludeUseCaseUsage() : String {
+	return "";
+}
+
+operation SysMini!AssertConstraintUsage AssertConstraintUsage() : String {
+	return "";
+}
+
+operation SysMini!SatisfyRequirementUsage SatisfyRequirementUsage() : String {
+	return "";
+}
+
+
 /* Def Key Word*/
 operation RenderingDefKeyword() : String {
 	return RenderingKeyword() + "def".space();
@@ -353,7 +526,106 @@ operation PartDefKeyword() : String {
 	return PartKeyword()+"def".space();
 }
 
+
+/* Usage Key Word*/
+operation ReferenceUsageKeyword() : String {
+	return ReferenceKeyword();
+}
+
+operation AttributeUsageKeyword() : String {
+	return AttributeKeyword();
+}
+
+operation EnumerationUsageKeyword() : String {
+	return EnumerationKeyword();
+}
+
+operation OccurrenceUsageKeyword() : String {
+	return OccurrenceKeyword();
+}
+
+operation ItemUsageKeyword() : String {
+	return ItemKeyword();
+}
+
+operation PartUsageKeyword() : String {
+	return PartKeyword();
+}
+
+operation PortUsageKeyword() : String {
+	return PortKeyword();
+}
+
+operation ConnectionUsageKeyword() : String {
+	return ConnectionKeyword();
+}
+
+operation InterfaceUsageKeyword() : String {
+	return InterfaceKeyword();
+}
+
+operation AllocationUsageKeyword() : String {
+	return AllocationKeyword();
+}
+
+operation ActionUsageKeyword() : String {
+	return ActionKeyword();
+}
+
+operation StateUsageKeyword() : String {
+	return StateKeyword();
+}
+
+operation TransitionUsageKeyword() : String {
+	return "transition".space();
+}
+
+operation CalculationUsageKeyword() : String {
+	return CalculationKeyword();
+}
+
+operation ConstraintUsageKeyword() : String {
+	return ConstraintKeyword();
+}
+
+operation RequirementUsageKeyword() : String {
+	return RequirementKeyword();
+}
+
+operation ConcernUsageKeyword() : String {
+	return ConcernKeyword();
+}
+
+operation CaseUsageKeyword() : String {
+	return CaseKeyword();
+}
+
+operation AnalysisCaseUsageKeyword() : String {
+	return AnalysisCaseKeyword();
+}
+
+operation VerificationCaseUsageKeyword() : String {
+	return VerificationCaseKeyword();
+}
+
+operation UseCaseUsageKeyword() : String {
+	return UseCaseKeyword();
+}
+
+operation ViewUsageKeyword() : String {
+	return ViewKeyword();
+}
+
+operation RenderingUsageKeyword() : String {
+	return RenderingKeyword();
+}
+
+
 /* Key Word*/
+operation ReferenceKeyword() : String {
+	return "ref".space();
+}
+
 operation RenderingKeyword() : String {
 	return "rendering".space();
 }
@@ -450,11 +722,17 @@ operation PartKeyword() : String {
 	return "part".space();
 }
 
+
 /* Others */
+operation SysMini!OccurrenceUsage OccurrenceUsagePrefix() : String {
+	return self.BasicUsagePrefix() + 
+			self.isIndividual() + 
+			self.portionKind() + 
+			self.UsageExtensionKeyword();
+}
 
 operation SysMini!Element PrefixMetadataMember() : String {
-	// TBD
-	return "";
+	return self.prefixMetadata.space();
 }
 
 operation SysMini!Package PackageDeclaration() : String {
@@ -524,6 +802,65 @@ operation SysMini!Definition Definition() : String {
 			self.DefinitionBody();
 }
 
+operation SysMini!Usage Usage() : String {
+	return self.UsageDeclaration() + 
+			self.UsageCompletion();
+}
+
+operation SysMini!Usage UsageDeclaration() : String {
+	return self.FeatureDeclaration();
+}
+
+operation SysMini!Feature FeatureDeclaration() : String {
+	return self.Identification() + 
+			self.FeatureSpecializationPart();
+}
+
+operation SysMini!Feature FeatureSpecializationPart() : String {
+	return self.multiplicityRange.space() + 
+			self.featureSpecialization.space();
+}
+
+operation SysMini!Usage UsageCompletion() : String {
+	return self.ValuePart() + 
+			self.UsageBody();
+}
+
+operation SysMini!Feature ValuePart() : String {
+	return self.valuePart.space();
+}
+
+operation SysMini!Usage UsageBody() : String {
+	return self.DefinitionBody();
+}
+
+operation SysMini!ViewUsage ViewBody() : String {
+	return "";
+}
+
+operation SysMini!Usage UsagePrefix() : String {
+	return self.BasicUsagePrefix() + 
+			self.UsageExtensionKeyword();
+}
+
+operation SysMini!Usage UsageExtensionKeyword() : String {
+	return self.prefixMetadata.space();
+}
+
+operation SysMini!Usage BasicUsagePrefix() : String {
+	return self.RefPrefix() + 
+			self.isReference();
+}
+
+operation SysMini!Usage RefPrefix() : String {
+	return self.featureDirection() + 
+			self.isAbstract() + 
+			self.isVariation() + 
+			self.isReadOnly() + 
+			self.isDerived() +
+			self.isEnd();
+}
+
 operation SysMini!Definition DefinitionDeclaration() : String {
 	return self.Identification() + 
 			self.SubclassificationPart();
@@ -541,6 +878,11 @@ operation SysMini!Element Identification() : String {
 }
 
 operation SysMini!Classifier SubclassificationPart() : String {
+	// TBD
+	return "";
+}
+
+operation SysMini!InterfaceUsage InterfaceUsageDeclaration() : String {
 	// TBD
 	return "";
 }
@@ -632,6 +974,60 @@ operation SysMini!Element isImportAll() : String {
 	}
 	else{
 		return "";
+	}
+}
+
+operation SysMini!Feature isReadOnly() : String {
+	if (self.isReadOnly){
+		return "readonly".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Feature isDerived() : String {
+	if (self.isDerived){
+		return "derived".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Feature isEnd() : String {
+	if (self.isEnd){
+		return "end".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isReference() : String {
+	if (self.isReference){
+		return "ref".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!OccurrenceUsage portionKind() : String {
+	if (self.portionKind.name == "timeslice"){
+		return "";
+	}
+	else{
+		return self.portionKind.name.space();
+	}
+}
+
+operation SysMini!Feature featureDirection() : String {
+	if (self.direction.name == "in"){
+		return "";
+	}
+	else{
+		return self.direction.name.space();
 	}
 }
 
