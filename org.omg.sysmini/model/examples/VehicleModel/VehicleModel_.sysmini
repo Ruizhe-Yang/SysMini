@@ -863,7 +863,7 @@
               </body>
               <body xsi:type="SatisfyRequirementUsage">
                 <body xsi:type="ReferenceUsage"/>
-                <body xsi:type="RequirementUsage" declaredName="torqueGenerationRequirement">
+                <body xsi:type="RequirementUsage" declaredName="torqueGenerationRequirement" featureSpecialization=":>> ">
                   <body xsi:type="ReferenceUsage" declaredName="generateTorque" featureSpecialization=":>> "/>
                   <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
                 </body>
@@ -1241,7 +1241,7 @@
               <body xsi:type="AttributeUsage" featureSpecialization=":>> "/>
               <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
             </body>
-            <body xsi:type="RequirementUsage" declaredName="torqueGenerationRequirement">
+            <body xsi:type="RequirementUsage" declaredName="torqueGenerationRequirement" featureSpecialization=": TorqueGenerationRequirement">
               <body xsi:type="ReferenceUsage" declaredName="generateTorque" isDefault="true"/>
               <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> "/>
             </body>

@@ -1,89 +1,645 @@
+/* Package */
 operation SysMini!Package Package() : String {
-	return "Package " + self.declaredName;
+	return self.PrefixMetadataMember() + 
+			self.PackageDeclaration() + 
+			self.PackageBody();
 }
 
+operation SysMini!LibraryPackage LibraryPackage() : String {
+	return self.isStandard() + 
+			"library".space() + 
+			self.PrefixMetadataMember() +
+			self.PackageDeclaration() + 
+			self.PackageBody();
+}
+
+/* Import */
 operation SysMini!NamespaceImport NamespaceImport() : String {
-	return "import "+self.declaredName;
+	return self.ImportPrefix() + 
+			self.ImportedNamespace() + 
+			self.FilterPackage();
 }
 
-operation SysMini!PartDefinition PartDefinition() : String {
-	return self.OccurrenceDefinitionPrefix() + PartDefKeyword() + self.Definition();
+operation SysMini!MembershipImport MembershipImport() : String {
+	return self.ImportPrefix() + 
+			self.ImportedMembership();
 }
 
-operation SysMini!AttributeDefinition AttributeDefinition() : String {
-	return self.BasicDefinitionPrefix() + AttributeDefKeyword() + self.Definition();
+operation SysMini!NamespaceExpose NamespaceExpose() : String {
+	return self.ExposePrefix() + 
+			self.ImportedNamespace() + 
+			self.FilterPackage();
 }
 
-operation SysMini!Definition DefinitionPrefix() : String {
-	return self.DefinitionPrefix() + self.DefinitionExtensionKeyword();
+operation SysMini!MembershipExpose MembershipExpose() : String {
+	return self.ExposePrefix() + 
+			self.ImportedMembership();
 }
 
-operation SysMini!Element root(){
-	
-}
-
-operation SysMini!Definition BasicDefinitionPrefix(): String {
+/* AnnotatingElement */
+operation SysMini!Comment Comment() : String {
 	var str = "";
-	if (self.isAbstract){
-		str += "abstract ";
+	if (self.annotation != null){
+		str += "comment".space();
+		str += self.declaredName.space(); 
+		str += "about".space();
+		for (annotationString in self.annotation){
+			str += annotationString.space();
+			// TBD
+		}
 	}
-	if (self.isVariation){
-		str += "variation ";
+	if (self.locale != null){
+		str += "locale".space() + self.locale.space();
 	}
+	str += "\\*".space() + self.text + "*\\".space();
 	return str;
 }
 
-operation SysMini!Definition DefinitionExtensionKeyword() : String {
-	return self.PrefixMetadataMember();
+operation SysMini!Documentation Documentation() : String {
+	var str = "";
+	str += "doc".space();
+	str += self.declaredName.space(); 
+	if (self.locale != null){
+		str += "locale".space() + self.locale.space();
+	}
+	str += "\\*".space() + self.text + "*\\".space();
+	return str;
 }
 
-operation SysMini!Definition PrefixMetadataMember() : String {
-	return "";
+operation SysMini!TextualRepresentation TextualRepresentation() : String {
+	var str = "";
+	if (self.declaredName != null){
+		str += "rep".space();
+		str += self.declaredName.space(); 
+	}
+	if (self.language != null){
+		str += "language".space() + self.language.space();
+	}
+	str += "\\*".space() + self.text + "*\\".space();
+	return str;
+}
+
+/* Definitions */
+operation SysMini!AttributeDefinition AttributeDefinition() : String {
+	return self.BasicDefinitionPrefix() + 
+			AttributeDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!EnumerationDefinition EnumerationDefinition() : String {
+	return self.DefinitionExtensionKeyword() + 
+			EnumerationDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.EnumerationBody();
+}
+
+operation SysMini!OccurrenceDefinition OccurrenceDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			OccurrenceDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!OccurrenceDefinition IndividualDefinition() : String {
+	return self.BasicDefinitionPrefix() + 
+			self.isIndividual() + 
+			self.DefinitionExtensionKeyword() + 
+			"def".space() + 
+			self.Definition() +
+			self.LifeClassMembership();
+}
+
+operation SysMini!ItemDefinition ItemDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ItemDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!MetadataDefinition MetadataDefinition() : String {
+	return self.isAbstract() + 
+			self.DefinitionExtensionKeyword() + 
+			MetadataDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!PartDefinition PartDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			PartDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!ConnectionDefinition ConnectionDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ConnectionDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!FlowConnectionDefinition FlowConnectionDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			FlowConnectionDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!InterfaceDefinition InterfaceDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() +
+			InterfaceDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.InterfaceBody();
+}
+
+operation SysMini!AllocationDefinition AllocationDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			AllocationDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!PortDefinition PortDefinition() : String {
+	return self.DefinitionPrefix() + 
+			PortDefKeyword() + 
+			self.Definition() +
+			self.ConjugatedPortDefinitionMember();
+}
+
+operation SysMini!ActionDefinition ActionDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ActionDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.ActionBody();
+}
+
+operation SysMini!CalculationDefinition CalculationDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			CalculationDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.CalculationBody();
+}
+
+operation SysMini!StateDefinition StateDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			StateDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.StateDefBody();
+}
+
+operation SysMini!ConstraintDefinition ConstraintDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ConstraintDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.CalculationBody();
+}
+
+operation SysMini!RequirementDefinition RequirementDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			RequirementDefKeyword() + 
+			self.DefinitionDeclaration() +
+			self.RequirementBody();
+}
+
+operation SysMini!ConcernDefinition ConcernDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ConcernDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.RequirementBody();
+}
+
+operation SysMini!CaseDefinition CaseDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			CaseDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.CaseBody();
+}
+
+operation SysMini!AnalysisCaseDefinition AnalysisCaseDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			AnalysisCaseDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.CaseBody();
+}
+
+operation SysMini!VerificationCaseDefinition VerificationCaseDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			VerificationCaseDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.CaseBody();
+}
+
+operation SysMini!UseCaseDefinition UseCaseDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			UseCaseDefKeyword() + 
+			self.DefinitionDeclaration() + 
+			self.CaseBody();
+}
+
+operation SysMini!ViewDefinition ViewDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ViewDefKeyword() + 
+			self.DefinitionDeclaration() +
+			self.ViewDefinitionBody();
+}
+
+operation SysMini!ViewpointDefinition ViewpointDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			ViewpointDefKeyword() + 
+			self.DefinitionDeclaration() +
+			self.RequirementBody();
+}
+
+operation SysMini!RenderingDefinition RenderingDefinition() : String {
+	return self.OccurrenceDefinitionPrefix() + 
+			RenderingDefKeyword() + 
+			self.Definition();
+}
+
+operation SysMini!ExtendedDefinition ExtendedDefinition() : String {
+	return self.BasicDefinitionPrefix() + 
+			self.DefinitionExtensionKeyword() + 
+			"def".space() +
+			self.Definition();
+}
+
+/* Def Key Word*/
+operation RenderingDefKeyword() : String {
+	return RenderingKeyword() + "def".space();
+}
+
+operation ViewpointDefKeyword() : String {
+	return ViewpointKeyword() + "def".space();
+}
+
+operation ViewDefKeyword() : String {
+	return ViewKeyword() + "def".space();
+}
+
+operation UseCaseDefKeyword() : String {
+	return UseCaseKeyword() + "def".space();
+}
+
+operation VerificationCaseDefKeyword() : String {
+	return VerificationCaseKeyword() + "def".space();
+}
+
+operation AnalysisCaseDefKeyword() : String {
+	return AnalysisCaseKeyword() + "def".space();
+}
+
+operation CaseDefKeyword() : String {
+	return CaseKeyword() + "def".space();
+}
+
+operation ConcernDefKeyword() : String {
+	return ConcernKeyword() + "def".space();
+}
+
+operation RequirementDefKeyword() : String {
+	return RequirementKeyword() + "def".space();
+}
+
+operation ConstraintDefKeyword() : String {
+	return ConstraintKeyword() + "def".space();
+}
+
+operation StateDefKeyword() : String {
+	return StateKeyword() + "def".space();
+}
+
+operation CalculationDefKeyword() : String {
+	return CalculationKeyword() + "def".space();
+}
+
+operation ActionDefKeyword() : String {
+	return ActionKeyword() + "def".space();
+}
+
+operation PortDefKeyword() : String {
+	return PortKeyword() + "def".space();
+}
+
+operation AllocationDefKeyword() : String {
+	return AllocationKeyword() + "def".space();
+}
+
+operation InterfaceDefKeyword() : String {
+	return InterfaceKeyword() + "def".space();
+}
+
+operation FlowConnectionDefKeyword() : String {
+	return FlowConnectionKeyword() + "def".space();
+}
+
+operation ConnectionDefKeyword() : String {
+	return ConnectionKeyword() + "def".space();
+}
+
+operation EnumerationDefKeyword() : String {
+	return EnumerationKeyword() + "def".space();
+}
+
+operation OccurrenceDefKeyword() : String {
+	return OccurrenceKeyword() + "def".space();
+}
+
+operation MetadataDefKeyword() : String {
+	return MetadataKeyword() + "def".space();
+}
+
+operation ItemDefKeyword() : String {
+	return ItemKeyword() + "def".space();
 }
 
 operation AttributeDefKeyword() : String {
-	return AttributeKeyword()+"def ";
-}
-
-operation AttributeKeyword() : String {
-	return "attribute ";
-}
-
-operation PartKeyword() : String {
-	return "part ";
+	return AttributeKeyword() + "def".space();
 }
 
 operation PartDefKeyword() : String {
-	return PartKeyword()+"def ";
+	return PartKeyword()+"def".space();
 }
 
-operation SysMini!OccurrenceDefinition OccurrenceDefinitionPrefix() : String {
+/* Key Word*/
+operation RenderingKeyword() : String {
+	return "rendering".space();
+}
+
+operation ViewpointKeyword() : String {
+	return "viewpoint".space();
+}
+
+operation ViewKeyword() : String {
+	return "view".space();
+}
+
+operation UseCaseKeyword() : String {
+	return "use case".space();
+}
+
+operation VerificationCaseKeyword() : String {
+	return "verification".space();
+}
+
+operation AnalysisCaseKeyword() : String {
+	return "analysis".space();
+}
+
+operation CaseKeyword() : String {
+	return "case".space();
+}
+
+operation ConcernKeyword() : String {
+	return "concern".space();
+}
+
+operation RequirementKeyword() : String {
+	return "requirement".space();
+}
+
+operation ConstraintKeyword() : String {
+	return "constraint".space();
+}
+
+operation StateKeyword() : String {
+	return "state".space();
+}
+
+operation CalculationKeyword() : String {
+	return "calc".space();
+}
+
+operation ActionKeyword() : String {
+	return "action".space();
+}
+
+operation PortKeyword() : String {
+	return "port".space();
+}
+
+operation AllocationKeyword() : String {
+	return "allocation".space();
+}
+
+operation InterfaceKeyword() : String {
+	return "interface".space();
+}
+
+operation FlowConnectionKeyword() : String {
+	return "flow".space();
+}
+
+operation ConnectionKeyword() : String {
+	return "connection".space();
+}
+
+operation MetadataKeyword() : String {
+	return "metadata".space();
+}
+
+operation OccurrenceKeyword() : String {
+	return "occurrence".space();
+}
+
+operation EnumerationKeyword() : String {
+	return "enum".space();
+}
+
+operation ItemKeyword() : String {
+	return "item".space();
+}
+
+operation AttributeKeyword() : String {
+	return "attribute".space();
+}
+
+operation PartKeyword() : String {
+	return "part".space();
+}
+
+/* Others */
+
+operation SysMini!Element PrefixMetadataMember() : String {
+	// TBD
 	return "";
 }
 
+operation SysMini!Package PackageDeclaration() : String {
+	return "package".space() + self.Identification();
+}
+
+operation SysMini!Package PackageBody() : String {
+	return "";
+}
+
+operation SysMini!Import ImportedMembership() : String {
+	return self.declaredName.space();
+}
+
+operation SysMini!Import ImportedNamespace() : String {
+	return self.declaredName.space();
+}
+
+operation SysMini!Import ImportPrefix() : String {
+	return self.VisibilityIndicator() + 'import'.space() + self.isImportAll();
+}
+
+operation SysMini!Import ExposePrefix() : String {
+	return self.VisibilityIndicator();
+}
+
+operation SysMini!Import VisibilityIndicator() : String {
+	return self.visibility.name.space();
+}
+
+operation SysMini!Definition LifeClassMembership() : String {
+	return "";
+}
+
+operation SysMini!Element FilterPackage() : String {
+	// TBD
+	return "";
+}
+
+operation SysMini!Definition ConjugatedPortDefinitionMember() : String {
+	// TBD
+	return "";
+}
+
+operation SysMini!Definition DefinitionPrefix() : String {
+	return self.BasicDefinitionPrefix() + 
+			self.DefinitionExtensionKeyword();
+}
+
+operation SysMini!Definition BasicDefinitionPrefix(): String {
+	return self.isAbstract() + self.isVariation();
+}
+
+operation SysMini!Definition DefinitionExtensionKeyword() : String {
+	return self.prefixMetadata.space();
+}
+
+operation SysMini!OccurrenceDefinition OccurrenceDefinitionPrefix() : String {
+	return self.BasicDefinitionPrefix() + 
+			self.isIndividual() + 
+			self.LifeClassMembership() + 
+			self.DefinitionExtensionKeyword();
+}
+
 operation SysMini!Definition Definition() : String {
-	return self.DefinitionDeclaration() + self.DefinitionBody();
+	return self.DefinitionDeclaration() + 
+			self.DefinitionBody();
 }
 
 operation SysMini!Definition DefinitionDeclaration() : String {
-	return self.Identification() + self.SubclassificationPart();
+	return self.Identification() + 
+			self.SubclassificationPart();
 }
 
 operation SysMini!Element Identification() : String {
 	var str = "";
 	if (self.declaredShortName != null){
-		str += "<"+self.declaredShortName+"> ";
+		str += "<"+self.declaredShortName+">".space();
 	}
 	if (self.declaredName != null) {
-		str += self.declaredName + " ";
+		str += self.declaredName.space();
 	}
 	return str;
 }
 
 operation SysMini!Classifier SubclassificationPart() : String {
+	// TBD
 	return "";
 }
 
-operation SysMini!Definition DefinitionBody() : String {
+operation SysMini!Type ViewDefinitionBody() : String {
 	return "";
+}
+
+operation SysMini!Type CaseBody() : String {
+	return "";
+}
+
+operation SysMini!Type RequirementBody() : String {
+	return "";
+}
+
+operation SysMini!Type StateDefBody() : String {
+	return self.isParallel() + "";
+}
+
+operation SysMini!Type CalculationBody() : String {
+	return "";
+}
+
+operation SysMini!Type ActionBody() : String {
+	return "";
+}
+
+operation SysMini!Type DefinitionBody() : String {
+	return "";
+}
+
+operation SysMini!Type InterfaceBody() : String {
+	return "";
+}
+
+operation SysMini!Type EnumerationBody() : String {
+	return "";
+}
+
+operation SysMini!Element isParallel() : String {
+	if (self.isParallel){
+		return "parallel".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isIndividual() : String {
+	if (self.isIndividual){
+		return "individual".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isAbstract() : String {
+	if (self.isAbstract){
+		return "abstract".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isVariation() : String {
+	if (self.isVariation){
+		return "variation".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isStandard() : String {
+	if (self.isStandard){
+		return "standard".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isImportAll() : String {
+	if (self.isImportAll){
+		return "all".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation Any space(){
+	if (self == null or self == ""){
+		return "";
+	}
+	else{
+		return self.asString()+" ";
+	}
 }

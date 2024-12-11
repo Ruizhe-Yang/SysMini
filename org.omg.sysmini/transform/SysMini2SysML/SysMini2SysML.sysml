@@ -1,21 +1,21 @@
 package SimpleVehicleModel {
-	import Definitions;
-	import ISQ::*;
-	Package Definitions{
-		import PartDefinitions;
-		import PortDefinitions;
-		import ItemDefinitions;
-		import SignalDefinitions;
-		import InterfaceDefinitions;
-		import AllocationDefinitions;
-		import ActionDefinitions;
-		import StateDefinitions;
-		import RequirementDefinitions;
-		import AttributeDefinitions;
-		import IndividualDefinitions;
-		;
-		import KeyWord_MetadataDefinitions;
-		Package PartDefinitions{
+	public import Definitions;
+	public import ISQ::*;
+	package Definitions {
+		public import PartDefinitions;
+		public import PortDefinitions;
+		public import ItemDefinitions;
+		public import SignalDefinitions;
+		public import InterfaceDefinitions;
+		public import AllocationDefinitions;
+		public import ActionDefinitions;
+		public import StateDefinitions;
+		public import RequirementDefinitions;
+		public import AttributeDefinitions;
+		public import IndividualDefinitions;
+		public import MetadataDefinitions;
+		public import KeyWord_MetadataDefinitions;
+		package PartDefinitions {
 			part def Vehicle {
 				;
 				;
@@ -209,14 +209,14 @@ package SimpleVehicleModel {
 			part def StarterMotor {
 				;
 			}
-			part def Cylinder ;
+			part def Cylinder;
 			part def Transmission {
 				;
 				;
 				;
 			}
-			part def Driveshaft ;
-			part def AxleAssembly ;
+			part def Driveshaft;
+			part def AxleAssembly;
 			part def Axle {
 				;
 			}
@@ -226,7 +226,7 @@ package SimpleVehicleModel {
 			part def HalfAxle {
 				;
 			}
-			part def Differential ;
+			part def Differential;
 			part def Wheel {
 				;
 				;
@@ -234,8 +234,8 @@ package SimpleVehicleModel {
 			part def Hub {
 				;
 			}
-			part def Software ;
-			part def VehicleSoftware ;
+			abstract part def Software;
+			part def VehicleSoftware;
 			part def VehicleController {
 				;
 				{
@@ -302,165 +302,165 @@ package SimpleVehicleModel {
 				;
 				;
 			}
-			part def BodyAssy ;
+			part def BodyAssy;
 			part def Body {
 				;
 			}
-			part def Thermostat ;
-			part def WaterHose ;
+			part def Thermostat;
+			part def WaterHose;
 			part def Road {
 				;
 				;
 			}
-			part def Engine4Cyl ;
-			part def Engine6Cyl ;
-			part def TransmissionChoices ;
-			part def TransmissionAutomatic ;
-			part def TransmissionManual ;
-			part def Sunroof ;
-			part def ElectricalGenerator ;
-			part def TorqueGenerator ;
-			part def SteeringSubsystem ;
-			part def BrakingSubsystem ;
+			part def Engine4Cyl;
+			part def Engine6Cyl;
+			part def TransmissionChoices;
+			part def TransmissionAutomatic;
+			part def TransmissionManual;
+			part def Sunroof;
+			part def ElectricalGenerator;
+			part def TorqueGenerator;
+			part def SteeringSubsystem;
+			part def BrakingSubsystem;
 		}
-		Package PortDefinitions{
-			{
+		package PortDefinitions {
+			port def IgnitionCmdPort {
 				;
 				;
 			}
-			{
+			port def StatusPort {
 				;
 			}
-			{
+			port def GearPort {
 				;
 			}
-			{
-				;
-				;
-			}
-			{
+			port def PwrCmdPort {
 				;
 				;
 			}
-			{
+			port def FuelCmdPort {
 				;
 				;
 			}
-			{
+			port def FuelPort {
 				;
 				;
 			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
+			port def DrivePwrPort {
 				;
 				;
 			}
-			{
+			port def ShaftPort_a {
+				;
+			}
+			port def ShaftPort_b {
+				;
+			}
+			port def ShaftPort_c {
+				;
+			}
+			port def ShaftPort_d {
+				;
+			}
+			port def DiffPort {
+				;
+			}
+			port def AxlePort {
+				;
+			}
+			port def AxleToWheelPort {
+				;
+			}
+			port def WheelToAxlePort {
+				;
+			}
+			port def WheelToRoadPort {
+				;
+			}
+			port def LugNutCompositePort {
 				;
 				;
 			}
-			{
-				;
+			port def ShankCompositePort {
 				;
 				;
 			}
-			{
-				;
+			port def LugNutPort {
 				;
 				;
 				;
 			}
-			{
+			port def ShankPort {
 				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-			}
-			{
-				;
-				;
-			}
-			{
 				;
 				;
 				;
 			}
-		}
-		Package ItemDefinitions{
-			{
+			port def VehicleToRoadPort {
 				;
 			}
-			;
-			{
+			port def ControlPort {
 				;
 			}
-			{
+			port def CruiseControlPort {
+				;
+			}
+			port def SpeedSensorPort {
+				;
+			}
+			port def SetSpeedPort {
+				;
+			}
+			port def DriverCmdPort {
+				;
+				;
+			}
+			port def HandPort {
+				;
+				;
 				;
 			}
 		}
-		Package SignalDefinitions{
-			;
-			;
-			{
+		package ItemDefinitions {
+			item def PwrCmd {
 				;
 			}
-			;
-			attribute def VehicleStartSignal ;
-			attribute def VehicleOnSignal ;
-			attribute def VehicleOffSignal ;
-			attribute def StartSignal ;
-			attribute def OffSignal ;
-			attribute def OverTemp ;
-			attribute def ReturnToNormal ;
-			attribute def SetSpeed ;
+			item def FuelCmd;
+			item def Fuel {
+				;
+			}
+			item def SensedSpeed {
+				;
+			}
 		}
-		Package InterfaceDefinitions{
-			{
+		package SignalDefinitions {
+			item def Cmd;
+			item def DriverCmd;
+			item def IgnitionCmd {
+				;
+			}
+			item def EngineStatus;
+			attribute def VehicleStartSignal;
+			attribute def VehicleOnSignal;
+			attribute def VehicleOffSignal;
+			attribute def StartSignal;
+			attribute def OffSignal;
+			attribute def OverTemp;
+			attribute def ReturnToNormal;
+			attribute def SetSpeed;
+		}
+		package InterfaceDefinitions {
+			interface def EngineToTransmissionInterface {
 				;
 				;
 				;
 			}
-			{
+			interface def FuelInterface {
 				;
 				;
 				;
 			}
-			{
+			interface def WheelFastenerInterface {
 				;
 				;
 				;
@@ -468,7 +468,7 @@ package SimpleVehicleModel {
 					;
 				}
 			}
-			{
+			interface def WheelHubInterface {
 				;
 				;
 				{
@@ -477,45 +477,45 @@ package SimpleVehicleModel {
 				}
 			}
 		}
-		Package AllocationDefinitions{
-			;
+		package AllocationDefinitions {
+			allocation def LogicalToPhysical;
 		}
-		Package ActionDefinitions{
-			{
+		package ActionDefinitions {
+			action def ProvidePower {
 				;
 				;
 			}
-			{
+			action def GenerateTorque {
 				;
 				;
 			}
-			{
+			action def AmplifyTorque {
 				;
 				;
 			}
-			{
+			action def TransferTorque {
 				;
 				;
 			}
-			{
+			action def DistributeTorque {
 				;
 				;
 			}
-			;
-			;
-			{
+			action def PerformSelfTest;
+			action def ApplyParkingBrake;
+			action def SenseTemperature {
 				;
 			}
 		}
-		Package StateDefinitions{
-			;
-			;
-			;
+		package StateDefinitions {
+			state def VehicleStates;
+			state def ControllerStates;
+			state def CruiseControllerStates;
 		}
-		Package RequirementDefinitions{
-			{
+		package RequirementDefinitions {
+			requirement def MassRequirement {
 				;
-				;
+				doc \* The actual mass shall be less than the required mass*\
 				;
 				;
 				{
@@ -523,29 +523,9 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			{
+			requirement def ReliabilityRequirement {
 				;
-				;
-				;
-				;
-				{
-					;
-				}
-				;
-			}
-			{
-				;
-				;
-				;
-			}
-			{
-				;
-				;
-				;
-			}
-			{
-				;
-				;
+				doc \* The actual reliability shall be greater than the required reliability*\
 				;
 				;
 				{
@@ -553,75 +533,96 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-		}
-		Package AttributeDefinitions{
-			import ScalarValues::*;
-			import Quantities::*;
-			;
-			;
-			import NumericalFunctions::*;
-			import SI::*;
-			import USCustomaryUnits::*;
-			{
-				;
+			requirement def TorqueGenerationRequirement {
+				doc \* The engine shall generate torque as a function of RPM as shown in Table 1. *\
 				;
 				;
 			}
-			{
+			requirement def DrivePowerOutputRequirement {
 				;
-				;
-				;
-			}
-			;
-			{
-				;
+				doc \* The engine shall provide a connection point to transfer torque to the transmission.*\
 				;
 			}
-			{
+			requirement def FuelEconomyRequirement {
+				;
+				doc \* The vehicle shall maintain an average fuel economomy of at least x miles per gallon for the nominal 
+driving scenario *\
 				;
 				;
-			}
-			;
-			;
-			;
-			;
-			;
-			;
-			;
-		}
-		Package IndividualDefinitions{
-			;
-			;
-			;
-			;
-			;
-			;
-			;
-			;
-		}
-		Package MetadataDefinitions{
-			import AnalysisTooling::*;
-			{
-				;
-			}
-			;
-		}
-		Package KeyWord_MetadataDefinitions{
-			;
-			;
-			{
-				;
-			}
-			;
-			{
-				;
-			}
-			;
-			{
+				{
+					;
+				}
 				;
 			}
 		}
-		Package GenericContext{
+		package AttributeDefinitions {
+			public import ScalarValues::*;
+			public import Quantities::*;
+			public import MeasurementReferences::null;
+			public import SIPrefixes::null;
+			public import NumericalFunctions::*;
+			public import SI::*;
+			public import USCustomaryUnits::*;
+			enum def {
+				;
+				;
+				;
+			}
+			enum def {
+				;
+				;
+				;
+			}
+			;
+			enum def {
+				;
+				;
+			}
+			enum def {
+				;
+				;
+			}
+			;
+			;
+			;
+			;
+			;
+			;
+			;
+		}
+		package IndividualDefinitions {
+			individual occurrence def VehicleRoadContext_1;
+			individual occurrence def Vehicle_1;
+			individual occurrence def FrontAxleAssembly_1;
+			individual occurrence def FrontAxle_1;
+			individual occurrence def Wheel_1;
+			individual occurrence def Wheel_2;
+			individual occurrence def RearAxleAssembly_1;
+			individual occurrence def Road_1;
+		}
+		package MetadataDefinitions {
+			public import AnalysisTooling::*;
+			metadata def Safety {
+				;
+			}
+			metadata def Security;
+		}
+		package KeyWord_MetadataDefinitions {
+			public import Metaobjects::null;
+			;
+			metadata def <fm> failureMode {
+				;
+			}
+			;
+			metadata def <l> logical {
+				;
+			}
+			;
+			metadata def <p> physical {
+				;
+			}
+		}
+		package GenericContext {
 			part def Context {
 				;
 				{
@@ -632,8 +633,8 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleLogicalConfiguration{
-		Package PartsTree{
+	package VehicleLogicalConfiguration {
+		package PartsTree {
 			{
 				;
 				{
@@ -647,9 +648,9 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleLogicalToPhysicalAllocation{
-		;
-		import PartsTree;
+	package VehicleLogicalToPhysicalAllocation {
+		public import PartsTree;
+		public import PartsTree;
 		{
 			;
 			;
@@ -671,9 +672,9 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleConfigurations{
-		Package VehicleConfiguration_a{
-			Package PartsTree{
+	package VehicleConfigurations {
+		package VehicleConfiguration_a {
+			package PartsTree {
 				{
 					;
 					;
@@ -700,14 +701,14 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			Package ActionTree;
-			Package Requirements;
+			package ActionTree;
+			package Requirements;
 		}
-		Package VehicleConfiguration_b{
-			;
-			;
-			import ModelingMetadata::*;
-			Package PartsTree{
+		package VehicleConfiguration_b {
+			public import ShapeItems::null;
+			public import ParametersOfInterestMetadata::null;
+			public import ModelingMetadata::*;
+			package PartsTree {
 				{
 					{
 						;
@@ -942,7 +943,7 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			Package ActionTree{
+			package ActionTree {
 				{
 					;
 					;
@@ -960,8 +961,8 @@ package SimpleVehicleModel {
 				;
 				;
 			}
-			Package DiscreteInteractions{
-				Package Sequence{
+			package DiscreteInteractions {
+				package Sequence {
 					part def Driver {
 						;
 						;
@@ -1099,15 +1100,16 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			Package Requirements{
-				import RequirementDerivation::*;
-				import ModelingMetadata::*;
+			package Requirements {
+				public import RequirementDerivation::*;
+				public import ModelingMetadata::*;
 				;
 				{
 					;
 					{
 						;
-						;
+						doc \* The total mass of the vehicle shall be less than or equal to the required mass.
+Assume total mass includes a full tank of gas of 60 kg*\
 						;
 						;
 						;
@@ -1123,7 +1125,7 @@ package SimpleVehicleModel {
 					}
 					{
 						;
-						;
+						doc \* fuel economy requirements group *\
 						;
 						{
 							;
@@ -1154,7 +1156,7 @@ package SimpleVehicleModel {
 					;
 					{
 						;
-						;
+						doc \* The total mass of the engine shall be less than or equal to the required mass.*\
 						;
 						;
 						;
@@ -1177,8 +1179,8 @@ package SimpleVehicleModel {
 				}
 			}
 		}
-		Package Engine4Cyl_Variant{
-			import ModelingMetadata::*;
+		package Engine4Cyl_Variant {
+			public import ModelingMetadata::*;
 			{
 				;
 			}
@@ -1190,7 +1192,7 @@ package SimpleVehicleModel {
 				;
 			}
 		}
-		Package WheelHubAssemblies{
+		package WheelHubAssemblies {
 			{
 				{
 					{
@@ -1273,41 +1275,62 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleAnalysis{
-		import RiskMetadata::*;
-		import RiskMetadata::RiskLevelEnum;
-		;
-		Package FuelEconomyAnalysisModel{
-			;
-			;
+	package VehicleAnalysis {
+		public import RiskMetadata::*;
+		public import RiskMetadata::RiskLevelEnum;
+		public import VehicleConfiguration_b;
+		package FuelEconomyAnalysisModel {
+			public import SampledFunctions::null;
+			comment about \* This analysis model was provided by Hisashi Miyashita on January 27, 2021
+We use the simplest fuel consumption analysis model introduced in:
+Akcelik, R. "Fuel efficiency and other objectives in traffic system management." Traffic Engineering and Control 22.2 (1981): 54-65. 
+
+Fuel consumption rate f can be decomposed to:
+f = f_a + f_b * tpd_avg,
+where tpd_avg is average interrupted travel time per unit distance, actually the inverse of the average velocity [t/km];
+f_a is the best fuel consumption per distance; and
+f_b is the additional fuel consumption per distance and average travel time, which can be regarded as the idling fuel consumption.
+Approximately, it is proportional to engine displacement and it ranges from 0.5 to 0.6 [l/hour/litre of engine displacement]
+according to:
+Review of the Incidence, Energy Use and Costs of Passenger Vehicle Idling; Gordon W. Taylor, P.Eng. Prepared for the Office of Energy Efficiency, Natural Resources Canada, 2003
+
+We assume f_a can be approximated to
+fuel_consumption / distance = BSFC * SGG * required_power_avg * tpd_avg,
+where required_power_avg is the required power, and it can be approximately derived from:
+total_energy == P_req * tpd_avg * distance == 1/2 * mass / tpd_avg^2
+This part is computed with BestFuelConsumptionPerDistance calc def.
+
+BSFC means Brake-Specific Fuel Consumption, defined as gram/power.  SGG is the specific gravity of gasoline.
+The high octane gasoline is about 0.76[l/kg].
+*\
 			attribute def Scenario {
 				{
 					;
 					;
 				}
 			}
-			{
+			calc def FuelConsumption {
 				;
 				;
 				;
 				;
 				;
 			}
-			{
+			calc def AverageTravelTimePerDistance {
 				;
 				;
 			}
-			{
+			calc def TraveledDistance {
 				;
 				;
 			}
-			{
+			calc def IdlingFuelConsumptionPerTime {
 				;
 				;
 				;
 			}
 			;
-			{
+			calc def BestFuelConsumptionPerDistance {
 				;
 				;
 				;
@@ -1318,7 +1341,7 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			{
+			calc def ComputeBSFC {
 				;
 				;
 			}
@@ -1326,7 +1349,7 @@ package SimpleVehicleModel {
 				;
 				{
 					;
-					;
+					doc \* estimate the vehicle fuel economy*\
 					{
 						;
 					}
@@ -1341,10 +1364,11 @@ package SimpleVehicleModel {
 				;
 			}
 		}
-		Package ElectricalPowerAnalysis;
-		Package ReliabilityAnalyis;
-		Package VehicleTradeOffAnalysis{
-			;
+		package ElectricalPowerAnalysis;
+		package ReliabilityAnalyis;
+		package VehicleTradeOffAnalysis {
+			comment about \* The following example provides the rationale for selecting the engine4cyl. 
+The rationale and risk are contained in a metadata library. *\
 			{
 				;
 				;
@@ -1361,8 +1385,22 @@ package SimpleVehicleModel {
 					;
 				}
 			}
-			import TradeStudies::*;
-			{
+			public import TradeStudies::*;
+			calc def EngineEvaluation {
+				;
+				;
+				;
+				;
+				;
+			}
+			calc def EngineEvaluation_4cyl {
+				;
+				;
+				;
+				;
+				;
+			}
+			calc def EngineEvaluation_6cyl {
 				;
 				;
 				;
@@ -1371,29 +1409,6 @@ package SimpleVehicleModel {
 			}
 			{
 				;
-				;
-				;
-				;
-				;
-			}
-			{
-				;
-				;
-				;
-				;
-				;
-			}
-			{
-				;
-				{
-					{
-						;
-						;
-						;
-						;
-						;
-					}
-				}
 				{
 					{
 						;
@@ -1404,10 +1419,19 @@ package SimpleVehicleModel {
 					}
 				}
 				{
+					{
+						;
+						;
+						;
+						;
+						;
+					}
+				}
+				{
 					;
 					;
 				}
-				;
+				comment about \* Select vehicle alternative with the engine whose evaluation function returns the max value*\
 				{
 					;
 					;
@@ -1420,14 +1444,14 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleVerification{
-		;
-		import VerificationCaseDefinitions;
-		import VerificationCases1;
-		import VerificationCases::*;
-		import VerificationSystem;
-		Package VerificationCaseDefinitions{
-			{
+	package VehicleVerification {
+		public import VehicleConfiguration_b;
+		public import VerificationCaseDefinitions;
+		public import VerificationCases1;
+		public import VerificationCases::*;
+		public import VerificationSystem;
+		package VerificationCaseDefinitions {
+			verification def MassTest {
 				;
 				{
 					;
@@ -1435,7 +1459,7 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			{
+			verification def AccelerationTest {
 				;
 				{
 					;
@@ -1443,7 +1467,7 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			{
+			verification def ReliabilityTest {
 				;
 				{
 					;
@@ -1452,7 +1476,7 @@ package SimpleVehicleModel {
 				;
 			}
 		}
-		Package VerificationCases1{
+		package VerificationCases1 {
 			{
 				;
 				;
@@ -1483,7 +1507,7 @@ package SimpleVehicleModel {
 				;
 			}
 		}
-		Package VerificationSystem{
+		package VerificationSystem {
 			{
 				;
 				;
@@ -1498,7 +1522,7 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleIndividuals{
+	package VehicleIndividuals {
 		{
 			{
 				{
@@ -1552,14 +1576,14 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package MissionContext{
-		;
-		;
-		;
-		import TransportPassengerScenario;
-		Package ContextDefinitions{
-			part def MissionContext ;
-			part def Road ;
+	package MissionContext {
+		comment about \* Define mission context with mission use cases for vehicle_b *\
+		public import VehicleConfiguration_b;
+		public import ParametersOfInterestMetadata::null;
+		public import TransportPassengerScenario;
+		package ContextDefinitions {
+			part def MissionContext;
+			part def Road;
 			part def Driver {
 				;
 				{
@@ -1601,15 +1625,15 @@ package SimpleVehicleModel {
 					}
 				}
 			}
-			part def Passenger ;
+			part def Passenger;
 			{
 				;
 				;
 			}
-			{
+			use case def TransportPassenger {
 				{
 					;
-					;
+					doc \* deliver passenger to destination safely, comfortably, and within acceptable time*\
 					{
 						;
 					}
@@ -1662,7 +1686,7 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			{
+			use case def GetInVehicle {
 				;
 				;
 				;
@@ -1699,7 +1723,7 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			{
+			use case def GetOutOfVehicle {
 				;
 				;
 				;
@@ -1713,8 +1737,8 @@ package SimpleVehicleModel {
 				;
 			}
 		}
-		Package TransportPassengerScenario{
-			;
+		package TransportPassengerScenario {
+			public import TransportPassenger;
 			{
 				;
 				{
@@ -1767,7 +1791,7 @@ package SimpleVehicleModel {
 				;
 				;
 				;
-				;
+				item def VehicleOnSignal;
 				;
 				;
 				;
@@ -1895,16 +1919,16 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package VehicleSuperSetModel{
-		;
-		Package VariationPointDefinitions{
-			part def TransmissionChoices {
+	package VehicleSuperSetModel {
+		comment about \* all of vehicleFamily is included in the superset model to enable subsetting a specific vehicle configuration*\
+		package VariationPointDefinitions {
+			variation part def TransmissionChoices {
 				;
 				;
 			}
 		}
-		Package VehiclePartsTree{
-			import VariationPointDefinitions;
+		package VehiclePartsTree {
+			public import VariationPointDefinitions;
 			{
 				{
 					;
@@ -1928,32 +1952,32 @@ package SimpleVehicleModel {
 			}
 		}
 	}
-	Package SafetyandSecurityGroups{
-		import PartsTree;
-		Package SafetyGroup{
-			;
-			;
+	package SafetyandSecurityGroups {
+		public import PartsTree;
+		package SafetyGroup {
+			comment about \* Parts that contribute to safety. *\
+			public import vehicle_b;
 		}
-		Package SecurityGroup{
-			;
-			;
+		package SecurityGroup {
+			comment about \* Parts that contribute to security. *\
+			public import vehicle_b;
 		}
-		Package SafetyandSecurityGroup{
-			;
-			;
+		package SafetyandSecurityGroup {
+			comment about \* Parts that contribute to safety OR security. *\
+			public import vehicle_b;
 		}
-		Package MandatorySafetyGroup{
-			;
-			;
+		package MandatorySafetyGroup {
+			comment about \* Parts that contribute to safety AND are mandatory. *\
+			public import vehicle_b;
 		}
 	}
-	Package Views_Viewpoints{
-		Package ViewpointDefinitions{
-			{
+	package Views_Viewpoints {
+		package ViewpointDefinitions {
+			viewpoint def BehaviorViewpoint {
 				;
 				;
 			}
-			{
+			viewpoint def SafetyViewpoint {
 				;
 				{
 					;
@@ -1961,35 +1985,35 @@ package SimpleVehicleModel {
 				}
 				;
 			}
-			part def SafetyEngineer ;
-			{
+			part def SafetyEngineer;
+			concern def VehicleSafety {
 				;
-				;
+				doc \* identify system safety features *\
 				;
 				;
 			}
 		}
-		Package ViewDefinitions{
-			import Views::*;
-			{
+		package ViewDefinitions {
+			public import Views::*;
+			view def TreeView {
 				;
 			}
-			;
-			;
-			;
-			;
-			;
+			view def NestedView;
+			view def RelationshipView;
+			view def TableView;
+			view def PartsTreeView;
+			view def PartsInterconnection;
 		}
-		Package VehicleViews{
-			import ViewpointDefinitions;
-			import ViewDefinitions;
-			import VehicleConfiguration_b;
+		package VehicleViews {
+			public import ViewpointDefinitions;
+			public import ViewDefinitions;
+			public import VehicleConfiguration_b;
 			{
 				{
 					;
 					;
 				}
-				;
+				protected PartsTree;
 			}
 		}
 	}

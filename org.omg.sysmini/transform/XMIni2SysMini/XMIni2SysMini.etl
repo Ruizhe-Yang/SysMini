@@ -823,6 +823,43 @@ rule OwnedReferenceSubsetting
 	}
 
 @abstract
+rule RequirementUsage
+	transform s : XMIni!RequirementUsage
+	to t : SysMini!RequirementUsage
+	extends OccurrenceUsagePrefix,
+			ConstraintUsageDeclaration,
+			RequirementBody{
+	}
+	
+@abstract
+rule ConstraintUsage
+	transform s : XMIni!ConstraintUsage
+	to t : SysMini!ConstraintUsage
+	extends OccurrenceUsagePrefix,
+			ConstraintUsageDeclaration,
+			CalculationBody{
+	}
+
+@abstract
+rule ConstraintUsageDeclaration
+	transform s : XMIni!ConstraintUsage
+	to t : SysMini!ConstraintUsage
+	extends UsageDeclaration, ValuePart{
+	}
+
+@abstract
+rule RequirementBody
+	transform s : XMIni!Type
+	to t : SysMini!Type{
+	}
+	
+@abstract
+rule CalculationBody
+	transform s : XMIni!Type
+	to t : SysMini!Type{
+	}
+		
+@abstract
 rule TransitionUsage
 	transform s : XMIni!TransitionUsage
 	to t : SysMini!TransitionUsage
@@ -846,6 +883,9 @@ rule TransitionSourceMember
 rule EmptyParameterMember
 	transform s : XMIni!Usage
 	to t : SysMini!Usage{
+//		for (emptyParameterMember in s.ownedRelationship.getElementOf("ParameterMembership")){
+//			emptyParameterMember.ownedRelatedElement.println();
+//		}
 	}
 
 @abstract
@@ -1315,6 +1355,7 @@ rule NamespaceImport
 				t.declaredName = n.first()+"::*";
 			}
 		}
+		t.declaredName.println();
 	}
 	
 @abstract
@@ -1893,14 +1934,14 @@ rule IncludeUseCaseUsageRule
 rule ConstraintUsageUsageRule
 	transform s : XMIni!ConstraintUsage
 	to t : SysMini!ConstraintUsage
-	extends UsageRule{
+	extends ConstraintUsage{
 	}
 	
 @lazy
 rule RequirementUsageRule
 	transform s : XMIni!RequirementUsage
 	to t : SysMini!RequirementUsage
-	extends UsageRule{
+	extends RequirementUsage{
 	}
 	
 @lazy

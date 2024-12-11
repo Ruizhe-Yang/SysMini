@@ -18,7 +18,12 @@ operation SysMini!Element getContent(content: String, layer: Integer) : String {
 		content += self.getTab(layer)+"}";
 	}
 	else {
-		content += ";";
+		if (content.endsWith(" ")){
+			content = content.substring(0, content.length()-1);
+		}
+		if (not content.endsWith("*\\")){
+			content += ";";
+		}
 	}
 	return content;
 }
@@ -33,10 +38,51 @@ operation SysMini!Element getTab(layer : Integer) : String {
 
 operation SysMini!Element matchType() : String {
 	switch (self.type().name){
-		case "Package":               return self.Package();
-		case "NamespaceImport":       return self.NamespaceImport();
-		case "PartDefinition":        return self.PartDefinition();
-		case "AttributeDefinition":   return self.AttributeDefinition();
+		
+		//Package
+		case "Package":                   return self.Package();
+		case "LibraryPackage":            return self.LibraryPackage();
+		
+		//Import
+		case "NamespaceImport":           return self.NamespaceImport();
+		case "NamespaceExpose":           return self.NamespaceExpose();
+		case "MembershipImport":          return self.MembershipImport();
+		case "MembershipExpose":          return self.MembershipExpose();
+		
+		//AnnotatingElement
+		case "Comment":                   return self.Comment();
+		case "Documentation":             return self.Documentation();
+		case "TextualRepresentation":     return self.TextualRepresentation();
+		
+		// Definitions
+		case "AttributeDefinition":       return self.AttributeDefinition();
+		case "EnumerationDefinition":     return self.EnumerationDefinition();
+		case "OccurrenceDefinition":      return self.OccurrenceDefinition();
+//		case "IndividualDefinition":      return self.IndividualDefinition();
+		case "ItemDefinition":            return self.ItemDefinition();
+		case "MetadataDefinition":        return self.MetadataDefinition();
+		case "PartDefinition":            return self.PartDefinition();
+		case "ConnectionDefinition":      return self.ConnectionDefinition();
+		case "FlowConnectionDefinition":  return self.FlowConnectionDefinition();
+		case "InterfaceDefinition":       return self.InterfaceDefinition();
+		case "AllocationDefinition":      return self.AllocationDefinition();
+		case "PortDefinition":            return self.PortDefinition();
+		case "ActionDefinition":          return self.ActionDefinition();
+		case "CalculationDefinition":     return self.CalculationDefinition();
+		case "StateDefinition":           return self.StateDefinition();
+		case "ConstraintDefinition":      return self.ConstraintDefinition();
+		case "RequirementDefinition":     return self.RequirementDefinition();
+		case "ConcernDefinition":         return self.ConcernDefinition();
+		case "CaseDefinition":            return self.CaseDefinition();
+		case "AnalysisCaseDefinition":    return self.AnalysisCaseDefinition();
+		case "VerificationCaseDefinition":return self.VerificationCaseDefinition();
+		case "UseCaseDefinition":         return self.UseCaseDefinition();
+		case "ViewDefinition":            return self.ViewDefinition();
+		case "ViewpointDefinition":       return self.ViewpointDefinition();
+		case "RenderingDefinition":       return self.RenderingDefinition();
+		case "ExtendedDefinition":        return self.ExtendedDefinition();
+		
+
 	}
 	return "";
 }
