@@ -61,6 +61,7 @@ operation SysMini!Element setPortionKind(s: XMIni!Element){
 	}
 }
 
+
 operation OrderedSet getElementOf(typeName : String){
 	return self.select(e|e.type().name == typeName);
 }
@@ -134,6 +135,31 @@ operation XMIni!Feature getFeatureSpecialization(){
 	}
 }
 
+operation XMIni!Element TransitionSourceMember() : String {
+	var membership = self.ownedRelationship.getElementOf("Membership").first();
+	return membership.memberElement.declaredName.space();
+}
+
+operation XMIni!Element EmptyParameterMember() : String {
+	return "";
+}
+
+operation XMIni!Element TriggerActionMember() : String {
+	return "";
+}
+
+operation XMIni!Element GuardExpressionMember() : String {
+	return "";
+}
+
+operation XMIni!Element EffectBehaviorMember() : String {
+	return "";
+}
+
+operation XMIni!Element TransitionSuccessionMember() : String {
+	return "";
+}
+
 operation XMIni!Specialization getDeclaredName(){
 	if (self.declaredName != null){
 		return self.declaredName;
@@ -187,43 +213,53 @@ operation XMIni!FeatureMembership getItemFeatureMember(){
 }
 
 operation XMIni!Usage getConnectorEnd(){
-	for (ownedRelationship in self.ownedRelationship){
-		if (ownedRelationship.isTypeOf("ReferenceSubsetting")){
-			var referenceSubsetting = ownedRelationship;
-			if (referenceSubsetting.referencedFeature == null){
+	if (self.declaredName != null){
+		return self.declaredName;
+	}
+	else{
+		return self.OwnedReferenceSubsetting();
+	}
+}
+
+operation XMIni!Element OwnedReferenceSubsetting() : String {
+	if (self.ownedRelationship.first().isTypeOf("ReferenceSubsetting")){
+		var referenceSubsetting = self.ownedRelationship.first();
+		referenceSubsetting.tag();
+		if (referenceSubsetting.referencedFeature == null){
+			return "";
+		}
+		else if (referenceSubsetting.referencedFeature.declaredName != null){
+			return referenceSubsetting.referencedFeature.declaredName;
+		}
+		else{
+			var str = "";
+			if (referenceSubsetting.ownedRelatedElement.size() == 0){
 				return "";
 			}
-			if (referenceSubsetting.referencedFeature.declaredName != null){
-				self.tag();
-				return referenceSubsetting.referencedFeature.declaredName;
-			}
-			else{
-				var str = "";
-				if (referenceSubsetting.ownedRelatedElement.first() == null){
-//					referenceSubsetting.referencedFeature.println("test:");
-					return "";
+			for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
+				if (featureChain.chainingFeature.declaredName != null){
+					str += featureChain.chainingFeature.declaredName;
+					str += ".";
 				}
-				else{
-					for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
-						if (featureChain.chainingFeature.declaredName != null){
-							str += featureChain.chainingFeature.declaredName;
-							str += ".";
-						}
-						else {
-							if (featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){
-								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
-								str += ".";
-							}
-						}
-					}
-					self.tag();
-					return str.substring(0, str.length()-1);
+				else if (featureChain.chainingFeature.equivalent().declaredName != null){
+					str += featureChain.chainingFeature.equivalent().declaredName;
+					str += ".";
+				}
+				else if (featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+						str += ".";
 				}
 			}
-		}
-		else {
-			return null;
+			return str.substring(0, str.length()-1);
 		}
 	}
 }
 
+
+operation Any space(){
+	if (self == null or self == ""){
+		return "";
+	}
+	else{
+		return self.asString()+" ";
+	}
+}

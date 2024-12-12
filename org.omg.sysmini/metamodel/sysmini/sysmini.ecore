@@ -266,7 +266,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isParallel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransitionUsage" eSuperTypes="#//ActionUsage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionUsage" eSuperTypes="#//ActionUsage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transitionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AcceptActionUsage" eSuperTypes="#//ActionUsage"/>
   <eClassifiers xsi:type="ecore:EClass" name="CalculationUsage" eSuperTypes="#//ActionUsage #//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConstraintUsage" eSuperTypes="#//OccurrenceUsage #//BooleanExpression"/>
@@ -317,7 +319,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StakeholderMembership" eSuperTypes="#//ParameterMembership"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActorMembership" eSuperTypes="#//ParameterMembership"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SatisfyRequirementUsage" eSuperTypes="#//RequirementUsage #//AssertConstraintUsage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SatisfyRequirementUsage" eSuperTypes="#//RequirementUsage #//AssertConstraintUsage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="satisfactionSubjectMember"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssertConstraintUsage" eSuperTypes="#//ConstraintUsage #//Invariant"/>
   <eClassifiers xsi:type="ecore:EClass" name="FramedConcernMembership" eSuperTypes="#//RequirementConstraintMembership"/>
   <eClassifiers xsi:type="ecore:EClass" name="EventOccurrenceUsage" eSuperTypes="#//OccurrenceUsage"/>

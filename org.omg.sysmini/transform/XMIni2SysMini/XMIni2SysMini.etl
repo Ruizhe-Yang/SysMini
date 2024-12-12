@@ -97,7 +97,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "EnumerationDefinition": element.addNodeTo(rootNode);
 			case "PartDefinition": element.addNodeTo(rootNode);
 			case "MetadataDefinition": element.addNodeTo(rootNode);
-			case "ConjugatedPortDefinition": element.addNodeTo(rootNode);
+//			case "ConjugatedPortDefinition": element.addNodeTo(rootNode);
 			case "CalculationDefinition": element.addNodeTo(rootNode);
 			case "StateDefinition": element.addNodeTo(rootNode);
 			case "ConnectionDefinition": element.addNodeTo(rootNode);
@@ -155,7 +155,6 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "UseCaseUsage": element.addNodeTo(rootNode);
 			case "SuccessionFlowConnectionUsage": element.addNodeTo(rootNode);
 			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
-			
 			case "ConstraintUsage": element.addNodeTo(rootNode);
 			case "RequirementUsage": element.addNodeTo(rootNode);
 			case "AssertConstraintUsage": element.addNodeTo(rootNode);
@@ -433,8 +432,8 @@ rule ViewpointDefinition
 	
 @abstract
 rule CaseBody
-	transform s : XMIni!CaseDefinition
-	to t : SysMini!CaseDefinition{
+	transform s : XMIni!Type
+	to t : SysMini!Type{
 	}
 	
 @abstract
@@ -683,6 +682,96 @@ rule StateUsage
 	}
 
 @abstract
+rule PerformActionUsage
+	transform s : XMIni!PerformActionUsage
+	to t : SysMini!PerformActionUsage
+	extends OccurrenceUsagePrefix, PerformActionUsageDeclaration, ActionBody{
+	}
+
+@abstract
+rule IncludeUseCaseUsage
+	transform s : XMIni!IncludeUseCaseUsage
+	to t : SysMini!IncludeUseCaseUsage
+	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, CaseBody{
+		if (s.declaredName == null){
+			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+	}
+	
+@abstract
+rule CalculationUsage
+	transform s : XMIni!CalculationUsage
+	to t : SysMini!CalculationUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, CalculationBody{
+	}
+
+@abstract
+rule CaseUsage
+	transform s : XMIni!CaseUsage
+	to t : SysMini!CaseUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, CaseBody{
+	}
+	
+@abstract
+rule AssertConstraintUsage
+	transform s : XMIni!AssertConstraintUsage
+	to t : SysMini!AssertConstraintUsage
+	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, CalculationBody{
+		if (s.declaredName == null){
+			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+		t.isNegated = s.isNegated;
+	}
+
+@abstract
+rule ConcernUsage
+	transform s : XMIni!ConcernUsage
+	to t : SysMini!ConcernUsage
+	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, RequirementBody{
+	}
+
+@abstract
+rule ViewpointUsage
+	transform s : XMIni!ViewpointUsage
+	to t : SysMini!ViewpointUsage
+	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, RequirementBody{
+	}
+
+@abstract
+rule SatisfyRequirementUsage
+	transform s : XMIni!SatisfyRequirementUsage
+	to t : SysMini!SatisfyRequirementUsage
+	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, RequirementBody{
+		if (s.declaredName == null){
+			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+		t.isNegated = s.isNegated;
+		for (satisfactionSubjectMember in s.ownedRelationship.getElementOf("SubjectMembership")){
+			if (satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().isTypeOf("FeatureValue")){
+				var featureReferenceExpression = satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first();
+				var membership = featureReferenceExpression.ownedRelationship.getElementOf("Membership");
+				if (membership.size() > 0){
+					t.satisfactionSubjectMember = membership.memberElement.first().declaredName;
+				}
+				else{
+					// TBD
+//					featureReferenceExpression.println("->");
+				}
+			}
+		}
+	}
+	
+@abstract
+rule PerformActionUsageDeclaration
+	transform s : XMIni!PerformActionUsage
+	to t : SysMini!PerformActionUsage
+	extends UsageDeclaration, ValuePart{
+		if (s.declaredName == null){
+			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+	}
+		
+@abstract
 rule StateUsageBody
 	transform s : XMIni!StateUsage
 	to t : SysMini!StateUsage{
@@ -693,16 +782,9 @@ rule StateUsageBody
 rule ExhibitStateUsage
 	transform s : XMIni!ExhibitStateUsage
 	to t : SysMini!ExhibitStateUsage
-	extends OccurrenceUsagePrefix, OwnedReferenceSubsetting, UsageDeclaration, ValuePart, StateUsageBody{
-	}
-
-@abstract
-rule OwnedReferenceSubsetting
-	transform s : XMIni!Element
-	to t : SysMini!Element{
-		for (referenceSubsetting in s.ownedRelationship.getElementOf("ReferenceSubsetting")){
-			referenceSubsetting.tag();
-			referenceSubsetting.println();
+	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, StateUsageBody{
+		if (s.declaredName == null){
+			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 	}
 
@@ -748,52 +830,17 @@ rule TransitionUsage
 	transform s : XMIni!TransitionUsage
 	to t : SysMini!TransitionUsage
 	extends UsageDeclaration,
-			ActionBody,
-			TransitionSourceMember, 
-			EmptyParameterMember, 
-			TriggerActionMember, 
-			GuardExpressionMember,
-			EffectBehaviorMember,
-			TransitionSuccessionMember{
-	}
-
-@abstract
-rule TransitionSourceMember
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
-	}
-	
-@abstract
-rule EmptyParameterMember
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
-//		for (emptyParameterMember in s.ownedRelationship.getElementOf("ParameterMembership")){
-//			emptyParameterMember.ownedRelatedElement.println();
-//		}
-	}
-
-@abstract
-rule TriggerActionMember
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
-	}
-
-@abstract
-rule GuardExpressionMember
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
-	}
-
-@abstract
-rule EffectBehaviorMember
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
-	}
-
-@abstract
-rule TransitionSuccessionMember
-	transform s : XMIni!Usage
-	to t : SysMini!Usage{
+			ActionBody{
+		t.transitionText += s.TransitionSourceMember();
+		t.transitionText += s.EmptyParameterMember();
+		t.transitionText += s.TriggerActionMember();
+		t.transitionText += s.GuardExpressionMember();
+		t.transitionText += s.EffectBehaviorMember();
+		t.transitionText += "then ";
+		t.transitionText += s.TransitionSuccessionMember();
+		for (o in s.eContents()){
+			o.tag();
+		}
 	}
 	
 @abstract
@@ -857,6 +904,9 @@ rule InterfaceUsage
 	transform s : XMIni!InterfaceUsage
 	to t : SysMini!InterfaceUsage
 	extends OccurrenceUsagePrefix, InterfaceUsageDeclaration, InterfaceBody{
+		for (e in s.ownedRelationship){
+			e.tag();
+		}
 	}
 
 @abstract
@@ -1119,6 +1169,70 @@ rule EventOccurrenceUsage
 	transform s : XMIni!EventOccurrenceUsage
 	to t : SysMini!EventOccurrenceUsage
 	extends OccurrenceUsagePrefix, FeatureSpecializationPart, UsageCompletion{
+	}
+	
+@abstract
+rule AnalysisCaseUsage
+	transform s : XMIni!AnalysisCaseUsage
+	to t : SysMini!AnalysisCaseUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, CaseBody{
+	}
+
+@abstract
+rule VerificationCaseUsage
+	transform s : XMIni!VerificationCaseUsage
+	to t : SysMini!VerificationCaseUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, CaseBody{
+	}
+
+@abstract
+rule UseCaseUsage
+	transform s : XMIni!UseCaseUsage
+	to t : SysMini!UseCaseUsage
+	extends OccurrenceUsagePrefix, ActionUsageDeclaration, CaseBody{
+	}
+
+@abstract
+rule MergeNode
+	transform s : XMIni!MergeNode
+	to t : SysMini!MergeNode
+	extends ControlNodePrefix, UsageDeclaration, ActionNodeBody{
+	}
+
+@abstract
+rule DecisionNode
+	transform s : XMIni!DecisionNode
+	to t : SysMini!DecisionNode
+	extends ControlNodePrefix, UsageDeclaration, ActionNodeBody{
+	}
+
+@abstract
+rule ForkNode
+	transform s : XMIni!ForkNode
+	to t : SysMini!ForkNode
+	extends ControlNodePrefix, UsageDeclaration, ActionNodeBody{
+	}
+
+@abstract
+rule JoinNode
+	transform s : XMIni!JoinNode
+	to t : SysMini!JoinNode
+	extends ControlNodePrefix, UsageDeclaration, ActionNodeBody{
+	}
+	
+@abstract
+rule ActionNodeBody
+	transform s : XMIni!ControlNode
+	to t : SysMini!ControlNode{
+	}
+
+@abstract
+rule ControlNodePrefix
+	transform s : XMIni!OccurrenceUsage
+	to t : SysMini!OccurrenceUsage
+	extends RefPrefix, UsageExtensionKeyword{
+		t.isIndividual = s.isIndividual;
+		t.setPortionKind(s);
 	}
 	
 //AnnotatingElement
@@ -1579,14 +1693,14 @@ rule AcceptActionUsageRule
 rule CalculationUsageRule
 	transform s : XMIni!CalculationUsage
 	to t : SysMini!CalculationUsage
-	extends UsageRule{
+	extends CalculationUsage{
 	}
 	
 @lazy
 rule PerformActionUsageRule
 	transform s : XMIni!PerformActionUsage
 	to t : SysMini!PerformActionUsage
-	extends UsageRule{
+	extends PerformActionUsage{
 	}
 	
 @lazy
@@ -1642,7 +1756,7 @@ rule ExhibitStateUsageRule
 rule CaseUsageRule
 	transform s : XMIni!CaseUsage
 	to t : SysMini!CaseUsage
-	extends UsageRule{
+	extends CaseBody{
 	}
 	
 @lazy
@@ -1663,28 +1777,28 @@ rule ForLoopActionUsageRule
 rule DecisionNodeRule
 	transform s : XMIni!DecisionNode
 	to t : SysMini!DecisionNode
-	extends UsageRule{
+	extends DecisionNode{
 	}
 	
 @lazy
 rule ForkNodeRule
 	transform s : XMIni!ForkNode
 	to t : SysMini!ForkNode
-	extends UsageRule{
+	extends ForkNode{
 	}
 	
 @lazy
 rule MergeNodeRule
 	transform s : XMIni!MergeNode
 	to t : SysMini!MergeNode
-	extends UsageRule{
+	extends MergeNode{
 	}
 	
 @lazy
 rule JoinNodeRule
 	transform s : XMIni!JoinNode
 	to t : SysMini!JoinNode
-	extends UsageRule{
+	extends JoinNode{
 	}
 	
 @lazy
@@ -1712,21 +1826,21 @@ rule AllocationUsageRule
 rule AnalysisCaseUsageRule
 	transform s : XMIni!AnalysisCaseUsage
 	to t : SysMini!AnalysisCaseUsage
-	extends UsageRule{
+	extends AnalysisCaseUsage{
 	}
 	
 @lazy
 rule VerificationCaseUsageRule
 	transform s : XMIni!VerificationCaseUsage
 	to t : SysMini!VerificationCaseUsage
-	extends UsageRule{
+	extends VerificationCaseUsage{
 	}
 	
 @lazy
 rule UseCaseUsageRule
 	transform s : XMIni!UseCaseUsage
 	to t : SysMini!UseCaseUsage
-	extends UsageRule{
+	extends UseCaseUsage{
 	}
 	
 @lazy
@@ -1740,7 +1854,7 @@ rule SuccessionFlowConnectionUsageRule
 rule IncludeUseCaseUsageRule
 	transform s : XMIni!IncludeUseCaseUsage
 	to t : SysMini!IncludeUseCaseUsage
-	extends UsageRule{
+	extends IncludeUseCaseUsage{
 	}
 	
 @lazy
@@ -1761,28 +1875,28 @@ rule RequirementUsageRule
 rule AssertConstraintUsageRule
 	transform s : XMIni!AssertConstraintUsage
 	to t : SysMini!AssertConstraintUsage
-	extends UsageRule{
+	extends AssertConstraintUsage{
 	}
 	
 @lazy
 rule ConcernUsageRule
 	transform s : XMIni!ConcernUsage
 	to t : SysMini!ConcernUsage
-	extends UsageRule{
+	extends ConcernUsage{
 	}
 	
 @lazy
 rule ViewpointUsageRule
 	transform s : XMIni!ViewpointUsage
 	to t : SysMini!ViewpointUsage
-	extends UsageRule{
+	extends ViewpointUsage{
 	}
 	
 @lazy
 rule SatisfyRequirementUsageRule
 	transform s : XMIni!SatisfyRequirementUsage
 	to t : SysMini!SatisfyRequirementUsage
-	extends UsageRule{
+	extends SatisfyRequirementUsage{
 	}
 
 @lazy

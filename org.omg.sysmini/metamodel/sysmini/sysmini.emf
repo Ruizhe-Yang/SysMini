@@ -407,6 +407,7 @@ class StateUsage extends ActionUsage {
 }
 
 class TransitionUsage extends ActionUsage {
+	attr String transitionText;
 }
 
 class AcceptActionUsage extends ActionUsage {
@@ -514,6 +515,7 @@ class ActorMembership extends ParameterMembership {
 }
 
 class SatisfyRequirementUsage extends RequirementUsage, AssertConstraintUsage {
+	attr String satisfactionSubjectMember;
 }
 
 class AssertConstraintUsage extends ConstraintUsage, Invariant {
