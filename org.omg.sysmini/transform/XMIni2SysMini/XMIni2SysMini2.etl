@@ -1,171 +1,12 @@
-import "XMIni2SysMini-util.eol";
+import "XMIni2SysMini-util2.eol";
 
 pre{
 	"------------------ ETL Start ------------------".println();
-	main();
+	main_new();
 }
 
 post{
 	"------------------ ETL Over  ------------------".println();
-}
-
-operation main(){
-	init();
-	var rootNamespace = new SysMini!Namespace;
-	XMIni!Package.all.first().addNodeTo(rootNamespace);
-}
-
-operation XMIni!Element elementTransform(rootNode : SysMini!Element){
-	for (relationship in self.relationships()){
-		switch (relationship.type().name){
-		
-			//Relationship Entity
-			case "Dependency": relationship.addRelationshipTo(rootNode);
-			case "NamespaceImport": relationship.addRelationshipTo(rootNode);
-			case "MembershipImport": relationship.addRelationshipTo(rootNode);
-			case "NamespaceExpose": relationship.addRelationshipTo(rootNode);
-			case "MembershipExpose": relationship.addRelationshipTo(rootNode);
-			
-			case "ElementFilterMembership": relationship.addRelationshipTo(rootNode);
-			
-			//Specialization
-			case "Subclassification": relationship.skipRelationshipTo(rootNode);
-			case "Subsetting": relationship.skipRelationshipTo(rootNode);
-			case "Redefinition": relationship.skipRelationshipTo(rootNode);
-			case "ReferenceSubsetting": relationship.skipRelationshipTo(rootNode);
-			case "FeatureTyping": relationship.skipRelationshipTo(rootNode);
-			case "ConjugatedPortTyping": relationship.skipRelationshipTo(rootNode);
-			
-			//Feature
-			case "TypeFeaturing": relationship.skipRelationshipTo(rootNode);
-			
-			//Membership
-			case "Membership": relationship.skipRelationshipTo(rootNode);
-			
-			case "OwningMembership": relationship.skipRelationshipTo(rootNode);
-			case "FeatureMembership": relationship.skipRelationshipTo(rootNode);
-			case "FeatureValue": relationship.skipRelationshipTo(rootNode);
-			case "VariantMembership": relationship.skipRelationshipTo(rootNode);
-			case "EndFeatureMembership": relationship.skipRelationshipTo(rootNode);
-			case "ParameterMembership": relationship.skipRelationshipTo(rootNode);
-			case "ResultExpressionMembership": relationship.skipRelationshipTo(rootNode);
-			case "RequirementConstraintMembership": relationship.skipRelationshipTo(rootNode);
-			case "ObjectiveMembership": relationship.skipRelationshipTo(rootNode);
-			case "StateSubactionMembership": relationship.skipRelationshipTo(rootNode);
-			case "TransitionFeatureMembership": relationship.skipRelationshipTo(rootNode);
-			case "ViewRenderingMembership": relationship.skipRelationshipTo(rootNode);
-			case "ReturnParameterMembership": relationship.skipRelationshipTo(rootNode);
-			case "SubjectMembership": relationship.skipRelationshipTo(rootNode);
-			case "StakeholderMembership": relationship.skipRelationshipTo(rootNode);
-			case "ActorMembership": relationship.skipRelationshipTo(rootNode);
-			case "FramedConcernMembership": relationship.skipRelationshipTo(rootNode);
-			case "RequirementVerificationMembership": relationship.skipRelationshipTo(rootNode);
-			
-			//Others
-			case "Annotation": relationship.skipRelationshipTo(rootNode);
-			case "FeatureInverting": relationship.skipRelationshipTo(rootNode);
-			case "FeatureChaining": relationship.skipRelationshipTo(rootNode);
-			case "Conjugation": relationship.skipRelationshipTo(rootNode);
-			case "PortConjugation": relationship.skipRelationshipTo(rootNode);
-			case "Intersecting": relationship.skipRelationshipTo(rootNode);
-			case "Unioning": relationship.skipRelationshipTo(rootNode);
-			case "Disjoining": relationship.skipRelationshipTo(rootNode);
-			case "Differencing": relationship.skipRelationshipTo(rootNode);
-			case "MultiplicityRange": relationship.skipRelationshipTo(rootNode);
-			case "Multiplicity": relationship.skipRelationshipTo(rootNode);
-		}
-	}
-}
-
-operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
-	for (element in self.elements()){
-		switch (element.type().name){
-		
-			//Package
-			case "Package": element.addNodeTo(rootNode);
-			case "LibraryPackage": element.addNodeTo(rootNode);
-			
-			//AnnotatingElement
-			case "Comment": element.addNodeTo(rootNode);
-			case "TextualRepresentation": element.addNodeTo(rootNode);
-			case "Documentation": element.addNodeTo(rootNode);
-			
-			//Definition
-			case "OccurrenceDefinition": element.addNodeTo(rootNode);
-			case "AttributeDefinition": element.addNodeTo(rootNode);
-			case "ItemDefinition": element.addNodeTo(rootNode);
-			case "PortDefinition": element.addNodeTo(rootNode);
-			case "ActionDefinition": element.addNodeTo(rootNode);
-			case "EnumerationDefinition": element.addNodeTo(rootNode);
-			case "PartDefinition": element.addNodeTo(rootNode);
-			case "MetadataDefinition": element.addNodeTo(rootNode);
-//			case "ConjugatedPortDefinition": element.addNodeTo(rootNode);
-			case "CalculationDefinition": element.addNodeTo(rootNode);
-			case "StateDefinition": element.addNodeTo(rootNode);
-			case "ConnectionDefinition": element.addNodeTo(rootNode);
-			case "ViewDefinition": element.addNodeTo(rootNode);
-			case "RenderingDefinition": element.addNodeTo(rootNode);
-			case "CaseDefinition": element.addNodeTo(rootNode);
-			case "FlowConnectionDefinition": element.addNodeTo(rootNode);
-			case "InterfaceDefinition": element.addNodeTo(rootNode);
-			case "AllocationDefinition": element.addNodeTo(rootNode);
-			case "AnalysisCaseDefinition": element.addNodeTo(rootNode);
-			case "VerificationCaseDefinition": element.addNodeTo(rootNode);
-			case "UseCaseDefinition": element.addNodeTo(rootNode);
-			case "ConstraintDefinition": element.addNodeTo(rootNode);
-			case "RequirementDefinition": element.addNodeTo(rootNode);
-			case "ConcernDefinition": element.addNodeTo(rootNode);
-			case "ViewpointDefinition": element.addNodeTo(rootNode);
-			
-			//Usage
-			case "OccurrenceUsage": element.addNodeTo(rootNode);
-			case "ReferenceUsage": element.addNodeTo(rootNode);
-			case "AttributeUsage": element.addNodeTo(rootNode);
-			case "SuccessionAsUsage": element.addNodeTo(rootNode);
-			case "BindingConnectorAsUsage": element.addNodeTo(rootNode);
-			case "ItemUsage": element.addNodeTo(rootNode);
-			case "ActionUsage": element.addNodeTo(rootNode);
-			case "PortUsage": element.addNodeTo(rootNode);
-			case "EventOccurrenceUsage": element.addNodeTo(rootNode);
-			case "EnumerationUsage": element.addNodeTo(rootNode);
-			case "PartUsage": element.addNodeTo(rootNode);
-			case "MetadataUsage": element.addNodeTo(rootNode);
-			case "StateUsage": element.addNodeTo(rootNode);
-			case "TransitionUsage": element.addNodeTo(rootNode);
-			case "AcceptActionUsage": element.addNodeTo(rootNode);
-			case "CalculationUsage": element.addNodeTo(rootNode);
-			case "PerformActionUsage": element.addNodeTo(rootNode);
-			case "SendActionUsage": element.addNodeTo(rootNode);
-			case "IfActionUsage": element.addNodeTo(rootNode);
-			case "AssignmentActionUsage": element.addNodeTo(rootNode);
-			case "ConnectionUsage": element.addNodeTo(rootNode);
-			case "ViewUsage": element.addNodeTo(rootNode);
-			case "RenderingUsage": element.addNodeTo(rootNode);
-			case "ExhibitStateUsage": element.addNodeTo(rootNode);
-			case "CaseUsage": element.addNodeTo(rootNode);
-			case "WhileLoopActionUsage": element.addNodeTo(rootNode);
-			case "ForLoopActionUsage": element.addNodeTo(rootNode);
-			case "DecisionNode": element.addNodeTo(rootNode);
-			case "ForkNode": element.addNodeTo(rootNode);
-			case "MergeNode": element.addNodeTo(rootNode);
-			case "JoinNode": element.addNodeTo(rootNode);
-			case "FlowConnectionUsage": element.addNodeTo(rootNode);
-			case "InterfaceUsage": element.addNodeTo(rootNode);
-			case "AllocationUsage": element.addNodeTo(rootNode);
-			case "AnalysisCaseUsage": element.addNodeTo(rootNode);
-			case "VerificationCaseUsage": element.addNodeTo(rootNode);
-			case "UseCaseUsage": element.addNodeTo(rootNode);
-			case "SuccessionFlowConnectionUsage": element.addNodeTo(rootNode);
-			case "IncludeUseCaseUsage": element.addNodeTo(rootNode);
-			case "ConstraintUsage": element.addNodeTo(rootNode);
-			case "RequirementUsage": element.addNodeTo(rootNode);
-			case "AssertConstraintUsage": element.addNodeTo(rootNode);
-			case "ConcernUsage": element.addNodeTo(rootNode);
-			case "ViewpointUsage": element.addNodeTo(rootNode);
-			case "SatisfyRequirementUsage": element.addNodeTo(rootNode);
-			
-		}
-	}
 }
 
 //Element
@@ -176,7 +17,41 @@ rule ElementRule
 		t.declaredName = s.declaredName;
 		t.declaredShortName = s.declaredShortName;
 	}
+	
+@abstract
+rule Package
+	transform s : XMIni!Package
+	to t : SysMini!Package
+	extends PrefixMetadataMember, PackageDeclaration, PackageBody{
+	}
 
+@abstract
+rule PackageDeclaration
+	transform s : XMIni!Package
+	to t : SysMini!Package
+	extends Identification{
+	}
+
+@abstract
+rule PackageBody
+	transform s : XMIni!Package
+	to t : SysMini!Package{
+		for (ownedRelationship in s.OR()){
+			if (ownedRelationship.isTypeOf(XMIni!OwningMembership)){
+				ownedRelationship.PackageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!ElementFilterMembership)){
+				ownedRelationship.ElementFilterMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!Membership)){
+				ownedRelationship.AliasMember(t);
+			}
+			else if (ownedRelationship.isKindOf(XMIni!Import)){
+				ownedRelationship.Import(t);
+			}
+		}
+	}
+	
 @abstract
 rule PrefixMetadataAnnotation
 	transform s : XMIni!Element
@@ -218,8 +93,9 @@ rule DefinitionPrefix
 @abstract
 rule Identification
 	transform s : XMIni!Element
-	to t : SysMini!Element
-	extends ElementRule{
+	to t : SysMini!Element{
+		t.declaredName = s.declaredName;
+		t.declaredShortName = s.declaredShortName;
 	}
 
 @abstract
@@ -492,7 +368,6 @@ rule LifeClassMembership
 	to t : SysMini!OccurrenceDefinition{
 		for (ownedRelationship in s.ownedRelationship.getElementOf("OwningMembership")){
 			for (lifeClass in ownedRelationship.ownedRelatedElement.getElementOf("LifeClass")){
-				lifeClass.tag();
 //				lifeClass.println();
 			}
 		}
@@ -752,7 +627,7 @@ rule SatisfyRequirementUsage
 		}
 		t.isNegated = s.isNegated;
 		for (satisfactionSubjectMember in s.ownedRelationship.getElementOf("SubjectMembership")){
-			if (satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().isTypeOf("FeatureValue")){
+			if (satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().isTypeNameOf("FeatureValue")){
 				var featureReferenceExpression = satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first();
 				var membership = featureReferenceExpression.ownedRelationship.getElementOf("Membership");
 				if (membership.size() > 0){
@@ -844,7 +719,6 @@ rule TransitionUsage
 		t.transitionText += "then ";
 		t.transitionText += s.TransitionSuccessionMember();
 		for (o in s.eContents()){
-			o.tag();
 		}
 	}
 	
@@ -909,9 +783,6 @@ rule InterfaceUsage
 	transform s : XMIni!InterfaceUsage
 	to t : SysMini!InterfaceUsage
 	extends OccurrenceUsagePrefix, InterfaceUsageDeclaration, InterfaceBody{
-		for (e in s.ownedRelationship){
-			e.tag();
-		}
 	}
 
 @abstract
@@ -957,7 +828,6 @@ rule BinaryInterfacePart
 				str += interfaceEnd.getMultiplicityRange();
 				t.interfacePart.add(str);
 			}
-			interfaceEnd.tag();
 		}
 	}
 	
@@ -978,7 +848,6 @@ rule NaryInterfacePart
 				str += interfaceEnd.getMultiplicityRange();
 				t.interfacePart.add(str);
 			}
-			interfaceEnd.tag();
 		}	
 	}
 	
@@ -990,14 +859,13 @@ rule FlowConnectionDeclaration
 		for (ownedRelationship in s.ownedRelationship){
 			var isIf = false;
 			var isFirst = true;
-			if (ownedRelationship.isTypeOf("FeatureMembership")){
+			if (ownedRelationship.isTypeNameOf("FeatureMembership")){
 				isIf = true;
 				t.flowConnectionDeclaration += " of ";
 				t.flowConnectionDeclaration += ownedRelationship.getItemFeatureMember();
 				t.flowConnectionDeclaration += " ";
-				ownedRelationship.tag();
 			}
-			else if (ownedRelationship.isTypeOf("EndFeatureMembership")){
+			else if (ownedRelationship.isTypeNameOf("EndFeatureMembership")){
 				if (isIf){
 					t.flowConnectionDeclaration += " from ";
 				}
@@ -1034,7 +902,6 @@ rule BinaryConnectorPart
 			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
 			if (referenceUsage.declaredName != null){
 				t.connectorPart.add(referenceUsage.declaredName);
-				referenceUsage.tag();
 			}
 			else {
 				t.connectorPart.add(referenceUsage.getConnectorEnd());
@@ -1050,7 +917,6 @@ rule NaryConnectorPart
 			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
 			if (referenceUsage.declaredName != null){
 				t.connectorPart.add(referenceUsage.declaredName);
-				referenceUsage.tag();
 			}
 			else {
 				t.connectorPart.add(referenceUsage.getConnectorEnd());
@@ -1122,7 +988,6 @@ rule MetadataTyping
 		else{
 			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().declaredName;
 		}
-		s.ownedRelationship.getElementOf("FeatureTyping").first().tag();
 	}
 	
 @abstract
@@ -1315,6 +1180,13 @@ rule MembershipImport
 	}
 	
 /* @lazy */
+//@lazy
+//rule NamespaceRule
+//	transform s : XMIni!Namespace
+//	to t : SysMini!Namespace 
+//	extends Namespace{
+//	}
+	
 @lazy
 rule NamespaceImportRule
 	transform s : XMIni!NamespaceImport
@@ -1349,7 +1221,7 @@ rule MembershipImportRule
 rule PackageRule
 	transform s : XMIni!Package
 	to t : SysMini!Package 
-	extends ElementRule{
+	extends Package{
 //				if (s.ownedRelationship != null){
 //                  for (prefixMetadataMember in s.ownedRelationship){
 // TODO: prefixMetadataMember

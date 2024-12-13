@@ -22,7 +22,6 @@ abstract class Relationship extends Element {
 }
 
 class DefinitionElement extends Element{
-	
 }
 
 class OwningMembership extends Membership {
