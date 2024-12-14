@@ -114,9 +114,88 @@ rule DefinitionDeclaration
 @abstract
 rule DefinitionBody
 	transform s : XMIni!Type
+	to t : SysMini!Type
+	extends DefinitionBodyItem{
+	}
+	
+@abstract
+rule DefinitionBodyItem
+	transform s : XMIni!Type
 	to t : SysMini!Type{
+		for (ownedRelationship in s.OR()){
+			if (ownedRelationship.isTypeOf(XMIni!OwningMembership)){
+				ownedRelationship.DefinitionMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!VariantMembership)){
+				ownedRelationship.VariantUsageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!FeatureMembership)){
+				ownedRelationship.XOccurrenceUsageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!SuccessionAsUsage)){
+				ownedRelationship.EmptySuccessionMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!Membership)){
+				ownedRelationship.AliasMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!Import)){
+				ownedRelationship.Import(t);
+			}
+		}	
 	}
 
+@abstract
+rule InterfaceBodyItem
+	transform s : XMIni!Type
+	to t : SysMini!Type{
+		for (ownedRelationship in s.OR()){
+			if (ownedRelationship.isTypeOf(XMIni!OwningMembership)){
+				ownedRelationship.DefinitionMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!VariantMembership)){
+				ownedRelationship.VariantUsageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!FeatureMembership)){
+				ownedRelationship.InterfaceXOccurrenceUsageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!SuccessionAsUsage)){
+				ownedRelationship.EmptySuccessionMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!Membership)){
+				ownedRelationship.AliasMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!Import)){
+				ownedRelationship.Import(t);
+			}
+		}	
+	}
+
+@abstract
+rule ActionBodyItem
+	transform s : XMIni!Type
+	to t : SysMini!Type{
+		for (ownedRelationship in s.OR()){
+			if (ownedRelationship.isTypeOf(XMIni!Import)){
+				ownedRelationship.Import(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!Membership)){
+				ownedRelationship.AliasMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!OwningMembership)){
+				ownedRelationship.DefinitionMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!VariantMembership)){
+				ownedRelationship.VariantUsageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!FeatureMembership)){
+				ownedRelationship.InterfaceXOccurrenceUsageMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!SuccessionAsUsage)){
+				ownedRelationship.EmptySuccessionMember(t);
+			}
+		}	
+	}
+	
 @abstract
 rule Definition
 	transform s : XMIni!Definition
@@ -147,8 +226,16 @@ rule OccurrenceDefinition
 	
 @abstract
 rule EnumerationBody
-	transform s : XMIni!AttributeDefinition
-	to t : SysMini!AttributeDefinition{
+	transform s : XMIni!EnumerationDefinition
+	to t : SysMini!EnumerationDefinition{
+		for (ownedRelationship in s.OR()){
+			if (ownedRelationship.isTypeOf(XMIni!OwningMembership)){
+				ownedRelationship.AnnotatingMember(t);
+			}
+			else if (ownedRelationship.isTypeOf(XMIni!VariantMembership)){
+				ownedRelationship.EnumerationUsageMember(t);
+			}
+		}
 	}
 	
 @abstract
@@ -259,7 +346,8 @@ rule UseCaseDefinition
 @abstract
 rule InterfaceBody
 	transform s : XMIni!Type
-	to t : SysMini!Type{
+	to t : SysMini!Type
+	extends InterfaceBodyItem{
 	}
 	
 @abstract
@@ -326,7 +414,8 @@ rule ViewDefinitionBody
 @abstract
 rule ActionBody
 	transform s : XMIni!Type
-	to t : SysMini!Type{
+	to t : SysMini!Type
+	extends ActionBodyItem{
 	}
 
 @abstract

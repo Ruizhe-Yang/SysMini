@@ -227,7 +227,7 @@ rule SubclassificationPart
 	transform s : XMIni!Classifier
 	to t : SysMini!Classifier{
 	}
-	
+
 @abstract
 rule DefinitionDeclaration
 	transform s : XMIni!Definition
