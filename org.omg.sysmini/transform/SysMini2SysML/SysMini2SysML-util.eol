@@ -818,6 +818,7 @@ operation SysMini!Feature FeatureDeclaration() : String {
 
 operation SysMini!Feature FeatureSpecializationPart() : String {
 	return self.multiplicityRange.space() + 
+			self.featureNote.space() +
 			self.featureSpecialization.space();
 }
 

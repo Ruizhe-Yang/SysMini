@@ -17,6 +17,16 @@ operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
 	}
 }
 
+operation XMIni!Element addPackageNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		var nowImportPackages = allImportPackages.clone();
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		self.elementTransform(node);
+		allImportPackages = nowImportPackages.clone();
+	}
+}
+
 operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
 	if (self.isEntity()){
 		var node = self.equivalent();
@@ -113,20 +123,58 @@ operation XMIni!Feature getMultiplicityRange(){
 	}
 }
 
+operation XMIni!Feature getFeatureNote(){
+	for (owningMembership in self.ownedRelationship.first()){
+		switch (owningMembership.type().name){
+			case "FeatureTyping":{
+				return ":";
+			}
+			case "Subsetting":{
+				return ":>";
+			}
+			case "OwnedReferenceSubsetting":{
+				return "::>";			
+			}
+			case "Redefinition":{
+				return ":>>";
+			}
+		}
+	}
+}
+
+
+operation clearImportPackage(text){
+	if (text != null and self != ""){
+		var n = text.split("::");
+		if (n.size() == 2){
+			for (package in allImportPackages){
+				if (package ==  n.first()){
+					text = n.second();
+				}
+				else if (package.length() < n.first().length() and package == n.first().substring(0, package.length())){
+					text = n.second();
+				}
+			}
+		}
+	}
+	return text;
+}
+
+
 operation XMIni!Feature getFeatureSpecialization(){
 	for (owningMembership in self.ownedRelationship.first()){
 		switch (owningMembership.type().name){
 			case "FeatureTyping":{
-				return ": "+owningMembership.getDeclaredName();
+				return owningMembership.getDeclaredName();
 			}
 			case "Subsetting":{
-				return ":> "+owningMembership.getDeclaredName();
+				return owningMembership.getDeclaredName();
 			}
 			case "OwnedReferenceSubsetting":{
-				return "::> "+owningMembership.getDeclaredName();			
+				return owningMembership.getDeclaredName();			
 			}
 			case "Redefinition":{
-				return ":>> "+owningMembership.getDeclaredName();
+				return owningMembership.getDeclaredName();
 			}
 //			case "OwningMembership":{
 //				owningMembership.ownedRelationship.println();
@@ -164,7 +212,10 @@ operation XMIni!Specialization getDeclaredName(){
 	if (self.declaredName != null){
 		return self.declaredName;
 	}
-	else if (self.type.name == null){
+	else if (self.type.isTypeOf(XMIni!EClass)){
+		return "";
+	}
+	else {
 		return self.type.declaredName;
 	}
 }

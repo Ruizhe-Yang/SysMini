@@ -2,6 +2,7 @@ import "XMIni2SysMini-util.eol";
 
 pre{
 	"------------------ ETL Start ------------------".println();
+	var allImportPackages = new Sequence;
 	main();
 }
 
@@ -82,7 +83,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 		switch (element.type().name){
 		
 			//Package
-			case "Package": element.addNodeTo(rootNode);
+			case "Package": element.addPackageNodeTo(rootNode);
 			case "LibraryPackage": element.addNodeTo(rootNode);
 			
 			//AnnotatingElement
@@ -202,7 +203,9 @@ rule BasicDefinitionPrefix
 @abstract
 rule DefinitionExtensionKeyword
 	transform s : XMIni!Definition
-	to t : SysMini!Definition{
+	to t : SysMini!Definition
+	extends PrefixMetadataMember{
+// TBD
 //		for (prefixMetadataMember in s.ownedRelationship.getElementOf("OwningMembership")){
 //			prefixMetadataMember.ownedRelatedElement.getElementOf("MetadataUsage").println();
 //		}
@@ -503,28 +506,7 @@ rule LifeClassMembership
 rule PrefixMetadataUsage
 	transform s : XMIni!Element
 	to t : SysMini!Element{
-//		for (e in s.ownedRelationship.getElementOf("OwningMembership")){
-//			for (metadataUsage in e.ownedRelatedElement.getElementOf("MetadataUsage")){
-//				s.println();
-//				"//".println();
-//				for (m in metadataUsage.ownedRelationship){
-//					"--------------".println();
-//					m.println();
-//					m.declaredName.println();
-//				}
-//				"--------------".println();
-//				var featureTyping = metadataUsage.ownedRelationship.getElementOf("FeatureTyping").first();
-////				featureTyping.println();
-//				if (metadataUsage.ownedRelationship.size() == 2 and featureTyping.declaredName != null){
-//					t.prefixMetadata = "#" + featureTyping.declaredName;
-//				}
-//				else{
-//					featureTyping.println();
-////					t.prefixMetadata = "#" + featureTyping.type.declaredName;
-//				}
-//				t.prefixMetadata.println();
-//			}
-//		}
+// TBD
 	}
 	
 //Import
@@ -549,7 +531,7 @@ rule DefinitionRule
 		t.isVariation = s.isVariation;
 //		if (s.ownedRelationship != null){
 //          for (prefixMetadataMember in s.ownedRelationship){
-// TODO: prefixMetadataMember
+// TBD
 //					}
 //				}
 	}
@@ -667,10 +649,9 @@ rule MultiplicityPart
 rule FeatureSpecialization 
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
-		t.featureSpecialization = s.getFeatureSpecialization();
+		t.featureNote = s.getFeatureNote();
+		t.featureSpecialization = clearImportPackage(s.getFeatureSpecialization());
 	}
-
-
 
 @abstract
 rule ActionUsage
@@ -1125,7 +1106,7 @@ rule MetadataTyping
 		else{
 			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().declaredName;
 		}
-		s.ownedRelationship.getElementOf("FeatureTyping").first().tag();
+//		s.ownedRelationship.getElementOf("FeatureTyping").first().tag();
 	}
 	
 @abstract
@@ -1288,6 +1269,7 @@ rule NamespaceImport
 		var n = t.declaredName.split("::");
 		if (n.size() == 2){
 			if (n.first() == n.second()){
+				allImportPackages.add(n.first());
 				t.declaredName = n.first()+"::*";
 			}
 		}

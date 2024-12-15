@@ -93,9 +93,10 @@ class Feature extends Type {
 	attr boolean[1] isInitial = false;
 	attr boolean[1] isDefault = false;
 	attr FeatureDirectionKind direction;
-	attr String multiplicityRange;
-	attr String featureSpecialization;
-	attr String valuePart;
+	attr String[1] multiplicityRange;
+	attr String[1] featureNote;
+	attr String[1] featureSpecialization;
+	attr String[1] valuePart;
 }
 
 class Redefinition extends Subsetting {
