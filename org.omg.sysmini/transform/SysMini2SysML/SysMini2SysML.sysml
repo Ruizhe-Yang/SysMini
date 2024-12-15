@@ -39,37 +39,8 @@ package SimpleVehicleModel {
 				;
 				{
 					ref controller : ;
-					{
-						;
-						;
-						;
-						{
-							;
-							;
-							;
-							{
-								out ref :>> Constraints::null;
-							}
-						}
-						;
-						;
-						;
-						;
-					}
-					{
-						;
-						{
-							out ref temp :> Base::things;
-						}
-						;
-						;
-						;
-						;
-						;
-						;
-						;
-						;
-					}
+					;
+					;
 				}
 			}
 			part def Engine {
@@ -88,9 +59,7 @@ package SimpleVehicleModel {
 				{
 					;
 					;
-					{
-						;
-					}
+					;
 				}
 			}
 			part def StarterMotor {
@@ -126,14 +95,7 @@ package SimpleVehicleModel {
 			part def VehicleController {
 				port controlPort : ;
 				{
-					{
-						;
-						;
-						;
-						;
-						;
-						;
-					}
+					;
 				}
 			}
 			part def CruiseController {

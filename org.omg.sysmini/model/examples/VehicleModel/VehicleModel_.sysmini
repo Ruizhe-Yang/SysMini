@@ -41,37 +41,8 @@
           <body xsi:type="PerformActionUsage" declaredName="senseTemperature" featureSpecialization=":> Parts::performedActions"/>
           <body xsi:type="ExhibitStateUsage" declaredName="vehicleStates" isParallel="true">
             <body xsi:type="ReferenceUsage" declaredName="controller" featureSpecialization=": "/>
-            <body xsi:type="StateUsage" declaredName="operatingStates">
-              <body xsi:type="PerformActionUsage" declaredName="initial" featureSpecialization=":>> States::entryAction"/>
-              <body xsi:type="StateUsage" declaredName="off" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="starting" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="on">
-                <body xsi:type="PerformActionUsage" declaredName="performSelfTest"/>
-                <body xsi:type="PerformActionUsage" declaredName="providePower"/>
-                <body xsi:type="PerformActionUsage" declaredName="applyParkingBrake"/>
-                <body xsi:type="ConstraintUsage">
-                  <body xsi:type="ReferenceUsage" direction="out" featureSpecialization=":>> Constraints::null"/>
-                </body>
-              </body>
-              <body xsi:type="TransitionUsage" transitionText="initial then "/>
-              <body xsi:type="TransitionUsage" declaredName="off_To_starting" transitionText="off then "/>
-              <body xsi:type="TransitionUsage" declaredName="starting_To_on" transitionText="starting then "/>
-              <body xsi:type="TransitionUsage" declaredName="on_To_off" transitionText="on then "/>
-            </body>
-            <body xsi:type="StateUsage" declaredName="healthStates">
-              <body xsi:type="PerformActionUsage" declaredName="initial" featureSpecialization=":>> States::entryAction"/>
-              <body xsi:type="PerformActionUsage" declaredName="senseTemperature">
-                <body xsi:type="ReferenceUsage" declaredName="temp" direction="out" featureSpecialization=":> Base::things"/>
-              </body>
-              <body xsi:type="StateUsage" declaredName="normal" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="maintenance" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="degraded" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="TransitionUsage" transitionText="initial then "/>
-              <body xsi:type="TransitionUsage" declaredName="normal_To_maintenance" transitionText="normal then "/>
-              <body xsi:type="TransitionUsage" declaredName="normal_To_degraded" transitionText="normal then "/>
-              <body xsi:type="TransitionUsage" declaredName="maintenance_To_normal" transitionText="maintenance then "/>
-              <body xsi:type="TransitionUsage" declaredName="degraded_To_normal" transitionText="degraded then "/>
-            </body>
+            <body xsi:type="StateUsage" declaredName="operatingStates"/>
+            <body xsi:type="StateUsage" declaredName="healthStates"/>
           </body>
         </body>
         <body xsi:type="PartDefinition" declaredName="Engine">
@@ -90,9 +61,7 @@
           <body xsi:type="ExhibitStateUsage" declaredName="engineStates">
             <body xsi:type="StateUsage" declaredName="off" featureSpecialization=":> States::exclusiveStates"/>
             <body xsi:type="StateUsage" declaredName="starting" featureSpecialization=":> States::exclusiveStates"/>
-            <body xsi:type="StateUsage" declaredName="on">
-              <body xsi:type="PerformActionUsage" declaredName="generateTorque"/>
-            </body>
+            <body xsi:type="StateUsage" declaredName="on"/>
           </body>
         </body>
         <body xsi:type="PartDefinition" declaredName="StarterMotor">
@@ -128,14 +97,7 @@
         <body xsi:type="PartDefinition" declaredName="VehicleController">
           <body xsi:type="PortUsage" declaredName="controlPort" featureSpecialization=": "/>
           <body xsi:type="ExhibitStateUsage" declaredName="controllerStates" isParallel="true">
-            <body xsi:type="StateUsage" declaredName="operatingStates">
-              <body xsi:type="PerformActionUsage" declaredName="initial" featureSpecialization=":>> States::entryAction"/>
-              <body xsi:type="StateUsage" declaredName="off" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="on" featureSpecialization=":> States::exclusiveStates"/>
-              <body xsi:type="TransitionUsage" transitionText="initial then "/>
-              <body xsi:type="TransitionUsage" declaredName="off-on" transitionText="off then "/>
-              <body xsi:type="TransitionUsage" declaredName="on-off" transitionText="on then "/>
-            </body>
+            <body xsi:type="StateUsage" declaredName="operatingStates"/>
           </body>
         </body>
         <body xsi:type="PartDefinition" declaredName="CruiseController">

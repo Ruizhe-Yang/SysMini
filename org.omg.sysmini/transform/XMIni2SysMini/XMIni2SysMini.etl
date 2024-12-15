@@ -26,7 +26,7 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "NamespaceExpose": relationship.addRelationshipTo(rootNode);
 			case "MembershipExpose": relationship.addRelationshipTo(rootNode);
 			
-			case "ElementFilterMembership": relationship.addRelationshipTo(rootNode);
+			case "ElementFilterMembership": relationship.skipRelationshipTo(rootNode);
 			
 			//Specialization
 			case "Subclassification": relationship.skipRelationshipTo(rootNode);
@@ -684,6 +684,9 @@ rule StateUsage
 	transform s : XMIni!StateUsage
 	to t : SysMini!StateUsage
 	extends OccurrenceUsagePrefix, ActionUsageDeclaration, StateUsageBody{
+		for (r in s.ownedRelationship){
+			r.tag();
+		}
 	}
 
 @abstract
