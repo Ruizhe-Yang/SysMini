@@ -17,14 +17,14 @@ package SimpleVehicleModel {
 		public import KeyWord_MetadataDefinitions;
 		package PartDefinitions {
 			part def Vehicle {
-				attribute mass :> mass;
-				attribute dryMass :> mass;
-				attribute cargoMass :> mass;
-				attribute position :> length;
-				attribute velocity :> speed;
-				attribute acceleration :> acceleration;
-				attribute electricalPower :> power;
-				attribute Tmax :> thermodynamicTemperature;
+				attribute mass :> ISQBase::mass;
+				attribute dryMass :> ISQBase::mass;
+				attribute cargoMass :> ISQBase::mass;
+				attribute position :> ISQBase::length;
+				attribute velocity :> ISQSpaceTime::speed;
+				attribute acceleration :> ISQSpaceTime::acceleration;
+				attribute electricalPower :> ISQMechanics::power;
+				attribute Tmax :> ISQBase::thermodynamicTemperature;
 				attribute maintenanceTime : Time::DateTime;
 				attribute brakePedalDepressed : ScalarValues::Boolean;
 				port ignitionCmdPort : IgnitionCmdPort;
@@ -44,11 +44,11 @@ package SimpleVehicleModel {
 				}
 			}
 			part def Engine {
-				attribute mass :> mass;
-				attribute peakHorsePower :> power;
+				attribute mass :> ISQBase::mass;
+				attribute peakHorsePower :> ISQMechanics::power;
 				attribute fuelEfficiency : ScalarValues::Real;
 				attribute cost : ScalarValues::Real;
-				attribute displacement :> volume;
+				attribute displacement :> ISQSpaceTime::volume;
 				port engineControlPort;
 				port fuelInPort;
 				port fuelCmdPort : FuelCmdPort;
@@ -74,17 +74,17 @@ package SimpleVehicleModel {
 			part def Driveshaft;
 			part def AxleAssembly;
 			part def Axle {
-				attribute mass :> mass;
+				attribute mass :> ISQBase::mass;
 			}
 			part def FrontAxle {
-				attribute steeringAngle :> angularMeasure;
+				attribute steeringAngle :> ISQSpaceTime::angularMeasure;
 			}
 			part def HalfAxle {
 				port shankCompositePort : ShankCompositePort;
 			}
 			part def Differential;
 			part def Wheel {
-				attribute diameter : LengthValue;
+				attribute diameter : ISQBase::LengthValue;
 				port lugNutCompositePort : LugNutCompositePort;
 			}
 			part def Hub {
@@ -108,12 +108,12 @@ package SimpleVehicleModel {
 				port speedSensorPort : SpeedSensorPort;
 			}
 			part def FuelTank {
-				attribute mass :> mass;
+				attribute mass :> ISQBase::mass;
 				item fuel : Fuel {
 					attribute :>>;
 				}
 				attribute fuelKind : FuelKind;
-				attribute fuelMassMax :> mass;
+				attribute fuelMassMax :> ISQBase::mass;
 				{
 					out ref :>> Constraints::null;
 				}
@@ -157,7 +157,7 @@ package SimpleVehicleModel {
 				out item fuel : Fuel;
 			}
 			port def DrivePwrPort {
-				out ref torque : TorqueValue;
+				out ref torque : ISQMechanics::TorqueValue;
 			}
 			port def ShaftPort_a;
 			port def ShaftPort_b;
@@ -202,10 +202,10 @@ package SimpleVehicleModel {
 			}
 			item def FuelCmd;
 			item def Fuel {
-				attribute fuelMass :> mass;
+				attribute fuelMass :> ISQBase::mass;
 			}
 			item def SensedSpeed {
-				attribute speed :> speed;
+				attribute speed :> ISQSpaceTime::speed;
 			}
 		}
 		package SignalDefinitions {
@@ -238,7 +238,7 @@ package SimpleVehicleModel {
 			interface def WheelFastenerInterface {
 				end port lugNutPort : LugNutPort;
 				end port shankPort : ShankPort;
-				attribute maxTorque : TorqueValue;
+				attribute maxTorque : ISQMechanics::TorqueValue;
 				{
 					out ref :>> Items::null;
 				}
@@ -255,28 +255,28 @@ package SimpleVehicleModel {
 		package ActionDefinitions {
 			action def ProvidePower {
 				item pwrCmd : PwrCmd;
-				out ref wheelToRoadTorque [2] : TorqueValue;
+				out ref wheelToRoadTorque [2] : ISQMechanics::TorqueValue;
 			}
 			action def GenerateTorque {
 				item fuelCmd : FuelCmd;
-				out ref engineTorque : TorqueValue;
+				out ref engineTorque : ISQMechanics::TorqueValue;
 			}
 			action def AmplifyTorque {
-				ref engineTorque : TorqueValue;
-				out ref transmissionTorque : TorqueValue;
+				ref engineTorque : ISQMechanics::TorqueValue;
+				out ref transmissionTorque : ISQMechanics::TorqueValue;
 			}
 			action def TransferTorque {
-				ref transmissionTorque : TorqueValue;
-				out ref driveshaftTorque : TorqueValue;
+				ref transmissionTorque : ISQMechanics::TorqueValue;
+				out ref driveshaftTorque : ISQMechanics::TorqueValue;
 			}
 			action def DistributeTorque {
-				ref driveshaftTorque : TorqueValue;
-				out ref wheelToRoadTorque [2] : TorqueValue;
+				ref driveshaftTorque : ISQMechanics::TorqueValue;
+				out ref wheelToRoadTorque [2] : ISQMechanics::TorqueValue;
 			}
 			action def PerformSelfTest;
 			action def ApplyParkingBrake;
 			action def SenseTemperature {
-				out ref temp : ThermodynamicTemperatureValue;
+				out ref temp : ISQBase::ThermodynamicTemperatureValue;
 			}
 		}
 		package StateDefinitions {
@@ -288,8 +288,8 @@ package SimpleVehicleModel {
 			requirement def MassRequirement {
 				ref :>> Requirements::subj;
 				doc \* The actual mass shall be less than the required mass*\
-				attribute massRequired :> mass;
-				attribute massActual :> mass;
+				attribute massRequired :> ISQBase::mass;
+				attribute massActual :> ISQBase::mass;
 				{
 					out ref :>> Requirements::null;
 				}
@@ -354,10 +354,10 @@ driving scenario *\
 				enum gas : FuelKind;
 				enum diesel : FuelKind;
 			}
-			ref distancePerVolume :> scalarQuantities /;
-			ref timePerDistance :> scalarQuantities /;
-			ref volumePerDistance :> scalarQuantities /;
-			ref volumePerTime :> scalarQuantities /;
+			ref distancePerVolume :> Quantities::scalarQuantities /;
+			ref timePerDistance :> Quantities::scalarQuantities /;
+			ref volumePerDistance :> Quantities::scalarQuantities /;
+			ref volumePerTime :> Quantities::scalarQuantities /;
 			ref kpl : MeasurementReferences::DerivedUnit /;
 			ref rpm : MeasurementReferences::DerivedUnit /;
 			ref kW : MeasurementReferences::DerivedUnit *;
@@ -396,12 +396,12 @@ driving scenario *\
 		}
 		package GenericContext {
 			part def Context {
-				attribute time : DurationValue;
-				attribute spatialCF [1] : CartesianSpatial3dCoordinateFrame {
-					ref :>> null ,;
+				attribute time : ISQBase::DurationValue;
+				attribute spatialCF [1] : ISQSpaceTime::CartesianSpatial3dCoordinateFrame {
+					ref :>> ISQSpaceTime::null ,;
 				}
-				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame /;
-				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame /;
+				attribute velocityCF [1] : ISQSpaceTime::CartesianVelocity3dCoordinateFrame /;
+				attribute accelarationCF [1] : ISQSpaceTime::CartesianAcceleration3dCoordinateFrame /;
 			}
 		}
 	}
@@ -459,12 +459,12 @@ driving scenario *\
 						}
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass [;
+						attribute mass :> ISQBase::mass [;
 						part frontAxle : Axle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass [;
+						attribute mass :> ISQBase::mass [;
 						attribute driveTrainEfficiency : ScalarValues::Real;
 						part rearAxle : Axle;
 						part rearWheels [2] : Wheel {
@@ -515,13 +515,13 @@ driving scenario *\
 						attribute :>> [;
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass [;
+						attribute mass :> ISQBase::mass [;
 						port shaftPort_d : ShaftPort_d;
 						part frontAxle : FrontAxle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass [;
+						attribute mass :> ISQBase::mass [;
 						attribute driveTrainEfficiency : ScalarValues::Real;
 						port shaftPort_d : ShaftPort_d;
 						;
@@ -595,12 +595,12 @@ driving scenario *\
 						}
 					}
 					part transmission : Transmission {
-						attribute mass :> mass [;
+						attribute mass :> ISQBase::mass [;
 						port shaftPort_a : ShaftPort_a;
 						;
 					}
 					part driveshaft : Driveshaft {
-						attribute mass :> mass [;
+						attribute mass :> ISQBase::mass [;
 						port shaftPort_b : ShaftPort_b;
 						port shaftPort_c : ShaftPort_c;
 						;
@@ -872,8 +872,8 @@ driving scenario *\
 Assume total mass includes a full tank of gas of 60 kg*\
 						attribute :>> [;
 						attribute :>> +;
-						attribute fuelMassActual :> mass;
-						attribute fuelMassMax :> mass [;
+						attribute fuelMassActual :> ISQBase::mass;
+						attribute fuelMassMax :> ISQBase::mass [;
 						{
 							out ref :>> Requirements::null;
 						}
@@ -886,7 +886,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					{
 						ref :>> Requirements::null;
 						doc \* fuel economy requirements group *\
-						attribute assumedCargoMass :> mass;
+						attribute assumedCargoMass :> ISQBase::mass;
 						{
 							ref :>>;
 							ref :>> [;
@@ -902,9 +902,9 @@ Assume total mass includes a full tank of gas of 60 kg*\
 								out ref :>> Requirements::null;
 							}
 							{
-								ref :>> status;
-								ref :>> originator;
-								ref :>> owner;
+								ref :>> ModelingMetadata::status;
+								ref :>> ModelingMetadata::originator;
+								ref :>> ModelingMetadata::owner;
 							}
 							out ref :>>;
 						}
@@ -928,7 +928,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					{
 						ref :>>;
 						port torqueOutPort {
-							out ref torque : TorqueValue;
+							out ref torque : ISQMechanics::TorqueValue;
 						}
 						out ref :>>;
 					}
@@ -1054,7 +1054,7 @@ The high octane gasoline is about 0.76[l/kg].
 			}
 			calc def TraveledDistance {
 				ref scenario : Scenario;
-				out ref distance :> length;
+				out ref distance :> ISQBase::length;
 			}
 			calc def IdlingFuelConsumptionPerTime {
 				ref engine : Engine;
@@ -1063,11 +1063,11 @@ The high octane gasoline is about 0.76[l/kg].
 			}
 			attribute specificGravityOfGasoline : ScalarValues::Real;
 			calc def BestFuelConsumptionPerDistance {
-				ref mass : MassValue;
+				ref mass : ISQBase::MassValue;
 				ref bsfc : ScalarValues::Real;
 				ref tpd_avg :>;
-				ref distance :> length;
-				attribute required_power_avg :> power;
+				ref distance :> ISQBase::length;
+				attribute required_power_avg :> ISQMechanics::power;
 				{
 					out ref :>> Constraints::null;
 				}
@@ -1106,35 +1106,35 @@ The rationale and risk are contained in a metadata library. *\
 				ref :>> ModelingMetadata::text;
 			}
 			{
-				ref :>> totalRisk;
-				ref :>> technicalRisk;
-				ref :>> scheduleRisk;
-				ref :>> costRisk;
+				ref :>> RiskMetadata::totalRisk;
+				ref :>> RiskMetadata::technicalRisk;
+				ref :>> RiskMetadata::scheduleRisk;
+				ref :>> RiskMetadata::costRisk;
 			}
 			{
-				ref :>> technicalRisk {
-					ref :>> probability;
-					ref :>> impact;
+				ref :>> RiskMetadata::technicalRisk {
+					ref :>> RiskMetadata::probability;
+					ref :>> RiskMetadata::impact;
 				}
 			}
 			public import TradeStudies::*;
 			calc def EngineEvaluation {
-				ref engineMass :> mass;
-				ref enginePower :> power;
+				ref engineMass :> ISQBase::mass;
+				ref enginePower :> ISQMechanics::power;
 				ref engineFuelEfficiency : ScalarValues::Real;
 				ref engineCost : ScalarValues::Real;
 				out ref eval : ScalarValues::Real;
 			}
 			calc def EngineEvaluation_4cyl {
-				ref engineMass :> mass;
-				ref enginePower :> power;
+				ref engineMass :> ISQBase::mass;
+				ref enginePower :> ISQMechanics::power;
 				ref engineFuelEfficiency : ScalarValues::Real;
 				ref engineCost : ScalarValues::Real;
 				out ref eval : ScalarValues::Real;
 			}
 			calc def EngineEvaluation_6cyl {
-				ref engineMass :> mass;
-				ref enginePower :> power;
+				ref engineMass :> ISQBase::mass;
+				ref enginePower :> ISQMechanics::power;
 				ref engineFuelEfficiency : ScalarValues::Real;
 				ref engineCost : ScalarValues::Real;
 				out ref eval : ScalarValues::Real;
@@ -1160,8 +1160,8 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				{
-					ref :>> null;
-					out ref :>> null;
+					ref :>> TradeStudies::null;
+					out ref :>> TradeStudies::null;
 				}
 				comment about \* Select vehicle alternative with the engine whose evaluation function returns the max value*\
 				{
@@ -1184,28 +1184,28 @@ The rationale and risk are contained in a metadata library. *\
 		public import VerificationSystem;
 		package VerificationCaseDefinitions {
 			verification def MassTest {
-				ref :>> subj;
+				ref :>> VerificationCases::subj;
 				{
-					ref :>> subj;
-					out ref :>> null;
+					ref :>> VerificationCases::subj;
+					out ref :>> VerificationCases::null;
 				}
-				out ref :>> verdict;
+				out ref :>> VerificationCases::verdict;
 			}
 			verification def AccelerationTest {
-				ref :>> subj;
+				ref :>> VerificationCases::subj;
 				{
-					ref :>> subj;
-					out ref :>> null;
+					ref :>> VerificationCases::subj;
+					out ref :>> VerificationCases::null;
 				}
-				out ref :>> verdict;
+				out ref :>> VerificationCases::verdict;
 			}
 			verification def ReliabilityTest {
-				ref :>> subj;
+				ref :>> VerificationCases::subj;
 				{
-					ref :>> subj;
-					out ref :>> null;
+					ref :>> VerificationCases::subj;
+					out ref :>> VerificationCases::null;
 				}
-				out ref :>> verdict;
+				out ref :>> VerificationCases::verdict;
 			}
 		}
 		package VerificationCases1 {
@@ -1222,17 +1222,17 @@ The rationale and risk are contained in a metadata library. *\
 					out ref :>>;
 				}
 				{
-					ref :>> kind ,;
+					ref :>> VerificationCases::kind ,;
 				}
 				{
-					out ref massMeasured :> mass;
+					out ref massMeasured :> ISQBase::mass;
 				}
 				{
 					end ref;
 					end ref;
 				}
 				{
-					ref massMeasured :> mass;
+					ref massMeasured :> ISQBase::mass;
 					out ref verdict;
 				}
 				;
@@ -1606,7 +1606,7 @@ The rationale and risk are contained in a metadata library. *\
 				;
 			}
 			part vehicle_b_1 :> {
-				attribute :>> position3dVector [;
+				attribute :>> ISQSpaceTime::position3dVector [;
 				;
 				;
 			}
@@ -1635,9 +1635,9 @@ The rationale and risk are contained in a metadata library. *\
 					part engine4Cyl : Engine4Cyl;
 					part engine6Cyl : Engine6Cyl {
 						part cylinder [6] : Cylinder {
-							variation attribute diameter : LengthValue {
-								attribute smallDiameter : LengthValue;
-								attribute largeDiagmeter : LengthValue;
+							variation attribute diameter : ISQBase::LengthValue {
+								attribute smallDiameter : ISQBase::LengthValue;
+								attribute largeDiagmeter : ISQBase::LengthValue;
 							}
 						}
 					}

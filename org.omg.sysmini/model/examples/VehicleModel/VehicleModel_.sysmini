@@ -19,14 +19,14 @@
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="KeyWord_MetadataDefinitions"/>
       <body xsi:type="Package" declaredName="PartDefinitions">
         <body xsi:type="PartDefinition" declaredName="Vehicle">
-          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="AttributeUsage" declaredName="dryMass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="AttributeUsage" declaredName="cargoMass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="AttributeUsage" declaredName="position" featureNote=":>" featureSpecialization="length"/>
-          <body xsi:type="AttributeUsage" declaredName="velocity" featureNote=":>" featureSpecialization="speed"/>
-          <body xsi:type="AttributeUsage" declaredName="acceleration" featureNote=":>" featureSpecialization="acceleration"/>
-          <body xsi:type="AttributeUsage" declaredName="electricalPower" featureNote=":>" featureSpecialization="power"/>
-          <body xsi:type="AttributeUsage" declaredName="Tmax" featureNote=":>" featureSpecialization="thermodynamicTemperature"/>
+          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="AttributeUsage" declaredName="dryMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="AttributeUsage" declaredName="cargoMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="AttributeUsage" declaredName="position" featureNote=":>" featureSpecialization="ISQBase::length"/>
+          <body xsi:type="AttributeUsage" declaredName="velocity" featureNote=":>" featureSpecialization="ISQSpaceTime::speed"/>
+          <body xsi:type="AttributeUsage" declaredName="acceleration" featureNote=":>" featureSpecialization="ISQSpaceTime::acceleration"/>
+          <body xsi:type="AttributeUsage" declaredName="electricalPower" featureNote=":>" featureSpecialization="ISQMechanics::power"/>
+          <body xsi:type="AttributeUsage" declaredName="Tmax" featureNote=":>" featureSpecialization="ISQBase::thermodynamicTemperature"/>
           <body xsi:type="AttributeUsage" declaredName="maintenanceTime" featureNote=":" featureSpecialization="Time::DateTime"/>
           <body xsi:type="AttributeUsage" declaredName="brakePedalDepressed" featureNote=":" featureSpecialization="ScalarValues::Boolean"/>
           <body xsi:type="PortUsage" declaredName="ignitionCmdPort" featureNote=":" featureSpecialization="IgnitionCmdPort"/>
@@ -46,11 +46,11 @@
           </body>
         </body>
         <body xsi:type="PartDefinition" declaredName="Engine">
-          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="AttributeUsage" declaredName="peakHorsePower" featureNote=":>" featureSpecialization="power"/>
+          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="AttributeUsage" declaredName="peakHorsePower" featureNote=":>" featureSpecialization="ISQMechanics::power"/>
           <body xsi:type="AttributeUsage" declaredName="fuelEfficiency" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="AttributeUsage" declaredName="cost" featureNote=":" featureSpecialization="ScalarValues::Real"/>
-          <body xsi:type="AttributeUsage" declaredName="displacement" featureNote=":>" featureSpecialization="volume"/>
+          <body xsi:type="AttributeUsage" declaredName="displacement" featureNote=":>" featureSpecialization="ISQSpaceTime::volume"/>
           <body xsi:type="PortUsage" declaredName="engineControlPort"/>
           <body xsi:type="PortUsage" declaredName="fuelInPort"/>
           <body xsi:type="PortUsage" declaredName="fuelCmdPort" featureNote=":" featureSpecialization="FuelCmdPort"/>
@@ -76,17 +76,17 @@
         <body xsi:type="PartDefinition" declaredName="Driveshaft"/>
         <body xsi:type="PartDefinition" declaredName="AxleAssembly"/>
         <body xsi:type="PartDefinition" declaredName="Axle">
-          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass"/>
+          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="FrontAxle">
-          <body xsi:type="AttributeUsage" declaredName="steeringAngle" featureNote=":>" featureSpecialization="angularMeasure"/>
+          <body xsi:type="AttributeUsage" declaredName="steeringAngle" featureNote=":>" featureSpecialization="ISQSpaceTime::angularMeasure"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="HalfAxle">
           <body xsi:type="PortUsage" declaredName="shankCompositePort" featureNote=":" featureSpecialization="ShankCompositePort"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Differential"/>
         <body xsi:type="PartDefinition" declaredName="Wheel">
-          <body xsi:type="AttributeUsage" declaredName="diameter" featureNote=":" featureSpecialization="LengthValue"/>
+          <body xsi:type="AttributeUsage" declaredName="diameter" featureNote=":" featureSpecialization="ISQBase::LengthValue"/>
           <body xsi:type="PortUsage" declaredName="lugNutCompositePort" featureNote=":" featureSpecialization="LugNutCompositePort"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="Hub">
@@ -110,12 +110,12 @@
           <body xsi:type="PortUsage" declaredName="speedSensorPort" featureNote=":" featureSpecialization="SpeedSensorPort"/>
         </body>
         <body xsi:type="PartDefinition" declaredName="FuelTank">
-          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass"/>
+          <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
           <body xsi:type="ItemUsage" declaredName="fuel" featureNote=":" featureSpecialization="Fuel">
             <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization=""/>
           </body>
           <body xsi:type="AttributeUsage" declaredName="fuelKind" featureNote=":" featureSpecialization="FuelKind"/>
-          <body xsi:type="AttributeUsage" declaredName="fuelMassMax" featureNote=":>" featureSpecialization="mass"/>
+          <body xsi:type="AttributeUsage" declaredName="fuelMassMax" featureNote=":>" featureSpecialization="ISQBase::mass"/>
           <body xsi:type="AssertConstraintUsage" declaredName="fuelConstraint">
             <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="Constraints::null"/>
           </body>
@@ -159,7 +159,7 @@
           <body xsi:type="ItemUsage" declaredName="fuel" direction="out" featureNote=":" featureSpecialization="Fuel"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="DrivePwrPort">
-          <body xsi:type="ReferenceUsage" declaredName="torque" direction="out" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="torque" direction="out" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="PortDefinition" declaredName="ShaftPort_a"/>
         <body xsi:type="PortDefinition" declaredName="ShaftPort_b"/>
@@ -204,10 +204,10 @@
         </body>
         <body xsi:type="ItemDefinition" declaredName="FuelCmd"/>
         <body xsi:type="ItemDefinition" declaredName="Fuel">
-          <body xsi:type="AttributeUsage" declaredName="fuelMass" featureNote=":>" featureSpecialization="mass"/>
+          <body xsi:type="AttributeUsage" declaredName="fuelMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
         </body>
         <body xsi:type="ItemDefinition" declaredName="SensedSpeed">
-          <body xsi:type="AttributeUsage" declaredName="speed" featureNote=":>" featureSpecialization="speed"/>
+          <body xsi:type="AttributeUsage" declaredName="speed" featureNote=":>" featureSpecialization="ISQSpaceTime::speed"/>
         </body>
       </body>
       <body xsi:type="Package" declaredName="SignalDefinitions">
@@ -240,7 +240,7 @@
         <body xsi:type="InterfaceDefinition" declaredName="WheelFastenerInterface">
           <body xsi:type="PortUsage" declaredName="lugNutPort" isEnd="true" featureNote=":" featureSpecialization="LugNutPort"/>
           <body xsi:type="PortUsage" declaredName="shankPort" isEnd="true" featureNote=":" featureSpecialization="ShankPort"/>
-          <body xsi:type="AttributeUsage" declaredName="maxTorque" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="AttributeUsage" declaredName="maxTorque" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
           <body xsi:type="ConstraintUsage">
             <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="Items::null"/>
           </body>
@@ -260,28 +260,28 @@
       <body xsi:type="Package" declaredName="ActionDefinitions">
         <body xsi:type="ActionDefinition" declaredName="ProvidePower">
           <body xsi:type="ItemUsage" declaredName="pwrCmd" featureNote=":" featureSpecialization="PwrCmd"/>
-          <body xsi:type="ReferenceUsage" declaredName="wheelToRoadTorque" direction="out" multiplicityRange="[2]" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="wheelToRoadTorque" direction="out" multiplicityRange="[2]" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="GenerateTorque">
           <body xsi:type="ItemUsage" declaredName="fuelCmd" featureNote=":" featureSpecialization="FuelCmd"/>
-          <body xsi:type="ReferenceUsage" declaredName="engineTorque" direction="out" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="engineTorque" direction="out" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="AmplifyTorque">
-          <body xsi:type="ReferenceUsage" declaredName="engineTorque" featureNote=":" featureSpecialization="TorqueValue"/>
-          <body xsi:type="ReferenceUsage" declaredName="transmissionTorque" direction="out" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="engineTorque" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="transmissionTorque" direction="out" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="TransferTorque">
-          <body xsi:type="ReferenceUsage" declaredName="transmissionTorque" featureNote=":" featureSpecialization="TorqueValue"/>
-          <body xsi:type="ReferenceUsage" declaredName="driveshaftTorque" direction="out" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="transmissionTorque" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="driveshaftTorque" direction="out" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="DistributeTorque">
-          <body xsi:type="ReferenceUsage" declaredName="driveshaftTorque" featureNote=":" featureSpecialization="TorqueValue"/>
-          <body xsi:type="ReferenceUsage" declaredName="wheelToRoadTorque" direction="out" multiplicityRange="[2]" featureNote=":" featureSpecialization="TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="driveshaftTorque" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="wheelToRoadTorque" direction="out" multiplicityRange="[2]" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
         </body>
         <body xsi:type="ActionDefinition" declaredName="PerformSelfTest"/>
         <body xsi:type="ActionDefinition" declaredName="ApplyParkingBrake"/>
         <body xsi:type="ActionDefinition" declaredName="SenseTemperature">
-          <body xsi:type="ReferenceUsage" declaredName="temp" direction="out" featureNote=":" featureSpecialization="ThermodynamicTemperatureValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="temp" direction="out" featureNote=":" featureSpecialization="ISQBase::ThermodynamicTemperatureValue"/>
         </body>
       </body>
       <body xsi:type="Package" declaredName="StateDefinitions">
@@ -293,8 +293,8 @@
         <body xsi:type="RequirementDefinition" declaredName="MassRequirement">
           <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="Requirements::subj"/>
           <body xsi:type="Documentation" text="The actual mass shall be less than the required mass"/>
-          <body xsi:type="AttributeUsage" declaredName="massRequired" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="AttributeUsage" declaredName="massActual" featureNote=":>" featureSpecialization="mass"/>
+          <body xsi:type="AttributeUsage" declaredName="massRequired" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="AttributeUsage" declaredName="massActual" featureNote=":>" featureSpecialization="ISQBase::mass"/>
           <body xsi:type="ConstraintUsage">
             <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="Requirements::null"/>
           </body>
@@ -358,10 +358,10 @@
           <body xsi:type="EnumerationUsage" declaredName="gas" featureNote=":" featureSpecialization="FuelKind"/>
           <body xsi:type="EnumerationUsage" declaredName="diesel" featureNote=":" featureSpecialization="FuelKind"/>
         </body>
-        <body xsi:type="ReferenceUsage" declaredName="distancePerVolume" featureNote=":>" featureSpecialization="scalarQuantities" valuePart="/"/>
-        <body xsi:type="ReferenceUsage" declaredName="timePerDistance" featureNote=":>" featureSpecialization="scalarQuantities" valuePart="/"/>
-        <body xsi:type="ReferenceUsage" declaredName="volumePerDistance" featureNote=":>" featureSpecialization="scalarQuantities" valuePart="/"/>
-        <body xsi:type="ReferenceUsage" declaredName="volumePerTime" featureNote=":>" featureSpecialization="scalarQuantities" valuePart="/"/>
+        <body xsi:type="ReferenceUsage" declaredName="distancePerVolume" featureNote=":>" featureSpecialization="Quantities::scalarQuantities" valuePart="/"/>
+        <body xsi:type="ReferenceUsage" declaredName="timePerDistance" featureNote=":>" featureSpecialization="Quantities::scalarQuantities" valuePart="/"/>
+        <body xsi:type="ReferenceUsage" declaredName="volumePerDistance" featureNote=":>" featureSpecialization="Quantities::scalarQuantities" valuePart="/"/>
+        <body xsi:type="ReferenceUsage" declaredName="volumePerTime" featureNote=":>" featureSpecialization="Quantities::scalarQuantities" valuePart="/"/>
         <body xsi:type="ReferenceUsage" declaredName="kpl" featureNote=":" featureSpecialization="MeasurementReferences::DerivedUnit" valuePart="/"/>
         <body xsi:type="ReferenceUsage" declaredName="rpm" featureNote=":" featureSpecialization="MeasurementReferences::DerivedUnit" valuePart="/"/>
         <body xsi:type="ReferenceUsage" declaredName="kW" featureNote=":" featureSpecialization="MeasurementReferences::DerivedUnit" valuePart="*"/>
@@ -400,12 +400,12 @@
       </body>
       <body xsi:type="Package" declaredName="GenericContext">
         <body xsi:type="PartDefinition" declaredName="Context">
-          <body xsi:type="AttributeUsage" declaredName="time" featureNote=":" featureSpecialization="DurationValue"/>
-          <body xsi:type="AttributeUsage" declaredName="spatialCF" multiplicityRange="[1]" featureNote=":" featureSpecialization="CartesianSpatial3dCoordinateFrame">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="null" valuePart=","/>
+          <body xsi:type="AttributeUsage" declaredName="time" featureNote=":" featureSpecialization="ISQBase::DurationValue"/>
+          <body xsi:type="AttributeUsage" declaredName="spatialCF" multiplicityRange="[1]" featureNote=":" featureSpecialization="ISQSpaceTime::CartesianSpatial3dCoordinateFrame">
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="ISQSpaceTime::null" valuePart=","/>
           </body>
-          <body xsi:type="AttributeUsage" declaredName="velocityCF" multiplicityRange="[1]" featureNote=":" featureSpecialization="CartesianVelocity3dCoordinateFrame" valuePart="/"/>
-          <body xsi:type="AttributeUsage" declaredName="accelarationCF" multiplicityRange="[1]" featureNote=":" featureSpecialization="CartesianAcceleration3dCoordinateFrame" valuePart="/"/>
+          <body xsi:type="AttributeUsage" declaredName="velocityCF" multiplicityRange="[1]" featureNote=":" featureSpecialization="ISQSpaceTime::CartesianVelocity3dCoordinateFrame" valuePart="/"/>
+          <body xsi:type="AttributeUsage" declaredName="accelarationCF" multiplicityRange="[1]" featureNote=":" featureSpecialization="ISQSpaceTime::CartesianAcceleration3dCoordinateFrame" valuePart="/"/>
         </body>
       </body>
     </body>
@@ -473,12 +473,12 @@
               </body>
             </body>
             <body xsi:type="PartUsage" declaredName="frontAxleAssembly" featureNote=":" featureSpecialization="AxleAssembly">
-              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="PartUsage" declaredName="frontAxle" featureNote=":" featureSpecialization="Axle"/>
               <body xsi:type="PartUsage" declaredName="frontWheels" multiplicityRange="[2]" featureNote=":" featureSpecialization="Wheel"/>
             </body>
             <body xsi:type="PartUsage" declaredName="rearAxleAssembly" featureNote=":" featureSpecialization="AxleAssembly">
-              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="AttributeUsage" declaredName="driveTrainEfficiency" featureNote=":" featureSpecialization="ScalarValues::Real"/>
               <body xsi:type="PartUsage" declaredName="rearAxle" featureNote=":" featureSpecialization="Axle"/>
               <body xsi:type="PartUsage" declaredName="rearWheels" multiplicityRange="[2]" featureNote=":" featureSpecialization="Wheel">
@@ -529,13 +529,13 @@
               <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="" valuePart="["/>
             </body>
             <body xsi:type="PartUsage" declaredName="frontAxleAssembly" featureNote=":" featureSpecialization="AxleAssembly">
-              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="PortUsage" declaredName="shaftPort_d" featureNote=":" featureSpecialization="ShaftPort_d"/>
               <body xsi:type="PartUsage" declaredName="frontAxle" featureNote=":" featureSpecialization="FrontAxle"/>
               <body xsi:type="PartUsage" declaredName="frontWheels" multiplicityRange="[2]" featureNote=":" featureSpecialization="Wheel"/>
             </body>
             <body xsi:type="PartUsage" declaredName="rearAxleAssembly" featureNote=":" featureSpecialization="AxleAssembly">
-              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="AttributeUsage" declaredName="driveTrainEfficiency" featureNote=":" featureSpecialization="ScalarValues::Real"/>
               <body xsi:type="PortUsage" declaredName="shaftPort_d" featureNote=":" featureSpecialization="ShaftPort_d"/>
               <body xsi:type="PerformActionUsage" declaredName="providePower.distributeTorque"/>
@@ -621,12 +621,12 @@
               </body>
             </body>
             <body xsi:type="PartUsage" declaredName="transmission" featureNote=":" featureSpecialization="Transmission">
-              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="PortUsage" declaredName="shaftPort_a" featureNote=":" featureSpecialization="ShaftPort_a"/>
               <body xsi:type="PerformActionUsage" declaredName="providePower.amplifyTorque"/>
             </body>
             <body xsi:type="PartUsage" declaredName="driveshaft" featureNote=":" featureSpecialization="Driveshaft">
-              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="PortUsage" declaredName="shaftPort_b" featureNote=":" featureSpecialization="ShaftPort_b"/>
               <body xsi:type="PortUsage" declaredName="shaftPort_c" featureNote=":" featureSpecialization="ShaftPort_c"/>
               <body xsi:type="PerformActionUsage" declaredName="providePower.transferTorque"/>
@@ -931,8 +931,8 @@
               <body xsi:type="Documentation" text="The total mass of the vehicle shall be less than or equal to the required mass.&#xA;Assume total mass includes a full tank of gas of 60 kg"/>
               <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="" valuePart="["/>
               <body xsi:type="AttributeUsage" isDefault="true" featureNote=":>>" featureSpecialization="" valuePart="+"/>
-              <body xsi:type="AttributeUsage" declaredName="fuelMassActual" featureNote=":>" featureSpecialization="mass"/>
-              <body xsi:type="AttributeUsage" declaredName="fuelMassMax" featureNote=":>" featureSpecialization="mass" valuePart="["/>
+              <body xsi:type="AttributeUsage" declaredName="fuelMassActual" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+              <body xsi:type="AttributeUsage" declaredName="fuelMassMax" featureNote=":>" featureSpecialization="ISQBase::mass" valuePart="["/>
               <body xsi:type="ConstraintUsage">
                 <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="Requirements::null"/>
               </body>
@@ -947,7 +947,7 @@
             <body xsi:type="RequirementUsage" declaredName="vehicleFuelEconomyRequirements">
               <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="Requirements::null"/>
               <body xsi:type="Documentation" text="fuel economy requirements group "/>
-              <body xsi:type="AttributeUsage" declaredName="assumedCargoMass" featureNote=":>" featureSpecialization="mass"/>
+              <body xsi:type="AttributeUsage" declaredName="assumedCargoMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
               <body xsi:type="RequirementUsage" declaredName="cityFuelEconomyRequirement">
                 <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization=""/>
                 <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="" valuePart="["/>
@@ -963,9 +963,9 @@
                   <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="Requirements::null"/>
                 </body>
                 <body xsi:type="MetadataUsage" declaredName="ModelingMetadata::StatusInfo">
-                  <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="status"/>
-                  <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="originator"/>
-                  <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="owner"/>
+                  <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="ModelingMetadata::status"/>
+                  <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="ModelingMetadata::originator"/>
+                  <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="ModelingMetadata::owner"/>
                 </body>
                 <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization=""/>
               </body>
@@ -989,7 +989,7 @@
             <body xsi:type="RequirementUsage" declaredName="drivePowerOutputRequirement">
               <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization=""/>
               <body xsi:type="PortUsage" declaredName="torqueOutPort">
-                <body xsi:type="ReferenceUsage" declaredName="torque" direction="out" featureNote=":" featureSpecialization="TorqueValue"/>
+                <body xsi:type="ReferenceUsage" declaredName="torque" direction="out" featureNote=":" featureSpecialization="ISQMechanics::TorqueValue"/>
               </body>
               <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization=""/>
             </body>
@@ -1103,7 +1103,7 @@
         </body>
         <body xsi:type="CalculationDefinition" declaredName="TraveledDistance">
           <body xsi:type="ReferenceUsage" declaredName="scenario" featureNote=":" featureSpecialization="Scenario"/>
-          <body xsi:type="ReferenceUsage" declaredName="distance" direction="out" featureNote=":>" featureSpecialization="length"/>
+          <body xsi:type="ReferenceUsage" declaredName="distance" direction="out" featureNote=":>" featureSpecialization="ISQBase::length"/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="IdlingFuelConsumptionPerTime">
           <body xsi:type="ReferenceUsage" declaredName="engine" featureNote=":" featureSpecialization="Engine"/>
@@ -1112,11 +1112,11 @@
         </body>
         <body xsi:type="AttributeUsage" declaredName="specificGravityOfGasoline" featureNote=":" featureSpecialization="ScalarValues::Real"/>
         <body xsi:type="CalculationDefinition" declaredName="BestFuelConsumptionPerDistance">
-          <body xsi:type="ReferenceUsage" declaredName="mass" featureNote=":" featureSpecialization="MassValue"/>
+          <body xsi:type="ReferenceUsage" declaredName="mass" featureNote=":" featureSpecialization="ISQBase::MassValue"/>
           <body xsi:type="ReferenceUsage" declaredName="bsfc" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="tpd_avg" featureNote=":>" featureSpecialization=""/>
-          <body xsi:type="ReferenceUsage" declaredName="distance" featureNote=":>" featureSpecialization="length"/>
-          <body xsi:type="AttributeUsage" declaredName="required_power_avg" featureNote=":>" featureSpecialization="power"/>
+          <body xsi:type="ReferenceUsage" declaredName="distance" featureNote=":>" featureSpecialization="ISQBase::length"/>
+          <body xsi:type="AttributeUsage" declaredName="required_power_avg" featureNote=":>" featureSpecialization="ISQMechanics::power"/>
           <body xsi:type="ConstraintUsage">
             <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="Constraints::null"/>
           </body>
@@ -1154,40 +1154,40 @@
           <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="ModelingMetadata::text"/>
         </body>
         <body xsi:type="MetadataUsage" declaredName="RiskMetadata::Risk">
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="totalRisk"/>
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="technicalRisk"/>
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="scheduleRisk"/>
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="costRisk"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::totalRisk"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::technicalRisk"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::scheduleRisk"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::costRisk"/>
         </body>
         <body xsi:type="MetadataUsage" declaredName="RiskMetadata::Risk">
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="technicalRisk">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="probability"/>
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="impact"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::technicalRisk">
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::probability"/>
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="RiskMetadata::impact"/>
           </body>
         </body>
         <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="TradeStudies::*"/>
         <body xsi:type="CalculationDefinition" declaredName="EngineEvaluation">
-          <body xsi:type="ReferenceUsage" declaredName="engineMass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="ReferenceUsage" declaredName="enginePower" featureNote=":>" featureSpecialization="power"/>
+          <body xsi:type="ReferenceUsage" declaredName="engineMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="ReferenceUsage" declaredName="enginePower" featureNote=":>" featureSpecialization="ISQMechanics::power"/>
           <body xsi:type="ReferenceUsage" declaredName="engineFuelEfficiency" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="engineCost" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="eval" direction="out" featureNote=":" featureSpecialization="ScalarValues::Real"/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="EngineEvaluation_4cyl">
-          <body xsi:type="ReferenceUsage" declaredName="engineMass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="ReferenceUsage" declaredName="enginePower" featureNote=":>" featureSpecialization="power"/>
+          <body xsi:type="ReferenceUsage" declaredName="engineMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="ReferenceUsage" declaredName="enginePower" featureNote=":>" featureSpecialization="ISQMechanics::power"/>
           <body xsi:type="ReferenceUsage" declaredName="engineFuelEfficiency" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="engineCost" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="eval" direction="out" featureNote=":" featureSpecialization="ScalarValues::Real"/>
         </body>
         <body xsi:type="CalculationDefinition" declaredName="EngineEvaluation_6cyl">
-          <body xsi:type="ReferenceUsage" declaredName="engineMass" featureNote=":>" featureSpecialization="mass"/>
-          <body xsi:type="ReferenceUsage" declaredName="enginePower" featureNote=":>" featureSpecialization="power"/>
+          <body xsi:type="ReferenceUsage" declaredName="engineMass" featureNote=":>" featureSpecialization="ISQBase::mass"/>
+          <body xsi:type="ReferenceUsage" declaredName="enginePower" featureNote=":>" featureSpecialization="ISQMechanics::power"/>
           <body xsi:type="ReferenceUsage" declaredName="engineFuelEfficiency" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="engineCost" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           <body xsi:type="ReferenceUsage" declaredName="eval" direction="out" featureNote=":" featureSpecialization="ScalarValues::Real"/>
         </body>
-        <body xsi:type="AnalysisCaseUsage" declaredName="engineTradeOffAnalysis" featureNote=":" featureSpecialization="TradeStudy">
+        <body xsi:type="AnalysisCaseUsage" declaredName="engineTradeOffAnalysis" featureNote=":" featureSpecialization="TradeStudies::TradeStudy">
           <body xsi:type="ReferenceUsage" declaredName="vehicleAlternatives" multiplicityRange="[2]"/>
           <body xsi:type="PartUsage" declaredName="vehicle_b_engine4cyl" featureNote=":>" featureSpecialization="">
             <body xsi:type="PartUsage" declaredName="engine" featureNote=":>>" featureSpecialization="">
@@ -1208,15 +1208,15 @@
             </body>
           </body>
           <body xsi:type="RequirementUsage">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="null"/>
-            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="null"/>
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="TradeStudies::null"/>
+            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="TradeStudies::null"/>
           </body>
           <body xsi:type="Comment" text="Select vehicle alternative with the engine whose evaluation function returns the max value"/>
-          <body xsi:type="CalculationUsage" featureNote=":>" featureSpecialization="evaluationFunction">
+          <body xsi:type="CalculationUsage" featureNote=":>" featureSpecialization="TradeStudies::evaluationFunction">
             <body xsi:type="PartUsage" declaredName="vehicle" featureNote=":>" featureSpecialization=""/>
             <body xsi:type="AttributeUsage" declaredName="eval" direction="out" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           </body>
-          <body xsi:type="CalculationUsage" featureNote=":>" featureSpecialization="evaluationFunction">
+          <body xsi:type="CalculationUsage" featureNote=":>" featureSpecialization="TradeStudies::evaluationFunction">
             <body xsi:type="PartUsage" declaredName="vehicle" featureNote=":>" featureSpecialization=""/>
             <body xsi:type="AttributeUsage" declaredName="eval" direction="out" featureNote=":" featureSpecialization="ScalarValues::Real"/>
           </body>
@@ -1232,28 +1232,28 @@
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="VerificationSystem"/>
       <body xsi:type="Package" declaredName="VerificationCaseDefinitions">
         <body xsi:type="VerificationCaseDefinition" declaredName="MassTest">
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="subj"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::subj"/>
           <body xsi:type="RequirementUsage">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="subj"/>
-            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="null"/>
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::subj"/>
+            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="VerificationCases::null"/>
           </body>
-          <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="verdict"/>
+          <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="VerificationCases::verdict"/>
         </body>
         <body xsi:type="VerificationCaseDefinition" declaredName="AccelerationTest">
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="subj"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::subj"/>
           <body xsi:type="RequirementUsage">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="subj"/>
-            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="null"/>
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::subj"/>
+            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="VerificationCases::null"/>
           </body>
-          <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="verdict"/>
+          <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="VerificationCases::verdict"/>
         </body>
         <body xsi:type="VerificationCaseDefinition" declaredName="ReliabilityTest">
-          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="subj"/>
+          <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::subj"/>
           <body xsi:type="RequirementUsage">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="subj"/>
-            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="null"/>
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::subj"/>
+            <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="VerificationCases::null"/>
           </body>
-          <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="verdict"/>
+          <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization="VerificationCases::verdict"/>
         </body>
       </body>
       <body xsi:type="Package" declaredName="VerificationCases1">
@@ -1270,10 +1270,10 @@
             <body xsi:type="ReferenceUsage" direction="out" featureNote=":>>" featureSpecialization=""/>
           </body>
           <body xsi:type="MetadataUsage" declaredName="VerificationCases::VerificationMethod">
-            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="kind" valuePart=","/>
+            <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="VerificationCases::kind" valuePart=","/>
           </body>
           <body xsi:type="ActionUsage" declaredName="weighVehicle">
-            <body xsi:type="ReferenceUsage" declaredName="massMeasured" direction="out" featureNote=":>" featureSpecialization="mass"/>
+            <body xsi:type="ReferenceUsage" declaredName="massMeasured" direction="out" featureNote=":>" featureSpecialization="ISQBase::mass"/>
           </body>
           <body xsi:type="SuccessionAsUsage">
             <body xsi:type="ReferenceUsage" isEnd="true"/>
@@ -1282,7 +1282,7 @@
             <connectorEndMember>evaluatePassFail</connectorEndMember>
           </body>
           <body xsi:type="ActionUsage" declaredName="evaluatePassFail">
-            <body xsi:type="ReferenceUsage" declaredName="massMeasured" featureNote=":>" featureSpecialization="mass"/>
+            <body xsi:type="ReferenceUsage" declaredName="massMeasured" featureNote=":>" featureSpecialization="ISQBase::mass"/>
             <body xsi:type="ReferenceUsage" declaredName="verdict" direction="out"/>
           </body>
           <body xsi:type="FlowConnectionUsage" flowConnectionDeclaration="weighVehicle.massMeasuredevaluatePassFail.massMeasured"/>
@@ -1712,7 +1712,7 @@
           <body xsi:type="PerformActionUsage" declaredName="transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out"/>
         </body>
         <body xsi:type="PartUsage" declaredName="vehicle_b_1" featureNote=":>" featureSpecialization="">
-          <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="position3dVector" valuePart="["/>
+          <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="ISQSpaceTime::position3dVector" valuePart="["/>
           <body xsi:type="PerformActionUsage" declaredName="transportPassenger.b.providePower"/>
           <body xsi:type="PerformActionUsage" declaredName="transportPassenger.trigger"/>
         </body>
@@ -1745,9 +1745,9 @@
             <body xsi:type="PartUsage" declaredName="engine4Cyl" featureNote=":" featureSpecialization="Engine4Cyl"/>
             <body xsi:type="PartUsage" declaredName="engine6Cyl" featureNote=":" featureSpecialization="Engine6Cyl">
               <body xsi:type="PartUsage" declaredName="cylinder" multiplicityRange="[6]" featureNote=":" featureSpecialization="Cylinder">
-                <body xsi:type="AttributeUsage" declaredName="diameter" featureNote=":" featureSpecialization="LengthValue" isVariation="true">
-                  <body xsi:type="AttributeUsage" declaredName="smallDiameter" featureNote=":" featureSpecialization="LengthValue"/>
-                  <body xsi:type="AttributeUsage" declaredName="largeDiagmeter" featureNote=":" featureSpecialization="LengthValue"/>
+                <body xsi:type="AttributeUsage" declaredName="diameter" featureNote=":" featureSpecialization="ISQBase::LengthValue" isVariation="true">
+                  <body xsi:type="AttributeUsage" declaredName="smallDiameter" featureNote=":" featureSpecialization="ISQBase::LengthValue"/>
+                  <body xsi:type="AttributeUsage" declaredName="largeDiagmeter" featureNote=":" featureSpecialization="ISQBase::LengthValue"/>
                 </body>
               </body>
             </body>

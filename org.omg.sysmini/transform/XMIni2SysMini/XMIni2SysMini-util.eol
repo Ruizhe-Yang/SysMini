@@ -144,8 +144,8 @@ operation XMIni!Feature getFeatureNote(){
 
 
 operation clearImportPackage(text){
+	return text;
 	if (text != null and self != ""){
-		var n = text.split("::");
 		if (n.size() == 2){
 			for (package in allImportPackages){
 				if (package ==  n.first()){
