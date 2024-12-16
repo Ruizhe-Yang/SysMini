@@ -1,1 +1,1 @@
-git add . && git commit -m 'importantsaving' && git push && pause
+git add . && git commit -m '.' && git push && pause

@@ -1,4 +1,4 @@
-package org.omg.sysmini;
+package org.omg.sysmini.util;
 
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
