@@ -905,9 +905,6 @@ rule InterfaceUsage
 	transform s : XMIni!InterfaceUsage
 	to t : SysMini!InterfaceUsage
 	extends OccurrenceUsagePrefix, InterfaceUsageDeclaration, InterfaceBody{
-		for (e in s.ownedRelationship){
-			e.tag();
-		}
 	}
 
 @abstract
@@ -983,9 +980,9 @@ rule FlowConnectionDeclaration
 	transform s : XMIni!FlowConnectionUsage
 	to t : SysMini!FlowConnectionUsage
 	extends UsageDeclaration, ValuePart{
+		var isFirst = true;
 		for (ownedRelationship in s.ownedRelationship){
 			var isIf = false;
-			var isFirst = true;
 			if (ownedRelationship.isTypeOf("FeatureMembership")){
 				isIf = true;
 				t.itemFeature = ownedRelationship.getItemFeatureMember();
@@ -996,9 +993,11 @@ rule FlowConnectionDeclaration
 				if (isFirst){
 					t.source = ownedRelationship.getFlowEndMember();
 					isFirst = false;
+					ownedRelationship.tag();
 				}
 				else{
 					t.target = ownedRelationship.getFlowEndMember();
+					ownedRelationship.tag();
 				}
 			}
 			else if (ownedRelationship.isTypeOf("ParameterMembership")){
@@ -1006,9 +1005,11 @@ rule FlowConnectionDeclaration
 				if (isFirst){
 					t.source = ownedRelationship.getFlowEndMember();
 					isFirst = false;
+					ownedRelationship.tag();
 				}
 				else{
 					t.target = ownedRelationship.getFlowEndMember();
+					ownedRelationship.tag();
 				}
 			}
 		}
@@ -1260,9 +1261,26 @@ rule SuccessionAsUsage
 	transform s : XMIni!SuccessionAsUsage
 	to t : SysMini!SuccessionAsUsage
 	extends UsagePrefix, UsageDeclaration, DefinitionBody{
-		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
-			t.connectorEndMember.add(endFeatureMembership.ownedRelatedElement.first().getConnectorEnd());	
+		var se = Sequence{};
+		t.SuccessionType = s.getTypeOfSuccessionAsUsage();
+		if (t.SuccessionType == "SuccessionAsUsage"){
+			for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
+				se.add(endFeatureMembership.ownedRelatedElement.first().getConnectorEnd());	
+			}
 		}
+		if (se.first() == ""){
+			t.connectorEndMember.add("start");
+		}
+		else {
+			t.connectorEndMember.add(se.first());
+		}
+		if (se.second() == ""){
+			t.connectorEndMember.add("done");
+		}
+		else {
+			t.connectorEndMember.add(se.second());
+		}
+//		t.connectorEndMember.println();
 	}
 
 @abstract

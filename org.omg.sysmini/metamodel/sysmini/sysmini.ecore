@@ -336,6 +336,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConjugatedPortTyping" eSuperTypes="#//FeatureTyping"/>
   <eClassifiers xsi:type="ecore:EClass" name="SuccessionAsUsage" eSuperTypes="#//ConnectorAsUsage #//Succession">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SuccessionType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="SuccessionAsUsage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorEndMember" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

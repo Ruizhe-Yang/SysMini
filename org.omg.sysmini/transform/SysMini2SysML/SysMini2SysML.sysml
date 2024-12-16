@@ -228,12 +228,12 @@ package SimpleVehicleModel {
 			interface def EngineToTransmissionInterface {
 				end port p1 : DrivePwrPort;
 				end port p2;
-				;
+				flow p1.torque to p2.torque;
 			}
 			interface def FuelInterface {
 				end port fuelOutPort : FuelPort;
 				end port fuelInPort;
-				;
+				flow of Fuelfrom fuelOutPort.fuel to fuelInPort.fuel;
 			}
 			interface def WheelFastenerInterface {
 				end port lugNutPort : LugNutPort;
@@ -246,7 +246,7 @@ package SimpleVehicleModel {
 			interface def WheelHubInterface {
 				end port lugNutCompositePort : LugNutCompositePort;
 				end port shankCompositePort : ShankCompositePort;
-				interface;
+				interface  wheelFastenerInterface [5] : WheelFastenerInterface connect  lugNutCompositePort.lugNutPort to shankCompositePort.shankPort;
 			}
 		}
 		package AllocationDefinitions {
@@ -423,24 +423,12 @@ driving scenario *\
 	package VehicleLogicalToPhysicalAllocation {
 		public import PartsTree;
 		public import PartsTree;
-		{
-			end ref;
-			end ref;
-			{
-				end ref;
-				end ref;
-				{
-					end ref;
-					end ref;
-				}
+		allocation  vehicleLogicalToPhysicalAllocation : LogicalToPhysical allocate  vehicleLogical to vehicle_b {
+			allocation  allocate  vehicleLogical.torqueGenerator to vehicle_b.engine {
+				allocation  allocate  vehicleLogical.torqueGenerator.generateTorque to vehicle_b.engine.providePower.generateTorque;
 			}
-			{
-				end ref;
-				end ref;
-				{
-					end ref;
-					end ref;
-				}
+			allocation  allocate  vehicleLogical.electricalGenerator to vehicle_b.engine {
+				allocation  allocate  vehicleLogical.electricalGenerator.generateElectricity to vehicle_b.engine.alternator.generateElectricity;
 			}
 		}
 	}
@@ -497,7 +485,6 @@ driving scenario *\
 						port wheelToRoadPort1 : WheelToRoadPort;
 						port wheelToRoadPort2 : WheelToRoadPort;
 					}
-					perform providePower;
 					perform performSelfTest;
 					perform applyParkingBrake;
 					perform senseTemperature;
@@ -558,24 +545,14 @@ driving scenario *\
 								}
 							}
 						}
-						{
-							end ref;
-							end ref;
-						}
-						{
-							end ref;
-							end ref;
-						}
-						{
-							end ref;
-							end ref;
-						}
-						interface;
-						interface;
+						bind shaftPort_d = differential.shaftPort_d;
+						connect  differential.leftDiffPort to rearAxle.leftHalfAxle.leftAxleToDiffPort;
+						connect  differential.rightDiffPort to rearAxle.rightHalfAxle.rightAxleToDiffPort;
+						interface  wheelToleftHalAxleInterface : WheelHubInterface connect  rearWheel1.lugNutCompositePort[1][1] to rearAxle.leftHalfAxle.shankCompositePort[1][1];
+						interface  wheelTorightHalAxleInterface : WheelHubInterface connect  rearWheel2.lugNutCompositePort[1][1] to rearAxle.rightHalfAxle.shankCompositePort[1][1];
 					}
 					part starterMotor : StarterMotor;
 					part engine : Engine {
-						perform providePower.generateTorque;
 						part cylinders [4] : Cylinder;
 						part alternator {
 							;
@@ -641,56 +618,20 @@ driving scenario *\
 							}
 						}
 					}
-					{
-						end ref;
-						end ref;
-					}
-					interface;
-					interface;
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
-					{
-						end ref;
-						end ref;
-					}
+					bind engine.fuelCmdPort = fuelCmdPort;
+					interface  engineToTransmissionInterface : EngineToTransmissionInterface connect  engine.drivePwrPort to transmission.clutchPort;
+					interface  fuelInterface : FuelInterface connect  fuelTank.fuelOutPort to engine.fuelInPort;
+					allocation  allocate  providePower.generateToAmplify to engineToTransmissionInterface;
+					bind engine.ignitionCmdPort = ignitionCmdPort;
+					connect  starterMotor.gearPort to engine.flyWheelPort;
+					connect  vehicleSoftware.vehicleController.controlPort to engine.engineControlPort;
+					bind vehicle_b.setSpeedPort = vehicleSoftware.vehicleController.cruiseController.setSpeedPort;
+					connect  speedSensor.speedSensorPort to vehicleSoftware.vehicleController.cruiseController.speedSensorPort;
+					bind vehicleSoftware.vehicleController.cruiseController.cruiseControlPort = vehicleSoftware.vehicleController.controlPort;
+					connect  transmission.shaftPort_a to driveshaft.shaftPort_b;
+					connect  driveshaft.shaftPort_c to rearAxleAssembly.shaftPort_d;
+					bind rearAxleAssembly.rearWheel1.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort1;
+					bind rearAxleAssembly.rearWheel2.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort2;
 					{
 						ref;
 						{
@@ -713,9 +654,9 @@ driving scenario *\
 					;
 					;
 					;
-					;
-					;
-					;
+					flow generateToAmplify generateTorque.engineTorque to amplifyTorque.engineTorque;
+					flow amplifyTorque.transmissionTorque to transferTorque.transmissionTorque;
+					flow transferTorque.driveshaftTorque to distributeTorque.driveshaftTorque;
 				}
 				;
 				;
@@ -739,12 +680,12 @@ driving scenario *\
 								ref ignitionCmd : IgnitionCmd;
 								ref;
 							}
-							;
+							flow of IgnitionCmdfrom trigger1.ignitionCmd to startEngine.ignitionCmd;
 							{
 								item ignitionCmd : IgnitionCmd;
 								out item es : EngineStatus;
 							}
-							;
+							flow of EngineStatusfrom startEngine.es to sendStatus.es;
 							{
 								ref;
 								ref;
@@ -766,18 +707,9 @@ driving scenario *\
 							perform startVehicle.sendStatus;
 							event occurrence :> Occurrences::timeEnclosedOccurrences;
 						}
-						{
-							end ref;
-							end ref;
-						}
-						{
-							event driver.startVehicle.turnVehicleOn;
-							event vehicle.startVehicle.trigger1;
-						}
-						{
-							event vehicle.startVehicle.sendStatus;
-							event driver.startVehicle.trigger2;
-						}
+						first vehicle.doorClosed then driver.driverReady;
+						message of IgnitionCmdfrom driver.startVehicle.turnVehicleOn to vehicle.startVehicle.trigger1;
+						message of EngineStatusfrom vehicle.startVehicle.sendStatus to driver.startVehicle.trigger2;
 					}
 				}
 				occurrence CruiseControl1 {
@@ -810,14 +742,8 @@ driving scenario *\
 								event occurrence :> Occurrences::timeEnclosedOccurrences;
 							}
 						}
-						{
-							event speedSensor.speedSensorPort.sensedSpeedSent;
-							event vehicleSoftware.vehicleController.cruiseController.speedSensorPort.sensedSpeedReceived;
-						}
-						{
-							event vehicleSoftware.vehicleController.cruiseController.cruiseControlPort.fuelCmdSent;
-							event engine.fuelCmdPort.fuelCmdReceived;
-						}
+						message sendSensedSpeed of SensedSpeedfrom speedSensor.speedSensorPort.sensedSpeedSent to vehicleSoftware.vehicleController.cruiseController.speedSensorPort.sensedSpeedReceived;
+						message sendFuelCmd of FuelCmdfrom vehicleSoftware.vehicleController.cruiseController.cruiseControlPort.fuelCmdSent to engine.fuelCmdPort.fuelCmdReceived;
 					}
 				}
 				occurrence CruiseControl2 {
@@ -838,8 +764,7 @@ driving scenario *\
 									}
 									port :>> {
 										event occurrence;
-										{
-											end ref;
+										first setSpeedReceived then done {
 											end ref;
 										}
 										event sendSensedSpeed;
@@ -879,10 +804,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						}
 						out ref :>>;
 					}
-					{
-						end ref;
-						end ref;
-					}
+					allocation  allocate  vehicleMassRequirement to vehicle_b.mass;
 					{
 						ref :>> Requirements::null;
 						doc \* fuel economy requirements group *\
@@ -964,7 +886,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port shankPort [5] :>>;
 					}
 				}
-				interface;
+				interface  wheelHubInterface : WheelHubInterface connect  wheel1.lugNutCompositePort[1][1] to hub1.shankCompositePort[1][1];
 			}
 			part wheelHubAssy2 {
 				part wheel1 : Wheel {
@@ -977,7 +899,9 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port shankPort [5] :>>;
 					}
 				}
-				interface;
+				interface  wheelHubInterface : WheelHubInterface connect  lugNutCompositePort to shankCompositePort {
+					interface  wheelFastenerInterface1 :> connect  lugNutPort to shankPort;
+				}
 			}
 			part wheelHubAssy3 {
 				part wheel1 : Wheel {
@@ -1003,7 +927,17 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port shankPort3 [1];
 					}
 				}
-				interface;
+				interface  wheelHubInterface : WheelHubInterface connect  lugNutCompositePort to shankCompositePort {
+					interface  wheelFastenerInterface1 :> connect  lugNutPort to shankPort {
+						attribute :>> *;
+					}
+					interface  wheelFastenerInterface2 :> connect  lugNutPort to shankPort {
+						attribute :>> *;
+					}
+					interface  wheelFastenerInterface3 :> connect  lugNutPort to shankPort {
+						attribute :>> *;
+					}
+				}
 			}
 		}
 	}
@@ -1227,15 +1161,12 @@ The rationale and risk are contained in a metadata library. *\
 				{
 					out ref massMeasured :> mass;
 				}
-				{
-					end ref;
-					end ref;
-				}
+				first weighVehicle then evaluatePassFail;
 				{
 					ref massMeasured :> mass;
 					out ref verdict;
 				}
-				;
+				flow weighVehicle.massMeasured to evaluatePassFail.massMeasured;
 				out ref :>>;
 			}
 		}
@@ -1366,20 +1297,11 @@ The rationale and risk are contained in a metadata library. *\
 			{
 				ref :>>;
 				;
-				{
-					end ref;
-					end ref;
-				}
+				first unlockDoor_in then openDoor_in;
 				;
-				{
-					end ref;
-					end ref;
-				}
+				first openDoor_in then enterVehicle;
 				;
-				{
-					end ref;
-					end ref;
-				}
+				first enterVehicle then closeDoor_in;
 				;
 				{
 					ref :>>;
@@ -1403,20 +1325,11 @@ The rationale and risk are contained in a metadata library. *\
 			{
 				ref :>>;
 				;
-				{
-					end ref;
-					end ref;
-				}
+				first openDoor_out then exitVehicle;
 				;
-				{
-					end ref;
-					end ref;
-				}
+				first exitVehicle then closeDoor_out;
 				;
-				{
-					end ref;
-					end ref;
-				}
+				first closeDoor_out then lockDoor_out;
 				;
 				{
 					ref :>>;
@@ -1442,40 +1355,29 @@ The rationale and risk are contained in a metadata library. *\
 			public import TransportPassenger;
 			{
 				ref :>>;
-				{
-					end ref;
+				first start then a {
 					end ref;
 				}
 				{
 					;
 					;
 				}
-				{
-					end ref;
-					end ref;
-				}
+				first a then trigger;
 				{
 					ref ignitionCmd : IgnitionCmd;
 					ref :>> Transfers::receiver;
 				}
-				{
-					end ref;
-					end ref;
-				}
+				first trigger then b;
 				{
 					;
 					;
 				}
-				{
-					end ref;
-					end ref;
-				}
+				first b then c;
 				{
 					;
 					;
 				}
-				{
-					end ref;
+				first c then done {
 					end ref;
 				}
 				{
@@ -1500,75 +1402,28 @@ The rationale and risk are contained in a metadata library. *\
 					ref ignitionCmd : IgnitionCmd;
 					ref :>> Transfers::receiver;
 				}
-				{
-					end ref;
-					end ref;
-				}
-				;
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
+				first start then fork1 {
 					end ref;
 				}
 				;
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
+				first fork1 then driverGetInVehicle;
+				first fork1 then passenger1GetInVehicle;
+				first driverGetInVehicle then join1;
+				first passenger1GetInVehicle then join1;
+				first join1 then trigger;
+				first trigger then fork2;
 				;
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
-					end ref;
-				}
-				{
-					end ref;
+				first fork2 then driveVehicleToDestination;
+				first fork2 then providePower;
+				first driveVehicleToDestination then join2;
+				first providePower then join2;
+				first join2 then fork3;
+				;
+				first fork3 then driverGetOutOfVehicle;
+				first fork3 then passenger1GetOutOfVehicle;
+				first driverGetOutOfVehicle then join3;
+				first passenger1GetOutOfVehicle then join3;
+				first join3 then done {
 					end ref;
 				}
 				{
@@ -1610,14 +1465,8 @@ The rationale and risk are contained in a metadata library. *\
 				perform transportPassenger.b.providePower;
 				perform transportPassenger.trigger;
 			}
-			{
-				end ref;
-				end ref;
-			}
-			{
-				end ref;
-				end ref;
-			}
+			connect  driver.handPort to vehicle_b_1.ignitionCmdPort;
+			connect  road to vehicle_b_1.vehicleToRoadPort;
 		}
 	}
 	package VehicleSuperSetModel {

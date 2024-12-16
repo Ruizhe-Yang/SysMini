@@ -264,22 +264,38 @@ operation XMIni!FeatureMembership getItemFeatureMember(){
 }
 
 operation XMIni!Usage getConnectorEnd(){
-	if (self.declaredName != null){
-		return self.declaredName;
+	var str = "";
+	if (self.declaredName != null and self.declaredName != ""){
+		str += self.declaredName;
 	}
-	else{
-		return self.OwnedReferenceSubsetting();
-	}
+	str += self.OwnedReferenceSubsetting();
+	str += self.getMultiplicityRange();
+	return str;
+}
+
+operation XMIni!SuccessionAsUsage getTypeOfSuccessionAsUsage() : String{
+// TBD
+//	var endFeatureMemberships = self.ownedRelationship.getElementOf("EndFeatureMembership");
+//	var first = endFeatureMemberships.first();
+//	var second = endFeatureMemberships.second();
+//	"".println();
+//	if (first.ownedRelatedElement.first().ownedRelationship.getElementOf("ReferenceSubsetting").size() > 0){
+//		first.ownedRelatedElement.first().ownedRelationship.getElementOf("ReferenceSubsetting").println("first: ");
+//	}
+//	if (second.ownedRelatedElement.first().ownedRelationship.getElementOf("ReferenceSubsetting").size() > 0){
+//		second.ownedRelatedElement.first().ownedRelationship.getElementOf("ReferenceSubsetting").println("second:");
+//	}
+	return "SuccessionAsUsage";
 }
 
 operation XMIni!Element OwnedReferenceSubsetting() : String {
 	if (self.ownedRelationship.first().isTypeOf("ReferenceSubsetting")){
 		var referenceSubsetting = self.ownedRelationship.first();
-		referenceSubsetting.tag();
 		if (referenceSubsetting.referencedFeature == null){
 			return "";
 		}
 		else if (referenceSubsetting.referencedFeature.declaredName != null){
+			self.tag();
 			return referenceSubsetting.referencedFeature.declaredName;
 		}
 		else{
@@ -300,6 +316,7 @@ operation XMIni!Element OwnedReferenceSubsetting() : String {
 						str += ".";
 				}
 			}
+			self.tag();
 			return str.substring(0, str.length()-1);
 		}
 	}

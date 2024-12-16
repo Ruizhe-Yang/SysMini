@@ -535,6 +535,7 @@ class ConjugatedPortTyping extends FeatureTyping {
 }
 
 class SuccessionAsUsage extends ConnectorAsUsage, Succession {
+	attr String[1] SuccessionType;
 	attr String[*] connectorEndMember;
 }
 

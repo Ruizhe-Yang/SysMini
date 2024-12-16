@@ -273,11 +273,6 @@ operation SysMini!ReferenceUsage ReferenceUsage() : String {
 	}
 }
 
-operation SysMini!VariantReference ReferenceUsage() : String {
-	return "";
-}
-
-
 operation SysMini!AttributeUsage AttributeUsage() : String {
 	return self.UsagePrefix() +
 			AttributeUsageKeyword() + 
@@ -291,11 +286,35 @@ operation SysMini!EnumerationUsage EnumerationUsage() : String {
 }
 
 operation SysMini!BindingConnectorAsUsage BindingConnectorAsUsage() : String {
-	return "";
+	var str = "";
+	str += self.UsagePrefix();
+	if (self.declaredName != null and self.declaredName != ""){
+		str += BindingKeyword().space();
+		str += self.UsageDeclaration();
+	}
+	str += "bind".space();
+	str += self.connectorEndMember.first().space();
+	str += "=".space();
+	str += self.connectorEndMember.second().space();
+	str += self.DefinitionBody();
+	return str;
 }
 
 operation SysMini!SuccessionAsUsage SuccessionAsUsage() : String {
-	return "";
+	var str = "";
+	if (self.SuccessionType == "SuccessionAsUsage"){
+		str += self.UsagePrefix();
+		if (self.declaredName != null and self.declaredName != ""){
+			str += SuccessionKeyword().space();
+			str += self.UsageDeclaration();
+		}
+		str += "first".space();
+		str += self.connectorEndMember.first().space();
+		str += "then".space();
+		str += self.connectorEndMember.second().space();
+		str += self.DefinitionBody();
+	}
+	return str;
 }
 
 
@@ -356,28 +375,69 @@ operation SysMini!PortUsage PortUsage() : String {
 }
 
 operation SysMini!ConnectionUsage ConnectionUsage() : String {
-	return "";
+	var str = "";
+	str += self.OccurrenceUsagePrefix();
+	if (self.declaredName != null and self.declaredName != ""){
+		str += ConnectionUsageKeyword().space();
+	}
+	str += self.UsageDeclaration();
+	str += self.ValuePart();
+	if (self.connectorPart.size() > 1){
+		str += ConnectorKeyword().space();
+		str += self.connectorPart.asSequence().getConnectorPartString();
+	}
+	str += self.UsageBody();
+	return str;
 }
 
 operation SysMini!InterfaceUsage InterfaceUsage() : String {
-	return self.OccurrenceUsagePrefix() + 
-			InterfaceUsageKeyword() + 
-			self.InterfaceUsageDeclaration() + 
-			self.InterfaceBody();
+	var str = "";
+	str += self.OccurrenceUsagePrefix();
+	str += InterfaceKeyword().space();
+	str += self.UsageDeclaration();
+	if (self.interfacePart.size() > 1){
+		str += ConnectorKeyword().space();
+		str += self.interfacePart.asSequence().getConnectorPartString();
+	}
+	str += self.InterfaceBody();
+	return str;
 }
 
 operation SysMini!AllocationUsage AllocationUsage() : String {
-	return "";
+	var str = "";
+	str += self.OccurrenceUsagePrefix();
+	str += AllocationKeyword().space();
+	str += self.UsageDeclaration();
+	if (self.connectorPart.size() > 1){
+		str += AllocateKeyword().space();
+		str += self.connectorPart.asSequence().getConnectorPartString();
+	}
+	str += self.UsageBody();
+	return str;
 }
 
 operation SysMini!FlowConnectionUsage FlowConnectionUsage() : String {
-	return "";
+	if (self.note == "Message"){
+		return self.OccurrenceUsagePrefix() + 
+				MessageKeyword() + 
+				self.MessageDeclaration() + 
+				self.DefinitionBody();
+	}
+	else if (self.note == "FlowConnectionUsage"){
+		return self.OccurrenceUsagePrefix() + 
+				FlowConnectionKeyword() + 
+				self.FlowConnectionDeclaration() + 
+				self.DefinitionBody();
+	}
 }
 
 operation SysMini!SuccessionFlowConnectionUsage SuccessionFlowConnectionUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			SuccessionKeyword() + 
+			FlowConnectionKeyword() + 
+			self.FlowConnectionDeclaration() +
+			self.DefinitionBody();
 }
-
 
 /* Usage(OccurrenceUsageElement/BehaviorUsageElement) */
 operation SysMini!ActionUsage ActionUsage() : String {
@@ -691,6 +751,10 @@ operation RenderingKeyword() : String {
 	return "rendering".space();
 }
 
+operation BindingKeyword() : String {
+	return "binding".space();
+}
+
 operation ViewpointKeyword() : String {
 	return "viewpoint".space();
 }
@@ -751,8 +815,24 @@ operation InterfaceKeyword() : String {
 	return "interface".space();
 }
 
+operation AllocateKeyword() : String {
+	return "allocate".space();
+}
+
 operation FlowConnectionKeyword() : String {
 	return "flow".space();
+}
+
+operation MessageKeyword() : String {
+	return "message".space();
+}
+
+operation SuccessionKeyword() : String {
+	return "succession".space();
+}
+
+operation ConnectorKeyword() : String {
+	return "connect".space();
 }
 
 operation ConnectionKeyword() : String {
@@ -790,6 +870,45 @@ operation SysMini!OccurrenceUsage OccurrenceUsagePrefix() : String {
 			self.isIndividual() + 
 			self.portionKind() + 
 			self.UsageExtensionKeyword();
+}
+
+operation Sequence getConnectorPartString() : String{
+	var str = "";
+	if (self.size() == 2){
+		str += self.at(0).space();
+		str += "to".space();
+		str += self.at(1).space();
+	}
+	else if (self.size() > 2){
+		str += "(".space();
+		for (c in self){
+			str += c;
+			str += ",".space();
+		}
+		str = str.substring(0, str.length()-2);
+		str += ")".space();
+	}
+	return str;
+}
+
+operation SysMini!FlowConnectionUsage MessageDeclaration(){
+	return self.FlowConnectionDeclaration();
+}
+
+operation SysMini!FlowConnectionUsage FlowConnectionDeclaration(){
+	var str = "";
+	str += self.UsageDeclaration();
+	str += self.ValuePart();
+	if (self.itemFeature != null){
+		str += "of".space() + self.itemFeature;
+		if (self.source != null){
+			str += "from".space() + self.source.space() + "to".space() + self.target.space();
+		}
+	}
+	else{
+		str += self.source.space() + "to".space() + self.target.space();
+	}
+	return str;
 }
 
 operation SysMini!Element PrefixMetadataMember() : String {
