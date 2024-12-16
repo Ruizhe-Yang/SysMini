@@ -26,7 +26,7 @@ import java.util.List;
 
 
 
-public class SysML2XMIni {
+public class SysML2XMIni_file {
 	
 	//Directory path of 'types.ecore', 'kerml.ecore' and 'SysML.ecore'.
 	public static String ecoreDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini\\metamodel\\sysmlv2";
@@ -49,6 +49,7 @@ public class SysML2XMIni {
     	File libraryDirectory = new File(libraryDirectoryPath);
     	File targetFile = new File(targetFilePath+"x");
 		List<List<String>> ElementIDList = getAllElementHref(targetFile);
+		registerEcoreModels();
 		modifyXMI(libraryDirectory, ElementIDList);
 		deleteFiles(libraryDirectoryPath);
     	System.out.println("SysML2XMIni.java runtime ends.");
@@ -122,7 +123,7 @@ public class SysML2XMIni {
     }
     //Delete the href index and add the model name of the index to the declaredName attribute.
     public static void modifyXMI(File directory, List<List<String>> lists) throws IOException {
-    	registerEcoreModels();
+    	
     	File inputFile = new File(fileName);
         ResourceSetImpl resourceSet = new ResourceSetImpl();
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("sysmlx", new XMIResourceFactoryImpl());
@@ -260,7 +261,7 @@ public class SysML2XMIni {
 		return null;
     }
     
-    private static void registerEcoreModels() {
+    protected static void registerEcoreModels() {
         try {
         	registerEcoreModel(ecoreDirectoryPath+"\\types.ecore");
         	registerEcoreModel(ecoreDirectoryPath+"\\kerml.ecore");

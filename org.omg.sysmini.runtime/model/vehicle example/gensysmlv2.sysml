@@ -41,8 +41,8 @@ package VehicleDefinitions {
 		/*
 		 * The definition of the interface for mounting a Wheel to an Axle. 
 		 */
-		port axleMount : AxleMountIF;
-		port hub : WheelHubIF;
+		end axleMount : AxleMountIF;
+		end hub : WheelHubIF;
 		flow axleMount.transferredTorque to hub.appliedTorque;
 	}
 }
