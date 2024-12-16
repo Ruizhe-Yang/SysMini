@@ -83,7 +83,7 @@ operation SysMini!Element matchType() : String {
 		case "ViewDefinition":               return self.ViewDefinition();
 		case "ViewpointDefinition":          return self.ViewpointDefinition();
 		case "RenderingDefinition":          return self.RenderingDefinition();
-		case "ExtendedDefinition":           return self.ExtendedDefinition();
+//		case "ExtendedDefinition":           return self.ExtendedDefinition();
 		
 		// Usage
 		// Usage(NonOccurrenceUsageElement)

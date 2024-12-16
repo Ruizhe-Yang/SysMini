@@ -682,8 +682,12 @@ rule IncludeUseCaseUsage
 	transform s : XMIni!IncludeUseCaseUsage
 	to t : SysMini!IncludeUseCaseUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, CaseBody{
-		if (s.declaredName == null){
+		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
+			t.isExtendKeyWord = false;
 			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+		else{
+			t.isExtendKeyWord = true;
 		}
 	}
 	
@@ -752,11 +756,15 @@ rule SatisfyRequirementUsage
 	
 @abstract
 rule PerformActionUsageDeclaration
-	transform s : XMIni!PerformActionUsage
-	to t : SysMini!PerformActionUsage
+	transform s : XMIni!ActionUsage
+	to t : SysMini!ActionUsage
 	extends UsageDeclaration, ValuePart{
-		if (s.declaredName == null){
+		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
+			t.isExtendKeyWord = false;
 			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+		else{
+			t.isExtendKeyWord = true;
 		}
 	}
 		
@@ -772,8 +780,12 @@ rule ExhibitStateUsage
 	transform s : XMIni!ExhibitStateUsage
 	to t : SysMini!ExhibitStateUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, StateUsageBody{
-		if (s.declaredName == null){
+		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
+			t.isExtendKeyWord = false;
 			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+		else{
+			t.isExtendKeyWord = true;
 		}
 	}
 
@@ -976,22 +988,27 @@ rule FlowConnectionDeclaration
 			var isFirst = true;
 			if (ownedRelationship.isTypeOf("FeatureMembership")){
 				isIf = true;
-				t.flowConnectionDeclaration += " of ";
-				t.flowConnectionDeclaration += ownedRelationship.getItemFeatureMember();
-				t.flowConnectionDeclaration += " ";
+				t.itemFeature = ownedRelationship.getItemFeatureMember();
 				ownedRelationship.tag();
 			}
 			else if (ownedRelationship.isTypeOf("EndFeatureMembership")){
-				if (isIf){
-					t.flowConnectionDeclaration += " from ";
-				}
+				t.note = "FlowConnectionUsage";
 				if (isFirst){
-					t.flowConnectionDeclaration += ownedRelationship.getFlowEndMember();
+					t.source = ownedRelationship.getFlowEndMember();
 					isFirst = false;
 				}
 				else{
-					t.flowConnectionDeclaration += " to ";
-					t.flowConnectionDeclaration += ownedRelationship.getFlowEndMember();
+					t.target = ownedRelationship.getFlowEndMember();
+				}
+			}
+			else if (ownedRelationship.isTypeOf("ParameterMembership")){
+				t.note = "Message";
+				if (isFirst){
+					t.source = ownedRelationship.getFlowEndMember();
+					isFirst = false;
+				}
+				else{
+					t.target = ownedRelationship.getFlowEndMember();
 				}
 			}
 		}
@@ -1158,6 +1175,13 @@ rule EventOccurrenceUsage
 	transform s : XMIni!EventOccurrenceUsage
 	to t : SysMini!EventOccurrenceUsage
 	extends OccurrenceUsagePrefix, FeatureSpecializationPart, UsageCompletion{
+		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
+			t.isExtendKeyWord = false;
+			t.declaredName = s.OwnedReferenceSubsetting();
+		}
+		else{
+			t.isExtendKeyWord = true;
+		}
 	}
 	
 @abstract

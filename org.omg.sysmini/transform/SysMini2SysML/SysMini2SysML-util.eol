@@ -259,21 +259,24 @@ operation SysMini!RenderingDefinition RenderingDefinition() : String {
 			self.Definition();
 }
 
-operation SysMini!ExtendedDefinition ExtendedDefinition() : String {
-	return self.BasicDefinitionPrefix() + 
-			self.DefinitionExtensionKeyword() + 
-			"def".space() +
-			self.Definition();
-}
-
 
 /* Usage */
 /* Usage(NonOccurrenceUsageElement) */
 operation SysMini!ReferenceUsage ReferenceUsage() : String {
-	return self.RefPrefix() + 
+	if (self.isOwningElementOf("OwnedReferenceSubsetting")){
+		return self.VariantReference();
+	}
+	else{
+		return self.RefPrefix() + 
 			ReferenceUsageKeyword() + 
 			self.Usage();
+	}
 }
+
+operation SysMini!VariantReference ReferenceUsage() : String {
+	return "";
+}
+
 
 operation SysMini!AttributeUsage AttributeUsage() : String {
 	return self.UsagePrefix() +
@@ -304,7 +307,20 @@ operation SysMini!OccurrenceUsage OccurrenceUsage() : String {
 }
 
 operation SysMini!EventOccurrenceUsage EventOccurrenceUsage() : String {
-	return "";
+	if (self.isExtendKeyWord){
+		return self.OccurrenceUsagePrefix() + 
+			'event'.space() + 
+			'occurrence'.space() +
+			self.UsageDeclaration() + 
+			self.UsageCompletion();
+	}
+	else{
+		return self.OccurrenceUsagePrefix() + 
+			'event'.space() + 
+			self.declaredName.space() +
+			self.featureSpecialization.space() + 
+			self.UsageCompletion();
+	}
 }
 
 operation SysMini!ItemUsage ItemUsage() : String {
@@ -409,15 +425,60 @@ operation SysMini!ViewpointUsage ViewpointUsage() : String {
 }
 
 operation SysMini!PerformActionUsage PerformActionUsage() : String {
-	return "";
+	if (self.isExtendKeyWord){
+		return self.OccurrenceUsagePrefix() + 
+			'perform'.space() + 
+			'action'.space() +
+			self.UsageDeclaration() + 
+			self.ValuePart() + 
+			self.ActionBody();
+	}
+	else{
+		return self.OccurrenceUsagePrefix() + 
+			'perform'.space() + 
+			self.declaredName.space() +
+			self.featureSpecialization.space() + 
+			self.ValuePart() + 
+			self.ActionBody();
+	}
 }
 
 operation SysMini!ExhibitStateUsage ExhibitStateUsage() : String {
-	return "";
+	if (self.isExtendKeyWord){
+		return self.OccurrenceUsagePrefix() + 
+			'exhibit'.space() + 
+			'state'.space() +
+			self.UsageDeclaration() + 
+			self.ValuePart() + 
+			self.StateUsageBody();
+	}
+	else{
+		return self.OccurrenceUsagePrefix() + 
+			'exhibit'.space() + 
+			self.declaredName.space() +
+			self.featureSpecialization.space() + 
+			self.ValuePart() + 
+			self.StateUsageBody();
+	}
 }
 
 operation SysMini!IncludeUseCaseUsage IncludeUseCaseUsage() : String {
-	return "";
+	if (self.isExtendKeyWord){
+		return self.OccurrenceUsagePrefix() + 
+			'include'.space() + 
+			'use case'.space() +
+			self.UsageDeclaration() + 
+			self.ValuePart() + 
+			self.CaseBody();
+	}
+	else{
+		return self.OccurrenceUsagePrefix() + 
+			'include'.space() + 
+			self.declaredName.space() +
+			self.featureSpecialization.space() + 
+			self.ValuePart() + 
+			self.CaseBody();
+	}
 }
 
 operation SysMini!AssertConstraintUsage AssertConstraintUsage() : String {
@@ -920,6 +981,10 @@ operation SysMini!Type InterfaceBody() : String {
 	return "";
 }
 
+operation SysMini!Type StateUsageBody() : String {
+	return "";
+}
+
 operation SysMini!Type EnumerationBody() : String {
 	return "";
 }
@@ -1029,6 +1094,18 @@ operation SysMini!Feature featureDirection() : String {
 	}
 	else{
 		return self.direction.name.space();
+	}
+}
+
+operation SysMini!Element isOwningElementOf(str:String):Boolean{
+	if (self.hasProperty("ownedRelationship") and self.ownedRelationship.getELementOf("str").size()>0){
+		return true;
+	}
+	else if (self.hasProperty("ownedRelatedElement") and self.ownedRelatedElement.getELementOf("str").size()>0){
+		return true;
+	}
+	else{
+		return false;
 	}
 }
 
