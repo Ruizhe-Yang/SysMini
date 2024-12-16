@@ -14,6 +14,7 @@ public class SysML2XMIni_dir extends SysML2XMIni {
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
 	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Metadata Examples";
+	//Generate file 'xxx_.sysmlx'.
 	public static String fileName = null;
 	
     public static void main(String[] args) throws IOException {

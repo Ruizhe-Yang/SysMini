@@ -35,7 +35,7 @@ public class SysML2XMIni {
 	//File path of the target file 'xxx.sysml'.
 	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\VehicleDefinitions.sysml";
 	//Generate file 'xxx_.sysmlx'.
-	private static String fileName = null;
+	public static String fileName = null;
 	
     public static void main(String[] args) throws IOException {
     	run();
