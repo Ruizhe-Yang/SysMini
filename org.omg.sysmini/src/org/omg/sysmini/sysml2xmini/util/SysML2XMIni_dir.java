@@ -1,4 +1,4 @@
-package org.omg.sysmini.util;
+package org.omg.sysmini.sysml2xmini.util;
 
 import org.omg.sysml.xtext.util.SysML2XMI;
 import java.io.File;
@@ -23,7 +23,7 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
     public static void run() throws IOException {
         
         String[] sysmlFilePaths = findFiles(targetFileDirectory);
-        registerEcoreModels();
+        
         for (String FilePath : sysmlFilePaths) {
         	fileName = "";
         	String[] result = findFiles(libraryDirectoryPath);
@@ -31,9 +31,11 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
         	System.out.println(targetFilePath+" is transforming...");
         	String[] config = {"-g", targetFilePath};
             String[] arg = mergeArrays(config, result);
-            SysML2XMI.main(arg);
+//            SysML2XMI.main(arg);
+            new SysML2XMI().run(arg);
         	File libraryDirectory = new File(libraryDirectoryPath);
         	File targetFile = new File(targetFilePath+"x");
+        	registerEcoreModels();
     		List<List<String>> ElementIDList = getAllElementHref(targetFile);
     		modifyXMI(libraryDirectory, ElementIDList);
     		deleteFiles(libraryDirectoryPath);

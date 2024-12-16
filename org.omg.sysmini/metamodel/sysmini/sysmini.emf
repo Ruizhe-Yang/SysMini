@@ -314,6 +314,7 @@ class ItemUsage extends OccurrenceUsage {
 class OccurrenceUsage extends Usage {
 	attr boolean[1] isIndividual = false;
 	attr PortionKind portionKind;
+	attr String itemFeature;
 }
 
 class Usage extends Feature {
@@ -377,7 +378,9 @@ abstract class ConnectorAsUsage extends Usage, Connector {
 }
 
 class FlowConnectionUsage extends ConnectionUsage, ActionUsage, ItemFlow {
-	attr String flowConnectionDeclaration;
+	attr String note;
+	attr String source;
+	attr String target;
 }
 
 class ConnectionUsage extends ConnectorAsUsage, PartUsage {
@@ -525,6 +528,7 @@ class FramedConcernMembership extends RequirementConstraintMembership {
 }
 
 class EventOccurrenceUsage extends OccurrenceUsage {
+	attr boolean isExtendKeyWord; 
 }
 
 class ConjugatedPortTyping extends FeatureTyping {

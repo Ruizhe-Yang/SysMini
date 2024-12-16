@@ -1,4 +1,4 @@
-package org.omg.sysmini.util;
+package org.omg.sysmini.sysml2xmini.util;
 
 import java.io.File;
 import org.omg.sysml.xtext.util.SysML2XMI;
