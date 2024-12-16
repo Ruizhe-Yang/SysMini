@@ -37,7 +37,6 @@ public class SysML2XMIni {
 	//Generate file 'xxx_.sysmlx'.
 	private static String fileName = null;
 	
-	
     public static void main(String[] args) throws IOException {
     	run();
     }
@@ -55,7 +54,7 @@ public class SysML2XMIni {
     	System.out.println("SysML2XMIni.java runtime ends.");
     }
     
-    private static String[] mergeArrays(String[] array1, String[] array2) {
+    public static String[] mergeArrays(String[] array1, String[] array2) {
         String[] mergedArray = new String[array1.length + array2.length];
         System.arraycopy(array1, 0, mergedArray, 0, array1.length);
         System.arraycopy(array2, 0, mergedArray, array1.length, array2.length);
