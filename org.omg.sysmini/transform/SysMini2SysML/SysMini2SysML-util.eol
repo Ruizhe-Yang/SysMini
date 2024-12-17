@@ -263,13 +263,32 @@ operation SysMini!RenderingDefinition RenderingDefinition() : String {
 /* Usage */
 /* Usage(NonOccurrenceUsageElement) */
 operation SysMini!ReferenceUsage ReferenceUsage() : String {
-	if (self.isOwningElementOf("OwnedReferenceSubsetting")){
-		return self.VariantReference();
-	}
-	else{
+	if (self.ReferenceUsageType == "DefaultReferenceUsage"){
 		return self.RefPrefix() + 
-			ReferenceUsageKeyword() + 
-			self.Usage();
+				self.UsageDeclaration() + 
+				self.ValuePart() + 
+				self.UsageBody();
+	}
+	else if (self.ReferenceUsageType == "VariantReference"){
+		return self.declaredName.space() + 
+				self.featureSpecialization().space() + 
+				self.UsageBody();
+	}
+	else if (self.ReferenceUsageType == "ReferenceUsage"){
+		return self.RefPrefix() + 
+				ReferenceUsageKeyword() + 
+				self.Usage();
+	}
+	else if (self.ReferenceUsageType == "MetadataBodyUsage"){
+		return self.declaredName.space() + 
+				self.FeatureSpecializationPart() + 
+				self.ValuePart() + 
+				self.MetadataBody();
+	}
+	else if (self.ReferenceUsageType == "SubjectUsage"){
+		return "subject".space() + 
+				self.UsageExtensionKeyword() + 
+				self.Usage();
 	}
 }
 
@@ -317,6 +336,11 @@ operation SysMini!SuccessionAsUsage SuccessionAsUsage() : String {
 	return str;
 }
 
+operation SysMini!Usage ExtendedUsage() : String {
+	return self.BasicUsagePrefix() +
+			self.UsageExtensionKeyword() + 
+			self.Usage();
+}
 
 /* Usage(OccurrenceUsageElement/StructureUsageElement) */
 operation SysMini!OccurrenceUsage OccurrenceUsage() : String {
@@ -406,8 +430,10 @@ operation SysMini!InterfaceUsage InterfaceUsage() : String {
 operation SysMini!AllocationUsage AllocationUsage() : String {
 	var str = "";
 	str += self.OccurrenceUsagePrefix();
-	str += AllocationKeyword().space();
-	str += self.UsageDeclaration();
+	if (self.declaredName != null and self.declaredName != ""){
+		str += AllocationKeyword().space();
+		str += self.UsageDeclaration();
+	}
 	if (self.connectorPart.size() > 1){
 		str += AllocateKeyword().space();
 		str += self.connectorPart.asSequence().getConnectorPartString();
@@ -441,47 +467,80 @@ operation SysMini!SuccessionFlowConnectionUsage SuccessionFlowConnectionUsage() 
 
 /* Usage(OccurrenceUsageElement/BehaviorUsageElement) */
 operation SysMini!ActionUsage ActionUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			ActionUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.ActionBody();
 }
 
 operation SysMini!CalculationUsage CalculationUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			CalculationUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.CalculationBody();
 }
 
 operation SysMini!StateUsage StateUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			StateUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.StateUsageBody();
 }
 
 operation SysMini!ConstraintUsage ConstraintUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			ConstraintUsageKeyword() + 
+			self.ConstraintUsageDeclaration() + 
+			self.CalculationBody();
 }
 
 operation SysMini!RequirementUsage RequirementUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			RequirementUsageKeyword() + 
+			self.ConstraintUsageDeclaration() + 
+			self.RequirementBody();
 }
 
 operation SysMini!ConcernUsage ConcernUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			ConcernUsageKeyword() + 
+			self.ConstraintUsageDeclaration() + 
+			self.RequirementBody();
 }
 
 operation SysMini!CaseUsage CaseUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			CaseUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.CaseBody();
 }
 
 operation SysMini!AnalysisCaseUsage AnalysisCaseUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			AnalysisCaseUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.CaseBody();
 }
 
 operation SysMini!VerificationCaseUsage VerificationCaseUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			VerificationCaseUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.CaseBody();
 }
 
 operation SysMini!UseCaseUsage UseCaseUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			UseCaseUsageKeyword() + 
+			self.ActionUsageDeclaration() + 
+			self.CaseBody();
 }
 
 operation SysMini!ViewpointUsage ViewpointUsage() : String {
-	return "";
+	return self.OccurrenceUsagePrefix() + 
+			ViewpointUsageKeyword() + 
+			self.ConstraintUsageDeclaration() + 
+			self.RequirementBody();
 }
 
 operation SysMini!PerformActionUsage PerformActionUsage() : String {
@@ -542,13 +601,43 @@ operation SysMini!IncludeUseCaseUsage IncludeUseCaseUsage() : String {
 }
 
 operation SysMini!AssertConstraintUsage AssertConstraintUsage() : String {
-	return "";
+	var str = "";
+	str += self.OccurrenceUsagePrefix();
+	str += "assert".space();
+	str += self.isNegated();
+	if (self.notConstraintUsageKeyword){
+		str += self.declaredName.space();
+		str += self.featureSpecialization.space();
+	}
+	else{
+		str += ConstraintUsageKeyword();
+		str += self.ConstraintUsageDeclaration();
+	}
+	str += self.CalculationBody();
+	return str;
 }
 
 operation SysMini!SatisfyRequirementUsage SatisfyRequirementUsage() : String {
-	return "";
+	var str = "";
+	str += self.OccurrenceUsagePrefix();
+	str += self.isNegated();
+	str += "satisfy".space();
+	if (self.notConstraintUsageKeyword){
+		str += self.declaredName.space();
+		str += self.featureSpecialization.space();
+	}
+	else{
+		str += RequirementUsageKeyword();
+		str += self.UsageDeclaration();
+	}
+	str += self.ValuePart();
+	if (self.satisfactionSubjectMember != null and self.satisfactionSubjectMember != ""){
+		str += "by".space();
+		str += self.satisfactionSubjectMember.space();
+	}
+	str += self.RequirementBody();
+	return str;
 }
-
 
 /* Def Key Word*/
 operation RenderingDefKeyword() : String {
@@ -719,6 +808,10 @@ operation ConcernUsageKeyword() : String {
 
 operation CaseUsageKeyword() : String {
 	return CaseKeyword();
+}
+
+operation ViewpointUsageKeyword() : String {
+	return ViewpointKeyword();
 }
 
 operation AnalysisCaseUsageKeyword() : String {
@@ -991,6 +1084,16 @@ operation SysMini!Usage UsageDeclaration() : String {
 	return self.FeatureDeclaration();
 }
 
+operation SysMini!ActionUsage ActionUsageDeclaration() : String {
+	return self.UsageDeclaration() +
+			self.ValuePart();
+}
+
+operation SysMini!ConstraintUsage ConstraintUsageDeclaration() : String {
+	return self.UsageDeclaration() +
+			self.ValuePart();
+}
+
 operation SysMini!Feature FeatureDeclaration() : String {
 	return self.Identification() + 
 			self.FeatureSpecializationPart();
@@ -1058,6 +1161,10 @@ operation SysMini!Element Identification() : String {
 	return str;
 }
 
+operation SysMini!Type MetadataBody() : String {
+	return "";
+}
+
 operation SysMini!Classifier SubclassificationPart() : String {
 	// TBD
 	return "";
@@ -1101,7 +1208,7 @@ operation SysMini!Type InterfaceBody() : String {
 }
 
 operation SysMini!Type StateUsageBody() : String {
-	return "";
+	return self.isParallel();
 }
 
 operation SysMini!Type EnumerationBody() : String {
@@ -1192,6 +1299,15 @@ operation SysMini!Feature isEnd() : String {
 operation SysMini!Element isReference() : String {
 	if (self.isReference){
 		return "ref".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isNegated() : String {
+	if (self.isReference){
+		return "not".space();
 	}
 	else{
 		return "";

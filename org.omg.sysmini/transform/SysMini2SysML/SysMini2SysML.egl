@@ -92,6 +92,7 @@ operation SysMini!Element matchType() : String {
 		case "EnumerationUsage":             return self.EnumerationUsage();
 		case "BindingConnectorAsUsage":      return self.BindingConnectorAsUsage();
 		case "SuccessionAsUsage":            return self.SuccessionAsUsage();
+		case "Usage":                        return self.ExtendedUsage();
 		
 		// Usage(OccurrenceUsageElement/StructureUsageElement)
 		case "OccurrenceUsage":              return self.OccurrenceUsage();

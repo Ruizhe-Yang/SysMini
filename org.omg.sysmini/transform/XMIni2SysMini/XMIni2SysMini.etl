@@ -123,6 +123,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "ReferenceUsage": element.addNodeTo(rootNode);
 			case "AttributeUsage": element.addNodeTo(rootNode);
 			case "SuccessionAsUsage": element.addNodeTo(rootNode);
+			case "Usage": element.addNodeTo(rootNode);
 			case "BindingConnectorAsUsage": element.addNodeTo(rootNode);
 			case "ItemUsage": element.addNodeTo(rootNode);
 			case "ActionUsage": element.addNodeTo(rootNode);
@@ -711,11 +712,15 @@ rule AssertConstraintUsage
 	to t : SysMini!AssertConstraintUsage
 	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, CalculationBody{
 		if (s.declaredName == null){
+			t.notConstraintUsageKeyword = true;
 			t.declaredName = s.OwnedReferenceSubsetting();
+			if (t.declaredName == null or t.declaredName == ""){
+				t.notConstraintUsageKeyword = false;
+			}
 		}
 		t.isNegated = s.isNegated;
 	}
-
+	
 @abstract
 rule ConcernUsage
 	transform s : XMIni!ConcernUsage
@@ -736,7 +741,11 @@ rule SatisfyRequirementUsage
 	to t : SysMini!SatisfyRequirementUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, RequirementBody{
 		if (s.declaredName == null){
+			t.notConstraintUsageKeyword = true;
 			t.declaredName = s.OwnedReferenceSubsetting();
+			if (t.declaredName == null or t.declaredName == ""){
+				t.notConstraintUsageKeyword = false;
+			}
 		}
 		t.isNegated = s.isNegated;
 		for (satisfactionSubjectMember in s.ownedRelationship.getElementOf("SubjectMembership")){
@@ -1144,7 +1153,13 @@ rule EnumerationUsage
 rule ReferenceUsage
 	transform s : XMIni!ReferenceUsage
 	to t : SysMini!ReferenceUsage
-	extends RefPrefix, Usage{
+	extends PrefixMetadataMember, RefPrefix, Usage{
+		t.ReferenceUsageType = s.getTypeOfReferenceUsage();
+		if (t.ReferenceUsageType == "ReferenceUsage"){
+			if (t.declaredName != null and t.declaredName != ""){
+				t.ReferenceUsageType = "DefaultReferenceUsage";
+			}
+		}
 	}
 		
 @abstract
@@ -1257,11 +1272,19 @@ rule AnnotatingElementRule
 	}
 
 @abstract
+rule ExtendedUsage
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends BasicUsagePrefix, UsageExtensionKeyword, Usage{
+	}
+	
+@abstract
 rule SuccessionAsUsage
 	transform s : XMIni!SuccessionAsUsage
 	to t : SysMini!SuccessionAsUsage
 	extends UsagePrefix, UsageDeclaration, DefinitionBody{
 		var se = Sequence{};
+		
 		t.SuccessionType = s.getTypeOfSuccessionAsUsage();
 		if (t.SuccessionType == "SuccessionAsUsage"){
 			for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
@@ -1280,6 +1303,7 @@ rule SuccessionAsUsage
 		else {
 			t.connectorEndMember.add(se.second());
 		}
+//		t.println();
 //		t.connectorEndMember.println();
 	}
 
@@ -1649,6 +1673,13 @@ rule SuccessionAsUsageRule
 	transform s : XMIni!SuccessionAsUsage
 	to t : SysMini!SuccessionAsUsage
 	extends SuccessionAsUsage{
+	}
+
+@lazy
+rule ExtendedUsageRule
+	transform s : XMIni!Usage
+	to t : SysMini!Usage
+	extends ExtendedUsage{
 	}
 	
 @lazy

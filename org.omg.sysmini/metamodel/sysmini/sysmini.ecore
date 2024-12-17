@@ -235,6 +235,8 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRedefines" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ReferenceUsageType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeUsage" eSuperTypes="#//Usage"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationUsage" eSuperTypes="#//AttributeUsage"/>
@@ -252,7 +254,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="PortDefinition" eSuperTypes="#//OccurrenceDefinition #//Structure"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConjugatedPortDefinition" eSuperTypes="#//PortDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="PortConjugation" eSuperTypes="#//Conjugation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectorAsUsage" abstract="true" eSuperTypes="#//Usage #//Connector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorAsUsage" abstract="true" eSuperTypes="#//Usage #//Connector">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorEndMember" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FlowConnectionUsage" eSuperTypes="#//ConnectionUsage #//ActionUsage #//ItemFlow">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="note" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -329,7 +334,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="satisfactionSubjectMember"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertConstraintUsage" eSuperTypes="#//ConstraintUsage #//Invariant"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertConstraintUsage" eSuperTypes="#//ConstraintUsage #//Invariant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notConstraintUsageKeyword"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FramedConcernMembership" eSuperTypes="#//RequirementConstraintMembership"/>
   <eClassifiers xsi:type="ecore:EClass" name="EventOccurrenceUsage" eSuperTypes="#//OccurrenceUsage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isExtendKeyWord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -337,15 +345,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ConjugatedPortTyping" eSuperTypes="#//FeatureTyping"/>
   <eClassifiers xsi:type="ecore:EClass" name="SuccessionAsUsage" eSuperTypes="#//ConnectorAsUsage #//Succession">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SuccessionType" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="SuccessionAsUsage"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorEndMember" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FlowConnectionDefinition" eSuperTypes="#//ConnectionDefinition #//ActionDefinition #//Interaction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BindingConnectorAsUsage" eSuperTypes="#//ConnectorAsUsage #//BindingConnector">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorEndMember" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingConnectorAsUsage" eSuperTypes="#//ConnectorAsUsage #//BindingConnector"/>
   <eClassifiers xsi:type="ecore:EClass" name="SuccessionFlowConnectionUsage" eSuperTypes="#//FlowConnectionUsage #//SuccessionItemFlow"/>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectiveMembership" eSuperTypes="#//FeatureMembership"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExhibitStateUsage" eSuperTypes="#//StateUsage #//PerformActionUsage"/>

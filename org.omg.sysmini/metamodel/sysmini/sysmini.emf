@@ -1,3 +1,4 @@
+@namespace(uri="sysmini", prefix="")
 package sysmini;
 
 abstract class Element {
@@ -8,7 +9,7 @@ abstract class Element {
 	attr String prefixMetadata;
 	attr boolean[1] isWell = false;
 	ref Element#body root;
-	ordered val Element[*]#root body;
+	val Element[*]#root body;
 }
 
 class Subclassification extends Specialization {
@@ -21,7 +22,7 @@ class Specialization extends Relationship {
 abstract class Relationship extends Element {
 }
 
-class DefinitionElement extends Element{
+class DefinitionElement extends Element {
 }
 
 class OwningMembership extends Membership {
@@ -304,8 +305,8 @@ class MembershipImport extends Import {
 }
 
 class Dependency extends Relationship {
-	ordered attr String[*] client;
-	ordered attr String[*] supplier;
+	attr String[*] client;
+	attr String[*] supplier;
 }
 
 class ItemUsage extends OccurrenceUsage {
@@ -332,6 +333,7 @@ class Definition extends Classifier {
 class ReferenceUsage extends Usage {
 	attr boolean[1] isRef = false;
 	attr boolean[1] isRedefines = false;
+	attr String[1] ReferenceUsageType;
 }
 
 class AttributeUsage extends Usage {
@@ -375,6 +377,7 @@ class PortConjugation extends Conjugation {
 }
 
 abstract class ConnectorAsUsage extends Usage, Connector {
+	attr String[*] connectorEndMember;
 }
 
 class FlowConnectionUsage extends ConnectionUsage, ActionUsage, ItemFlow {
@@ -522,13 +525,14 @@ class SatisfyRequirementUsage extends RequirementUsage, AssertConstraintUsage {
 }
 
 class AssertConstraintUsage extends ConstraintUsage, Invariant {
+	attr boolean notConstraintUsageKeyword;
 }
 
 class FramedConcernMembership extends RequirementConstraintMembership {
 }
 
 class EventOccurrenceUsage extends OccurrenceUsage {
-	attr boolean isExtendKeyWord; 
+	attr boolean isExtendKeyWord;
 }
 
 class ConjugatedPortTyping extends FeatureTyping {
@@ -536,14 +540,13 @@ class ConjugatedPortTyping extends FeatureTyping {
 
 class SuccessionAsUsage extends ConnectorAsUsage, Succession {
 	attr String[1] SuccessionType;
-	attr String[*] connectorEndMember;
+	
 }
 
 class FlowConnectionDefinition extends ConnectionDefinition, ActionDefinition, Interaction {
 }
 
 class BindingConnectorAsUsage extends ConnectorAsUsage, BindingConnector {
-	attr String[*] connectorEndMember;
 }
 
 class SuccessionFlowConnectionUsage extends FlowConnectionUsage, SuccessionItemFlow {
@@ -646,3 +649,4 @@ class AssignmentActionUsage extends ActionUsage {
 
 class JoinNode extends ControlNode {
 }
+

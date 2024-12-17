@@ -288,6 +288,19 @@ operation XMIni!SuccessionAsUsage getTypeOfSuccessionAsUsage() : String{
 	return "SuccessionAsUsage";
 }
 
+operation XMIni!ReferenceUsage getTypeOfReferenceUsage(){
+	var ownedRelationship = self.ownedRelationship;
+	if (self.eContainer().isTypeOf(XMIni!SubjectMembership)){
+		return "SubjectUsage";
+	}
+	if (self.eContainer().isTypeOf(XMIni!FeatureMembership)){
+		return "MetadataBodyUsage";
+	}
+	else{
+		return "ReferenceUsage";
+	}
+}
+
 operation XMIni!Element OwnedReferenceSubsetting() : String {
 	if (self.ownedRelationship.first().isTypeOf("ReferenceSubsetting")){
 		var referenceSubsetting = self.ownedRelationship.first();
