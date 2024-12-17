@@ -108,7 +108,6 @@ class Subsetting extends Specialization {
 }
 
 class FeatureTyping extends Specialization {
-	attr String type_;
 }
 
 class TypeFeaturing extends Featuring {
@@ -179,6 +178,7 @@ class LibraryPackage extends Package {
 }
 
 class ElementFilterMembership extends OwningMembership {
+	attr String[1] ElementFilterText;
 }
 
 class LiteralRational extends LiteralExpression {

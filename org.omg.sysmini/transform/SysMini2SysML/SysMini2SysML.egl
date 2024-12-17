@@ -48,10 +48,7 @@ operation SysMini!Element matchType() : String {
 		case "NamespaceExpose":              return self.NamespaceExpose();
 		case "MembershipImport":             return self.MembershipImport();
 		case "MembershipExpose":             return self.MembershipExpose();
-		
-		//Package
-		case "Dependency":                   return self.Dependency();
-		
+
 		//AnnotatingElement
 		case "Comment":                      return self.Comment();
 		case "Documentation":                return self.Documentation();
@@ -123,6 +120,17 @@ operation SysMini!Element matchType() : String {
 		case "IncludeUseCaseUsage":          return self.IncludeUseCaseUsage();
 		case "AssertConstraintUsage":        return self.AssertConstraintUsage();
 		case "SatisfyRequirementUsage":      return self.SatisfyRequirementUsage();
+		
+		//Others
+		case "Dependency":                   return self.Dependency();
+		case "ElementFilterMembership":      return self.ElementFilterMembership();
+		case "MetadataUsage":                return self.MetadataUsage();
+		case "MergeNode":                    return self.MergeNode();
+		case "DecisionNode":                 return self.DecisionNode();
+		case "JoinNode":                     return self.JoinNode();
+		case "ForkNode":                     return self.ForkNode();
+		case "WhileLoopActionUsage":         return self.WhileLoopActionUsage();
+		case "ForLoopActionUsage":           return self.ForLoopActionUsage();
 	}
 	return "";
 }

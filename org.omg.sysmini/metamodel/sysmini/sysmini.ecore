@@ -105,9 +105,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Subsetting" eSuperTypes="#//Specialization">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureTyping" eSuperTypes="#//Specialization">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureTyping" eSuperTypes="#//Specialization"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeFeaturing" eSuperTypes="#//Featuring"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureInverting" eSuperTypes="#//Relationship"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureChaining" eSuperTypes="#//Relationship"/>
@@ -144,7 +142,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStandard" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementFilterMembership" eSuperTypes="#//OwningMembership"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementFilterMembership" eSuperTypes="#//OwningMembership">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ElementFilterText" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralRational" eSuperTypes="#//LiteralExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>

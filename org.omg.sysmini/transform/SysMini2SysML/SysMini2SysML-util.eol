@@ -37,23 +37,6 @@ operation SysMini!MembershipExpose MembershipExpose() : String {
 }
 
 
-/* Dependency */
-operation SysMini!Dependency Dependency() : String {
-	var str = "";
-	str += self.PrefixMetadataMember();
-	str += "dependency".space();
-	if (self.declaredName != null and self.declaredName != ""){
-		str += self.Identification();
-		str += "from".space();
-	}
-	str += self.client.asSequence().getDependencyObject();
-	str += "to".space();
-	str += self.supplier.asSequence().getDependencyObject();
-	str += self.RelationshipBody();
-	return str;
-}
-
-
 /* AnnotatingElement */
 operation SysMini!Comment Comment() : String {
 	var str = "";
@@ -660,6 +643,83 @@ operation SysMini!SatisfyRequirementUsage SatisfyRequirementUsage() : String {
 	return str;
 }
 
+/* Others */
+operation SysMini!Dependency Dependency() : String {
+	var str = "";
+	str += self.PrefixMetadataMember();
+	str += "dependency".space();
+	if (self.declaredName != null and self.declaredName != ""){
+		str += self.Identification();
+		str += "from".space();
+	}
+	str += self.client.asSequence().getDependencyObject();
+	str += "to".space();
+	str += self.supplier.asSequence().getDependencyObject();
+	str += self.RelationshipBody();
+	return str;
+}
+
+operation SysMini!ElementFilterMembership ElementFilterMembership() : String {
+	return self.MemberPrefix() + 
+			"filter".space() + 
+			self.ElementFilterText.space();
+}
+
+operation SysMini!MetadataUsage MetadataUsage() : String {
+	var str = "";
+	str += self.UsageExtensionKeyword();
+	str += "@";
+	str += self.MetadataUsageDeclaration();
+	if (self.annotatedElement.size() > 0){
+		str += "about".space();
+		for (annotation in self.annotatedElement){
+			str += annotation;
+			str += ",".space();
+		}
+		str = str.substring(0, str.length()-2);
+	}
+	str += self.MetadataBody();
+	return str;
+}
+
+operation SysMini!MergeNode MergeNode() : String {
+	return self.ControlNodePrefix() +
+			"merge".space() + 
+			self.UsageDeclaration() + 
+			self.ActionNodeBody();
+}
+
+operation SysMini!DecisionNode DecisionNode() : String {
+	return self.ControlNodePrefix() +
+			"decide".space() + 
+			self.UsageDeclaration() + 
+			self.ActionNodeBody();
+}
+
+operation SysMini!JoinNode JoinNode() : String {
+	return self.ControlNodePrefix() +
+			"join".space() + 
+			self.UsageDeclaration() + 
+			self.ActionNodeBody();
+}
+
+operation SysMini!ForkNode ForkNode() : String {
+	return self.ControlNodePrefix() +
+			"fork".space() + 
+			self.UsageDeclaration() + 
+			self.ActionNodeBody();
+}
+
+operation SysMini!WhileLoopActionUsage WhileLoopActionUsage() : String {
+// TBD
+	return "[WhileLoopActionUsage]";
+}
+
+operation SysMini!ForLoopActionUsage ForLoopActionUsage() : String {
+// TBD
+	return "[ForLoopActionUsage]";
+}
+
 /* Def Key Word*/
 operation RenderingDefKeyword() : String {
 	return RenderingKeyword() + "def".space();
@@ -977,6 +1037,9 @@ operation PartKeyword() : String {
 	return "part".space();
 }
 
+operation DefinedByKeyword() : String {
+	return ":".space();
+}
 
 /* Others */
 operation SysMini!OccurrenceUsage OccurrenceUsagePrefix() : String {
@@ -1015,7 +1078,7 @@ operation Sequence getDependencyObject() : String{
 			str += c;
 			str += ",".space();
 		}
-		str = str.substring(0, str.length()-1);
+		str = str.substring(0, str.length()-2);
 	}
 	return str;
 }
@@ -1068,7 +1131,7 @@ operation SysMini!Import ExposePrefix() : String {
 	return self.VisibilityIndicator();
 }
 
-operation SysMini!Import VisibilityIndicator() : String {
+operation SysMini!Element VisibilityIndicator() : String {
 	return self.visibility.name.space();
 }
 
@@ -1120,6 +1183,16 @@ operation SysMini!Usage UsageDeclaration() : String {
 	return self.FeatureDeclaration();
 }
 
+operation SysMini!MetadataUsage MetadataUsageDeclaration() : String {
+	var str = "";
+	str += self.Identification();
+	if (self.declaredName != null and self.declaredName != ""){
+		str += DefinedByKeyword();
+	}
+	str += self.prefixMetadata.space();
+	return str;
+}
+
 operation SysMini!ActionUsage ActionUsageDeclaration() : String {
 	return self.UsageDeclaration() +
 			self.ValuePart();
@@ -1147,7 +1220,24 @@ operation SysMini!Usage UsageCompletion() : String {
 }
 
 operation SysMini!Feature ValuePart() : String {
-	return self.valuePart.space();
+	if (self.valuePart != null and self.valuePart != ""){
+		var str = "";
+		if (self.isInitial){
+			str += ":=".space();
+		}
+		else if (self.isDefault){
+			str += "default".space();
+		}
+		else{
+			str += ":".space();
+//	TBD		str += "=".space();
+		}
+		str += self.valuePart.space();
+		return str;
+	}
+	else{
+		return "";
+	}
 }
 
 operation SysMini!Usage UsageBody() : String {
@@ -1186,6 +1276,10 @@ operation SysMini!Definition DefinitionDeclaration() : String {
 			self.SubclassificationPart();
 }
 
+operation SysMini!Membership MemberPrefix() : String {
+	return self.VisibilityIndicator();
+}
+
 operation SysMini!Element Identification() : String {
 	var str = "";
 	if (self.declaredShortName != null){
@@ -1195,6 +1289,13 @@ operation SysMini!Element Identification() : String {
 		str += self.declaredName.space();
 	}
 	return str;
+}
+
+operation SysMini!OccurrenceUsage ControlNodePrefix() : String {
+	return self.RefPrefix() + 
+			self.isIndividual() + 
+			self.portionKind() + 
+			self.UsageExtensionKeyword();
 }
 
 operation SysMini!Type MetadataBody() : String {
@@ -1236,6 +1337,10 @@ operation SysMini!Relationship RelationshipBody() : String {
 }
 
 operation SysMini!Type ActionBody() : String {
+	return "";
+}
+
+operation SysMini!ControlNode ActionNodeBody() : String {
 	return "";
 }
 
