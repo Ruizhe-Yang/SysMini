@@ -308,7 +308,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ViewDefinition" eSuperTypes="#//PartDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="ViewpointUsage" eSuperTypes="#//RequirementUsage"/>
   <eClassifiers xsi:type="ecore:EClass" name="ViewpointDefinition" eSuperTypes="#//RequirementDefinition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RenderingUsage" eSuperTypes="#//PartUsage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RenderingUsage" eSuperTypes="#//PartUsage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="RenderingUsageType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RenderingDefinition" eSuperTypes="#//PartDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="MetadataUsage" eSuperTypes="#//ItemUsage #//MetadataFeature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_" upperBound="-1"

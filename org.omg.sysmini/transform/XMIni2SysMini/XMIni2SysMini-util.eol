@@ -301,6 +301,15 @@ operation XMIni!ReferenceUsage getTypeOfReferenceUsage(){
 	}
 }
 
+operation XMIni!RenderingUsage getTypeOfRenderingUsage(){
+	if (self.eContainer().isTypeOf(XMIni!ViewRenderingMembership)){
+		return "ViewRenderingUsage";
+	}
+	else{
+		return "RenderingUsage";
+	}
+}
+
 operation XMIni!Element OwnedReferenceSubsetting() : String {
 	if (self.ownedRelationship.first().isTypeOf("ReferenceSubsetting")){
 		var referenceSubsetting = self.ownedRelationship.first();
@@ -345,4 +354,8 @@ operation Any space(){
 	}
 }
 
-
+operation XMIni!Element tagAllOwnedElement(){
+	for (o in self.eContents()){
+		o.tag();
+	}
+}

@@ -487,6 +487,7 @@ class ViewpointDefinition extends RequirementDefinition {
 }
 
 class RenderingUsage extends PartUsage {
+	attr String[1] RenderingUsageType;
 }
 
 class RenderingDefinition extends PartDefinition {

@@ -61,7 +61,6 @@ operation SysMini!Element matchType() : String {
 		case "AttributeDefinition":          return self.AttributeDefinition();
 		case "EnumerationDefinition":        return self.EnumerationDefinition();
 		case "OccurrenceDefinition":         return self.OccurrenceDefinition();
-//		case "IndividualDefinition":         return self.IndividualDefinition();
 		case "ItemDefinition":               return self.ItemDefinition();
 		case "MetadataDefinition":           return self.MetadataDefinition();
 		case "PartDefinition":               return self.PartDefinition();
@@ -83,7 +82,6 @@ operation SysMini!Element matchType() : String {
 		case "ViewDefinition":               return self.ViewDefinition();
 		case "ViewpointDefinition":          return self.ViewpointDefinition();
 		case "RenderingDefinition":          return self.RenderingDefinition();
-//		case "ExtendedDefinition":           return self.ExtendedDefinition();
 		
 		// Usage
 		// Usage(NonOccurrenceUsageElement)
@@ -96,8 +94,6 @@ operation SysMini!Element matchType() : String {
 		
 		// Usage(OccurrenceUsageElement/StructureUsageElement)
 		case "OccurrenceUsage":              return self.OccurrenceUsage();
-//		case "IndividualUsage":              return self.IndividualUsage();
-//		case "PortionUsage":                 return self.PortionUsage();
 		case "EventOccurrenceUsage":         return self.EventOccurrenceUsage();
 		case "ItemUsage":                    return self.ItemUsage();
 		case "PartUsage":                    return self.PartUsage();
@@ -107,7 +103,6 @@ operation SysMini!Element matchType() : String {
 		case "ConnectionUsage":              return self.ConnectionUsage();
 		case "InterfaceUsage":               return self.InterfaceUsage();
 		case "AllocationUsage":              return self.AllocationUsage();
-//		case "Message":                      return self.Message();
 		case "FlowConnectionUsage":          return self.FlowConnectionUsage();
 		case "SuccessionFlowConnectionUsage":return self.SuccessionFlowConnectionUsage();
 		

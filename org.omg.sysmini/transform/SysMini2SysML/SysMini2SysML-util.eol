@@ -1,4 +1,3 @@
-
 /* Package */
 operation SysMini!Package Package() : String {
 	return self.PrefixMetadataMember() + 
@@ -13,7 +12,6 @@ operation SysMini!LibraryPackage LibraryPackage() : String {
 			self.PackageDeclaration() + 
 			self.PackageBody();
 }
-
 
 /* Import */
 operation SysMini!NamespaceImport NamespaceImport() : String {
@@ -41,7 +39,18 @@ operation SysMini!MembershipExpose MembershipExpose() : String {
 
 /* Dependency */
 operation SysMini!Dependency Dependency() : String {
-	return "";
+	var str = "";
+	str += self.PrefixMetadataMember();
+	str += "dependency".space();
+	if (self.declaredName != null and self.declaredName != ""){
+		str += self.Identification();
+		str += "from".space();
+	}
+	str += self.client.asSequence().getDependencyObject();
+	str += "to".space();
+	str += self.supplier.asSequence().getDependencyObject();
+	str += self.RelationshipBody();
+	return str;
 }
 
 
@@ -320,6 +329,7 @@ operation SysMini!BindingConnectorAsUsage BindingConnectorAsUsage() : String {
 }
 
 operation SysMini!SuccessionAsUsage SuccessionAsUsage() : String {
+// TBD
 	var str = "";
 	if (self.SuccessionType == "SuccessionAsUsage"){
 		str += self.UsagePrefix();
@@ -387,9 +397,20 @@ operation SysMini!ViewUsage ViewUsage() : String {
 }
 
 operation SysMini!RenderingUsage RenderingUsage() : String {
-	return self.OccurrenceUsagePrefix() + 
+	if (self.RenderingUsageType == "ViewRenderingUsage"){
+// TBD
+		if (self.declaredName != null and self.declaredName != ""){
+			return "";
+		}
+		else{
+			return "";
+		}
+	}
+	else if (self.RenderingUsageType == "RenderingUsage"){
+		return self.OccurrenceUsagePrefix() + 
 			RenderingUsageKeyword() + 
 			self.Usage();
+	}
 }
 
 operation SysMini!PortUsage PortUsage() : String {
@@ -984,6 +1005,21 @@ operation Sequence getConnectorPartString() : String{
 	return str;
 }
 
+operation Sequence getDependencyObject() : String{
+	var str = "";
+	if (self.size() == 1){
+		str = self.first();
+	}
+	else if (self.size() > 1){
+		for (c in self){
+			str += c;
+			str += ",".space();
+		}
+		str = str.substring(0, str.length()-1);
+	}
+	return str;
+}
+
 operation SysMini!FlowConnectionUsage MessageDeclaration(){
 	return self.FlowConnectionDeclaration();
 }
@@ -1192,6 +1228,10 @@ operation SysMini!Type StateDefBody() : String {
 }
 
 operation SysMini!Type CalculationBody() : String {
+	return "";
+}
+
+operation SysMini!Relationship RelationshipBody() : String {
 	return "";
 }
 

@@ -37,11 +37,7 @@ package SimpleVehicleModel {
 				perform action performSelfTest :> Parts::performedActions;
 				perform action applyParkingBrake :> Parts::performedActions;
 				perform action senseTemperature :> Parts::performedActions;
-				exhibit state vehicleStates parallel {
-					controller : VehicleController;
-					state operatingStates;
-					state healthStates;
-				}
+				exhibit state vehicleStates parallel;
 			}
 			part def Engine {
 				attribute mass :> mass;
@@ -56,11 +52,7 @@ package SimpleVehicleModel {
 				port ignitionCmdPort : IgnitionCmdPort;
 				port flyWheelPort;
 				perform action generateTorque :> Parts::performedActions;
-				exhibit state engineStates {
-					state off :> States::exclusiveStates;
-					state starting :> States::exclusiveStates;
-					state on;
-				}
+				exhibit state engineStates;
 			}
 			part def StarterMotor {
 				port gearPort : GearPort;
@@ -94,9 +86,7 @@ package SimpleVehicleModel {
 			part def VehicleSoftware;
 			part def VehicleController {
 				port controlPort : ControlPort;
-				exhibit state controllerStates parallel {
-					state operatingStates;
-				}
+				exhibit state controllerStates parallel;
 			}
 			part def CruiseController {
 				port setSpeedPort;
@@ -796,6 +786,7 @@ driving scenario *\
 				public import RequirementDerivation::*;
 				public import ModelingMetadata::*;
 				item marketSurvey :> Items::items;
+				dependency vehicleSpecificationto marketSurvey;
 				requirement vehicleSpecification {
 					subject vehicle : Vehicle;
 					requirement vehicleMassRequirement {
@@ -885,6 +876,9 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				part cylinder2 [1] :>;
 				part cylinder3 [1] :>;
 				part cylinder4 [1] :>;
+			}
+			dependency engine4Cylto engine{
+				;
 			}
 		}
 		package WheelHubAssemblies {
@@ -1262,13 +1256,7 @@ The rationale and risk are contained in a metadata library. *\
 			part def Road;
 			part def Driver {
 				port handPort : HandPort;
-				exhibit state driverStates {
-					state initial :> States::exclusiveStates;
-					state wait :> States::exclusiveStates;
-					;
-					;
-					;
-				}
+				exhibit state driverStates;
 			}
 			part def Passenger;
 			requirement transportRequirements {
@@ -1559,7 +1547,7 @@ The rationale and risk are contained in a metadata library. *\
 		package ViewDefinitions {
 			public import Views::*;
 			view def TreeView {
-				rendering;
+				;
 			}
 			view def NestedView;
 			view def RelationshipView;

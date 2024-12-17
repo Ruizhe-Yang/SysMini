@@ -40,11 +40,7 @@
             <body xsi:type="PerformActionUsage" declaredName="performSelfTest" featureNote=":>" featureSpecialization="Parts::performedActions" isExtendKeyWord="true"/>
             <body xsi:type="PerformActionUsage" declaredName="applyParkingBrake" featureNote=":>" featureSpecialization="Parts::performedActions" isExtendKeyWord="true"/>
             <body xsi:type="PerformActionUsage" declaredName="senseTemperature" featureNote=":>" featureSpecialization="Parts::performedActions" isExtendKeyWord="true"/>
-            <body xsi:type="ExhibitStateUsage" declaredName="vehicleStates" isParallel="true" isExtendKeyWord="true">
-              <body xsi:type="ReferenceUsage" declaredName="controller" featureNote=":" featureSpecialization="VehicleController" ReferenceUsageType="MetadataBodyUsage"/>
-              <body xsi:type="StateUsage" declaredName="operatingStates"/>
-              <body xsi:type="StateUsage" declaredName="healthStates"/>
-            </body>
+            <body xsi:type="ExhibitStateUsage" declaredName="vehicleStates" isParallel="true" isExtendKeyWord="true"/>
           </body>
           <body xsi:type="PartDefinition" declaredName="Engine">
             <body xsi:type="AttributeUsage" declaredName="mass" featureNote=":>" featureSpecialization="mass"/>
@@ -59,11 +55,7 @@
             <body xsi:type="PortUsage" declaredName="ignitionCmdPort" featureNote=":" featureSpecialization="IgnitionCmdPort"/>
             <body xsi:type="PortUsage" declaredName="flyWheelPort"/>
             <body xsi:type="PerformActionUsage" declaredName="generateTorque" featureNote=":>" featureSpecialization="Parts::performedActions" isExtendKeyWord="true"/>
-            <body xsi:type="ExhibitStateUsage" declaredName="engineStates" isExtendKeyWord="true">
-              <body xsi:type="StateUsage" declaredName="off" featureNote=":>" featureSpecialization="States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="starting" featureNote=":>" featureSpecialization="States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="on"/>
-            </body>
+            <body xsi:type="ExhibitStateUsage" declaredName="engineStates" isExtendKeyWord="true"/>
           </body>
           <body xsi:type="PartDefinition" declaredName="StarterMotor">
             <body xsi:type="PortUsage" declaredName="gearPort" featureNote=":" featureSpecialization="GearPort"/>
@@ -97,9 +89,7 @@
           <body xsi:type="PartDefinition" declaredName="VehicleSoftware"/>
           <body xsi:type="PartDefinition" declaredName="VehicleController">
             <body xsi:type="PortUsage" declaredName="controlPort" featureNote=":" featureSpecialization="ControlPort"/>
-            <body xsi:type="ExhibitStateUsage" declaredName="controllerStates" isParallel="true" isExtendKeyWord="true">
-              <body xsi:type="StateUsage" declaredName="operatingStates"/>
-            </body>
+            <body xsi:type="ExhibitStateUsage" declaredName="controllerStates" isParallel="true" isExtendKeyWord="true"/>
           </body>
           <body xsi:type="PartDefinition" declaredName="CruiseController">
             <body xsi:type="PortUsage" declaredName="setSpeedPort"/>
@@ -875,6 +865,10 @@
             <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="RequirementDerivation::*"/>
             <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="ModelingMetadata::*"/>
             <body xsi:type="ItemUsage" declaredName="marketSurvey" featureNote=":>" featureSpecialization="Items::items"/>
+            <body xsi:type="Dependency">
+              <client>vehicleSpecification</client>
+              <supplier>marketSurvey</supplier>
+            </body>
             <body xsi:type="RequirementUsage" declaredName="vehicleSpecification">
               <body xsi:type="ReferenceUsage" declaredName="vehicle" featureNote=":" featureSpecialization="Vehicle" ReferenceUsageType="SubjectUsage"/>
               <body xsi:type="RequirementUsage" declaredName="vehicleMassRequirement">
@@ -966,6 +960,11 @@
             <body xsi:type="PartUsage" declaredName="cylinder2" multiplicityRange="[1]" featureNote=":>" featureSpecialization=""/>
             <body xsi:type="PartUsage" declaredName="cylinder3" multiplicityRange="[1]" featureNote=":>" featureSpecialization=""/>
             <body xsi:type="PartUsage" declaredName="cylinder4" multiplicityRange="[1]" featureNote=":>" featureSpecialization=""/>
+          </body>
+          <body xsi:type="Dependency">
+            <body xsi:type="MetadataUsage" declaredName="ModelingMetadata::Refinement"/>
+            <client>engine4Cyl</client>
+            <supplier>engine</supplier>
           </body>
         </body>
         <body xsi:type="Package" declaredName="WheelHubAssemblies">
@@ -1340,13 +1339,7 @@
           <body xsi:type="PartDefinition" declaredName="Road"/>
           <body xsi:type="PartDefinition" declaredName="Driver">
             <body xsi:type="PortUsage" declaredName="handPort" featureNote=":" featureSpecialization="HandPort"/>
-            <body xsi:type="ExhibitStateUsage" declaredName="driverStates" isExtendKeyWord="true">
-              <body xsi:type="StateUsage" declaredName="initial" featureNote=":>" featureSpecialization="States::exclusiveStates"/>
-              <body xsi:type="StateUsage" declaredName="wait" featureNote=":>" featureSpecialization="States::exclusiveStates"/>
-              <body xsi:type="TransitionUsage" transitionText="initial then "/>
-              <body xsi:type="TransitionUsage" declaredName="wait-wait-1" transitionText="wait then "/>
-              <body xsi:type="TransitionUsage" declaredName="wait-wait-2" transitionText="wait then "/>
-            </body>
+            <body xsi:type="ExhibitStateUsage" declaredName="driverStates" isExtendKeyWord="true"/>
           </body>
           <body xsi:type="PartDefinition" declaredName="Passenger"/>
           <body xsi:type="RequirementUsage" declaredName="transportRequirements">
@@ -1723,7 +1716,7 @@
         <body xsi:type="Package" declaredName="ViewDefinitions">
           <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="Views::*"/>
           <body xsi:type="ViewDefinition" declaredName="TreeView">
-            <body xsi:type="RenderingUsage"/>
+            <body xsi:type="RenderingUsage" declaredName="" RenderingUsageType="ViewRenderingUsage"/>
           </body>
           <body xsi:type="ViewDefinition" declaredName="NestedView"/>
           <body xsi:type="ViewDefinition" declaredName="RelationshipView"/>
