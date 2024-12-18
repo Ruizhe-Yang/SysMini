@@ -63,7 +63,6 @@ operation SysMini!Element setPortionKind(s: XMIni!Element){
 	}
 }
 
-
 operation OrderedSet getElementOf(typeName : String){
 	return self.select(e|e.type().name == typeName);
 }

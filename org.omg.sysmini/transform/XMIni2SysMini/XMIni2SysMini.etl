@@ -8,6 +8,9 @@ pre{
 
 post{
 	"------------------ ETL Over  ------------------".println();
+	for (e in SysMini!ReturnParameterMembership.all){
+		e.println();
+	}
 }
 
 operation main(){
@@ -25,35 +28,34 @@ operation XMIni!Element elementTransform(rootNode : SysMini!Element){
 			case "MembershipImport":                   relationship.addRelationshipTo(rootNode);
 			case "NamespaceExpose":                    relationship.addRelationshipTo(rootNode);
 			case "MembershipExpose":                   relationship.addRelationshipTo(rootNode);
-			
 			case "ElementFilterMembership":            relationship.addRelationshipTo(rootNode);
+			case "Membership":                         relationship.addRelationshipTo(rootNode);
+			
 			//Specialization
 			case "Subclassification":                  relationship.skipRelationshipTo(rootNode);
 			case "Subsetting":                         relationship.skipRelationshipTo(rootNode);
 			case "Redefinition":                       relationship.skipRelationshipTo(rootNode);
 			case "ReferenceSubsetting":                relationship.skipRelationshipTo(rootNode);
 			case "FeatureTyping":                      relationship.skipRelationshipTo(rootNode);
-			case "ConjugatedPortTyping": relationship.skipRelationshipTo(rootNode);
+			case "ConjugatedPortTyping":               relationship.skipRelationshipTo(rootNode);
 			
 			//Feature
-			case "TypeFeaturing": relationship.skipRelationshipTo(rootNode);
+			case "TypeFeaturing":                      relationship.skipRelationshipTo(rootNode);
 			
 			//Membership
-			case "Membership": relationship.skipRelationshipTo(rootNode);
 			case "OwningMembership":                   relationship.skipRelationshipTo(rootNode);
-			
 			case "FeatureMembership":                  relationship.skipRelationshipTo(rootNode);
 			case "FeatureValue":                       relationship.skipRelationshipTo(rootNode);
 			case "VariantMembership":                  relationship.skipRelationshipTo(rootNode);
 			case "EndFeatureMembership":               relationship.skipRelationshipTo(rootNode);
 			case "ParameterMembership":                relationship.skipRelationshipTo(rootNode);
 			case "ResultExpressionMembership":         relationship.skipRelationshipTo(rootNode);
+			case "ReturnParameterMembership":          relationship.skipRelationshipTo(rootNode);
 			case "RequirementConstraintMembership":    relationship.skipRelationshipTo(rootNode);
 			case "ObjectiveMembership":                relationship.skipRelationshipTo(rootNode);
 			case "StateSubactionMembership":           relationship.skipRelationshipTo(rootNode);
 			case "TransitionFeatureMembership":        relationship.skipRelationshipTo(rootNode);
 			case "ViewRenderingMembership":            relationship.skipRelationshipTo(rootNode);
-			case "ReturnParameterMembership":          relationship.skipRelationshipTo(rootNode);
 			case "SubjectMembership":                  relationship.skipRelationshipTo(rootNode);
 			case "StakeholderMembership":              relationship.skipRelationshipTo(rootNode);
 			case "ActorMembership":                    relationship.skipRelationshipTo(rootNode);
@@ -508,6 +510,7 @@ rule PrefixMetadataUsage
 	to t : SysMini!Element{
 		for (owningMembership in s.ownedRelationship.getElementOf("OwningMembership")){
 			for (prefixMetadataUsage in owningMembership.ownedRelatedElement.getElementOf("MetadataUsage")){
+				t.prefixMetadata = "[prefixMetadata]";
 				prefixMetadataUsage.tag();
 			}
 		}
@@ -556,6 +559,9 @@ rule UsageRule
 rule RefPrefix
 	transform s : XMIni!Usage
 	to t : SysMini!Usage{
+		if (s.eContainer().isTypeOf("ReturnParameterMembership") and s.declaredName != null){
+			t.isReturn = true;
+		}
 		t.setFeatureDirection(s);
 		t.isAbstract = s.isAbstract;
 		t.isVariation = s.isVariation;
@@ -634,6 +640,22 @@ rule ElementFilterMembership
 // TBD :All of the s is ElementFilterMember, no FilterPackageMember.
 		t.setVisibility(s);
 		t.ElementFilterText = s.ownedRelatedElement.first().getOperatorExpression();
+	}
+
+@abstract
+rule Membership
+	transform s : XMIni!Membership
+	to t : SysMini!Membership{
+		t.setVisibility(s);
+		t.declaredName = s.declaredName;
+		if (s.eContainer().isKindOf(XMIni!Usage) and s.memberShortName == null and s.memberName == null){
+			t.MembershipType = "InitialNodeMember";
+		}
+		else {
+			t.MembershipType = "AliasMember";
+			t.memberShortName = s.memberShortName;
+			t.memberName = s.memberName;
+		}
 	}
 	
 @abstract
@@ -1207,6 +1229,9 @@ rule ReferenceUsage
 				t.ReferenceUsageType = "DefaultReferenceUsage";
 			}
 		}
+//		if (t.declaredName == null or t.declaredName == ""){
+//			t.println();
+//		}		
 	}
 		
 @abstract
@@ -2007,5 +2032,12 @@ rule ElementFilterMembershipRule
 	transform s : XMIni!ElementFilterMembership
 	to t : SysMini!ElementFilterMembership
 	extends ElementFilterMembership{
+	}
+
+@lazy
+rule MembershipRule
+	transform s : XMIni!Membership
+	to t : SysMini!Membership
+	extends Membership{
 	}
 	
