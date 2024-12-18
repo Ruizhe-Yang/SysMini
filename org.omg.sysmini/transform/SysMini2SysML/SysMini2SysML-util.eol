@@ -665,6 +665,24 @@ operation SysMini!ElementFilterMembership ElementFilterMembership() : String {
 			self.ElementFilterText.space();
 }
 
+operation SysMini!Membership Membership() : String {
+	if (self.MembershipType == "InitialNodeMember"){
+		return self.MemberPrefix() + 
+				"first".space() + 
+				self.declaredName.space() + 
+				self.RelationshipBody();
+	}
+	else if (self.MembershipType == "AliasMember"){
+		return self.MemberPrefix() + 
+				"alias".space() + 
+				self.memberShortName() + 
+				self.memberName() + 
+				"for".space() + 
+				self.declaredName.space() + 
+				self.RelationshipBody();
+	}
+}
+
 operation SysMini!MetadataUsage MetadataUsage() : String {
 	var str = "";
 	str += self.UsageExtensionKeyword();
@@ -1112,6 +1130,9 @@ operation SysMini!Package PackageDeclaration() : String {
 }
 
 operation SysMini!Package PackageBody() : String {
+	if (self.body.size() == 0){
+		return "{}";
+	}
 	return "";
 }
 
@@ -1124,11 +1145,14 @@ operation SysMini!Import ImportedNamespace() : String {
 }
 
 operation SysMini!Import ImportPrefix() : String {
-	return self.VisibilityIndicator() + 'import'.space() + self.isImportAll();
+	return self.VisibilityIndicator() + 
+			"import".space() + 
+			self.isImportAll();
 }
 
 operation SysMini!Import ExposePrefix() : String {
-	return self.VisibilityIndicator();
+	return self.VisibilityIndicator()  + 
+			"expose".space();
 }
 
 operation SysMini!Element VisibilityIndicator() : String {
@@ -1145,7 +1169,6 @@ operation SysMini!Element FilterPackage() : String {
 }
 
 operation SysMini!Definition ConjugatedPortDefinitionMember() : String {
-	// TBD
 	return "";
 }
 
@@ -1263,7 +1286,8 @@ operation SysMini!Usage BasicUsagePrefix() : String {
 }
 
 operation SysMini!Usage RefPrefix() : String {
-	return self.featureDirection() + 
+	return self.isReturn() + 
+			self.featureDirection() + 
 			self.isAbstract() + 
 			self.isVariation() + 
 			self.isReadOnly() + 
@@ -1296,6 +1320,24 @@ operation SysMini!OccurrenceUsage ControlNodePrefix() : String {
 			self.isIndividual() + 
 			self.portionKind() + 
 			self.UsageExtensionKeyword();
+}
+
+operation SysMini!Membership memberShortName(){
+	if (self.memberShortName != null and self.memberShortName != ""){
+		return ("<" + self.memberShortName + ">").space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Membership memberName(){
+	if (self.memberName != null and self.memberName != ""){
+		return self.memberName.space();
+	}
+	else{
+		return "";
+	}
 }
 
 operation SysMini!Type MetadataBody() : String {
@@ -1372,6 +1414,15 @@ operation SysMini!Element isParallel() : String {
 operation SysMini!Element isIndividual() : String {
 	if (self.isIndividual){
 		return "individual".space();
+	}
+	else{
+		return "";
+	}
+}
+
+operation SysMini!Element isReturn() : String {
+	if (self.isReturn){
+		return "return".space();
 	}
 	else{
 		return "";

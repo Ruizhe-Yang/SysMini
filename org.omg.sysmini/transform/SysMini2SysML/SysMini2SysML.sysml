@@ -2,42 +2,9 @@ package SimpleVehicleModel {
 	public import Definitions;
 	public import ISQ::*;
 	package Definitions {
-		public import PartDefinitions;
-		public import PortDefinitions;
-		public import ItemDefinitions;
-		public import SignalDefinitions;
-		public import InterfaceDefinitions;
-		public import AllocationDefinitions;
-		public import ActionDefinitions;
-		public import StateDefinitions;
-		public import RequirementDefinitions;
-		public import AttributeDefinitions;
-		public import IndividualDefinitions;
-		public import MetadataDefinitions;
-		public import KeyWord_MetadataDefinitions;
+
 		package PartDefinitions {
-			part def Vehicle {
-				attribute mass :> mass;
-				attribute dryMass :> mass;
-				attribute cargoMass :> mass;
-				attribute position :> length;
-				attribute velocity :> speed;
-				attribute acceleration :> acceleration;
-				attribute electricalPower :> power;
-				attribute Tmax :> thermodynamicTemperature;
-				attribute maintenanceTime : Time::DateTime;
-				attribute brakePedalDepressed : ScalarValues::Boolean;
-				port ignitionCmdPort : IgnitionCmdPort;
-				port pwrCmdPort : PwrCmdPort;
-				port vehicleToRoadPort : VehicleToRoadPort;
-				port statusPort : StatusPort;
-				perform action providePower :> Parts::performedActions;
-				perform action provideBraking :> Parts::performedActions;
-				perform action controlDirection :> Parts::performedActions;
-				perform action performSelfTest :> Parts::performedActions;
-				perform action applyParkingBrake :> Parts::performedActions;
-				perform action senseTemperature :> Parts::performedActions;
-				exhibit state vehicleStates parallel;
+			part def Vehicle {;
 			}
 			part def Engine {
 				attribute mass :> mass;
@@ -241,8 +208,8 @@ package SimpleVehicleModel {
 		}
 		package AllocationDefinitions {
 			allocation def LogicalToPhysical {
-				end logicalEnd;
-				end physicalEnd;
+				end [prefixMetadata] logicalEnd;
+				end [prefixMetadata] physicalEnd;
 			}
 		}
 		package ActionDefinitions {
@@ -328,6 +295,7 @@ driving scenario *\
 			public import NumericalFunctions::*;
 			public import SI::*;
 			public import USCustomaryUnits::*;
+			public alias Torque for ISQMechanics::TorqueValue;
 			enum def {
 				enum black : Colors;
 				enum grey : Colors;
@@ -400,7 +368,7 @@ driving scenario *\
 	}
 	package VehicleLogicalConfiguration {
 		package PartsTree {
-			part vehicleLogical {
+			[prefixMetadata] part vehicleLogical {
 				part torqueGenerator : TorqueGenerator {
 					action generateTorque :> Parts::ownedActions;
 				}
@@ -453,8 +421,8 @@ driving scenario *\
 					}
 				}
 			}
-			package ActionTree;
-			package Requirements;
+			package ActionTree {}
+			package Requirements {}
 		}
 		package VehicleConfiguration_b {
 			public import ShapeItems::null;
@@ -462,7 +430,7 @@ driving scenario *\
 			public import ModelingMetadata::*;
 			package PartsTree {
 				part vehicle_b : Vehicle {
-					attribute mass : [OperatorExpression];
+					[prefixMetadata] attribute mass : [OperatorExpression];
 					attribute dryMass :>> : [nullCoalescingExpression];
 					attribute :>> default [OperatorExpression];
 					attribute partMasses : [OperatorExpression];
@@ -583,14 +551,14 @@ driving scenario *\
 						part body : Body {
 							attribute :>> : [nullCoalescingExpression];
 						}
-						part bumper;
-						part keylessEntry;
+						[prefixMetadata] part bumper;
+						[prefixMetadata] part keylessEntry;
 					}
 					part interior {
-						part alarm;
-						part seatBelt [2];
+						[prefixMetadata] part alarm;
+						[prefixMetadata] part seatBelt [2];
 						part frontSeat [2];
-						part driverAirBag;
+						[prefixMetadata] part driverAirBag;
 					}
 					bind engine.fuelCmdPort = fuelCmdPort;
 					interface  engineToTransmissionInterface : EngineToTransmissionInterface connect  engine.drivePwrPort to transmission.clutchPort;
@@ -792,7 +760,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 							}
 							out ref :>>;
 						}
-						requirement highwayFuelEconomyRequirement {
+						[prefixMetadata] requirement highwayFuelEconomyRequirement {
 							subject :>>;
 							:>> : [OperatorExpression];
 							constraint {
@@ -826,9 +794,9 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					}
 					out ref :>> Requirements::null;
 				}
-				{
-					end;
-					end;
+				[prefixMetadata] {
+					end [prefixMetadata];
+					end [prefixMetadata];
 				}
 			}
 		}
@@ -954,20 +922,20 @@ The high octane gasoline is about 0.76[l/kg].
 				idlingFuelConsumption : ScalarValues::Real;
 				tpd_avg :>;
 				attribute f : [OperatorExpression];
-				out dpv :> : [OperatorExpression];
+				return out dpv :> : [OperatorExpression];
 			}
 			calc def AverageTravelTimePerDistance {
 				scenario : Scenario;
-				out tpd_avg :>;
+				return out tpd_avg :>;
 			}
 			calc def TraveledDistance {
 				scenario : Scenario;
-				out distance :> length;
+				return out distance :> length;
 			}
 			calc def IdlingFuelConsumptionPerTime {
 				engine : Engine;
 				attribute idlingFuelConsumptionPerDisplacement : ScalarValues::Real : [nullCoalescingExpression];
-				out f_a : ScalarValues::Real : [OperatorExpression];
+				return out f_a : ScalarValues::Real : [OperatorExpression];
 			}
 			attribute specificGravityOfGasoline : ScalarValues::Real : [nullCoalescingExpression];
 			calc def BestFuelConsumptionPerDistance {
@@ -979,7 +947,7 @@ The high octane gasoline is about 0.76[l/kg].
 				constraint {
 					out ref :>> Constraints::null;
 				}
-				out f_b : ScalarValues::Real : [OperatorExpression];
+				return out f_b : ScalarValues::Real : [OperatorExpression];
 			}
 			calc def ComputeBSFC {
 				engine : Engine;
@@ -1001,11 +969,11 @@ The high octane gasoline is about 0.76[l/kg].
 				attribute bsfc : [nullCoalescingExpression];
 				attribute f_a : [nullCoalescingExpression];
 				attribute f_b : [nullCoalescingExpression];
-				out attribute calculatedFuelEconomy :> : [nullCoalescingExpression];
+				return out attribute calculatedFuelEconomy :> : [nullCoalescingExpression];
 			}
 		}
-		package ElectricalPowerAnalysis;
-		package ReliabilityAnalyis;
+		package ElectricalPowerAnalysis {}
+		package ReliabilityAnalyis {}
 		package VehicleTradeOffAnalysis {
 			comment about \* The following example provides the rationale for selecting the engine4cyl. 
 The rationale and risk are contained in a metadata library. *\
@@ -1031,21 +999,21 @@ The rationale and risk are contained in a metadata library. *\
 				enginePower :> power;
 				engineFuelEfficiency : ScalarValues::Real;
 				engineCost : ScalarValues::Real;
-				out eval : ScalarValues::Real;
+				return out eval : ScalarValues::Real;
 			}
 			calc def EngineEvaluation_4cyl {
 				engineMass :> mass;
 				enginePower :> power;
 				engineFuelEfficiency : ScalarValues::Real;
 				engineCost : ScalarValues::Real;
-				out eval : ScalarValues::Real;
+				return out eval : ScalarValues::Real;
 			}
 			calc def EngineEvaluation_6cyl {
 				engineMass :> mass;
 				enginePower :> power;
 				engineFuelEfficiency : ScalarValues::Real;
 				engineCost : ScalarValues::Real;
-				out eval : ScalarValues::Real;
+				return out eval : ScalarValues::Real;
 			}
 			analysis engineTradeOffAnalysis : TradeStudy {
 				subject vehicleAlternatives [2];
@@ -1074,13 +1042,13 @@ The rationale and risk are contained in a metadata library. *\
 				comment about \* Select vehicle alternative with the engine whose evaluation function returns the max value*\
 				calc :> evaluationFunction {
 					part vehicle :>;
-					out attribute eval : ScalarValues::Real : [nullCoalescingExpression];
+					return out attribute eval : ScalarValues::Real : [nullCoalescingExpression];
 				}
 				calc :> evaluationFunction {
 					part vehicle :>;
-					out attribute eval : ScalarValues::Real : [nullCoalescingExpression];
+					return out attribute eval : ScalarValues::Real : [nullCoalescingExpression];
 				}
-				out part selectedVehicle :>;
+				return out part selectedVehicle :>;
 			}
 		}
 	}
@@ -1117,7 +1085,7 @@ The rationale and risk are contained in a metadata library. *\
 			}
 		}
 		package VerificationCases1 {
-			verification massTests : MassTest {
+			[prefixMetadata] verification massTests : MassTest {
 				subject vehicle_uut :>;
 				part vehicleVerificationSubSystem_1 : [nullCoalescingExpression];
 				requirement {
@@ -1320,6 +1288,7 @@ The rationale and risk are contained in a metadata library. *\
 			public import TransportPassenger;
 			use case transportPassenger {
 				subject :>>;
+				public first UseCases::start;
 				first start then a {
 					end ref;
 				}
@@ -1367,6 +1336,7 @@ The rationale and risk are contained in a metadata library. *\
 					ignitionCmd : IgnitionCmd;
 					ref :>> Transfers::receiver;
 				}
+				public first UseCases::start;
 				first start then fork1 {
 					end ref;
 				}
@@ -1399,7 +1369,7 @@ The rationale and risk are contained in a metadata library. *\
 			}
 		}
 		part missionContext : MissionContext {
-			attribute transportTime;
+			[prefixMetadata] attribute transportTime;
 			perform transportPassenger;
 			part road : Road : [nullCoalescingExpression];
 			part driver : Driver : [nullCoalescingExpression] {
@@ -1532,7 +1502,7 @@ The rationale and risk are contained in a metadata library. *\
 					subject :>>;
 					out ref :>>;
 				}
-				protected PartsTree;
+				protected expose PartsTree;
 				public filter [OperatorExpression];
 			}
 		}
