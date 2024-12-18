@@ -32,6 +32,7 @@ class OwningMembership extends Membership {
 }
 
 class Membership extends Relationship {
+	attr String[1] MembershipType;
 	attr String memberShortName;
 	attr String memberName;
 }
@@ -321,6 +322,7 @@ class OccurrenceUsage extends Usage {
 class Usage extends Feature {
 	attr boolean[1] isReference;
 	attr boolean[1] isVariation;
+	attr boolean[1] isReturn;
 }
 
 class VariantMembership extends OwningMembership {
