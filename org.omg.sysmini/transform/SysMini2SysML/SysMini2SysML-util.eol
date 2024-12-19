@@ -1137,11 +1137,21 @@ operation SysMini!Package PackageBody() : String {
 }
 
 operation SysMini!Import ImportedMembership() : String {
-	return self.declaredName.space();
+	if (self.isRecursive){
+		return (self.declaredName+"::**").space();
+	}
+	else{
+		return (self.declaredName+"::*").space();
+	}
 }
 
 operation SysMini!Import ImportedNamespace() : String {
-	return self.declaredName.space();
+	if (self.isRecursive){
+		return (self.declaredName+"::**").space();
+	}
+	else{
+		return (self.declaredName+"::*").space();
+	}
 }
 
 operation SysMini!Import ImportPrefix() : String {
