@@ -17,7 +17,15 @@ operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
 	}
 }
 
-operation XMIni!Element addPackageNodeTo(rootNode : SysMini!Element){
+operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		self.elementTransform(node);
+	}
+}
+
+operation XMIni!Package addPackageNodeTo(rootNode : SysMini!Element){
 	if (self.isEntity()){
 		var nowImportPackages = allImportPackages.clone();
 		var node = self.equivalent();
@@ -27,13 +35,21 @@ operation XMIni!Element addPackageNodeTo(rootNode : SysMini!Element){
 	}
 }
 
-operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
-	if (self.isEntity()){
+operation XMIni!ReferenceUsage addReferenceUsageNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity() and (not self.isNullReturnParameter())){
 		var node = self.equivalent();
 		rootNode.body.add(node);
 		self.elementTransform(node);
+//		if (self.eContainer().isTypeOf("ReturnParameterMembership")){
+// TBD			self.println();
+//		}
 	}
 }
+
+operation XMIni!ReferenceUsage isNullReturnParameter(){
+	return (self.eContainer().isTypeOf("ReturnParameterMembership") and (self.declaredName == null or self.declaredName == ""));
+}
+
 
 operation XMIni!Element isEntity(){
 	return (self.name != "*");

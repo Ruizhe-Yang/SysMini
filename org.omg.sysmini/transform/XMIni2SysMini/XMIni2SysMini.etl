@@ -8,9 +8,6 @@ pre{
 
 post{
 	"------------------ ETL Over  ------------------".println();
-	for (e in SysMini!ReturnParameterMembership.all){
-		e.println();
-	}
 }
 
 operation main(){
@@ -121,7 +118,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			
 			//Usage
 			case "OccurrenceUsage":                    element.addNodeTo(rootNode);
-			case "ReferenceUsage":                     element.addNodeTo(rootNode);
+			case "ReferenceUsage":                     element.addReferenceUsageNodeTo(rootNode);
 			case "AttributeUsage":                     element.addNodeTo(rootNode);
 			case "SuccessionAsUsage":                  element.addNodeTo(rootNode);
 			case "Usage":                              element.addNodeTo(rootNode);
@@ -716,9 +713,6 @@ rule StateUsage
 	transform s : XMIni!StateUsage
 	to t : SysMini!StateUsage
 	extends OccurrenceUsagePrefix, ActionUsageDeclaration, StateUsageBody{
-		for (r in s.ownedRelationship){
-			r.tag();
-		}
 	}
 
 @abstract
@@ -1406,7 +1400,7 @@ rule NamespaceImport
 		if (n.size() == 2){
 			if (n.first() == n.second()){
 				allImportPackages.add(n.first());
-				t.declaredName = n.first()+"::*";
+				t.declaredName = n.first();
 			}
 		}
 	}
