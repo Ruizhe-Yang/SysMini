@@ -1,10 +1,43 @@
 package SimpleVehicleModel {
-	public import Definitions;
+	public import Definitions::*;
 	public import ISQ::*;
 	package Definitions {
-
+		public import PartDefinitions::*;
+		public import PortDefinitions::*;
+		public import ItemDefinitions::*;
+		public import SignalDefinitions::*;
+		public import InterfaceDefinitions::*;
+		public import AllocationDefinitions::*;
+		public import ActionDefinitions::*;
+		public import StateDefinitions::*;
+		public import RequirementDefinitions::*;
+		public import AttributeDefinitions::*;
+		public import IndividualDefinitions::*;
+		public import MetadataDefinitions::**;
+		public import KeyWord_MetadataDefinitions::*;
 		package PartDefinitions {
-			part def Vehicle {;
+			part def Vehicle {
+				attribute mass :> mass;
+				attribute dryMass :> mass;
+				attribute cargoMass :> mass;
+				attribute position :> length;
+				attribute velocity :> speed;
+				attribute acceleration :> acceleration;
+				attribute electricalPower :> power;
+				attribute Tmax :> thermodynamicTemperature;
+				attribute maintenanceTime : Time::DateTime;
+				attribute brakePedalDepressed : ScalarValues::Boolean;
+				port ignitionCmdPort : IgnitionCmdPort;
+				port pwrCmdPort : PwrCmdPort;
+				port vehicleToRoadPort : VehicleToRoadPort;
+				port statusPort : StatusPort;
+				perform action providePower :> Parts::performedActions;
+				perform action provideBraking :> Parts::performedActions;
+				perform action controlDirection :> Parts::performedActions;
+				perform action performSelfTest :> Parts::performedActions;
+				perform action applyParkingBrake :> Parts::performedActions;
+				perform action senseTemperature :> Parts::performedActions;
+				exhibit state vehicleStates parallel;
 			}
 			part def Engine {
 				attribute mass :> mass;
@@ -71,9 +104,7 @@ package SimpleVehicleModel {
 				}
 				attribute fuelKind : FuelKind;
 				attribute fuelMassMax :> mass;
-				assert constraint fuelConstraint {
-					out ref :>> Constraints::null;
-				}
+				assert constraint fuelConstraint;
 				port fuelOutPort : FuelPort;
 				port fuelInPort : ~FuelPort;
 			}
@@ -196,9 +227,7 @@ package SimpleVehicleModel {
 				end port lugNutPort : LugNutPort;
 				end port shankPort : ShankPort;
 				attribute maxTorque : TorqueValue;
-				constraint {
-					out ref :>> Items::null;
-				}
+				constraint;
 			}
 			interface def WheelHubInterface {
 				end port lugNutCompositePort : LugNutCompositePort;
@@ -250,30 +279,22 @@ package SimpleVehicleModel {
 				doc \* The actual mass shall be less than the required mass*\
 				attribute massRequired :> mass;
 				attribute massActual :> mass;
-				constraint {
-					out ref :>> Requirements::null;
-				}
-				out ref :>> Requirements::null;
+				constraint;
 			}
 			requirement def ReliabilityRequirement {
 				subject :>> Requirements::subj;
 				doc \* The actual reliability shall be greater than the required reliability*\
 				attribute reliabilityRequired : ScalarValues::Real;
 				attribute reliabilityActual : ScalarValues::Real;
-				constraint {
-					out ref :>> Requirements::null;
-				}
-				out ref :>> Requirements::null;
+				constraint;
 			}
 			requirement def TorqueGenerationRequirement {
 				doc \* The engine shall generate torque as a function of RPM as shown in Table 1. *\
 				subject generateTorque : GenerateTorque;
-				out ref :>> Requirements::null;
 			}
 			requirement def DrivePowerOutputRequirement {
 				subject :>> Requirements::subj;
 				doc \* The engine shall provide a connection point to transfer torque to the transmission.*\
-				out ref :>> Requirements::null;
 			}
 			requirement def FuelEconomyRequirement {
 				subject :>> Requirements::subj;
@@ -281,17 +302,14 @@ package SimpleVehicleModel {
 driving scenario *\
 				attribute actualFuelEconomy :>;
 				attribute requiredFuelEconomy :>;
-				constraint {
-					out ref :>> Requirements::null;
-				}
-				out ref :>> Requirements::null;
+				constraint;
 			}
 		}
 		package AttributeDefinitions {
 			public import ScalarValues::*;
 			public import Quantities::*;
-			public import MeasurementReferences::null;
-			public import SIPrefixes::null;
+			public import MeasurementReferences::null::*;
+			public import SIPrefixes::null::*;
 			public import NumericalFunctions::*;
 			public import SI::*;
 			public import USCustomaryUnits::*;
@@ -341,7 +359,7 @@ driving scenario *\
 			metadata def Security;
 		}
 		package KeyWord_MetadataDefinitions {
-			public import Metaobjects::null;
+			public import Metaobjects::null::*;
 			state failureModes [*];
 			metadata def <fm> failureMode {
 				:>> Metaobjects::baseType : [OperatorExpression];
@@ -381,8 +399,8 @@ driving scenario *\
 		}
 	}
 	package VehicleLogicalToPhysicalAllocation {
-		public import PartsTree;
-		public import PartsTree;
+		public import PartsTree::**;
+		public import PartsTree::*;
 		allocation  vehicleLogicalToPhysicalAllocation : LogicalToPhysical allocate  vehicleLogical to vehicle_b {
 			allocate  vehicleLogical.torqueGenerator to vehicle_b.engine {
 				allocate  vehicleLogical.torqueGenerator.generateTorque to vehicle_b.engine.providePower.generateTorque;
@@ -425,8 +443,8 @@ driving scenario *\
 			package Requirements {}
 		}
 		package VehicleConfiguration_b {
-			public import ShapeItems::null;
-			public import ParametersOfInterestMetadata::null;
+			public import ShapeItems::null::*;
+			public import ParametersOfInterestMetadata::null::*;
 			public import ModelingMetadata::*;
 			package PartsTree {
 				part vehicle_b : Vehicle {
@@ -519,14 +537,11 @@ driving scenario *\
 							subject : [nullCoalescingExpression];
 							requirement torqueGenerationRequirement :>> {
 								subject generateTorque :>> : [nullCoalescingExpression];
-								out ref :>>;
 							}
 							requirement drivePowerOuputRequirement {
 								subject :>>;
 								port torqueOutPort :>> : [nullCoalescingExpression];
-								out ref :>>;
 							}
-							out ref :>>;
 						}
 					}
 					part transmission : Transmission {
@@ -580,9 +595,7 @@ driving scenario *\
 							subject :>>;
 							attribute :>> : [nullCoalescingExpression];
 							attribute :>> : [nullCoalescingExpression];
-							out ref :>>;
 						}
-						out ref :>>;
 					}
 				}
 			}
@@ -742,10 +755,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						attribute :>> default [OperatorExpression];
 						attribute fuelMassActual :> mass;
 						attribute fuelMassMax :> mass : [OperatorExpression];
-						constraint {
-							out ref :>> Requirements::null;
-						}
-						out ref :>>;
+						constraint;
 					}
 					allocate  vehicleMassRequirement to vehicle_b.mass;
 					requirement vehicleFuelEconomyRequirements {
@@ -755,22 +765,14 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						requirement cityFuelEconomyRequirement {
 							subject :>>;
 							:>> : [OperatorExpression];
-							constraint {
-								out ref :>> Requirements::null;
-							}
-							out ref :>>;
+							constraint;
 						}
 						[prefixMetadata] requirement highwayFuelEconomyRequirement {
 							subject :>>;
 							:>> : [OperatorExpression];
-							constraint {
-								out ref :>> Requirements::null;
-							}
-							out ref :>>;
+							constraint;
 						}
-						out ref :>> Requirements::null;
 					}
-					out ref :>> Requirements::null;
 				}
 				requirement engineSpecification {
 					subject engine1 : Engine;
@@ -779,20 +781,16 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						doc \* The total mass of the engine shall be less than or equal to the required mass.*\
 						attribute :>> : [OperatorExpression];
 						attribute :>> : [nullCoalescingExpression];
-						out ref :>>;
 					}
 					requirement torqueGenerationRequirement : TorqueGenerationRequirement {
 						subject generateTorque default [nullCoalescingExpression];
-						out ref :>>;
 					}
 					requirement drivePowerOutputRequirement {
 						subject :>>;
 						port torqueOutPort {
 							torque : TorqueValue;
 						}
-						out ref :>>;
 					}
-					out ref :>> Requirements::null;
 				}
 				[prefixMetadata] {
 					end [prefixMetadata];
@@ -885,10 +883,10 @@ Assume total mass includes a full tank of gas of 60 kg*\
 	}
 	package VehicleAnalysis {
 		public import RiskMetadata::*;
-		public import RiskMetadata::RiskLevelEnum;
-		public import VehicleConfiguration_b;
+		public import RiskMetadata::RiskLevelEnum::*;
+		public import VehicleConfiguration_b::**;
 		package FuelEconomyAnalysisModel {
-			public import SampledFunctions::null;
+			public import SampledFunctions::null::*;
 			comment about \* This analysis model was provided by Hisashi Miyashita on January 27, 2021
 We use the simplest fuel consumption analysis model introduced in:
 Akcelik, R. "Fuel efficiency and other objectives in traffic system management." Traffic Engineering and Control 22.2 (1981): 54-65. 
@@ -944,24 +942,18 @@ The high octane gasoline is about 0.76[l/kg].
 				tpd_avg :>;
 				distance :> length;
 				attribute required_power_avg :> power;
-				constraint {
-					out ref :>> Constraints::null;
-				}
+				constraint;
 				return out f_b : ScalarValues::Real : [OperatorExpression];
 			}
 			calc def ComputeBSFC {
 				engine : Engine;
-				out ref : ScalarValues::Real;
 			}
 			analysis fuelEconomyAnalysis {
 				subject : [nullCoalescingExpression];
 				requirement fuelEconomyAnalysisObjective {
 					subject :>> AnalysisCases::null;
 					doc \* estimate the vehicle fuel economy*\
-					constraint {
-						out ref :>>;
-					}
-					out ref :>> AnalysisCases::null;
+					constraint;
 				}
 				attribute scenario : Scenario;
 				attribute distance : [nullCoalescingExpression];
@@ -1037,7 +1029,6 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				requirement {
 					subject :>> null;
-					out ref :>> null;
 				}
 				comment about \* Select vehicle alternative with the engine whose evaluation function returns the max value*\
 				calc :> evaluationFunction {
@@ -1053,35 +1044,29 @@ The rationale and risk are contained in a metadata library. *\
 		}
 	}
 	package VehicleVerification {
-		public import VehicleConfiguration_b;
-		public import VerificationCaseDefinitions;
-		public import VerificationCases1;
+		public import VehicleConfiguration_b::**;
+		public import VerificationCaseDefinitions::*;
+		public import VerificationCases1::*;
 		public import VerificationCases::*;
-		public import VerificationSystem;
+		public import VerificationSystem::*;
 		package VerificationCaseDefinitions {
 			verification def MassTest {
 				subject :>> subj;
 				requirement {
 					subject :>> subj;
-					out ref :>> null;
 				}
-				out ref :>> verdict;
 			}
 			verification def AccelerationTest {
 				subject :>> subj;
 				requirement {
 					subject :>> subj;
-					out ref :>> null;
 				}
-				out ref :>> verdict;
 			}
 			verification def ReliabilityTest {
 				subject :>> subj;
 				requirement {
 					subject :>> subj;
-					out ref :>> null;
 				}
-				out ref :>> verdict;
 			}
 		}
 		package VerificationCases1 {
@@ -1093,9 +1078,7 @@ The rationale and risk are contained in a metadata library. *\
 					requirement {
 						subject :>>;
 						:>> : [nullCoalescingExpression];
-						out ref :>>;
 					}
-					out ref :>>;
 				}
 				action weighVehicle {
 					massMeasured :> mass;
@@ -1106,7 +1089,6 @@ The rationale and risk are contained in a metadata library. *\
 					verdict : [nullCoalescingExpression];
 				}
 				flow weighVehicle.massMeasured to evaluatePassFail.massMeasured;
-				out ref :>> : [nullCoalescingExpression];
 			}
 		}
 		package VerificationSystem {
@@ -1180,9 +1162,9 @@ The rationale and risk are contained in a metadata library. *\
 	}
 	package MissionContext {
 		comment about \* Define mission context with mission use cases for vehicle_b *\
-		public import VehicleConfiguration_b;
-		public import ParametersOfInterestMetadata::null;
-		public import TransportPassengerScenario;
+		public import VehicleConfiguration_b::**;
+		public import ParametersOfInterestMetadata::null::*;
+		public import TransportPassengerScenario::*;
 		package ContextDefinitions {
 			part def MissionContext;
 			part def Road;
@@ -1193,16 +1175,12 @@ The rationale and risk are contained in a metadata library. *\
 			part def Passenger;
 			requirement transportRequirements {
 				subject :>> Requirements::null;
-				out ref :>> Requirements::null;
 			}
 			use case def TransportPassenger {
 				requirement TransportObjective {
 					subject :>> UseCases::null;
 					doc \* deliver passenger to destination safely, comfortably, and within acceptable time*\
-					constraint {
-						out ref :>>;
-					}
-					out ref :>> UseCases::null;
+					constraint;
 				}
 				subject vehicle : Vehicle;
 				part environment;
@@ -1213,19 +1191,14 @@ The rationale and risk are contained in a metadata library. *\
 					subject :>>;
 					requirement {
 						subject :>> Requirements::null;
-						out ref :>>;
 					}
-					out ref :>>;
 				}
 				include use case getOutOfVehicle_a [1] {
 					subject :>>;
 					requirement {
 						subject :>> Requirements::null;
-						out ref :>>;
 					}
-					out ref :>>;
 				}
-				out ref :>> UseCases::null;
 			}
 			use case getInVehicle {
 				subject :>>;
@@ -1238,22 +1211,16 @@ The rationale and risk are contained in a metadata library. *\
 				action closeDoor_in :> Actions::subactions;
 				requirement {
 					subject :>>;
-					out ref :>>;
 				}
-				out ref :>>;
 			}
 			use case def GetInVehicle {
 				subject vehicle : Vehicle;
 				part driver [0];
 				part passenger [0];
-				assert constraint {
-					out ref :>> Constraints::null;
-				}
+				assert constraint;
 				requirement {
 					subject :>> UseCases::null;
-					out ref :>> UseCases::null;
 				}
-				out ref :>> UseCases::null;
 			}
 			use case getOutOfVehicle {
 				subject :>>;
@@ -1266,26 +1233,20 @@ The rationale and risk are contained in a metadata library. *\
 				action lockDoor_out :> Actions::subactions;
 				requirement {
 					subject :>>;
-					out ref :>>;
 				}
-				out ref :>>;
 			}
 			use case def GetOutOfVehicle {
 				subject vehicle : Vehicle;
 				part driver [0];
 				part passenger [0];
-				assert constraint {
-					out ref :>> Constraints::null;
-				}
+				assert constraint;
 				requirement {
 					subject :>> UseCases::null;
-					out ref :>> UseCases::null;
 				}
-				out ref :>> UseCases::null;
 			}
 		}
 		package TransportPassengerScenario {
-			public import TransportPassenger;
+			public import TransportPassenger::*;
 			use case transportPassenger {
 				subject :>>;
 				public first UseCases::start;
@@ -1316,9 +1277,7 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				requirement {
 					subject :>>;
-					out ref :>>;
 				}
-				out ref :>>;
 			}
 			use case transportPassenger_1 {
 				subject :>>;
@@ -1363,9 +1322,7 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				requirement {
 					subject :>>;
-					out ref :>>;
 				}
-				out ref :>>;
 			}
 		}
 		part missionContext : MissionContext {
@@ -1411,7 +1368,7 @@ The rationale and risk are contained in a metadata library. *\
 			}
 		}
 		package VehiclePartsTree {
-			public import VariationPointDefinitions;
+			public import VariationPointDefinitions::*;
 			abstract part vehicleFamily {
 				variation part engine : Engine {
 					part engine4Cyl : Engine4Cyl;
@@ -1426,9 +1383,7 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				part transmissionChoices : TransmissionChoices;
 				part sunroof [0] : Sunroof;
-				assert constraint selectionConstraint {
-					out ref :>> Constraints::null;
-				}
+				assert constraint selectionConstraint;
 				part driveshaft;
 				part frontAxleAssembly;
 				part rearAxleAssembly;
@@ -1436,25 +1391,25 @@ The rationale and risk are contained in a metadata library. *\
 		}
 	}
 	package SafetyandSecurityGroups {
-		public import PartsTree;
+		public import PartsTree::*;
 		package SafetyGroup {
 			comment about \* Parts that contribute to safety. *\
-			public import vehicle_b;
+			public import vehicle_b::**;
 			public filter [OperatorExpression];
 		}
 		package SecurityGroup {
 			comment about \* Parts that contribute to security. *\
-			public import vehicle_b;
+			public import vehicle_b::**;
 			public filter [OperatorExpression];
 		}
 		package SafetyandSecurityGroup {
 			comment about \* Parts that contribute to safety OR security. *\
-			public import vehicle_b;
+			public import vehicle_b::**;
 			public filter [OperatorExpression];
 		}
 		package MandatorySafetyGroup {
 			comment about \* Parts that contribute to safety AND are mandatory. *\
-			public import vehicle_b;
+			public import vehicle_b::**;
 			public filter [OperatorExpression];
 		}
 	}
@@ -1462,22 +1417,18 @@ The rationale and risk are contained in a metadata library. *\
 		package ViewpointDefinitions {
 			viewpoint def BehaviorViewpoint {
 				subject :>> Views::subj;
-				out ref :>> Views::null;
 			}
 			viewpoint def SafetyViewpoint {
 				subject :>> Views::subj;
 				concern vs {
 					subject :>> Requirements::null;
-					out ref :>>;
 				}
-				out ref :>> Views::null;
 			}
 			part def SafetyEngineer;
 			concern def VehicleSafety {
 				subject :>> Requirements::null;
 				doc \* identify system safety features *\
 				part se : SafetyEngineer;
-				out ref :>> Requirements::null;
 			}
 		}
 		package ViewDefinitions {
@@ -1494,15 +1445,14 @@ The rationale and risk are contained in a metadata library. *\
 			view def PartsInterconnection;
 		}
 		package VehicleViews {
-			public import ViewpointDefinitions;
-			public import ViewDefinitions;
-			public import VehicleConfiguration_b;
+			public import ViewpointDefinitions::*;
+			public import ViewDefinitions::*;
+			public import VehicleConfiguration_b::*;
 			view vehiclePartsTree_Safety : PartsTreeView {
 				satisfy requirement sv {
 					subject :>>;
-					out ref :>>;
 				}
-				protected expose PartsTree;
+				protected expose PartsTree::**;
 				public filter [OperatorExpression];
 			}
 		}
