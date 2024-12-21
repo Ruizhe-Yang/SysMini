@@ -357,18 +357,64 @@ operation XMIni!Element tagAllOwnedElement(){
 	}
 }
 
-operation XMIni!Element getExpression(){
-	if (self.ownedRelatedElement.first().isKindOf(XMIni!Expression)){
-//		return self.ownedRelatedElement.first().getOperatorExpression();
-		var expression = self.ownedRelatedElement.first();
-		if (expression.isKindOf(XMIni!OperatorExpression)){
-			expression.operator.print();
-			expression.operand.print("    ");
-			"".println();
-		}
-		else{
-//			expression.println();
-		}
-		return "[Expression]";
-	}
+operation XMIni!Expression LiteralBoolean(){
+	return self.value.asString();
 }
+
+operation XMIni!Expression LiteralString(){
+	return self.value.asString();
+}
+
+operation XMIni!Expression LiteralInteger(){
+	return self.value.asString();
+}
+
+operation XMIni!Expression LiteralRational(){
+	return self.value.asString();
+}
+
+operation XMIni!Expression LiteralInfinity(){
+	return "*";
+}
+
+operation XMIni!Expression LiteralExpression(){
+	return "[LiteralExpression]";
+}
+
+operation XMIni!Expression NullExpression(){
+	return "[NullExpression]";
+}
+
+operation XMIni!Expression InvocationExpression(){
+	return "[InvocationExpression]";
+}
+
+operation XMIni!Expression MetadataAccessExpression(){
+	return "[MetadataAccessExpression]";
+}
+
+operation XMIni!Expression FeatureReferenceExpression(){
+	return "[FeatureReferenceExpression]";
+}
+
+operation XMIni!Expression BaseExpression(){
+	return "[BaseExpression]";
+}
+
+operation XMIni!Expression FeatureChainExpression(){
+	return "[FeatureChainExpression]";
+}
+
+operation XMIni!Expression SelectExpression(){
+	return "[SelectExpression]";
+}
+
+operation XMIni!Expression CollectExpression(){
+	return "[CollectExpression]";
+}
+
+operation XMIni!Expression OperatorExpression(){
+	return "[OperatorExpression]";
+}
+
+
