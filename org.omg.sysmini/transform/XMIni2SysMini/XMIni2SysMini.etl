@@ -874,7 +874,6 @@ rule ConstraintUsage
 		if (s.eContainer().isTypeOf("RequirementConstraintMembership")){
 			var requirementConstraintMembership = s.eContainer();
 			t.RequirementConstraintMembershipKind = requirementConstraintMembership.kind.name.asString();
-			t.println();
 		}
 	}
 
