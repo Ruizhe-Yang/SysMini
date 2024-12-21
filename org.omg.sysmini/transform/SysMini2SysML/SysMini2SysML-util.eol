@@ -492,7 +492,8 @@ operation SysMini!StateUsage StateUsage() : String {
 }
 
 operation SysMini!ConstraintUsage ConstraintUsage() : String {
-	return self.OccurrenceUsagePrefix() + 
+	return self.RequirementConstraintMembershipKind.space();
+			self.OccurrenceUsagePrefix() + 
 			ConstraintUsageKeyword() + 
 			self.ConstraintUsageDeclaration() + 
 			self.CalculationBody();

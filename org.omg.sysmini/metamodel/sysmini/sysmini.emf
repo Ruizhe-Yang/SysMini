@@ -425,6 +425,7 @@ class CalculationUsage extends ActionUsage, Expression {
 }
 
 class ConstraintUsage extends OccurrenceUsage, BooleanExpression {
+	attr String[1] RequirementConstraintMembershipKind;
 }
 
 class RequirementUsage extends ConstraintUsage {

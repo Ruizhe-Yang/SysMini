@@ -285,14 +285,14 @@
             <body xsi:type="Documentation" text="The actual mass shall be less than the required mass"/>
             <body xsi:type="AttributeUsage" declaredName="massRequired" featureNote=":>" featureSpecialization="mass"/>
             <body xsi:type="AttributeUsage" declaredName="massActual" featureNote=":>" featureSpecialization="mass"/>
-            <body xsi:type="ConstraintUsage" featureNote=""/>
+            <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="requirement"/>
           </body>
           <body xsi:type="RequirementDefinition" declaredName="ReliabilityRequirement">
             <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="Requirements::subj" ReferenceUsageType="SubjectUsage"/>
             <body xsi:type="Documentation" text="The actual reliability shall be greater than the required reliability"/>
             <body xsi:type="AttributeUsage" declaredName="reliabilityRequired" featureNote=":" featureSpecialization="ScalarValues::Real"/>
             <body xsi:type="AttributeUsage" declaredName="reliabilityActual" featureNote=":" featureSpecialization="ScalarValues::Real"/>
-            <body xsi:type="ConstraintUsage" featureNote=""/>
+            <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="requirement"/>
           </body>
           <body xsi:type="RequirementDefinition" declaredName="TorqueGenerationRequirement">
             <body xsi:type="Documentation" text="The engine shall generate torque as a function of RPM as shown in Table 1. "/>
@@ -307,7 +307,7 @@
             <body xsi:type="Documentation" text="The vehicle shall maintain an average fuel economomy of at least x miles per gallon for the nominal &#xA;driving scenario "/>
             <body xsi:type="AttributeUsage" declaredName="actualFuelEconomy" featureNote=":>" featureSpecialization="distancePerVolume"/>
             <body xsi:type="AttributeUsage" declaredName="requiredFuelEconomy" featureNote=":>" featureSpecialization="distancePerVolume"/>
-            <body xsi:type="ConstraintUsage" featureNote=""/>
+            <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="requirement"/>
           </body>
         </body>
         <body xsi:type="Package" declaredName="AttributeDefinitions">
@@ -836,7 +836,7 @@
                 <body xsi:type="AttributeUsage" isDefault="true" featureNote=":>>" featureSpecialization="massActual" valuePart="[OperatorExpression]"/>
                 <body xsi:type="AttributeUsage" declaredName="fuelMassActual" featureNote=":>" featureSpecialization="mass"/>
                 <body xsi:type="AttributeUsage" declaredName="fuelMassMax" featureNote=":>" featureSpecialization="mass" valuePart="[OperatorExpression]"/>
-                <body xsi:type="ConstraintUsage" featureNote=""/>
+                <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="assumption"/>
               </body>
               <body xsi:type="AllocationUsage" featureNote="">
                 <connectorPart>vehicleMassRequirement</connectorPart>
@@ -849,12 +849,12 @@
                 <body xsi:type="RequirementUsage" declaredName="cityFuelEconomyRequirement" featureNote="">
                   <body xsi:type="ReferenceUsage" featureNote="" ReferenceUsageType="SubjectUsage"/>
                   <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="requiredFuelEconomy" valuePart="[OperatorExpression]" ReferenceUsageType="MetadataBodyUsage"/>
-                  <body xsi:type="ConstraintUsage" featureNote=""/>
+                  <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="assumption"/>
                 </body>
                 <body xsi:type="RequirementUsage" declaredName="highwayFuelEconomyRequirement" prefixMetadata="[prefixMetadata]" featureNote="">
                   <body xsi:type="ReferenceUsage" featureNote="" ReferenceUsageType="SubjectUsage"/>
                   <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="requiredFuelEconomy" valuePart="[OperatorExpression]" ReferenceUsageType="MetadataBodyUsage"/>
-                  <body xsi:type="ConstraintUsage" featureNote=""/>
+                  <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="assumption"/>
                 </body>
               </body>
             </body>
@@ -1034,7 +1034,7 @@
             <body xsi:type="RequirementUsage" declaredName="fuelEconomyAnalysisObjective" featureNote="">
               <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="AnalysisCases::null" ReferenceUsageType="SubjectUsage"/>
               <body xsi:type="Documentation" text="estimate the vehicle fuel economy"/>
-              <body xsi:type="ConstraintUsage" featureNote=""/>
+              <body xsi:type="ConstraintUsage" featureNote="" RequirementConstraintMembershipKind="requirement"/>
             </body>
             <body xsi:type="AttributeUsage" declaredName="scenario" featureNote=":" featureSpecialization="Scenario"/>
             <body xsi:type="AttributeUsage" declaredName="distance" featureNote="" valuePart="[nullCoalescingExpression]"/>
@@ -1266,7 +1266,7 @@
             <body xsi:type="RequirementUsage" declaredName="TransportObjective" featureNote="">
               <body xsi:type="ReferenceUsage" featureNote=":>>" featureSpecialization="UseCases::null" ReferenceUsageType="SubjectUsage"/>
               <body xsi:type="Documentation" text="deliver passenger to destination safely, comfortably, and within acceptable time"/>
-              <body xsi:type="ConstraintUsage" featureSpecialization="transportRequirements"/>
+              <body xsi:type="ConstraintUsage" featureSpecialization="transportRequirements" RequirementConstraintMembershipKind="requirement"/>
             </body>
             <body xsi:type="ReferenceUsage" declaredName="vehicle" featureNote=":" featureSpecialization="Vehicle" ReferenceUsageType="SubjectUsage"/>
             <body xsi:type="PartUsage" declaredName="environment" featureNote=""/>

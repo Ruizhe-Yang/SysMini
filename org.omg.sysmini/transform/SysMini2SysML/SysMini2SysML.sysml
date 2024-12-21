@@ -227,7 +227,7 @@ package SimpleVehicleModel {
 				end port lugNutPort : LugNutPort;
 				end port shankPort : ShankPort;
 				attribute maxTorque : TorqueValue;
-				constraint;
+				;
 			}
 			interface def WheelHubInterface {
 				end port lugNutCompositePort : LugNutCompositePort;
@@ -279,14 +279,14 @@ package SimpleVehicleModel {
 				doc \* The actual mass shall be less than the required mass*\
 				attribute massRequired :> mass;
 				attribute massActual :> mass;
-				constraint;
+				requirement;
 			}
 			requirement def ReliabilityRequirement {
 				subject :>> Requirements::subj;
 				doc \* The actual reliability shall be greater than the required reliability*\
 				attribute reliabilityRequired : ScalarValues::Real;
 				attribute reliabilityActual : ScalarValues::Real;
-				constraint;
+				requirement;
 			}
 			requirement def TorqueGenerationRequirement {
 				doc \* The engine shall generate torque as a function of RPM as shown in Table 1. *\
@@ -302,7 +302,7 @@ package SimpleVehicleModel {
 driving scenario *\
 				attribute actualFuelEconomy :> distancePerVolume;
 				attribute requiredFuelEconomy :> distancePerVolume;
-				constraint;
+				requirement;
 			}
 		}
 		package AttributeDefinitions {
@@ -755,7 +755,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						attribute :>> massActual default [OperatorExpression];
 						attribute fuelMassActual :> mass;
 						attribute fuelMassMax :> mass = [OperatorExpression];
-						constraint;
+						assumption;
 					}
 					allocate  vehicleMassRequirement to vehicle_b.mass;
 					requirement vehicleFuelEconomyRequirements {
@@ -765,12 +765,12 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						requirement cityFuelEconomyRequirement {
 							subject;
 							:>> requiredFuelEconomy = [OperatorExpression];
-							constraint;
+							assumption;
 						}
 						[prefixMetadata] requirement highwayFuelEconomyRequirement {
 							subject;
 							:>> requiredFuelEconomy = [OperatorExpression];
-							constraint;
+							assumption;
 						}
 					}
 				}
@@ -942,7 +942,7 @@ The high octane gasoline is about 0.76[l/kg].
 				tpd_avg :> timePerDistance;
 				distance :> length;
 				attribute required_power_avg :> power;
-				constraint;
+				;
 				return out f_b : ScalarValues::Real = [OperatorExpression];
 			}
 			calc def ComputeBSFC {
@@ -953,7 +953,7 @@ The high octane gasoline is about 0.76[l/kg].
 				requirement fuelEconomyAnalysisObjective {
 					subject :>> AnalysisCases::null;
 					doc \* estimate the vehicle fuel economy*\
-					constraint;
+					requirement;
 				}
 				attribute scenario : Scenario;
 				attribute distance = [nullCoalescingExpression];
@@ -1180,7 +1180,7 @@ The rationale and risk are contained in a metadata library. *\
 				requirement TransportObjective {
 					subject :>> UseCases::null;
 					doc \* deliver passenger to destination safely, comfortably, and within acceptable time*\
-					constraint transportRequirements;
+					requirement;
 				}
 				subject vehicle : Vehicle;
 				part environment;

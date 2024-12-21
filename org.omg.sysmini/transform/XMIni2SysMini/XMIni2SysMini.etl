@@ -871,7 +871,11 @@ rule ConstraintUsage
 	extends OccurrenceUsagePrefix,
 			ConstraintUsageDeclaration,
 			CalculationBody{
-// TBD: RequirementConstraintMember
+		if (s.eContainer().isTypeOf("RequirementConstraintMembership")){
+			var requirementConstraintMembership = s.eContainer();
+			t.RequirementConstraintMembershipKind = requirementConstraintMembership.kind.name.asString();
+			t.println();
+		}
 	}
 
 @abstract

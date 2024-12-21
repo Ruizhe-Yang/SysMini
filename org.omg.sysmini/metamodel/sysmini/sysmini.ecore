@@ -287,7 +287,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AcceptActionUsage" eSuperTypes="#//ActionUsage"/>
   <eClassifiers xsi:type="ecore:EClass" name="CalculationUsage" eSuperTypes="#//ActionUsage #//Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstraintUsage" eSuperTypes="#//OccurrenceUsage #//BooleanExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstraintUsage" eSuperTypes="#//OccurrenceUsage #//BooleanExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="RequirementConstraintMembershipKind"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequirementUsage" eSuperTypes="#//ConstraintUsage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reqId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
