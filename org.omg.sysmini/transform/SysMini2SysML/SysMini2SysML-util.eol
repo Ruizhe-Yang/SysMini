@@ -1262,8 +1262,8 @@ operation SysMini!Feature ValuePart() : String {
 			str += "default".space();
 		}
 		else{
-			str += ":".space();
-//	TBD		str += "=".space();
+// TBD		str += ":".space();
+			str += "=".space();
 		}
 		str += self.valuePart.space();
 		return str;

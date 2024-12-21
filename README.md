@@ -25,6 +25,5 @@
 ### 未解决的BUG
 
 - 部分featureSpecialization未转换问题
-- 部分MultiplicityRange转换错误问题
 - 部分幽灵ReferenceUsage生成问题
 - 两个意外的PerformActionUsage生成问题

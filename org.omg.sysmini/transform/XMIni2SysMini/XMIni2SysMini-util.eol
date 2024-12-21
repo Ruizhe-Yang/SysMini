@@ -123,19 +123,18 @@ operation XMIni!Feature getMultiplicityRange(){
 	for (owningMembership in self.ownedRelationship.getElementOf("OwningMembership")){
 		for (element in owningMembership.ownedRelatedElement){
 			if (element.isTypeOf("MultiplicityRange")){
-				for (e in element.ownedRelationship.getElementOf("OwningMembership")){
-					if (e.ownedRelatedElement.size() == 1 and e.ownedRelatedElement.first().isTypeOf("LiteralInteger")){
-						return "["+e.ownedRelatedElement.first().value.asString()+"]";
-					}
-					else if (e.ownedRelatedElement.size() == 1 and e.ownedRelatedElement.first().isTypeOf("LiteralInfinity")){
-						return "[*]";
-					}
-					else if (e.ownedRelatedElement.size() == 2 and e.ownedRelatedElement.second().isTypeOf("LiteralInteger")){
-						return "["+e.ownedRelatedElement.first().value.asString()+".."+e.ownedRelatedElement.second().value.asString()+"]";
-					}
-					else if (e.ownedRelatedElement.size() == 2 and e.ownedRelatedElement.second().isTypeOf("LiteralInfinity")){
-						return "["+e.ownedRelatedElement.first().value.asString()+"..*]";
-					}
+				var e = element.ownedRelationship.getElementOf("OwningMembership");
+				if (e.ownedRelatedElement.size() == 1 and e.first().ownedRelatedElement.first().isTypeOf("LiteralInteger")){
+					return "["+e.first().ownedRelatedElement.first().value.asString()+"]";
+				}
+				else if (e.ownedRelatedElement.size() == 1 and e.first().ownedRelatedElement.first().isTypeOf("LiteralInfinity")){
+					return "[*]";
+				}
+				else if (e.ownedRelatedElement.size() == 2 and e.second().ownedRelatedElement.first().isTypeOf("LiteralInteger")){
+					return "["+e.first().ownedRelatedElement.first().value.asString()+".."+e.second().ownedRelatedElement.first().value.asString()+"]";
+				}
+				else if (e.ownedRelatedElement.size() == 2 and e.second().ownedRelatedElement.first().isTypeOf("LiteralInfinity")){
+					return "["+e.first().ownedRelatedElement.first().value.asString()+"..*]";			
 				}
 			}
 			else {
@@ -184,24 +183,28 @@ operation clearImportPackage(text){
 
 
 operation XMIni!Feature getFeatureSpecialization(){
-	for (owningMembership in self.ownedRelationship.first()){
-		switch (owningMembership.type().name){
-			case "FeatureTyping":{
-				return owningMembership.getDeclaredName();
+	var owningMembership = self.ownedRelationship.first();
+	if (owningMembership.isKindOf(XMIni!Specialization) and (not owningMembership.isTypeOf("ConjugatedPortTyping"))){
+		var object = owningMembership.getDeclaredName();
+		if (object == "" or object == null){
+			if (owningMembership.isTypeOf("Redefinition")){
+				object = owningMembership.redefinedFeature.declaredName;
 			}
-			case "Subsetting":{
-				return owningMembership.getDeclaredName();
+			else if (owningMembership.isTypeOf("FeatureTyping")){
+				object =  owningMembership.type.declaredName;
 			}
-			case "OwnedReferenceSubsetting":{
-				return owningMembership.getDeclaredName();			
+			else if (owningMembership.isTypeOf("Subsetting")){
+				object = owningMembership.subsettedFeature.declaredName;
 			}
-			case "Redefinition":{
-				return owningMembership.getDeclaredName();
+			else if (owningMembership.isTypeOf("ReferenceSubsetting")){
+				object = owningMembership.referencedFeature.declaredName;
 			}
-//			case "OwningMembership":{
-//				owningMembership.ownedRelationship.println();
+//			else{
+//				self.println();
+//				owningMembership.println();
 //			}
 		}
+		return object;
 	}
 }
 

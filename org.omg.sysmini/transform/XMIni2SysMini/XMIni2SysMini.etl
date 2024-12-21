@@ -699,6 +699,9 @@ rule FeatureSpecialization
 	to t : SysMini!Feature{
 		t.featureNote = s.getFeatureNote();
 		t.featureSpecialization = clearImportPackage(s.getFeatureSpecialization());
+		if (t.featureSpecialization == "" or t.featureSpecialization == null){
+			t.featureNote = "";
+		}
 	}
 
 @abstract
