@@ -197,7 +197,7 @@ rule BasicDefinitionPrefix
 		t.isAbstract = s.isAbstract;
 		t.isVariation = s.isVariation;
 	}
-
+	
 @abstract
 rule DefinitionExtensionKeyword
 	transform s : XMIni!Definition
@@ -610,7 +610,7 @@ rule ValuePart
 		for (featureValue in s.ownedRelationship.getElementOf("FeatureValue")){
 			t.isInitial = featureValue.isInitial;
 			t.isDefault = featureValue.isDefault;
-			t.valuePart = featureValue.getFeatureValueOperator();
+			t.valuePart = featureValue.getExpression();
 		}
 		for (ConjugatedPortTyping in s.ownedRelationship.getElementOf("ConjugatedPortTyping")){
 			t.valuePart = "~"+ConjugatedPortTyping.conjugatedPortDefinition.eContents().first().originalPortDefinition.declaredName;
@@ -636,7 +636,7 @@ rule ElementFilterMembership
 	to t : SysMini!ElementFilterMembership{
 // TBD :All of the s is ElementFilterMember, no FilterPackageMember.
 		t.setVisibility(s);
-		t.ElementFilterText = s.ownedRelatedElement.first().getOperatorExpression();
+		t.ElementFilterText = s.getExpression();
 	}
 
 @abstract

@@ -91,34 +91,6 @@ operation SysMini!Usage setFeatureDirection(s: XMIni!Usage){
 	}
 }
 
-operation XMIni!FeatureValue getFeatureValueOperator(){
-	if (self.ownedRelatedElement.first().isTypeOf("OperatorExpression")){
-		return self.ownedRelatedElement.first().getOperatorExpression();
-	}
-	else{
-		var nullCoalescingExpression = self.ownedRelatedElement.first();
-//		nullCoalescingExpression.println();
-		return "[nullCoalescingExpression]";
-	}
-}
-
-operation XMIni!OperatorExpression getOperatorExpression(){
-//	operatorExpression.println();
-//	operatorExpression.operator.println();
-//	operatorExpression.eContents().asOrderedSet().getElementOf("ParameterMembership").size().println();
-	if (self.operator == "["){
-//		"---------------------------------------------".println();
-//		self.ownedRelationship.size().println();
-		for (p in self.ownedRelationship){
-//			if (p.isTypeOf("ParameterMembership")){
-//				p.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first().println();
-//			}
-//			p.println();
-		}
-	}
-	return "[OperatorExpression]";
-}
-
 operation XMIni!Feature getMultiplicityRange(){
 	for (owningMembership in self.ownedRelationship.getElementOf("OwningMembership")){
 		for (element in owningMembership.ownedRelatedElement){
@@ -382,5 +354,21 @@ operation Any space(){
 operation XMIni!Element tagAllOwnedElement(){
 	for (o in self.eContents()){
 		o.tag();
+	}
+}
+
+operation XMIni!Element getExpression(){
+	if (self.ownedRelatedElement.first().isKindOf(XMIni!Expression)){
+//		return self.ownedRelatedElement.first().getOperatorExpression();
+		var expression = self.ownedRelatedElement.first();
+		if (expression.isKindOf(XMIni!OperatorExpression)){
+			expression.operator.print();
+			expression.operand.print("    ");
+			"".println();
+		}
+		else{
+//			expression.println();
+		}
+		return "[Expression]";
 	}
 }
