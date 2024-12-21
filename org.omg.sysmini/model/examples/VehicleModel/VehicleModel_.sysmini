@@ -814,8 +814,8 @@
                     <body xsi:type="EventOccurrenceUsage" declaredName="sendFuelCmd" featureNote=""/>
                   </body>
                 </body>
-                <body xsi:type="FlowConnectionUsage" declaredName="sendSensedSpeed" featureNote="" itemFeature="SensedSpeed"/>
-                <body xsi:type="FlowConnectionUsage" declaredName="sendFuelCmd" featureNote="" itemFeature="FuelCmd"/>
+                <body xsi:type="FlowConnectionUsage" declaredName="sendSensedSpeed" featureNote="" itemFeature="SensedSpeed" note="Message"/>
+                <body xsi:type="FlowConnectionUsage" declaredName="sendFuelCmd" featureNote="" itemFeature="FuelCmd" note="Message"/>
               </body>
             </body>
           </body>

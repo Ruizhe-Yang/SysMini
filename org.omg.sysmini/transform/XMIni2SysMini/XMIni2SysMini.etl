@@ -1085,6 +1085,9 @@ rule FlowConnectionDeclaration
 				}
 			}
 		}
+		if (t.note == null or t.note == ""){
+			t.note = "Message";
+		}
 	}
 
 @abstract

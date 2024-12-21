@@ -735,8 +735,8 @@ driving scenario *\
 								event sendFuelCmd;
 							}
 						}
-						;
-						;
+						message sendSensedSpeed of SensedSpeed;
+						message sendFuelCmd of FuelCmd;
 					}
 				}
 			}
