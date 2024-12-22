@@ -1210,7 +1210,7 @@
             </body>
             <body xsi:type="ActionUsage" declaredName="evaluatePassFail" featureNote="">
               <body xsi:type="ReferenceUsage" declaredName="massMeasured" featureNote=":>" featureSpecialization="mass" ReferenceUsageType="MetadataBodyUsage"/>
-              <body xsi:type="ReferenceUsage" declaredName="verdict" direction="out" featureNote="" valuePart="VerificationCases::PassIf(VerificationCases::isPassing=(=vehicle_uut))" ReferenceUsageType="MetadataBodyUsage"/>
+              <body xsi:type="ReferenceUsage" declaredName="verdict" direction="out" featureNote="" valuePart="VerificationCases::PassIf(VerificationCases::isPassing=(vehicle_uut))" ReferenceUsageType="MetadataBodyUsage"/>
             </body>
             <body xsi:type="FlowConnectionUsage" featureNote="" note="FlowConnectionUsage" source="weighVehicle.massMeasured" target="evaluatePassFail.massMeasured"/>
           </body>

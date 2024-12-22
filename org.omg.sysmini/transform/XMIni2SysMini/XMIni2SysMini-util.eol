@@ -413,7 +413,6 @@ operation XMIni!Expression InvocationExpression(){
 		str += ownedFeatureTyping.ownedRelatedElement.first().FeatureChain();
 	}
 	str += self.ArgumentList();
-	str.println("str: ");
 	return str;
 }
 
@@ -440,6 +439,9 @@ operation XMIni!Expression ArgumentList(){
 			strr += argumentValue.getExpression();
 			if (strr.split("=").size() == 2 and strr.split("=").first() == strr.split("=").second()){
 				strr = strr.split("=").first();
+			}
+			else if (strr.split("=").size() == 2 and strr.split("=").first() == ""){
+				strr = strr.split("=").second();
 			}
 			str += strr;
 		}
