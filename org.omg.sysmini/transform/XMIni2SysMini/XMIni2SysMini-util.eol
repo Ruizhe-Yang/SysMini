@@ -362,6 +362,38 @@ operation XMIni!Element tagAllOwnedElement(){
 	}
 }
 
+operation XMIni!Element getExpression(){
+	if (self.ownedRelatedElement.first().isKindOf(XMIni!Expression)){
+		return self.ownedRelatedElement.first().OwnedExpression();
+	}
+	else{
+		return "";
+	}
+}
+
+operation XMIni!Expression OwnedExpression(){
+	var str = "";
+	switch (self.type().name){
+		case "LiteralBoolean":                     str = self.LiteralBoolean();
+		case "LiteralString":                      str = self.LiteralString();
+		case "LiteralInteger":                     str = self.LiteralInteger();
+		case "LiteralRational":                    str = self.LiteralRational();
+		case "LiteralInfinity":                    str = self.LiteralInfinity();
+		case "NullExpression":                     str = self.NullExpression();
+		case "InvocationExpression":               str = self.InvocationExpression();
+		case "MetadataAccessExpression":           str = self.MetadataAccessExpression();
+		case "FeatureReferenceExpression":         str = self.FeatureReferenceExpression();
+//		case "Expression":                         str = self.BaseExpression();
+		case "FeatureChainExpression":             str = self.FeatureChainExpression();
+		case "SelectExpression":                   str = self.SelectExpression();
+		case "CollectExpression":                  str = self.CollectExpression();
+		case "OperatorExpression":                 str = self.OperatorExpression();
+	}
+//	str.println();
+	self.tagAllOwnedElement();
+	return str;
+}
+
 operation XMIni!Expression LiteralBoolean(){
 	return self.value.asString();
 }
@@ -397,8 +429,6 @@ operation XMIni!Expression LiteralExpression(){
 operation XMIni!Expression NullExpression(){
 	return "null";
 }
-
-
 
 operation XMIni!Expression InvocationExpression(){
 	var str = "";
@@ -457,13 +487,21 @@ operation XMIni!Expression ArgumentList(){
 }
 
 operation XMIni!Expression MetadataAccessExpression(){
-	return "[MetadataAccessExpression]";
+	if (self.declaredName != null){
+		return self.declaredName+".metadata";
+	}
+	else if (self.referencedElement.declaredName != null){
+		return self.referencedElement.declaredName+".metadata";
+	}
+	else{
+		return "[MetadataAccessExpression]";
+	}
 }
 
 operation XMIni!Expression FeatureReferenceExpression(){
-	var ownedRelationship = self.ownedRelationship.getElementOf("Membership");
-	if (ownedRelationship.size() == 1){
-		var featureReferenceExpression = ownedRelationship.first();
+	if (self.ownedRelationship.getElementOf("Membership").size() == 1){
+		//FeatureReferenceExpression
+		var featureReferenceExpression = self.ownedRelationship.getElementOf("Membership").first();
 		if (featureReferenceExpression.declaredName != null){
 			return featureReferenceExpression.declaredName;
 		}
@@ -471,14 +509,21 @@ operation XMIni!Expression FeatureReferenceExpression(){
 			return featureReferenceExpression.memberElement.declaredName;
 		}
 	}
-	return "[FeatureReferenceExpression]";
-}
-
-operation XMIni!Expression BodyExpression(){
-	return "[BodyExpression]";
+	else if (self.ownedRelationship.getElementOf("FeatureMembership").size() == 1){
+// TBD  BodyExpression
+		var expressionBodyMember = self.ownedRelationship.first();
+		return "[BodyExpression]";
+	}
+	else{
+// TBD	self.ownedRelationship.println();
+		return "[FeatureReferenceExpression]";
+	}
 }
 
 operation XMIni!Expression SequenceExpression(){
+//	str = "";
+//	str += self.OwnedExpression();
+// TBD  ( ',' | {SysML::OperatorExpression.operand += current} operator = ',' operand += SequenceExpression)?
 	return "[SequenceExpression]";
 }
 
@@ -490,18 +535,27 @@ operation XMIni!Expression BaseExpression(){
 		case "FeatureReferenceExpression":  str = self.FeatureReferenceExpression();
 		case "MetadataAccessExpression":    str = self.MetadataAccessExpression();
 		case "InvocationExpression":        str = self.InvocationExpression();
-		case "BodyExpression":              str = self.BodyExpression();
-		case "SequenceExpression":          str = "(" + self.SequenceExpression() + ")";
+		case "Expression":                  str = "(" + self.SequenceExpression() + ")";
 	}
 	return str;
 }
 
 operation XMIni!Expression FeatureChainExpression(){
-	return "[FeatureChainExpression]";
+	if (self.hasProperty("memberElement")){
+		return self.memberElement.declaredName;
+	}
+	else if (self.ownedRelationship.getElementOf("OwningMembership").size() == 1){
+		return self.ownedRelationship.getElementOf("OwningMembership").first().ownedRelatedElement.first().FeatureChain();
+	}
+	else{
+// TBD	return "[FeatureChainExpression]";
+		return "";
+	}
+	
 }
 
 operation XMIni!Expression SelectExpression(){
-	return "[SelectExpression]";
+ 	return "[SelectExpression]";
 }
 
 operation XMIni!Expression CollectExpression(){
@@ -509,7 +563,56 @@ operation XMIni!Expression CollectExpression(){
 }
 
 operation XMIni!Expression OperatorExpression(){
+	switch(self.operator){
+		case null: self.println();
+		case "[": return self.SquareBracketOperator();
+		case "/": return self.MultiplicativeOperator();
+		case "*": return self.MultiplicativeOperator();
+		case "%": return self.MultiplicativeOperator();
+		case "**": return self.ExponentiationOperator();
+		case "^": return self.ExponentiationOperator();
+		case "meta": return self.MetaCastOperator();
+		case "hastype": return self.ClassificationTestOperator();
+		case "istype": return self.ClassificationTestOperator();
+		case "@": return self.ClassificationTestOperator();
+		case "and": return self.ConditionalAndOperator();
+		case "or": return self.ConditionalOrOperator();
+		case "+": return self.AdditiveOperator();
+		case "-": return self.AdditiveOperator();
+		case ",": return self.SequenceExpression();
+	}
 	return "[OperatorExpression]";
 }
 
+operation XMIni!Expression SquareBracketOperator(){
+	return "[SquareBracketOperator]";
+}
+
+operation XMIni!Expression MultiplicativeOperator(){
+	return "[MultiplicativeOperator]";
+}
+
+operation XMIni!Expression ExponentiationOperator(){
+	return "[ExponentiationOperator]";
+}
+
+operation XMIni!Expression MetaCastOperator(){
+	return "[MetaCastOperator]";
+}
+
+operation XMIni!Expression ClassificationTestOperator(){
+	return "[ClassificationTestOperator]";
+}
+
+operation XMIni!Expression ConditionalAndOperator(){
+	return "[ConditionalAndOperator]";
+}
+
+operation XMIni!Expression ConditionalOrOperator(){
+	return "[ConditionalOrOperator]";
+}
+
+operation XMIni!Expression AdditiveOperator(){
+	return "[AdditiveOperator]";
+}
 

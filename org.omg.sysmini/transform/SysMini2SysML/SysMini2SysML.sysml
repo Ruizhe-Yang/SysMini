@@ -320,11 +320,11 @@ driving scenario *\
 				enum red : Colors;
 			}
 			enum def {
-				enum = [OperatorExpression];
-				enum = [OperatorExpression];
-				enum = [OperatorExpression];
+				enum = [SquareBracketOperator];
+				enum = [SquareBracketOperator];
+				enum = [SquareBracketOperator];
 			}
-			attribute cylinderDiameter : DiameterChoices = [OperatorExpression];
+			attribute cylinderDiameter : DiameterChoices = [SquareBracketOperator];
 			enum def {
 				enum on : IgnitionOnOff;
 				enum off : IgnitionOnOff;
@@ -333,13 +333,13 @@ driving scenario *\
 				enum gas : FuelKind;
 				enum diesel : FuelKind;
 			}
-			distancePerVolume :> scalarQuantities = [OperatorExpression];
-			timePerDistance :> scalarQuantities = [OperatorExpression];
-			volumePerDistance :> scalarQuantities = [OperatorExpression];
-			volumePerTime :> scalarQuantities = [OperatorExpression];
-			kpl : MeasurementReferences::DerivedUnit = [OperatorExpression];
-			rpm : MeasurementReferences::DerivedUnit = [OperatorExpression];
-			kW : MeasurementReferences::DerivedUnit = [OperatorExpression];
+			distancePerVolume :> scalarQuantities = [MultiplicativeOperator];
+			timePerDistance :> scalarQuantities = [MultiplicativeOperator];
+			volumePerDistance :> scalarQuantities = [MultiplicativeOperator];
+			volumePerTime :> scalarQuantities = [MultiplicativeOperator];
+			kpl : MeasurementReferences::DerivedUnit = [MultiplicativeOperator];
+			rpm : MeasurementReferences::DerivedUnit = [MultiplicativeOperator];
+			kW : MeasurementReferences::DerivedUnit = [MultiplicativeOperator];
 		}
 		package IndividualDefinitions {
 			individual occurrence def VehicleRoadContext_1;
@@ -362,25 +362,25 @@ driving scenario *\
 			public import Metaobjects::null::*;
 			state failureModes [*];
 			metadata def <fm> failureMode {
-				:>> Metaobjects::baseType = [OperatorExpression];
+				:>> Metaobjects::baseType = [MetaCastOperator];
 			}
 			occurrence logicalOccurrences [*];
 			metadata def <l> logical {
-				:>> Metaobjects::baseType = [OperatorExpression];
+				:>> Metaobjects::baseType = [MetaCastOperator];
 			}
 			occurrence physicalOccurrences [*];
 			metadata def <p> physical {
-				:>> Metaobjects::baseType = [OperatorExpression];
+				:>> Metaobjects::baseType = [MetaCastOperator];
 			}
 		}
 		package GenericContext {
 			part def Context {
 				attribute time : DurationValue;
 				attribute spatialCF [1] : CartesianSpatial3dCoordinateFrame {
-					:>> null = [OperatorExpression];
+					:>> null = [SequenceExpression];
 				}
-				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame = [OperatorExpression];
-				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame = [OperatorExpression];
+				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame = [MultiplicativeOperator];
+				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame = [MultiplicativeOperator];
 			}
 		}
 	}
@@ -403,10 +403,20 @@ driving scenario *\
 		public import PartsTree::*;
 		allocation  vehicleLogicalToPhysicalAllocation : LogicalToPhysical allocate  vehicleLogical to vehicle_b {
 			allocate  vehicleLogical.torqueGenerator to vehicle_b.engine {
-				allocate  vehicleLogical.torqueGenerator.generateTorque to vehicle_b.engine.providePower.generateTorque;
+				end ref;
+				end ref;
+				allocate  vehicleLogical.torqueGenerator.generateTorque to vehicle_b.engine.providePower.generateTorque {
+					end ref;
+					end ref;
+				}
 			}
 			allocate  vehicleLogical.electricalGenerator to vehicle_b.engine {
-				allocate  vehicleLogical.electricalGenerator.generateElectricity to vehicle_b.engine.alternator.generateElectricity;
+				end ref;
+				end ref;
+				allocate  vehicleLogical.electricalGenerator.generateElectricity to vehicle_b.engine.alternator.generateElectricity {
+					end ref;
+					end ref;
+				}
 			}
 		}
 	}
@@ -414,23 +424,23 @@ driving scenario *\
 		package VehicleConfiguration_a {
 			package PartsTree {
 				part vehicle_a : Vehicle {
-					attribute mass :>> mass = [OperatorExpression];
-					attribute dryMass :>> dryMass = [InvocationExpression];
-					attribute :>> cargoMass = [OperatorExpression];
+					attribute mass :>> mass = [AdditiveOperator];
+					attribute dryMass :>> dryMass = NumericalFunctions::sum(NumericalFunctions::collection=partMasses);
+					attribute :>> cargoMass = [SquareBracketOperator];
 					attribute partMasses [*];
 					part fuelTank : FuelTank {
-						attribute :>> mass = [OperatorExpression];
+						attribute :>> mass = [SquareBracketOperator];
 						item :>> fuel {
-							attribute = [OperatorExpression];
+							attribute = [SquareBracketOperator];
 						}
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass = [OperatorExpression];
+						attribute mass :> mass = [SquareBracketOperator];
 						part frontAxle : Axle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass = [OperatorExpression];
+						attribute mass :> mass = [SquareBracketOperator];
 						attribute driveTrainEfficiency : ScalarValues::Real = 0.6;
 						part rearAxle : Axle;
 						part rearWheels [2] : Wheel {
@@ -448,10 +458,10 @@ driving scenario *\
 			public import ModelingMetadata::*;
 			package PartsTree {
 				part vehicle_b : Vehicle {
-					[prefixMetadata] attribute mass = [OperatorExpression];
-					attribute dryMass :>> dryMass = [InvocationExpression];
-					attribute :>> cargoMass default [OperatorExpression];
-					attribute partMasses = [OperatorExpression];
+					[prefixMetadata] attribute mass = [AdditiveOperator];
+					attribute dryMass :>> dryMass = NumericalFunctions::sum(NumericalFunctions::collection=partMasses);
+					attribute :>> cargoMass default [SquareBracketOperator];
+					attribute partMasses = [SequenceExpression];
 					attribute avgFuelEconomy :> distancePerVolume;
 					port fuelCmdPort : FuelCmdPort {
 						item fuelCmd :>> pwrCmd;
@@ -466,25 +476,25 @@ driving scenario *\
 					perform senseTemperature senseTemperature;
 					exhibit state vehicleStates :>> vehicleStates;
 					item [1] :> Items::envelopingShapes {
-						length1 :>> ShapeItems::null = [OperatorExpression];
-						width1 :>> ShapeItems::null = [OperatorExpression];
-						height1 :>> ShapeItems::null = [OperatorExpression];
+						length1 :>> ShapeItems::null = [SquareBracketOperator];
+						width1 :>> ShapeItems::null = [SquareBracketOperator];
+						height1 :>> ShapeItems::null = [SquareBracketOperator];
 					}
 					part fuelTank : FuelTank {
-						attribute :>> mass = [OperatorExpression];
+						attribute :>> mass = [SquareBracketOperator];
 						item :>> fuel {
-							attribute = [OperatorExpression];
+							attribute = [SquareBracketOperator];
 						}
-						attribute :>> fuelMassMax = [OperatorExpression];
+						attribute :>> fuelMassMax = [SquareBracketOperator];
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass = [OperatorExpression];
+						attribute mass :> mass = [SquareBracketOperator];
 						port shaftPort_d : ShaftPort_d;
 						part frontAxle : FrontAxle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass = [OperatorExpression];
+						attribute mass :> mass = [SquareBracketOperator];
 						attribute driveTrainEfficiency : ScalarValues::Real = 0.6;
 						port shaftPort_d : ShaftPort_d;
 						perform providePower.distributeTorque;
@@ -521,14 +531,23 @@ driving scenario *\
 								}
 							}
 						}
-						bind shaftPort_d = differential.shaftPort_d;
-						connect  differential.leftDiffPort to rearAxle.leftHalfAxle.leftAxleToDiffPort;
-						connect  differential.rightDiffPort to rearAxle.rightHalfAxle.rightAxleToDiffPort;
+						bind shaftPort_d = differential.shaftPort_d {
+							end ref;
+						}
+						connect  differential.leftDiffPort to rearAxle.leftHalfAxle.leftAxleToDiffPort {
+							end ref;
+							end ref;
+						}
+						connect  differential.rightDiffPort to rearAxle.rightHalfAxle.rightAxleToDiffPort {
+							end ref;
+							end ref;
+						}
 						interface  wheelToleftHalAxleInterface : WheelHubInterface connect  rearWheel1.lugNutCompositePort[1][1] to rearAxle.leftHalfAxle.shankCompositePort[1][1];
 						interface  wheelTorightHalAxleInterface : WheelHubInterface connect  rearWheel2.lugNutCompositePort[1][1] to rearAxle.rightHalfAxle.shankCompositePort[1][1];
 					}
 					part starterMotor : StarterMotor;
 					part engine : Engine {
+						perform providePower.generateTorque;
 						part cylinders [4..6] : Cylinder;
 						part alternator {
 							action generateElectricity :> Parts::ownedActions;
@@ -536,21 +555,21 @@ driving scenario *\
 						satisfy engineSpecification engineSpecification {
 							subject = [FeatureReferenceExpression];
 							requirement torqueGenerationRequirement :>> torqueGenerationRequirement {
-								subject generateTorque :>> generateTorque = [FeatureChainExpression];
+								subject generateTorque :>> generateTorque = engine.providePower.generateTorque;
 							}
 							requirement drivePowerOuputRequirement {
 								subject;
-								port torqueOutPort :>> torqueOutPort = [FeatureChainExpression];
+								port torqueOutPort :>> torqueOutPort = engine.drivePwrPort;
 							}
 						}
 					}
 					part transmission : Transmission {
-						attribute mass :> mass = [OperatorExpression];
+						attribute mass :> mass = [SquareBracketOperator];
 						port shaftPort_a : ShaftPort_a;
 						perform providePower.amplifyTorque;
 					}
 					part driveshaft : Driveshaft {
-						attribute mass :> mass = [OperatorExpression];
+						attribute mass :> mass = [SquareBracketOperator];
 						port shaftPort_b : ShaftPort_b;
 						port shaftPort_c : ShaftPort_c;
 						perform providePower.transferTorque;
@@ -564,7 +583,7 @@ driving scenario *\
 					part speedSensor : SpeedSensor;
 					part bodyAssy : BodyAssy {
 						part body : Body {
-							attribute :>> color = [FeatureReferenceExpression];
+							attribute :>> color = red;
 						}
 						[prefixMetadata] part bumper;
 						[prefixMetadata] part keylessEntry;
@@ -575,26 +594,59 @@ driving scenario *\
 						part frontSeat [2];
 						[prefixMetadata] part driverAirBag;
 					}
-					bind engine.fuelCmdPort = fuelCmdPort;
+					bind engine.fuelCmdPort = fuelCmdPort {
+						end ref;
+					}
 					interface  engineToTransmissionInterface : EngineToTransmissionInterface connect  engine.drivePwrPort to transmission.clutchPort;
 					interface  fuelInterface : FuelInterface connect  fuelTank.fuelOutPort to engine.fuelInPort;
-					allocate  providePower.generateToAmplify to engineToTransmissionInterface;
-					bind engine.ignitionCmdPort = ignitionCmdPort;
-					connect  starterMotor.gearPort to engine.flyWheelPort;
-					connect  vehicleSoftware.vehicleController.controlPort to engine.engineControlPort;
-					bind vehicle_b.setSpeedPort = vehicleSoftware.vehicleController.cruiseController.setSpeedPort;
-					connect  speedSensor.speedSensorPort to vehicleSoftware.vehicleController.cruiseController.speedSensorPort;
-					bind vehicleSoftware.vehicleController.cruiseController.cruiseControlPort = vehicleSoftware.vehicleController.controlPort;
-					connect  transmission.shaftPort_a to driveshaft.shaftPort_b;
-					connect  driveshaft.shaftPort_c to rearAxleAssembly.shaftPort_d;
-					bind rearAxleAssembly.rearWheel1.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort1;
-					bind rearAxleAssembly.rearWheel2.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort2;
+					allocate  providePower.generateToAmplify to engineToTransmissionInterface {
+						end ref;
+					}
+					bind engine.ignitionCmdPort = ignitionCmdPort {
+						end ref;
+					}
+					connect  starterMotor.gearPort to engine.flyWheelPort {
+						end ref;
+						end ref;
+					}
+					connect  vehicleSoftware.vehicleController.controlPort to engine.engineControlPort {
+						end ref;
+						end ref;
+					}
+					bind vehicle_b.setSpeedPort = vehicleSoftware.vehicleController.cruiseController.setSpeedPort {
+						end ref;
+						end ref;
+					}
+					connect  speedSensor.speedSensorPort to vehicleSoftware.vehicleController.cruiseController.speedSensorPort {
+						end ref;
+						end ref;
+					}
+					bind vehicleSoftware.vehicleController.cruiseController.cruiseControlPort = vehicleSoftware.vehicleController.controlPort {
+						end ref;
+						end ref;
+					}
+					connect  transmission.shaftPort_a to driveshaft.shaftPort_b {
+						end ref;
+						end ref;
+					}
+					connect  driveshaft.shaftPort_c to rearAxleAssembly.shaftPort_d {
+						end ref;
+						end ref;
+					}
+					bind rearAxleAssembly.rearWheel1.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort1 {
+						end ref;
+						end ref;
+					}
+					bind rearAxleAssembly.rearWheel2.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort2 {
+						end ref;
+						end ref;
+					}
 					satisfy vehicleSpecification vehicleSpecification by vehicle_b {
-						subject = [FeatureReferenceExpression];
+						subject = vehicle_b;
 						requirement vehicleMassRequirement {
 							subject;
-							attribute = [FeatureChainExpression];
-							attribute :>> fuelMassActual = [FeatureChainExpression];
+							attribute;
+							attribute :>> fuelMassActual = fuelTank.fuel.;
 						}
 					}
 				}
@@ -602,9 +654,9 @@ driving scenario *\
 			package ActionTree {
 				action providePower : ProvidePower {
 					item fuelCmd : FuelCmd;
-					wheelToRoadTorque [2] :>> wheelToRoadTorque = [FeatureChainExpression];
+					wheelToRoadTorque [2] :>> wheelToRoadTorque;
 					action generateTorque : GenerateTorque {
-						item = [FeatureChainExpression];
+						item;
 					}
 					action amplifyTorque : AmplifyTorque;
 					action transferTorque : TransferTorque;
@@ -626,14 +678,14 @@ driving scenario *\
 					part part0 {
 						perform action startVehicle {
 							{
-								ref = [FeatureReferenceExpression];
-								ref = [FeatureChainExpression];
+								ref = ignitionCmd;
+								ref;
 								ref :>> Transfers::receiver;
 								ignitionCmd : IgnitionCmd;
 							}
 							{
 								ignitionCmd : IgnitionCmd;
-								ref = [FeatureChainExpression];
+								ref;
 							}
 							flow of IgnitionCmdfrom trigger1.ignitionCmd to startEngine.ignitionCmd;
 							action startEngine {
@@ -642,14 +694,14 @@ driving scenario *\
 							}
 							flow of EngineStatusfrom startEngine.es to sendStatus.es;
 							{
-								ref = [FeatureReferenceExpression];
-								ref = [FeatureChainExpression];
+								ref = es;
+								ref;
 								ref :>> Transfers::receiver;
 								es : EngineStatus;
 							}
 							{
 								es : EngineStatus;
-								ref = [FeatureChainExpression];
+								ref;
 							}
 						}
 						part driver : Driver {
@@ -662,7 +714,10 @@ driving scenario *\
 							perform startVehicle.sendStatus;
 							event occurrence :> Occurrences::timeEnclosedOccurrences;
 						}
-						first vehicle.doorClosed then driver.driverReady;
+						first vehicle.doorClosed then driver.driverReady {
+							end ref;
+							end ref;
+						}
 						message of IgnitionCmdfrom driver.startVehicle.turnVehicleOn to vehicle.startVehicle.trigger1;
 						message of EngineStatusfrom vehicle.startVehicle.sendStatus to driver.startVehicle.trigger2;
 					}
@@ -681,7 +736,7 @@ driving scenario *\
 							part :>> vehicleController {
 								part :>> cruiseController {
 									port :>> setSpeedPort {
-										event occurrence = [FeatureChainExpression];
+										event occurrence = setSpeedPort.setSpeedReceived;
 									}
 									port :>> speedSensorPort {
 										event occurrence :> Occurrences::timeEnclosedOccurrences;
@@ -715,10 +770,10 @@ driving scenario *\
 							part :>> vehicleController {
 								part :>> cruiseController {
 									port :>> setSpeedPort {
-										event occurrence = [FeatureChainExpression];
+										event occurrence = setSpeedPort.setSpeedReceived;
 									}
 									port :>> speedSensorPort {
-										event occurrence = [FeatureChainExpression];
+										event occurrence;
 										first setSpeedReceived then done {
 											end ref;
 										}
@@ -751,25 +806,27 @@ driving scenario *\
 						subject;
 						doc \* The total mass of the vehicle shall be less than or equal to the required mass.
 Assume total mass includes a full tank of gas of 60 kg*\
-						attribute :>> massRequired = [OperatorExpression];
-						attribute :>> massActual default [OperatorExpression];
+						attribute :>> massRequired = [SquareBracketOperator];
+						attribute :>> massActual default [AdditiveOperator];
 						attribute fuelMassActual :> mass;
-						attribute fuelMassMax :> mass = [OperatorExpression];
+						attribute fuelMassMax :> mass = [SquareBracketOperator];
 						assumption;
 					}
-					allocate  vehicleMassRequirement to vehicle_b.mass;
+					allocate  vehicleMassRequirement to vehicle_b.mass {
+						end ref;
+					}
 					requirement vehicleFuelEconomyRequirements {
 						subject :>> Requirements::null;
 						doc \* fuel economy requirements group *\
 						attribute assumedCargoMass :> mass;
 						requirement cityFuelEconomyRequirement {
 							subject;
-							:>> requiredFuelEconomy = [OperatorExpression];
+							:>> requiredFuelEconomy = [SquareBracketOperator];
 							assumption;
 						}
 						[prefixMetadata] requirement highwayFuelEconomyRequirement {
 							subject;
-							:>> requiredFuelEconomy = [OperatorExpression];
+							:>> requiredFuelEconomy = [SquareBracketOperator];
 							assumption;
 						}
 					}
@@ -779,11 +836,11 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					requirement engineMassRequirement {
 						subject;
 						doc \* The total mass of the engine shall be less than or equal to the required mass.*\
-						attribute :>> massRequired = [OperatorExpression];
-						attribute :>> massActual = [FeatureChainExpression];
+						attribute :>> massRequired = [SquareBracketOperator];
+						attribute :>> massActual;
 					}
 					requirement torqueGenerationRequirement : TorqueGenerationRequirement {
-						subject generateTorque default [FeatureChainExpression];
+						subject generateTorque;
 					}
 					requirement drivePowerOutputRequirement {
 						subject;
@@ -847,8 +904,8 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				part wheel1 : Wheel {
 					port lugNutCompositePort :>> lugNutCompositePort {
 						port lugNutPort [5] {
-							attribute :>> threadDia = [OperatorExpression];
-							attribute :>> threadPitch = [OperatorExpression];
+							attribute :>> threadDia = [SquareBracketOperator];
+							attribute :>> threadPitch = [SquareBracketOperator];
 						}
 						port lugNutPort1 [1];
 						port lugNutPort2 [1];
@@ -858,9 +915,9 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				part hub1 : Hub {
 					port shankCompositePort :>> shankCompositePort {
 						port shankPort [5] {
-							attribute :>> threadDia = [OperatorExpression];
-							attribute :>> threadPitch = [OperatorExpression];
-							attribute :>> shaftLength = [OperatorExpression];
+							attribute :>> threadDia = [SquareBracketOperator];
+							attribute :>> threadPitch = [SquareBracketOperator];
+							attribute :>> shaftLength = [SquareBracketOperator];
 						}
 						port shankPort1 [1];
 						port shankPort2 [1];
@@ -869,13 +926,13 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				}
 				interface  wheelHubInterface : WheelHubInterface connect  lugNutCompositePort to shankCompositePort {
 					interface  wheelFastenerInterface1 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = [OperatorExpression];
+						attribute :>> maxTorque = [MultiplicativeOperator];
 					}
 					interface  wheelFastenerInterface2 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = [OperatorExpression];
+						attribute :>> maxTorque = [MultiplicativeOperator];
 					}
 					interface  wheelFastenerInterface3 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = [OperatorExpression];
+						attribute :>> maxTorque = [MultiplicativeOperator];
 					}
 				}
 			}
@@ -919,8 +976,8 @@ The high octane gasoline is about 0.76[l/kg].
 				bestFuelConsumption : ScalarValues::Real;
 				idlingFuelConsumption : ScalarValues::Real;
 				tpd_avg :> timePerDistance;
-				attribute f = [OperatorExpression];
-				return out dpv :> distancePerVolume = [OperatorExpression];
+				attribute f = [AdditiveOperator];
+				return out dpv :> distancePerVolume = [MultiplicativeOperator];
 			}
 			calc def AverageTravelTimePerDistance {
 				scenario : Scenario;
@@ -933,7 +990,7 @@ The high octane gasoline is about 0.76[l/kg].
 			calc def IdlingFuelConsumptionPerTime {
 				engine : Engine;
 				attribute idlingFuelConsumptionPerDisplacement : ScalarValues::Real = 0.5;
-				return out f_a : ScalarValues::Real = [OperatorExpression];
+				return out f_a : ScalarValues::Real = [MultiplicativeOperator];
 			}
 			attribute specificGravityOfGasoline : ScalarValues::Real = 0.76;
 			calc def BestFuelConsumptionPerDistance {
@@ -943,25 +1000,25 @@ The high octane gasoline is about 0.76[l/kg].
 				distance :> length;
 				attribute required_power_avg :> power;
 				;
-				return out f_b : ScalarValues::Real = [OperatorExpression];
+				return out f_b : ScalarValues::Real = [MultiplicativeOperator];
 			}
 			calc def ComputeBSFC {
 				engine : Engine;
 			}
 			analysis fuelEconomyAnalysis {
-				subject = [FeatureReferenceExpression];
+				subject = vehicle_b;
 				requirement fuelEconomyAnalysisObjective {
 					subject :>> AnalysisCases::null;
 					doc \* estimate the vehicle fuel economy*\
 					requirement;
 				}
 				attribute scenario : Scenario;
-				attribute distance = [InvocationExpression];
-				attribute tpd_avg = [InvocationExpression];
-				attribute bsfc = [InvocationExpression];
-				attribute f_a = [InvocationExpression];
-				attribute f_b = [InvocationExpression];
-				return out attribute calculatedFuelEconomy :> distancePerVolume = [InvocationExpression];
+				attribute distance = TraveledDistance(scenario);
+				attribute tpd_avg = AverageTravelTimePerDistance(scenario);
+				attribute bsfc = ComputeBSFC(engine=);
+				attribute f_a = BestFuelConsumptionPerDistance(mass=, bsfc, tpd_avg, distance);
+				attribute f_b = IdlingFuelConsumptionPerTime(engine=);
+				return out attribute calculatedFuelEconomy :> distancePerVolume = FuelConsumption(bestFuelConsumption=f_a, idlingFuelConsumption=f_b, tpd_avg);
 			}
 		}
 		package ElectricalPowerAnalysis {}
@@ -970,14 +1027,14 @@ The high octane gasoline is about 0.76[l/kg].
 			comment about \* The following example provides the rationale for selecting the engine4cyl. 
 The rationale and risk are contained in a metadata library. *\
 			@ModelingMetadata::Rationale : about vehicle_b_engine4cyl{
-				:>> ModelingMetadata::explanation = [FeatureReferenceExpression];
+				:>> ModelingMetadata::explanation = engineTradeOffAnalysis;
 				:>> ModelingMetadata::text = the engine4cyl was evaluated to have a higher objective function compared to the engine6cyl based on the trade-off analyiss;
 			}
 			@RiskMetadata::Risk : about vehicle_b_engine4cyl{
-				:>> totalRisk = [FeatureReferenceExpression];
-				:>> technicalRisk = [FeatureReferenceExpression];
-				:>> scheduleRisk = [FeatureReferenceExpression];
-				:>> costRisk = [FeatureReferenceExpression];
+				:>> totalRisk = RiskMetadata::medium;
+				:>> technicalRisk = RiskMetadata::medium;
+				:>> scheduleRisk = RiskMetadata::medium;
+				:>> costRisk = RiskMetadata::low;
 			}
 			@RiskMetadata::Risk : about fuelEfficiency{
 				:>> technicalRisk {
@@ -1012,8 +1069,8 @@ The rationale and risk are contained in a metadata library. *\
 				part vehicle_b_engine4cyl :> vehicleAlternatives {
 					part engine :>> engine {
 						part cylinders [4] :>> cylinders;
-						attribute mass :>> mass = [OperatorExpression];
-						attribute peakHorsePower :>> peakHorsePower = [OperatorExpression];
+						attribute mass :>> mass = [SquareBracketOperator];
+						attribute peakHorsePower :>> peakHorsePower = [SquareBracketOperator];
 						attribute fuelEfficiency :>> fuelEfficiency = 0.6;
 						attribute cost :>> cost = 1000;
 					}
@@ -1021,8 +1078,8 @@ The rationale and risk are contained in a metadata library. *\
 				part vehicle_b_engine6cyl :> vehicleAlternatives {
 					part engine :>> engine {
 						part cylinders [6] :>> cylinders;
-						attribute mass :>> mass = [OperatorExpression];
-						attribute peakHorsePower :>> peakHorsePower = [OperatorExpression];
+						attribute mass :>> mass = [SquareBracketOperator];
+						attribute peakHorsePower :>> peakHorsePower = [SquareBracketOperator];
 						attribute fuelEfficiency :>> fuelEfficiency = 0.5;
 						attribute cost :>> cost = 1500;
 					}
@@ -1033,11 +1090,11 @@ The rationale and risk are contained in a metadata library. *\
 				comment about \* Select vehicle alternative with the engine whose evaluation function returns the max value*\
 				calc :> evaluationFunction {
 					part vehicle :> vehicle_b_engine4cyl;
-					return out attribute eval : ScalarValues::Real = [InvocationExpression];
+					return out attribute eval : ScalarValues::Real = EngineEvaluation_4cyl(engineMass=engine.mass, enginePower=engine.peakHorsePower, engineFuelEfficiency=engine.fuelEfficiency, engineCost=engine.cost);
 				}
 				calc :> evaluationFunction {
 					part vehicle :> vehicle_b_engine6cyl;
-					return out attribute eval : ScalarValues::Real = [InvocationExpression];
+					return out attribute eval : ScalarValues::Real = EngineEvaluation_6cyl(engineMass=engine.mass, enginePower=engine.peakHorsePower, engineFuelEfficiency=engine.fuelEfficiency, engineCost=engine.cost);
 				}
 				return out part selectedVehicle :> vehicle_b;
 			}
@@ -1072,12 +1129,12 @@ The rationale and risk are contained in a metadata library. *\
 		package VerificationCases1 {
 			[prefixMetadata] verification massTests : MassTest {
 				subject vehicle_uut :> vehicle_b;
-				part vehicleVerificationSubSystem_1 = [FeatureChainExpression];
+				part vehicleVerificationSubSystem_1;
 				requirement {
 					subject;
 					requirement {
 						subject;
-						= [FeatureChainExpression];
+						;
 					}
 				}
 				action weighVehicle {
@@ -1086,7 +1143,7 @@ The rationale and risk are contained in a metadata library. *\
 				first weighVehicle then evaluatePassFail;
 				action evaluatePassFail {
 					massMeasured :> mass;
-					verdict = [InvocationExpression];
+					verdict = VerificationCases::PassIf(VerificationCases::isPassing=(vehicle_uut));
 				}
 				flow weighVehicle.massMeasured to evaluatePassFail.massMeasured;
 			}
@@ -1110,15 +1167,15 @@ The rationale and risk are contained in a metadata library. *\
 		individual occurrence a : VehicleRoadContext_1 {
 			occurrence t0_t2_a {
 				snapshot occurrence t0_a {
-					attribute t0 :>> time = [OperatorExpression];
+					attribute t0 :>> time = [SquareBracketOperator];
 					snapshot occurrence t0_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t0_v : Vehicle_1 {
-						:>> position = [OperatorExpression];
-						:>> velocity = [OperatorExpression];
-						:>> acceleration = [OperatorExpression];
+						:>> position = [SquareBracketOperator];
+						:>> velocity = [SquareBracketOperator];
+						:>> acceleration = [SquareBracketOperator];
 						snapshot occurrence t0_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t0_leftFront : Wheel_1;
 							snapshot occurrence t0_rightFront : Wheel_2;
@@ -1126,15 +1183,15 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				snapshot occurrence t1_a {
-					attribute t1 :>> time = [OperatorExpression];
+					attribute t1 :>> time = [SquareBracketOperator];
 					snapshot occurrence t1_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t1_v : Vehicle_1 {
-						:>> position = [OperatorExpression];
-						:>> velocity = [OperatorExpression];
-						:>> acceleration = [OperatorExpression];
+						:>> position = [SquareBracketOperator];
+						:>> velocity = [SquareBracketOperator];
+						:>> acceleration = [SquareBracketOperator];
 						snapshot occurrence t1_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t1_leftFront : Wheel_1;
 							snapshot occurrence t1_rightFront : Wheel_2;
@@ -1142,15 +1199,15 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				snapshot occurrence t2_a {
-					attribute t2 :>> time = [OperatorExpression];
+					attribute t2 :>> time = [SquareBracketOperator];
 					snapshot occurrence t2_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t2_v : Vehicle_1 {
-						:>> position = [OperatorExpression];
-						:>> velocity = [OperatorExpression];
-						:>> acceleration = [OperatorExpression];
+						:>> position = [SquareBracketOperator];
+						:>> velocity = [SquareBracketOperator];
+						:>> acceleration = [SquareBracketOperator];
 						snapshot occurrence t2_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t2_leftFront : Wheel_1;
 							snapshot occurrence t2_rightFront : Wheel_2;
@@ -1328,8 +1385,8 @@ The rationale and risk are contained in a metadata library. *\
 		part missionContext : MissionContext {
 			[prefixMetadata] attribute transportTime;
 			perform transportPassenger transportPassenger;
-			part road : Road = [FeatureChainExpression];
-			part driver : Driver = [FeatureChainExpression] {
+			part road : Road;
+			part driver : Driver {
 				perform transportPassenger.a.driverGetInVehicle.unlockDoor_in;
 				perform transportPassenger.a.driverGetInVehicle.openDoor_in;
 				perform transportPassenger.a.driverGetInVehicle.enterVehicle;
@@ -1340,7 +1397,7 @@ The rationale and risk are contained in a metadata library. *\
 				perform transportPassenger.c.driverGetOutOfVehicle.lockDoor_out;
 				perform transportPassenger.b.driveVehicleToDestination;
 			}
-			part passenger1 : Passenger = [FeatureChainExpression] {
+			part passenger1 : Passenger {
 				perform transportPassenger.a.passenger1GetInVehicle.unlockDoor_in;
 				perform transportPassenger.a.passenger1GetInVehicle.openDoor_in;
 				perform transportPassenger.a.passenger1GetInVehicle.enterVehicle;
@@ -1350,13 +1407,18 @@ The rationale and risk are contained in a metadata library. *\
 				perform transportPassenger.c.passenger1GetOutOfVehicle.closeDoor_out;
 				perform transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out;
 			}
-			part vehicle_b_1 :> vehicle_b = [FeatureChainExpression] {
-				attribute :>> position3dVector = [OperatorExpression];
+			part vehicle_b_1 :> vehicle_b {
+				attribute :>> position3dVector = [SquareBracketOperator];
 				perform transportPassenger.b.providePower;
 				perform transportPassenger.trigger;
 			}
-			connect  driver.handPort to vehicle_b_1.ignitionCmdPort;
-			connect  road to vehicle_b_1.vehicleToRoadPort;
+			connect  driver.handPort to vehicle_b_1.ignitionCmdPort {
+				end ref;
+				end ref;
+			}
+			connect  road to vehicle_b_1.vehicleToRoadPort {
+				end ref;
+			}
 		}
 	}
 	package VehicleSuperSetModel {
@@ -1395,22 +1457,22 @@ The rationale and risk are contained in a metadata library. *\
 		package SafetyGroup {
 			comment about \* Parts that contribute to safety. *\
 			public import vehicle_b::**;
-			public filter [OperatorExpression];
+			public filter [ClassificationTestOperator];
 		}
 		package SecurityGroup {
 			comment about \* Parts that contribute to security. *\
 			public import vehicle_b::**;
-			public filter [OperatorExpression];
+			public filter [ClassificationTestOperator];
 		}
 		package SafetyandSecurityGroup {
 			comment about \* Parts that contribute to safety OR security. *\
 			public import vehicle_b::**;
-			public filter [OperatorExpression];
+			public filter [ConditionalOrOperator];
 		}
 		package MandatorySafetyGroup {
 			comment about \* Parts that contribute to safety AND are mandatory. *\
 			public import vehicle_b::**;
-			public filter [OperatorExpression];
+			public filter [ConditionalAndOperator];
 		}
 	}
 	package Views_Viewpoints {
@@ -1440,7 +1502,7 @@ The rationale and risk are contained in a metadata library. *\
 			view def RelationshipView;
 			view def TableView;
 			view def PartsTreeView {
-				public filter [OperatorExpression];
+				public filter [ClassificationTestOperator];
 			}
 			view def PartsInterconnection;
 		}
@@ -1453,7 +1515,7 @@ The rationale and risk are contained in a metadata library. *\
 					subject;
 				}
 				protected expose PartsTree::**;
-				public filter [OperatorExpression];
+				public filter [ClassificationTestOperator];
 			}
 		}
 	}

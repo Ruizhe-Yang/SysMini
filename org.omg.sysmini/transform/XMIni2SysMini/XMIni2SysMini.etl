@@ -167,34 +167,6 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 	}
 }
 
-operation XMIni!Element getExpression(){
-	if (self.ownedRelatedElement.first().isKindOf(XMIni!Expression)){
-		var str = "";
-		var expression = self.ownedRelatedElement.first();
-		switch (expression.type().name){
-			case "LiteralBoolean":                     str = expression.LiteralBoolean();
-			case "LiteralString":                      str = expression.LiteralString();
-			case "LiteralInteger":                     str = expression.LiteralInteger();
-			case "LiteralRational":                    str = expression.LiteralRational();
-			case "LiteralInfinity":                    str = expression.LiteralInfinity();
-			case "NullExpression":                     str = expression.NullExpression();
-			case "InvocationExpression":               str = expression.InvocationExpression();
-			case "MetadataAccessExpression":           str = expression.MetadataAccessExpression();
-			case "FeatureReferenceExpression":         str = expression.FeatureReferenceExpression();
-			case "Expression":                         str = expression.BaseExpression();
-			case "FeatureChainExpression":             str = expression.FeatureChainExpression();
-			case "SelectExpression":                   str = expression.SelectExpression();
-			case "CollectExpression":                  str = expression.CollectExpression();
-			case "OperatorExpression":                 str = expression.OperatorExpression();
-		}
-		expression.tagAllOwnedElement();
-		return str;
-	}
-	else{
-		return "";
-	}
-}
-
 //Element
 @abstract
 rule ElementRule
