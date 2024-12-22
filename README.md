@@ -15,10 +15,11 @@
 
 - 若干Usage的一类多用未处理
 - 若干Membership实例化情况未确定
-- 整个Expression转换未实现
+- Expression部分转换未补全
 - 一次性对一个文件夹进行转换的代码未实现
 - PrefixMetadata问题未处理
 - TransitionUsage目前关闭
+- 缩写字符问题
 - 全类校对
 - 全架构JAVA驱动实现
 

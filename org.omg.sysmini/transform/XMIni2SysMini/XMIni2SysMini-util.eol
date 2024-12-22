@@ -160,16 +160,40 @@ operation XMIni!Feature getFeatureSpecialization(){
 		var object = owningMembership.getDeclaredName();
 		if (object == "" or object == null){
 			if (owningMembership.isTypeOf("Redefinition")){
-				object = owningMembership.redefinedFeature.declaredName;
+				if (owningMembership.redefinedFeature.declaredName !=  null){
+					object = owningMembership.redefinedFeature.declaredName;
+				}
+				else{
+					object = owningMembership.redefinedFeature.equivalent().featureSpecialization;
+				}
 			}
 			else if (owningMembership.isTypeOf("FeatureTyping")){
-				object =  owningMembership.type.declaredName;
+				if (owningMembership.type.declaredName !=  null){
+					object = owningMembership.type.declaredName;
+				}
+				else{
+					object = owningMembership.type.equivalent().featureSpecialization;
+				}
+
 			}
 			else if (owningMembership.isTypeOf("Subsetting")){
-				object = owningMembership.subsettedFeature.declaredName;
+				if (owningMembership.subsettedFeature.declaredName !=  null){
+					object = owningMembership.subsettedFeature.declaredName;
+				}
+				else{
+					object = owningMembership.subsettedFeature.equivalent().featureSpecialization;
+				}
 			}
 			else if (owningMembership.isTypeOf("ReferenceSubsetting")){
-				object = owningMembership.referencedFeature.declaredName;
+				if (owningMembership.referencedFeature.declaredName !=  null){
+					object = owningMembership.referencedFeature.declaredName;
+				}
+				else if (owningMembership.referencedFeature.isTypeOf("Feature")){
+					object = owningMembership.referencedFeature.FeatureChain();
+				}
+				else{
+					object = owningMembership.referencedFeature.equivalent().featureSpecialization;
+				}
 			}
 //			else{
 //				self.println();
@@ -338,8 +362,18 @@ operation XMIni!Feature FeatureChain(){
 		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().declaredName != null){
 			str += featureChain.chainingFeature.equivalent().declaredName;
 			str += ".";
+
+		}
+		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().featureSpecialization != null){
+			str += featureChain.chainingFeature.equivalent().featureSpecialization;
+			str += ".";
+
 		}
 		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+			str += ".";
+		}
+		else{
+			str += featureChain.declaredName;
 			str += ".";
 		}
 	}
@@ -503,10 +537,17 @@ operation XMIni!Expression FeatureReferenceExpression(){
 		//FeatureReferenceExpression
 		var featureReferenceExpression = self.ownedRelationship.getElementOf("Membership").first();
 		if (featureReferenceExpression.declaredName != null){
-			return featureReferenceExpression.declaredName;
+			var str = featureReferenceExpression.declaredName;
+			if (str.split("::").first() == "SI"){
+				//featureReferenceExpression.println();
+			}
+			return str;
 		}
-		else{
+		else if (featureReferenceExpression.memberElement.declaredName != null){
 			return featureReferenceExpression.memberElement.declaredName;
+		}
+		else if (featureReferenceExpression.memberElement.equivalent().featureSpecialization != null){
+			return featureReferenceExpression.memberElement.equivalent().featureSpecialization;
 		}
 	}
 	else if (self.ownedRelationship.getElementOf("FeatureMembership").size() == 1){
@@ -524,6 +565,13 @@ operation XMIni!Expression SequenceExpression(){
 //	str = "";
 //	str += self.OwnedExpression();
 // TBD  ( ',' | {SysML::OperatorExpression.operand += current} operator = ',' operand += SequenceExpression)?
+//	var str = self.OwnedExpression();
+//	if (self.operator == ","){
+//		self.operand.println();
+//	}
+//	else{
+//		str += ",";
+//	}
 	return "[SequenceExpression]";
 }
 
@@ -545,11 +593,12 @@ operation XMIni!Expression FeatureChainExpression(){
 		return self.memberElement.declaredName;
 	}
 	else if (self.ownedRelationship.getElementOf("OwningMembership").size() == 1){
+//		self.ownedRelationship.getElementOf("OwningMembership").first().ownedRelatedElement.first().FeatureChain().println();
 		return self.ownedRelationship.getElementOf("OwningMembership").first().ownedRelatedElement.first().FeatureChain();
 	}
 	else{
-// TBD	return "[FeatureChainExpression]";
-		return "";
+		return "[FeatureChainExpression]";
+//	shang	return "";
 	}
 	
 }
@@ -564,55 +613,89 @@ operation XMIni!Expression CollectExpression(){
 
 operation XMIni!Expression OperatorExpression(){
 	switch(self.operator){
-		case null: self.println();
-		case "[": return self.SquareBracketOperator();
-		case "/": return self.MultiplicativeOperator();
-		case "*": return self.MultiplicativeOperator();
-		case "%": return self.MultiplicativeOperator();
-		case "**": return self.ExponentiationOperator();
-		case "^": return self.ExponentiationOperator();
-		case "meta": return self.MetaCastOperator();
+		case null:      self.println();
+		case "[":       return self.SquareBracketOperator();
+		case "/":       return self.MultiplicativeOperator();
+		case "*":       return self.MultiplicativeOperator();
+		case "%":       return self.MultiplicativeOperator();
+		case "**":      return self.ExponentiationOperator();
+		case "^":       return self.ExponentiationOperator();
+		case "meta":    return self.MetaCastOperator();
 		case "hastype": return self.ClassificationTestOperator();
-		case "istype": return self.ClassificationTestOperator();
-		case "@": return self.ClassificationTestOperator();
-		case "and": return self.ConditionalAndOperator();
-		case "or": return self.ConditionalOrOperator();
-		case "+": return self.AdditiveOperator();
-		case "-": return self.AdditiveOperator();
-		case ",": return self.SequenceExpression();
+		case "istype":  return self.ClassificationTestOperator();
+		case "@":       return self.ClassificationTestOperator();
+		case "and":     return self.ConditionalAndOperator();
+		case "or":      return self.ConditionalOrOperator();
+		case "+":       return self.AdditiveOperator();
+		case "-":       return self.AdditiveOperator();
+		case ",":       return self.SequenceExpression();
 	}
 	return "[OperatorExpression]";
 }
 
 operation XMIni!Expression SquareBracketOperator(){
-	return "[SquareBracketOperator]";
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart+" ["+backPart+"]";
+}
+
+operation XMIni!ParameterMembership ParameterMembership(){
+	return self.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first().OwnedExpression();
+}
+
+operation XMIni!ReturnParameterMembership ReturnParameterMembership(){
+	return self.ownedRelatedElement.first().ownedRelationship.first().declaredName;
 }
 
 operation XMIni!Expression MultiplicativeOperator(){
-	return "[MultiplicativeOperator]";
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart+self.operator+backPart;
 }
 
 operation XMIni!Expression ExponentiationOperator(){
-	return "[ExponentiationOperator]";
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart+self.operator+backPart;
 }
 
 operation XMIni!Expression MetaCastOperator(){
-	return "[MetaCastOperator]";
+	var frontPart = self.ownedRelationship.getElementOf("ParameterMembership").first().ParameterMembership().split(".metadata").first();
+	var backPart = self.ownedRelationship.getElementOf("ReturnParameterMembership").first().ReturnParameterMembership();
+	return frontPart.space()+"meta".space()+backPart;
 }
 
 operation XMIni!Expression ClassificationTestOperator(){
-	return "[ClassificationTestOperator]";
+	var featureTyping = self.ownedRelationship.getElementOf("FeatureMembership").first().ownedRelatedElement.first().ownedRelationship.first();
+	if (featureTyping.declaredName != null){
+		return self.operator+featureTyping.declaredName;
+	}
+	else{
+		return self.operator+featureTyping.type.declaredName;
+	}
 }
 
 operation XMIni!Expression ConditionalAndOperator(){
-	return "[ConditionalAndOperator]";
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart.space()+"and".space()+backPart;
 }
 
 operation XMIni!Expression ConditionalOrOperator(){
-	return "[ConditionalOrOperator]";
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart.space()+"or".space()+backPart;
 }
 
 operation XMIni!Expression AdditiveOperator(){
-	return "[AdditiveOperator]";
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart.space()+self.operator.space()+backPart;
 }
 
