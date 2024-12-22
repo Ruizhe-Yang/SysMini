@@ -177,7 +177,6 @@ operation XMIni!Element getExpression(){
 			case "LiteralInteger":                     str = expression.LiteralInteger();
 			case "LiteralRational":                    str = expression.LiteralRational();
 			case "LiteralInfinity":                    str = expression.LiteralInfinity();
-			case "LiteralExpression":                  str = expression.LiteralExpression();
 			case "NullExpression":                     str = expression.NullExpression();
 			case "InvocationExpression":               str = expression.InvocationExpression();
 			case "MetadataAccessExpression":           str = expression.MetadataAccessExpression();
@@ -188,7 +187,7 @@ operation XMIni!Element getExpression(){
 			case "CollectExpression":                  str = expression.CollectExpression();
 			case "OperatorExpression":                 str = expression.OperatorExpression();
 		}
-//		str.println();
+		expression.tagAllOwnedElement();
 		return str;
 	}
 	else{

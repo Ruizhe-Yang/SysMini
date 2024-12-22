@@ -318,29 +318,34 @@ operation XMIni!Element OwnedReferenceSubsetting() : String {
 			return referenceSubsetting.referencedFeature.declaredName;
 		}
 		else{
-			var str = "";
 			if (referenceSubsetting.ownedRelatedElement.size() == 0){
 				return "";
 			}
-			for (featureChain in referenceSubsetting.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureChaining")){
-				if (featureChain.chainingFeature != null and featureChain.chainingFeature.declaredName != null){
-					str += featureChain.chainingFeature.declaredName;
-					str += ".";
-				}
-				else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().declaredName != null){
-					str += featureChain.chainingFeature.equivalent().declaredName;
-					str += ".";
-				}
-				else if (featureChain.chainingFeature != null and featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
-						str += ".";
-				}
+			else{
+				return referenceSubsetting.ownedRelatedElement.first().FeatureChain();
 			}
-			self.tag();
-			return str.substring(0, str.length()-1);
 		}
 	}
 }
 
+operation XMIni!Feature FeatureChain(){
+	var str = "";
+	for (featureChain in self.ownedRelationship.getElementOf("FeatureChaining")){
+		if (featureChain.chainingFeature != null and featureChain.chainingFeature.declaredName != null){
+			str += featureChain.chainingFeature.declaredName;
+			str += ".";
+		}
+		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().declaredName != null){
+			str += featureChain.chainingFeature.equivalent().declaredName;
+			str += ".";
+		}
+		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){								str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+			str += ".";
+		}
+	}
+	self.tag();
+	return str.substring(0, str.length()-1);
+}
 
 operation Any space(){
 	if (self == null or self == ""){
@@ -378,15 +383,75 @@ operation XMIni!Expression LiteralInfinity(){
 }
 
 operation XMIni!Expression LiteralExpression(){
-	return "[LiteralExpression]";
+	var str = "[LiteralExpression]";
+	switch (expression.type().name){
+		case "LiteralBoolean":      str = self.LiteralBoolean();
+		case "LiteralString":       str = self.LiteralString();
+		case "LiteralInteger":      str = self.LiteralInteger();
+		case "LiteralRational":     str = self.LiteralRational();
+		case "LiteralInfinity":     str = self.LiteralInfinity();
+	}
+	return str;
 }
 
 operation XMIni!Expression NullExpression(){
-	return "[NullExpression]";
+	return "null";
 }
 
+
+
 operation XMIni!Expression InvocationExpression(){
-	return "[InvocationExpression]";
+	var str = "";
+	var ownedFeatureTyping = self.ownedRelationship.getElementOf("FeatureTyping").first();
+	if (ownedFeatureTyping.declaredName != null){
+		str += ownedFeatureTyping.declaredName;
+	}
+	else if (ownedFeatureTyping.type != null){
+		str += ownedFeatureTyping.type.declaredName;
+	}
+	else{
+		str += ownedFeatureTyping.ownedRelatedElement.first().FeatureChain();
+	}
+	str += self.ArgumentList();
+	str.println("str: ");
+	return str;
+}
+
+operation XMIni!Expression ArgumentList(){
+	if (self.ownedRelationship.getElementOf("ParameterMembership").size() == 0){
+		return "()";
+	}
+	var str = "";
+	for (t in self.ownedRelationship.getElementOf("ParameterMembership")){
+		if (t.ownedRelatedElement.first().ownedRelationship.size() == 2){
+			//NamedArgument
+			var strr = "";
+			var parameterRedefinition = t.ownedRelatedElement.first().ownedRelationship.getElementOf("Redefinition").first();
+			if (parameterRedefinition.declaredName != null){
+				strr += parameterRedefinition.declaredName;
+			}
+			else if (parameterRedefinition.redefinedFeature.declaredName != null){
+				strr += parameterRedefinition.redefinedFeature.declaredName;
+			}
+			else{
+			}
+			strr += "=";
+			var argumentValue = t.ownedRelatedElement.first().ownedRelationship.getElementOf("FeatureValue").first();
+			strr += argumentValue.getExpression();
+			if (strr.split("=").size() == 2 and strr.split("=").first() == strr.split("=").second()){
+				strr = strr.split("=").first();
+			}
+			str += strr;
+		}
+		else {
+			//Argument
+			var argumentValue = t.ownedRelatedElement.first().ownedRelationship.first();
+			str += argumentValue.getExpression();
+		}
+		str += ", ";
+	}
+	str = str.substring(0, str.length()-2);
+	return "(" + str + ")";
 }
 
 operation XMIni!Expression MetadataAccessExpression(){
@@ -394,11 +459,39 @@ operation XMIni!Expression MetadataAccessExpression(){
 }
 
 operation XMIni!Expression FeatureReferenceExpression(){
+	var ownedRelationship = self.ownedRelationship.getElementOf("Membership");
+	if (ownedRelationship.size() == 1){
+		var featureReferenceExpression = ownedRelationship.first();
+		if (featureReferenceExpression.declaredName != null){
+			return featureReferenceExpression.declaredName;
+		}
+		else{
+			return featureReferenceExpression.memberElement.declaredName;
+		}
+	}
 	return "[FeatureReferenceExpression]";
 }
 
+operation XMIni!Expression BodyExpression(){
+	return "[BodyExpression]";
+}
+
+operation XMIni!Expression SequenceExpression(){
+	return "[SequenceExpression]";
+}
+
 operation XMIni!Expression BaseExpression(){
-	return "[BaseExpression]";
+	var str = "[BaseExpression]";
+	switch (expression.type().name){
+		case "NullExpression":              str = self.NullExpression();
+		case "LiteralExpression":           str = self.LiteralExpression();
+		case "FeatureReferenceExpression":  str = self.FeatureReferenceExpression();
+		case "MetadataAccessExpression":    str = self.MetadataAccessExpression();
+		case "InvocationExpression":        str = self.InvocationExpression();
+		case "BodyExpression":              str = self.BodyExpression();
+		case "SequenceExpression":          str = "(" + self.SequenceExpression() + ")";
+	}
+	return str;
 }
 
 operation XMIni!Expression FeatureChainExpression(){
