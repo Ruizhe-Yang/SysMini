@@ -133,6 +133,7 @@ operation SysMini!Element matchType() : String {
 		case "WhileLoopActionUsage":         return self.WhileLoopActionUsage();
 		case "ForLoopActionUsage":           return self.ForLoopActionUsage();
 		case "OperatorExpression":           return self.OperatorExpression();
+		case "SendActionUsage":              return self.SendActionUsage();
 	}
 	return "";
 }

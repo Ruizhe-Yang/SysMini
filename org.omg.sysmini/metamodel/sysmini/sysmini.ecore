@@ -272,7 +272,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorPart" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActionUsage" eSuperTypes="#//OccurrenceUsage #//Step"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionUsage" eSuperTypes="#//OccurrenceUsage #//Step">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NodeParameterMember" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceUsage" eSuperTypes="#//ConnectionUsage"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceDefinition" eSuperTypes="#//ConnectionDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionDefinition" eSuperTypes="#//PartDefinition #//AssociationStructure"/>

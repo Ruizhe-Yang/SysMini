@@ -393,6 +393,7 @@ class ConnectionUsage extends ConnectorAsUsage, PartUsage {
 }
 
 class ActionUsage extends OccurrenceUsage, Step {
+	attr String[*] NodeParameterMember;
 }
 
 class InterfaceUsage extends ConnectionUsage {

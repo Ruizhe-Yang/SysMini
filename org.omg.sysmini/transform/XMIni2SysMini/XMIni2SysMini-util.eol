@@ -46,6 +46,18 @@ operation XMIni!ReferenceUsage addReferenceUsageNodeTo(rootNode : SysMini!Elemen
 	}
 }
 
+operation XMIni!RequirementUsage addRequirementUsageNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity() and (not self.isObjectiveMembership())){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		self.elementTransform(node);
+	}
+}
+
+operation XMIni!RequirementUsage isObjectiveMembership(){
+	return (self.eContainer().isTypeOf("ObjectiveMembership") and (self.declaredName == null or self.declaredName == ""));
+}
+
 operation XMIni!ReferenceUsage isNullReturnParameter(){
 	return (self.eContainer().isTypeOf("ReturnParameterMembership") and (self.declaredName == null or self.declaredName == ""));
 }
@@ -199,10 +211,6 @@ operation XMIni!Feature getFeatureSpecialization(){
 					object = owningMembership.referencedFeature.equivalent().featureSpecialization;
 				}
 			}
-//			else{
-//				self.println();
-//				owningMembership.println();
-//			}
 		}
 		return object;
 	}
@@ -635,40 +643,62 @@ operation XMIni!Expression CollectExpression(){
 
 operation XMIni!Expression OperatorExpression(){
 	switch(self.operator){
-		case null:      self.println();
-		case "[":       return self.SquareBracketOperator();
+//		case "if":      return self.ConditionalOperator();	
+//		case "??":      return self.NullCoalescingOperator();
+//		case "implies": return self.ImpliesOperator();
+		case "|":       return self.ConditionalOrOperator();
+		case "or":      return self.ConditionalOrOperator();	
+		case "xor":     return self.XorOperator();
+		case "and":     return self.ConditionalAndOperator();
+		case "&":       return self.ConditionalAndOperator();
+		case "==":      return self.EqualityOperator();
+		case "!=":      return self.EqualityOperator();
+		case "===":     return self.EqualityOperator();
+		case "!==":     return self.EqualityOperator();
+		case "hastype": return self.ClassificationTestOperator();
+		case "istype":  return self.ClassificationTestOperator();
+		case "@":       return self.ClassificationTestOperator();
+//		case "@@":      return self.MetaClassificationTestOperator();
+//		case "as":      return self.CastOperator();
+		case "meta":    return self.MetaCastOperator();
+		case "<":       return self.RelationalOperator();
+		case ">":       return self.RelationalOperator();
+		case "<=":      return self.RelationalOperator();
+		case ">=":      return self.RelationalOperator();
 		case "/":       return self.MultiplicativeOperator();
 		case "*":       return self.MultiplicativeOperator();
 		case "%":       return self.MultiplicativeOperator();
 		case "**":      return self.ExponentiationOperator();
 		case "^":       return self.ExponentiationOperator();
-		case "meta":    return self.MetaCastOperator();
-		case "hastype": return self.ClassificationTestOperator();
-		case "istype":  return self.ClassificationTestOperator();
-		case "@":       return self.ClassificationTestOperator();
-		case "and":     return self.ConditionalAndOperator();
-		case "or":      return self.ConditionalOrOperator();
-		case "<":       return self.RelationalOperator();
-		case ">":       return self.RelationalOperator();
-		case "<=":       return self.RelationalOperator();
-		case ">=":       return self.RelationalOperator();
-		case "+":       return self.AdditiveOperator();
-		case "-":       return self.AdditiveOperator();
+		case "+":       return self.UnaryOperator();
+		case "-":       return self.UnaryOperator();
+		case "~":       return self.UnaryOperator();
+		case "not":     return self.UnaryOperator();
+		case "#":       return self.SquareBracketOperator();
+		case "[":       return self.SquareBracketOperator();
 		case ",":       return self.SequenceExpression();
 	}
 	return "[OperatorExpression]";
 }
 
-
 operation XMIni!Expression SquareBracketOperator(){
 	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
 	var frontPart = parameterMemberships.first().ParameterMembership();
 	var backPart = parameterMemberships.second().ParameterMembership();
-	return frontPart+" ["+backPart+"]";
+	if (self.operator == "["){
+		return frontPart+"["+backPart+"]";
+	}
+	else{
+		return frontPart+"#("+backPart+")";
+	}
 }
 
 operation XMIni!ParameterMembership ParameterMembership(){
-	return self.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first().OwnedExpression();
+	self.tag();
+	if (self.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first() != null){
+		return self.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first().OwnedExpression();
+	}
+	return "";
 }
 
 operation XMIni!ReturnParameterMembership ReturnParameterMembership(){
@@ -719,6 +749,13 @@ operation XMIni!Expression ConditionalOrOperator(){
 	return frontPart.space()+"or".space()+backPart;
 }
 
+operation XMIni!Expression XorOperator(){
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	return frontPart.space()+"xor".space()+backPart;
+}
+
 operation XMIni!Expression RelationalOperator(){
 	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
 	var frontPart = parameterMemberships.first().ParameterMembership();
@@ -726,13 +763,25 @@ operation XMIni!Expression RelationalOperator(){
 	return frontPart.space()+self.operator.space()+backPart;
 }
 
-operation XMIni!Expression AdditiveOperator(){
+operation XMIni!Expression UnaryOperator(){
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	if (parameterMemberships.size() == 1){
+		var part = parameterMemberships.first().ParameterMembership();
+		return "("+self.operator+part+")";
+	}
+	else{
+		var frontPart = parameterMemberships.first().ParameterMembership();
+		var backPart = parameterMemberships.second().ParameterMembership();
+		return frontPart.space()+self.operator.space()+backPart;
+	}
+}
+
+operation XMIni!Expression EqualityOperator(){
 	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
 	var frontPart = parameterMemberships.first().ParameterMembership();
 	var backPart = parameterMemberships.second().ParameterMembership();
 	return frontPart.space()+self.operator.space()+backPart;
 }
-
 
 operation XMIni!Element tagAllOwnedElement(){
 	self.tag();

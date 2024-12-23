@@ -743,6 +743,22 @@ operation SysMini!OperatorExpression OperatorExpression() : String {
 	return self.valuePart;
 }
 
+operation SysMini!SendActionUsage SendActionUsage() : String {
+	var str = "";
+	str += self.ActionNodeUsageDeclaration();
+	str += "send".space();
+	str += self.NodeParameterMember.first().space();
+	if (self.NodeParameterMember.second() != ""){
+		str += "via".space();
+		str += self.NodeParameterMember.second().space();
+	}
+	if (self.NodeParameterMember.third() != ""){
+		str += "to".space();
+		str += self.NodeParameterMember.third().space();
+	}
+	return str;
+}
+
 /* Def Key Word*/
 operation RenderingDefKeyword() : String {
 	return RenderingKeyword() + "def".space();
@@ -1221,6 +1237,11 @@ operation SysMini!Usage UsageDeclaration() : String {
 	return self.FeatureDeclaration();
 }
 
+operation SysMini!ActionUsage ActionNodeUsageDeclaration() : String {
+	return ActionUsageKeyword() + 
+			self.UsageDeclaration();
+}
+
 operation SysMini!MetadataUsage MetadataUsageDeclaration() : String {
 	var str = "";
 	str += self.Identification();
@@ -1267,7 +1288,6 @@ operation SysMini!Feature ValuePart() : String {
 			str += "default".space();
 		}
 		else{
-// TBD		str += ":".space();
 			str += "=".space();
 		}
 		str += self.valuePart.space();

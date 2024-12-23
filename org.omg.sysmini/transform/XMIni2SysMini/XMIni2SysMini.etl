@@ -138,7 +138,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "AcceptActionUsage": element.addNodeTo(rootNode);
 			case "CalculationUsage":                   element.addNodeTo(rootNode);
 			case "PerformActionUsage":                 element.addNodeTo(rootNode);
-			case "SendActionUsage": element.addNodeTo(rootNode);
+			case "SendActionUsage":                    element.addNodeTo(rootNode);
 			case "IfActionUsage": element.addNodeTo(rootNode);
 			case "AssignmentActionUsage":              element.addNodeTo(rootNode);
 			case "ConnectionUsage":                    element.addNodeTo(rootNode);
@@ -161,7 +161,7 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "SuccessionFlowConnectionUsage":      element.addNodeTo(rootNode);
 			case "IncludeUseCaseUsage":                element.addNodeTo(rootNode);
 			case "ConstraintUsage": element.addNodeTo(rootNode);
-			case "RequirementUsage": element.addNodeTo(rootNode);
+			case "RequirementUsage": element.addRequirementUsageNodeTo(rootNode);
 			case "AssertConstraintUsage":              element.addNodeTo(rootNode);
 			case "ConcernUsage": element.addNodeTo(rootNode);
 			case "ViewpointUsage":                     element.addNodeTo(rootNode);
@@ -171,13 +171,6 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 }
 
 //Element
-@abstract
-rule ElementRule
-	transform s : XMIni!Element
-	to t : SysMini!Element {
-		t.declaredName = s.declaredName;
-		t.declaredShortName = s.declaredShortName;
-	}
 
 @abstract
 rule PrefixMetadataAnnotation
@@ -206,10 +199,6 @@ rule DefinitionExtensionKeyword
 	transform s : XMIni!Definition
 	to t : SysMini!Definition
 	extends PrefixMetadataMember{
-// TBD
-//		for (prefixMetadataMember in s.ownedRelationship.getElementOf("OwningMembership")){
-//			prefixMetadataMember.ownedRelatedElement.getElementOf("MetadataUsage").println();
-//		}
 	}
 	
 @abstract
@@ -222,8 +211,9 @@ rule DefinitionPrefix
 @abstract
 rule Identification
 	transform s : XMIni!Element
-	to t : SysMini!Element
-	extends ElementRule{
+	to t : SysMini!Element{
+		t.declaredName = s.declaredName;
+		t.declaredShortName = s.declaredShortName;
 	}
 
 @abstract
@@ -509,12 +499,18 @@ rule PrefixMetadataUsage
 	transform s : XMIni!Element
 	to t : SysMini!Element{
 		for (owningMembership in s.ownedRelationship.getElementOf("OwningMembership")){
-			for (prefixMetadataUsage in owningMembership.ownedRelatedElement.getElementOf("MetadataUsage")){
-				t.prefixMetadata = "[prefixMetadata]";
+			var prefixMetadataUsage = owningMembership.ownedRelatedElement.getElementOf("MetadataUsage").first();
+			if (prefixMetadataUsage != null){
+				var featureTyping = prefixMetadataUsage.ownedRelationship.first();
+				if (featureTyping.declaredName != null){
+					t.prefixMetadata = "#"+featureTyping.declaredName;
+				}
+				else if (featureTyping.type.declaredName != null){
+					t.prefixMetadata = "#"+featureTyping.type.declaredName;
+				}
 				prefixMetadataUsage.tag();
 			}
 		}
-// TBD
 	}
 	
 //Import
@@ -522,7 +518,7 @@ rule PrefixMetadataUsage
 rule Import
 	transform s : XMIni!Import
 	to t : SysMini!Import 
-	extends ElementRule{
+	extends Identification{
 		t.setVisibility(s);
 		t.isImportAll = s.isImportAll;
 		t.isRecursive = s.isRecursive;
@@ -534,14 +530,9 @@ rule Import
 rule DefinitionRule
 	transform s : XMIni!Definition
 	to t : SysMini!Definition
-	extends ElementRule, PrefixMetadataMember{
+	extends Identification, PrefixMetadataMember{
 		t.isAbstract = s.isAbstract;
 		t.isVariation = s.isVariation;
-//		if (s.ownedRelationship != null){
-//          for (prefixMetadataMember in s.ownedRelationship){
-// TBD
-//					}
-//				}
 	}
 
 
@@ -550,7 +541,7 @@ rule DefinitionRule
 rule UsageRule
 	transform s : XMIni!Usage
 	to t : SysMini!Usage
-	extends ElementRule, PrefixMetadataMember{
+	extends Identification, PrefixMetadataMember{
 	}
 	
 	
@@ -729,13 +720,37 @@ rule PerformActionUsage
 	}
 
 @abstract
+rule SendActionUsage
+	transform s : XMIni!SendActionUsage
+	to t : SysMini!SendActionUsage
+	extends OccurrenceUsagePrefix, SendNodeDeclaration, ActionBody{
+		for (parameterMembership in s.ownedRelationship.getElementOf("ParameterMembership")){
+			t.NodeParameterMember.add(parameterMembership.ParameterMembership());
+		}
+	}
+
+@abstract
+rule SendNodeDeclaration
+	transform s : XMIni!ActionUsage
+	to t : SysMini!ActionUsage
+	extends ActionNodeUsageDeclaration{
+		
+	}
+
+@abstract
+rule ActionNodeUsageDeclaration
+	transform s : XMIni!ActionUsage
+	to t : SysMini!ActionUsage
+	extends UsageDeclaration{
+	}
+	
+@abstract
 rule IncludeUseCaseUsage
 	transform s : XMIni!IncludeUseCaseUsage
 	to t : SysMini!IncludeUseCaseUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, CaseBody{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -811,7 +826,6 @@ rule PerformActionUsageDeclaration
 	extends UsageDeclaration, ValuePart{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -851,9 +865,7 @@ rule ExhibitStateUsage
 rule RequirementUsage
 	transform s : XMIni!RequirementUsage
 	to t : SysMini!RequirementUsage
-	extends OccurrenceUsagePrefix,
-			ConstraintUsageDeclaration,
-			RequirementBody{
+	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, RequirementBody{
 // TBD
 	}
 	
@@ -1261,7 +1273,6 @@ rule EventOccurrenceUsage
 	extends OccurrenceUsagePrefix, FeatureSpecializationPart, UsageCompletion{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -1439,6 +1450,34 @@ rule OperatorExpression
 	}
 
 
+@abstract
+rule Package
+	transform s : XMIni!Package
+	to t : SysMini!Package 
+	extends PrefixMetadataMember, PackageDeclaration, PackageBody{
+	}
+
+@abstract
+rule LibraryPackage
+	transform s : XMIni!LibraryPackage
+	to t : SysMini!LibraryPackage 
+	extends PrefixMetadataMember, PackageDeclaration, PackageBody{
+	}
+	
+@abstract
+rule PackageDeclaration
+	transform s : XMIni!Package
+	to t : SysMini!Package 
+	extends Identification{
+	}
+
+@abstract
+rule PackageBody
+	transform s : XMIni!Package
+	to t : SysMini!Package{
+	}
+	
+	
 /* @lazy */
 @lazy
 rule NamespaceImportRule
@@ -1474,31 +1513,26 @@ rule MembershipImportRule
 rule PackageRule
 	transform s : XMIni!Package
 	to t : SysMini!Package 
-	extends ElementRule{
-//				if (s.ownedRelationship != null){
-//                  for (prefixMetadataMember in s.ownedRelationship){
-// TBD: prefixMetadataMember
-//					}
-//				}
+	extends Package{
 	}
 
-//Package
+@lazy
+rule LibraryPackageRule
+	transform s : XMIni!LibraryPackage
+	to t : SysMini!LibraryPackage 
+	extends LibraryPackage{
+		t.isStandard = s.isStandard;
+	}
+	
+//Dependency
 @lazy
 rule DependencyRule
 	transform s : XMIni!Dependency
 	to t : SysMini!Dependency 
 	extends Dependency{
 	}
-	
-//Package
-@lazy
-rule LibraryPackageRule
-	transform s : XMIni!LibraryPackage
-	to t : SysMini!LibraryPackage 
-	extends PackageRule{
-		t.isStandard = s.isStandard;
-	}
-	
+
+//Annotation
 @lazy
 rule CommentRule
 	transform s : XMIni!Comment
@@ -1518,20 +1552,6 @@ rule DocumentationRule
 	transform s : XMIni!Documentation
 	to t : SysMini!Documentation
 	extends Documentation{
-	}
-
-//ItemFeature
-@lazy
-rule ItemFeatureRule
-	transform s : XMIni!ItemFeature
-	to t : SysMini!ItemFeature{
-	}
-
-//ItemFlowEnd
-@lazy
-rule ItemFlowEndRule
-	transform s : XMIni!ItemFlowEnd
-	to t : SysMini!ItemFlowEnd{
 	}
 
 @lazy
@@ -1839,7 +1859,7 @@ rule PerformActionUsageRule
 rule SendActionUsageRule
 	transform s : XMIni!SendActionUsage
 	to t : SysMini!SendActionUsage
-	extends UsageRule{
+	extends SendActionUsage{
 	}
 	
 @lazy
