@@ -315,9 +315,9 @@ driving scenario *\
 			public import USCustomaryUnits::*;
 			public alias Torque for ISQMechanics::TorqueValue;
 			enum def {
-				enum black : Colors;
-				enum grey : Colors;
-				enum red : Colors;
+				enum black :> Base::dataValues;
+				enum grey :> Base::dataValues;
+				enum red :> Base::dataValues;
 			}
 			enum def {
 				enum = 60 [SI::millimetre];
@@ -326,12 +326,12 @@ driving scenario *\
 			}
 			attribute cylinderDiameter : DiameterChoices = 80 [SI::millimetre];
 			enum def {
-				enum on : IgnitionOnOff;
-				enum off : IgnitionOnOff;
+				enum on :> Base::dataValues;
+				enum off :> Base::dataValues;
 			}
 			enum def {
-				enum gas : FuelKind;
-				enum diesel : FuelKind;
+				enum gas :> Base::dataValues;
+				enum diesel :> Base::dataValues;
 			}
 			distancePerVolume :> scalarQuantities = ISQSpaceTime::distance/ISQSpaceTime::volume;
 			timePerDistance :> scalarQuantities = ISQBase::duration/ISQSpaceTime::distance;
@@ -1247,13 +1247,13 @@ The rationale and risk are contained in a metadata library. *\
 				include use case getInVehicle_a [1..5] {
 					subject :>> vehicle;
 					requirement {
-						subject :>> Requirements::null;
+						subject :>> UseCases::null;
 					}
 				}
 				include use case getOutOfVehicle_a [1..5] {
 					subject :>> vehicle;
 					requirement {
-						subject :>> Requirements::null;
+						subject :>> UseCases::null;
 					}
 				}
 			}
