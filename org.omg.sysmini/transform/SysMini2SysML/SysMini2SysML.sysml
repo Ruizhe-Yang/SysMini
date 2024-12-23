@@ -105,7 +105,7 @@ package SimpleVehicleModel {
 				attribute fuelKind : FuelKind;
 				attribute fuelMassMax :> mass;
 				assert constraint fuelConstraint {
-					[OperatorExpression];
+					fuel.fuelMass <= fuelMassMax;
 				}
 				port fuelOutPort : FuelPort;
 				port fuelInPort = ~FuelPort;
@@ -236,7 +236,7 @@ package SimpleVehicleModel {
 			interface def WheelHubInterface {
 				end port lugNutCompositePort : LugNutCompositePort;
 				end port shankCompositePort : ShankCompositePort;
-				interface  wheelFastenerInterface [5] : WheelFastenerInterface connect  lugNutCompositePort.lugNutPort to shankCompositePort.shankPort;
+				interface wheelFastenerInterface [5] : WheelFastenerInterface connect lugNutCompositePort.lugNutPort to shankCompositePort.shankPort;
 			}
 		}
 		package AllocationDefinitions {
@@ -284,7 +284,7 @@ package SimpleVehicleModel {
 				attribute massRequired :> mass;
 				attribute massActual :> mass;
 				requirement {
-					[OperatorExpression];
+					massActual <= massRequired;
 				}
 			}
 			requirement def ReliabilityRequirement {
@@ -293,7 +293,7 @@ package SimpleVehicleModel {
 				attribute reliabilityRequired : ScalarValues::Real;
 				attribute reliabilityActual : ScalarValues::Real;
 				requirement {
-					[OperatorExpression];
+					reliabilityActual >= reliabilityRequired;
 				}
 			}
 			requirement def TorqueGenerationRequirement {
@@ -311,7 +311,7 @@ driving scenario *\
 				attribute actualFuelEconomy :> distancePerVolume;
 				attribute requiredFuelEconomy :> distancePerVolume;
 				requirement {
-					[OperatorExpression];
+					actualFuelEconomy >= requiredFuelEconomy;
 				}
 			}
 		}
@@ -330,19 +330,11 @@ driving scenario *\
 				enum red :> Base::dataValues;
 			}
 			enum def {
-				enum = 60 [SI::millimetre] {
-					60 [SI::millimetre];
-				}
-				enum = 80 [SI::millimetre] {
-					80 [SI::millimetre];
-				}
-				enum = 100 [SI::millimetre] {
-					100 [SI::millimetre];
-				}
+				enum = 60 [SI::millimetre];
+				enum = 80 [SI::millimetre];
+				enum = 100 [SI::millimetre];
 			}
-			attribute cylinderDiameter : DiameterChoices = 80 [SI::millimetre] {
-				80 [SI::millimetre];
-			}
+			attribute cylinderDiameter : DiameterChoices = 80 [SI::millimetre];
 			enum def {
 				enum on :> Base::dataValues;
 				enum off :> Base::dataValues;
@@ -351,27 +343,13 @@ driving scenario *\
 				enum gas :> Base::dataValues;
 				enum diesel :> Base::dataValues;
 			}
-			distancePerVolume :> scalarQuantities = ISQSpaceTime::distance/ISQSpaceTime::volume {
-				ISQSpaceTime::distance/ISQSpaceTime::volume;
-			}
-			timePerDistance :> scalarQuantities = ISQBase::duration/ISQSpaceTime::distance {
-				ISQBase::duration/ISQSpaceTime::distance;
-			}
-			volumePerDistance :> scalarQuantities = ISQSpaceTime::volume/ISQSpaceTime::distance {
-				ISQSpaceTime::volume/ISQSpaceTime::distance;
-			}
-			volumePerTime :> scalarQuantities = ISQSpaceTime::volume/ISQBase::duration {
-				ISQSpaceTime::volume/ISQBase::duration;
-			}
-			kpl : MeasurementReferences::DerivedUnit = SI::kilometre/SI::litre {
-				SI::kilometre/SI::litre;
-			}
-			rpm : MeasurementReferences::DerivedUnit = 1/SI::minute {
-				1/SI::minute;
-			}
-			kW : MeasurementReferences::DerivedUnit = SIPrefixes::kilo*SI::watt {
-				SIPrefixes::kilo*SI::watt;
-			}
+			distancePerVolume :> scalarQuantities = ISQSpaceTime::distance/ISQSpaceTime::volume;
+			timePerDistance :> scalarQuantities = ISQBase::duration/ISQSpaceTime::distance;
+			volumePerDistance :> scalarQuantities = ISQSpaceTime::volume/ISQSpaceTime::distance;
+			volumePerTime :> scalarQuantities = ISQSpaceTime::volume/ISQBase::duration;
+			kpl : MeasurementReferences::DerivedUnit = SI::kilometre/SI::litre;
+			rpm : MeasurementReferences::DerivedUnit = 1/SI::minute;
+			kW : MeasurementReferences::DerivedUnit = SIPrefixes::kilo*SI::watt;
 		}
 		package IndividualDefinitions {
 			individual occurrence def VehicleRoadContext_1;
@@ -394,37 +372,25 @@ driving scenario *\
 			public import Metaobjects::null::*;
 			state failureModes [*];
 			metadata def <fm> failureMode {
-				:>> Metaobjects::baseType = failureModes meta SysML::StateUsage {
-					failureModes meta SysML::StateUsage;
-				}
+				:>> Metaobjects::baseType = failureModes meta SysML::StateUsage;
 			}
 			occurrence logicalOccurrences [*];
 			metadata def <l> logical {
-				:>> Metaobjects::baseType = logicalOccurrences meta SysML::Usage {
-					logicalOccurrences meta SysML::Usage;
-				}
+				:>> Metaobjects::baseType = logicalOccurrences meta SysML::Usage;
 			}
 			occurrence physicalOccurrences [*];
 			metadata def <p> physical {
-				:>> Metaobjects::baseType = physicalOccurrences meta SysML::Usage {
-					physicalOccurrences meta SysML::Usage;
-				}
+				:>> Metaobjects::baseType = physicalOccurrences meta SysML::Usage;
 			}
 		}
 		package GenericContext {
 			part def Context {
 				attribute time : DurationValue;
 				attribute spatialCF [1] : CartesianSpatial3dCoordinateFrame {
-					:>> null = (SI::metre,SI::metre,SI::metre) {
-						(SI::metre,SI::metre,SI::metre);
-					}
+					:>> null = (SI::metre,SI::metre,SI::metre);
 				}
-				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame = spatialCF/SI::second {
-					spatialCF/SI::second;
-				}
-				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame = velocityCF/SI::second {
-					velocityCF/SI::second;
-				}
+				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame = spatialCF/SI::second;
+				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame = velocityCF/SI::second;
 			}
 		}
 	}
@@ -445,22 +411,12 @@ driving scenario *\
 	package VehicleLogicalToPhysicalAllocation {
 		public import PartsTree::**;
 		public import PartsTree::*;
-		allocation  vehicleLogicalToPhysicalAllocation : LogicalToPhysical allocate  vehicleLogical to vehicle_b {
-			allocate  vehicleLogical.torqueGenerator to vehicle_b.engine {
-				end ref vehicleLogical.torqueGenerator;
-				end ref vehicle_b.engine;
-				allocate  vehicleLogical.torqueGenerator.generateTorque to vehicle_b.engine.providePower.generateTorque {
-					end ref vehicleLogical.torqueGenerator.generateTorque;
-					end ref vehicle_b.engine.providePower.generateTorque;
-				}
+		allocation vehicleLogicalToPhysicalAllocation : LogicalToPhysical allocate vehicleLogical to vehicle_b {
+			allocate vehicleLogical.torqueGenerator to vehicle_b.engine {
+				allocate vehicleLogical.torqueGenerator.generateTorque to vehicle_b.engine.providePower.generateTorque;
 			}
-			allocate  vehicleLogical.electricalGenerator to vehicle_b.engine {
-				end ref vehicleLogical.electricalGenerator;
-				end ref vehicle_b.engine;
-				allocate  vehicleLogical.electricalGenerator.generateElectricity to vehicle_b.engine.alternator.generateElectricity {
-					end ref vehicleLogical.electricalGenerator.generateElectricity;
-					end ref vehicle_b.engine.alternator.generateElectricity;
-				}
+			allocate vehicleLogical.electricalGenerator to vehicle_b.engine {
+				allocate vehicleLogical.electricalGenerator.generateElectricity to vehicle_b.engine.alternator.generateElectricity;
 			}
 		}
 	}
@@ -468,35 +424,23 @@ driving scenario *\
 		package VehicleConfiguration_a {
 			package PartsTree {
 				part vehicle_a : Vehicle {
-					attribute mass :>> mass = dryMass + cargoMass + fuelTank {
-						dryMass + cargoMass + fuelTank;
-					}
+					attribute mass :>> mass = dryMass + cargoMass + fuelTank;
 					attribute dryMass :>> dryMass = NumericalFunctions::sum(NumericalFunctions::collection=partMasses);
-					attribute :>> cargoMass = 0 [SI::kilogram] {
-						0 [SI::kilogram];
-					}
+					attribute :>> cargoMass = 0 [SI::kilogram];
 					attribute partMasses [*];
 					part fuelTank : FuelTank {
-						attribute :>> mass = 75 [SI::kilogram] {
-							75 [SI::kilogram];
-						}
+						attribute :>> mass = 75 [SI::kilogram];
 						item :>> fuel {
-							attribute :>> fuelMass = 50 [SI::kilogram] {
-								50 [SI::kilogram];
-							}
+							attribute :>> fuelMass = 50 [SI::kilogram];
 						}
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 800 [SI::kilogram] {
-							800 [SI::kilogram];
-						}
+						attribute mass :> mass = 800 [SI::kilogram];
 						part frontAxle : Axle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 875 [SI::kilogram] {
-							875 [SI::kilogram];
-						}
+						attribute mass :> mass = 875 [SI::kilogram];
 						attribute driveTrainEfficiency : ScalarValues::Real = 0.6;
 						part rearAxle : Axle;
 						part rearWheels [2] : Wheel {
@@ -514,16 +458,10 @@ driving scenario *\
 			public import ModelingMetadata::*;
 			package PartsTree {
 				part vehicle_b : Vehicle {
-					[prefixMetadata] attribute mass = dryMass + cargoMass + fuelTank {
-						dryMass + cargoMass + fuelTank;
-					}
+					[prefixMetadata] attribute mass = dryMass + cargoMass + fuelTank;
 					attribute dryMass :>> dryMass = NumericalFunctions::sum(NumericalFunctions::collection=partMasses);
-					attribute :>> cargoMass default 0 [SI::kilogram] {
-						0 [SI::kilogram];
-					}
-					attribute partMasses = (fuelTank.mass,frontAxleAssembly.mass,rearAxleAssembly.mass,engine.mass,transmission.mass,driveshaft.mass) {
-						(fuelTank.mass,frontAxleAssembly.mass,rearAxleAssembly.mass,engine.mass,transmission.mass,driveshaft.mass);
-					}
+					attribute :>> cargoMass default 0 [SI::kilogram];
+					attribute partMasses = (fuelTank.mass,frontAxleAssembly.mass,rearAxleAssembly.mass,engine.mass,transmission.mass,driveshaft.mass);
 					attribute avgFuelEconomy :> distancePerVolume;
 					port fuelCmdPort : FuelCmdPort {
 						item fuelCmd :>> pwrCmd;
@@ -533,49 +471,34 @@ driving scenario *\
 						port wheelToRoadPort1 : WheelToRoadPort;
 						port wheelToRoadPort2 : WheelToRoadPort;
 					}
-					perform performSelfTest performSelfTest;
-					perform applyParkingBrake applyParkingBrake;
-					perform senseTemperature senseTemperature;
+					perform providePower;
+					perform performSelfTest;
+					perform applyParkingBrake;
+					perform senseTemperature;
 					exhibit state vehicleStates :>> vehicleStates;
 					item [1] :> Items::envelopingShapes {
-						length1 :>> ShapeItems::null = 4800 [SI::millimetre] {
-							4800 [SI::millimetre];
-						}
-						width1 :>> ShapeItems::null = 1840 [SI::millimetre] {
-							1840 [SI::millimetre];
-						}
-						height1 :>> ShapeItems::null = 1350 [SI::millimetre] {
-							1350 [SI::millimetre];
-						}
+						length1 :>> ShapeItems::null = 4800 [SI::millimetre];
+						width1 :>> ShapeItems::null = 1840 [SI::millimetre];
+						height1 :>> ShapeItems::null = 1350 [SI::millimetre];
 					}
 					part fuelTank : FuelTank {
-						attribute :>> mass = 75 [SI::kilogram] {
-							75 [SI::kilogram];
-						}
+						attribute :>> mass = 75 [SI::kilogram];
 						item :>> fuel {
-							attribute :>> fuelMass = 60 [SI::kilogram] {
-								60 [SI::kilogram];
-							}
+							attribute :>> fuelMass = 60 [SI::kilogram];
 						}
-						attribute :>> fuelMassMax = 60 [SI::kilogram] {
-							60 [SI::kilogram];
-						}
+						attribute :>> fuelMassMax = 60 [SI::kilogram];
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 800 [SI::kilogram] {
-							800 [SI::kilogram];
-						}
+						attribute mass :> mass = 800 [SI::kilogram];
 						port shaftPort_d : ShaftPort_d;
 						part frontAxle : FrontAxle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 875 [SI::kilogram] {
-							875 [SI::kilogram];
-						}
+						attribute mass :> mass = 875 [SI::kilogram];
 						attribute driveTrainEfficiency : ScalarValues::Real = 0.6;
 						port shaftPort_d : ShaftPort_d;
-						perform providePower.distributeTorque providePower.distributeTorque;
+						perform providePower.distributeTorque;
 						part rearWheel1 : Wheel {
 							attribute :>> diameter;
 							port wheelToRoadPort : WheelToRoadPort;
@@ -609,29 +532,20 @@ driving scenario *\
 								}
 							}
 						}
-						bind shaftPort_d = differential.shaftPort_d {
-							end ref differential.shaftPort_d;
-						}
-						connect  differential.leftDiffPort to rearAxle.leftHalfAxle.leftAxleToDiffPort {
-							end ref differential.leftDiffPort;
-							end ref rearAxle.leftHalfAxle.leftAxleToDiffPort;
-						}
-						connect  differential.rightDiffPort to rearAxle.rightHalfAxle.rightAxleToDiffPort {
-							end ref differential.rightDiffPort;
-							end ref rearAxle.rightHalfAxle.rightAxleToDiffPort;
-						}
-						interface  wheelToleftHalAxleInterface : WheelHubInterface connect  rearWheel1.lugNutCompositePort[1][1] to rearAxle.leftHalfAxle.shankCompositePort[1][1];
-						interface  wheelTorightHalAxleInterface : WheelHubInterface connect  rearWheel2.lugNutCompositePort[1][1] to rearAxle.rightHalfAxle.shankCompositePort[1][1];
+						bind shaftPort_d = differential.shaftPort_d;
+						connect differential.leftDiffPort to rearAxle.leftHalfAxle.leftAxleToDiffPort;
+						connect differential.rightDiffPort to rearAxle.rightHalfAxle.rightAxleToDiffPort;
+						interface wheelToleftHalAxleInterface : WheelHubInterface connect rearWheel1.lugNutCompositePort[1][1] to rearAxle.leftHalfAxle.shankCompositePort[1][1];
+						interface wheelTorightHalAxleInterface : WheelHubInterface connect rearWheel2.lugNutCompositePort[1][1] to rearAxle.rightHalfAxle.shankCompositePort[1][1];
 					}
 					part starterMotor : StarterMotor;
 					part engine : Engine {
-						perform providePower.generateTorque providePower.generateTorque;
+						perform providePower.generateTorque;
 						part cylinders [4..6] : Cylinder;
 						part alternator {
 							action generateElectricity :> Parts::ownedActions;
 						}
-						satisfy engineSpecification engineSpecification {
-							subject = [FeatureReferenceExpression];
+						satisfy engineSpecification by vehicle_b.engine {
 							requirement torqueGenerationRequirement :>> torqueGenerationRequirement {
 								subject generateTorque :>> generateTorque = vehicle_b;
 							}
@@ -642,19 +556,15 @@ driving scenario *\
 						}
 					}
 					part transmission : Transmission {
-						attribute mass :> mass = 100 [SI::kilogram] {
-							100 [SI::kilogram];
-						}
+						attribute mass :> mass = 100 [SI::kilogram];
 						port shaftPort_a : ShaftPort_a;
-						perform providePower.amplifyTorque providePower.amplifyTorque;
+						perform providePower.amplifyTorque;
 					}
 					part driveshaft : Driveshaft {
-						attribute mass :> mass = 100 [SI::kilogram] {
-							100 [SI::kilogram];
-						}
+						attribute mass :> mass = 100 [SI::kilogram];
 						port shaftPort_b : ShaftPort_b;
 						port shaftPort_c : ShaftPort_c;
-						perform providePower.transferTorque providePower.transferTorque;
+						perform providePower.transferTorque;
 					}
 					part vehicleSoftware : VehicleSoftware {
 						part vehicleController : VehicleController {
@@ -676,55 +586,21 @@ driving scenario *\
 						part frontSeat [2];
 						[prefixMetadata] part driverAirBag;
 					}
-					bind engine.fuelCmdPort = fuelCmdPort {
-						end ref engine.fuelCmdPort;
-					}
-					interface  engineToTransmissionInterface : EngineToTransmissionInterface connect  engine.drivePwrPort to transmission.clutchPort;
-					interface  fuelInterface : FuelInterface connect  fuelTank.fuelOutPort to engine.fuelInPort;
-					allocate  providePower.generateToAmplify to engineToTransmissionInterface {
-						end ref providePower.generateToAmplify;
-					}
-					bind engine.ignitionCmdPort = ignitionCmdPort {
-						end ref engine.ignitionCmdPort;
-					}
-					connect  starterMotor.gearPort to engine.flyWheelPort {
-						end ref starterMotor.gearPort;
-						end ref engine.flyWheelPort;
-					}
-					connect  vehicleSoftware.vehicleController.controlPort to engine.engineControlPort {
-						end ref vehicleSoftware.vehicleController.controlPort;
-						end ref engine.engineControlPort;
-					}
-					bind vehicle_b.setSpeedPort = vehicleSoftware.vehicleController.cruiseController.setSpeedPort {
-						end ref vehicle_b.setSpeedPort;
-						end ref vehicleSoftware.vehicleController.cruiseController.setSpeedPort;
-					}
-					connect  speedSensor.speedSensorPort to vehicleSoftware.vehicleController.cruiseController.speedSensorPort {
-						end ref speedSensor.speedSensorPort;
-						end ref vehicleSoftware.vehicleController.cruiseController.speedSensorPort;
-					}
-					bind vehicleSoftware.vehicleController.cruiseController.cruiseControlPort = vehicleSoftware.vehicleController.controlPort {
-						end ref vehicleSoftware.vehicleController.cruiseController.cruiseControlPort;
-						end ref vehicleSoftware.vehicleController.controlPort;
-					}
-					connect  transmission.shaftPort_a to driveshaft.shaftPort_b {
-						end ref transmission.shaftPort_a;
-						end ref driveshaft.shaftPort_b;
-					}
-					connect  driveshaft.shaftPort_c to rearAxleAssembly.shaftPort_d {
-						end ref driveshaft.shaftPort_c;
-						end ref rearAxleAssembly.shaftPort_d;
-					}
-					bind rearAxleAssembly.rearWheel1.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort1 {
-						end ref rearAxleAssembly.rearWheel1.wheelToRoadPort;
-						end ref vehicleToRoadPort.wheelToRoadPort1;
-					}
-					bind rearAxleAssembly.rearWheel2.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort2 {
-						end ref rearAxleAssembly.rearWheel2.wheelToRoadPort;
-						end ref vehicleToRoadPort.wheelToRoadPort2;
-					}
-					satisfy vehicleSpecification vehicleSpecification by vehicle_b {
-						subject = vehicle_b;
+					bind engine.fuelCmdPort = fuelCmdPort;
+					interface engineToTransmissionInterface : EngineToTransmissionInterface connect engine.drivePwrPort to transmission.clutchPort;
+					interface fuelInterface : FuelInterface connect fuelTank.fuelOutPort to engine.fuelInPort;
+					allocate providePower.generateToAmplify to engineToTransmissionInterface;
+					bind engine.ignitionCmdPort = ignitionCmdPort;
+					connect starterMotor.gearPort to engine.flyWheelPort;
+					connect vehicleSoftware.vehicleController.controlPort to engine.engineControlPort;
+					bind vehicle_b.setSpeedPort = vehicleSoftware.vehicleController.cruiseController.setSpeedPort;
+					connect speedSensor.speedSensorPort to vehicleSoftware.vehicleController.cruiseController.speedSensorPort;
+					bind vehicleSoftware.vehicleController.cruiseController.cruiseControlPort = vehicleSoftware.vehicleController.controlPort;
+					connect transmission.shaftPort_a to driveshaft.shaftPort_b;
+					connect driveshaft.shaftPort_c to rearAxleAssembly.shaftPort_d;
+					bind rearAxleAssembly.rearWheel1.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort1;
+					bind rearAxleAssembly.rearWheel2.wheelToRoadPort = vehicleToRoadPort.wheelToRoadPort2;
+					satisfy vehicleSpecification by vehicle_b {
 						requirement vehicleMassRequirement {
 							subject :>> Requirements::subj;
 							attribute :>> massActual = vehicle_b.mass;
@@ -787,19 +663,16 @@ driving scenario *\
 							}
 						}
 						part driver : Driver {
-							perform startVehicle.turnVehicleOn startVehicle.turnVehicleOn;
-							perform startVehicle.trigger2 startVehicle.trigger2;
+							perform startVehicle.turnVehicleOn;
+							perform startVehicle.trigger2;
 							event occurrence :> Occurrences::timeEnclosedOccurrences;
 						}
 						part vehicle : Vehicle {
-							perform startVehicle.trigger1 startVehicle.trigger1;
-							perform startVehicle.sendStatus startVehicle.sendStatus;
+							perform startVehicle.trigger1;
+							perform startVehicle.sendStatus;
 							event occurrence :> Occurrences::timeEnclosedOccurrences;
 						}
-						first vehicle.doorClosed then driver.driverReady {
-							end ref vehicle.doorClosed;
-							end ref driver.driverReady;
-						}
+						first vehicle.doorClosed then driver.driverReady;
 						message of IgnitionCmdfrom driver.startVehicle.turnVehicleOn to vehicle.startVehicle.trigger1;
 						message of EngineStatusfrom vehicle.startVehicle.sendStatus to driver.startVehicle.trigger2;
 					}
@@ -845,7 +718,7 @@ driving scenario *\
 						}
 						part :>> speedSensor {
 							port :>> speedSensorPort {
-								event sendSensedSpeed.Connections::source sendSensedSpeed.Connections::source;
+								event sendSensedSpeed.Connections::source;
 							}
 						}
 						part :>> vehicleSoftware {
@@ -859,17 +732,17 @@ driving scenario *\
 										first setSpeedReceived then done {
 											end ref sendSensedSpeed.Connections::target;
 										}
-										event sendSensedSpeed.Connections::target sendSensedSpeed.Connections::target;
+										event sendSensedSpeed.Connections::target;
 									}
 									port :>> cruiseControlPort {
-										event sendFuelCmd.Connections::source sendFuelCmd.Connections::source;
+										event sendFuelCmd.Connections::source;
 									}
 								}
 							}
 						}
 						part :>> engine {
 							port :>> fuelCmdPort {
-								event sendFuelCmd.Connections::target sendFuelCmd.Connections::target;
+								event sendFuelCmd.Connections::target;
 							}
 						}
 						message sendSensedSpeed of SensedSpeed;
@@ -888,43 +761,31 @@ driving scenario *\
 						subject :>> Requirements::subj;
 						doc \* The total mass of the vehicle shall be less than or equal to the required mass.
 Assume total mass includes a full tank of gas of 60 kg*\
-						attribute :>> massRequired = 2000 [SI::kilogram] {
-							2000 [SI::kilogram];
-						}
-						attribute :>> massActual default vehicle.dryMass + fuelMassActual {
-							vehicle.dryMass + fuelMassActual;
-						}
+						attribute :>> massRequired = 2000 [SI::kilogram];
+						attribute :>> massActual default vehicle.dryMass + fuelMassActual;
 						attribute fuelMassActual :> mass;
-						attribute fuelMassMax :> mass = 60 [SI::kilogram] {
-							60 [SI::kilogram];
-						}
+						attribute fuelMassMax :> mass = 60 [SI::kilogram];
 						assumption {
 							[OperatorExpression];
 						}
 					}
-					allocate  vehicleMassRequirement to vehicle_b.mass {
-						end ref vehicle_b.mass;
-					}
+					allocate vehicleMassRequirement to vehicle_b.mass;
 					requirement vehicleFuelEconomyRequirements {
 						subject :>> Requirements::null;
 						doc \* fuel economy requirements group *\
 						attribute assumedCargoMass :> mass;
 						requirement cityFuelEconomyRequirement {
 							subject :>> Requirements::subj;
-							:>> requiredFuelEconomy = 10 [SI::kilometre/SI::litre] {
-								10 [SI::kilometre/SI::litre];
-							}
+							:>> requiredFuelEconomy = 10 [SI::kilometre/SI::litre];
 							assumption {
-								[OperatorExpression];
+								assumedCargoMass <= 500 [SI::kilogram];
 							}
 						}
 						[prefixMetadata] requirement highwayFuelEconomyRequirement {
 							subject :>> Requirements::subj;
-							:>> requiredFuelEconomy = 12.75 [SI::kilometre/SI::litre] {
-								12.75 [SI::kilometre/SI::litre];
-							}
+							:>> requiredFuelEconomy = 12.75 [SI::kilometre/SI::litre];
 							assumption {
-								[OperatorExpression];
+								assumedCargoMass <= 500 [SI::kilogram];
 							}
 						}
 					}
@@ -934,9 +795,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					requirement engineMassRequirement {
 						subject :>> Requirements::subj;
 						doc \* The total mass of the engine shall be less than or equal to the required mass.*\
-						attribute :>> massRequired = 200 [SI::kilogram] {
-							200 [SI::kilogram];
-						}
+						attribute :>> massRequired = 200 [SI::kilogram];
 						attribute :>> massActual = engine1.mass;
 					}
 					requirement torqueGenerationRequirement : TorqueGenerationRequirement {
@@ -983,7 +842,7 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port shankPort [5] :>> shankPort;
 					}
 				}
-				interface  wheelHubInterface : WheelHubInterface connect  wheel1.lugNutCompositePort[1][1] to hub1.shankCompositePort[1][1];
+				interface wheelHubInterface : WheelHubInterface connect wheel1.lugNutCompositePort[1][1] to hub1.shankCompositePort[1][1];
 			}
 			part wheelHubAssy2 {
 				part wheel1 : Wheel {
@@ -996,20 +855,16 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						port shankPort [5] :>> shankPort;
 					}
 				}
-				interface  wheelHubInterface : WheelHubInterface connect  lugNutCompositePort to shankCompositePort {
-					interface  wheelFastenerInterface1 :> wheelFastenerInterface connect  lugNutPort to shankPort;
+				interface wheelHubInterface : WheelHubInterface connect lugNutCompositePort to shankCompositePort {
+					interface wheelFastenerInterface1 :> wheelFastenerInterface connect lugNutPort to shankPort;
 				}
 			}
 			part wheelHubAssy3 {
 				part wheel1 : Wheel {
 					port lugNutCompositePort :>> lugNutCompositePort {
 						port lugNutPort [5] {
-							attribute :>> threadDia = 14 [SI::millimetre] {
-								14 [SI::millimetre];
-							}
-							attribute :>> threadPitch = 1.5 [SI::millimetre] {
-								1.5 [SI::millimetre];
-							}
+							attribute :>> threadDia = 14 [SI::millimetre];
+							attribute :>> threadPitch = 1.5 [SI::millimetre];
 						}
 						port lugNutPort1 [1];
 						port lugNutPort2 [1];
@@ -1019,36 +874,24 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				part hub1 : Hub {
 					port shankCompositePort :>> shankCompositePort {
 						port shankPort [5] {
-							attribute :>> threadDia = 14 [SI::millimetre] {
-								14 [SI::millimetre];
-							}
-							attribute :>> threadPitch = 1.5 [SI::millimetre] {
-								1.5 [SI::millimetre];
-							}
-							attribute :>> shaftLength = 70 [SI::millimetre] {
-								70 [SI::millimetre];
-							}
+							attribute :>> threadDia = 14 [SI::millimetre];
+							attribute :>> threadPitch = 1.5 [SI::millimetre];
+							attribute :>> shaftLength = 70 [SI::millimetre];
 						}
 						port shankPort1 [1];
 						port shankPort2 [1];
 						port shankPort3 [1];
 					}
 				}
-				interface  wheelHubInterface : WheelHubInterface connect  lugNutCompositePort to shankCompositePort {
-					interface  wheelFastenerInterface1 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre] {
-							90*1.356 [SI::newton*SI::metre];
-						}
+				interface wheelHubInterface : WheelHubInterface connect lugNutCompositePort to shankCompositePort {
+					interface wheelFastenerInterface1 :> wheelFastenerInterface connect lugNutPort to shankPort {
+						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre];
 					}
-					interface  wheelFastenerInterface2 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre] {
-							90*1.356 [SI::newton*SI::metre];
-						}
+					interface wheelFastenerInterface2 :> wheelFastenerInterface connect lugNutPort to shankPort {
+						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre];
 					}
-					interface  wheelFastenerInterface3 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre] {
-							90*1.356 [SI::newton*SI::metre];
-						}
+					interface wheelFastenerInterface3 :> wheelFastenerInterface connect lugNutPort to shankPort {
+						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre];
 					}
 				}
 			}
@@ -1092,12 +935,8 @@ The high octane gasoline is about 0.76[l/kg].
 				bestFuelConsumption : ScalarValues::Real;
 				idlingFuelConsumption : ScalarValues::Real;
 				tpd_avg :> timePerDistance;
-				attribute f = bestFuelConsumption + idlingFuelConsumption*tpd_avg {
-					bestFuelConsumption + idlingFuelConsumption*tpd_avg;
-				}
-				return out dpv :> distancePerVolume = 1/f {
-					1/f;
-				}
+				attribute f = bestFuelConsumption + idlingFuelConsumption*tpd_avg;
+				return out dpv :> distancePerVolume = 1/f;
 			}
 			calc def AverageTravelTimePerDistance {
 				scenario : Scenario;
@@ -1110,9 +949,7 @@ The high octane gasoline is about 0.76[l/kg].
 			calc def IdlingFuelConsumptionPerTime {
 				engine : Engine;
 				attribute idlingFuelConsumptionPerDisplacement : ScalarValues::Real = 0.5;
-				return out f_a : ScalarValues::Real = engine.displacement*idlingFuelConsumptionPerDisplacement {
-					engine.displacement*idlingFuelConsumptionPerDisplacement;
-				}
+				return out f_a : ScalarValues::Real = engine.displacement*idlingFuelConsumptionPerDisplacement;
 			}
 			attribute specificGravityOfGasoline : ScalarValues::Real = 0.76;
 			calc def BestFuelConsumptionPerDistance {
@@ -1124,9 +961,7 @@ The high octane gasoline is about 0.76[l/kg].
 				{
 					[OperatorExpression];
 				}
-				return out f_b : ScalarValues::Real = bsfc*specificGravityOfGasoline*required_power_avg*tpd_avg {
-					bsfc*specificGravityOfGasoline*required_power_avg*tpd_avg;
-				}
+				return out f_b : ScalarValues::Real = bsfc*specificGravityOfGasoline*required_power_avg*tpd_avg;
 			}
 			calc def ComputeBSFC {
 				engine : Engine;
@@ -1195,12 +1030,8 @@ The rationale and risk are contained in a metadata library. *\
 				part vehicle_b_engine4cyl :> vehicleAlternatives {
 					part engine :>> engine {
 						part cylinders [4] :>> cylinders;
-						attribute mass :>> mass = 180 [SI::kilogram] {
-							180 [SI::kilogram];
-						}
-						attribute peakHorsePower :>> peakHorsePower = 180 [SI::watt] {
-							180 [SI::watt];
-						}
+						attribute mass :>> mass = 180 [SI::kilogram];
+						attribute peakHorsePower :>> peakHorsePower = 180 [SI::watt];
 						attribute fuelEfficiency :>> fuelEfficiency = 0.6;
 						attribute cost :>> cost = 1000;
 					}
@@ -1208,12 +1039,8 @@ The rationale and risk are contained in a metadata library. *\
 				part vehicle_b_engine6cyl :> vehicleAlternatives {
 					part engine :>> engine {
 						part cylinders [6] :>> cylinders;
-						attribute mass :>> mass = 220 [SI::kilogram] {
-							220 [SI::kilogram];
-						}
-						attribute peakHorsePower :>> peakHorsePower = 220 [SI::watt] {
-							220 [SI::watt];
-						}
+						attribute mass :>> mass = 220 [SI::kilogram];
+						attribute peakHorsePower :>> peakHorsePower = 220 [SI::watt];
 						attribute fuelEfficiency :>> fuelEfficiency = 0.5;
 						attribute cost :>> cost = 1500;
 					}
@@ -1284,14 +1111,14 @@ The rationale and risk are contained in a metadata library. *\
 		}
 		package VerificationSystem {
 			part verificationContext {
-				perform massTests massTests;
+				perform massTests;
 				part vehicle_UnitUnderTest :> vehicle_b;
 				part massVerificationSystem {
 					part scale {
-						perform massTests.weighVehicle massTests.weighVehicle;
+						perform massTests.weighVehicle;
 					}
 					part operator {
-						perform massTests.evaluatePassFail massTests.evaluatePassFail;
+						perform massTests.evaluatePassFail;
 					}
 				}
 			}
@@ -1301,23 +1128,15 @@ The rationale and risk are contained in a metadata library. *\
 		individual occurrence a : VehicleRoadContext_1 {
 			occurrence t0_t2_a {
 				snapshot occurrence t0_a {
-					attribute t0 :>> time = 0 [SI::second] {
-						0 [SI::second];
-					}
+					attribute t0 :>> time = 0 [SI::second];
 					snapshot occurrence t0_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t0_v : Vehicle_1 {
-						:>> position = 0 [SI::metre] {
-							0 [SI::metre];
-						}
-						:>> velocity = 0 [SI::metre] {
-							0 [SI::metre];
-						}
-						:>> acceleration = 1.96 [SI::metre/SI::second**2] {
-							1.96 [SI::metre/SI::second**2];
-						}
+						:>> position = 0 [SI::metre];
+						:>> velocity = 0 [SI::metre];
+						:>> acceleration = 1.96 [SI::metre/SI::second**2];
 						snapshot occurrence t0_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t0_leftFront : Wheel_1;
 							snapshot occurrence t0_rightFront : Wheel_2;
@@ -1325,23 +1144,15 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				snapshot occurrence t1_a {
-					attribute t1 :>> time = 1 [SI::second] {
-						1 [SI::second];
-					}
+					attribute t1 :>> time = 1 [SI::second];
 					snapshot occurrence t1_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t1_v : Vehicle_1 {
-						:>> position = 0.98 [SI::metre] {
-							0.98 [SI::metre];
-						}
-						:>> velocity = 1.96 [SI::metre/SI::second] {
-							1.96 [SI::metre/SI::second];
-						}
-						:>> acceleration = 1.96 [SI::metre/SI::second**2] {
-							1.96 [SI::metre/SI::second**2];
-						}
+						:>> position = 0.98 [SI::metre];
+						:>> velocity = 1.96 [SI::metre/SI::second];
+						:>> acceleration = 1.96 [SI::metre/SI::second**2];
 						snapshot occurrence t1_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t1_leftFront : Wheel_1;
 							snapshot occurrence t1_rightFront : Wheel_2;
@@ -1349,23 +1160,15 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				snapshot occurrence t2_a {
-					attribute t2 :>> time = 2 [SI::second] {
-						2 [SI::second];
-					}
+					attribute t2 :>> time = 2 [SI::second];
 					snapshot occurrence t2_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t2_v : Vehicle_1 {
-						:>> position = 3.92 [SI::metre] {
-							3.92 [SI::metre];
-						}
-						:>> velocity = 3.92 [SI::metre/SI::second] {
-							3.92 [SI::metre/SI::second];
-						}
-						:>> acceleration = 1.96 [SI::metre/SI::second**2] {
-							1.96 [SI::metre/SI::second**2];
-						}
+						:>> position = 3.92 [SI::metre];
+						:>> velocity = 3.92 [SI::metre/SI::second];
+						:>> acceleration = 1.96 [SI::metre/SI::second**2];
 						snapshot occurrence t2_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t2_leftFront : Wheel_1;
 							snapshot occurrence t2_rightFront : Wheel_2;
@@ -1546,43 +1349,36 @@ The rationale and risk are contained in a metadata library. *\
 		}
 		part missionContext : MissionContext {
 			[prefixMetadata] attribute transportTime;
-			perform transportPassenger transportPassenger;
+			perform transportPassenger;
 			part road : Road = transportPassenger.road;
 			part driver : Driver = transportPassenger.driver {
-				perform transportPassenger.a.driverGetInVehicle.unlockDoor_in transportPassenger.a.driverGetInVehicle.unlockDoor_in;
-				perform transportPassenger.a.driverGetInVehicle.openDoor_in transportPassenger.a.driverGetInVehicle.openDoor_in;
-				perform transportPassenger.a.driverGetInVehicle.enterVehicle transportPassenger.a.driverGetInVehicle.enterVehicle;
-				perform transportPassenger.a.driverGetInVehicle.closeDoor_in transportPassenger.a.driverGetInVehicle.closeDoor_in;
-				perform transportPassenger.c.driverGetOutOfVehicle.openDoor_out transportPassenger.c.driverGetOutOfVehicle.openDoor_out;
-				perform transportPassenger.c.driverGetOutOfVehicle.exitVehicle transportPassenger.c.driverGetOutOfVehicle.exitVehicle;
-				perform transportPassenger.c.driverGetOutOfVehicle.closeDoor_out transportPassenger.c.driverGetOutOfVehicle.closeDoor_out;
-				perform transportPassenger.c.driverGetOutOfVehicle.lockDoor_out transportPassenger.c.driverGetOutOfVehicle.lockDoor_out;
-				perform transportPassenger.b.driveVehicleToDestination transportPassenger.b.driveVehicleToDestination;
+				perform transportPassenger.a.driverGetInVehicle.unlockDoor_in;
+				perform transportPassenger.a.driverGetInVehicle.openDoor_in;
+				perform transportPassenger.a.driverGetInVehicle.enterVehicle;
+				perform transportPassenger.a.driverGetInVehicle.closeDoor_in;
+				perform transportPassenger.c.driverGetOutOfVehicle.openDoor_out;
+				perform transportPassenger.c.driverGetOutOfVehicle.exitVehicle;
+				perform transportPassenger.c.driverGetOutOfVehicle.closeDoor_out;
+				perform transportPassenger.c.driverGetOutOfVehicle.lockDoor_out;
+				perform transportPassenger.b.driveVehicleToDestination;
 			}
 			part passenger1 : Passenger = transportPassenger.passenger {
-				perform transportPassenger.a.passenger1GetInVehicle.unlockDoor_in transportPassenger.a.passenger1GetInVehicle.unlockDoor_in;
-				perform transportPassenger.a.passenger1GetInVehicle.openDoor_in transportPassenger.a.passenger1GetInVehicle.openDoor_in;
-				perform transportPassenger.a.passenger1GetInVehicle.enterVehicle transportPassenger.a.passenger1GetInVehicle.enterVehicle;
-				perform transportPassenger.a.passenger1GetInVehicle.closeDoor_in transportPassenger.a.passenger1GetInVehicle.closeDoor_in;
-				perform transportPassenger.c.passenger1GetOutOfVehicle.openDoor_out transportPassenger.c.passenger1GetOutOfVehicle.openDoor_out;
-				perform transportPassenger.c.passenger1GetOutOfVehicle.exitVehicle transportPassenger.c.passenger1GetOutOfVehicle.exitVehicle;
-				perform transportPassenger.c.passenger1GetOutOfVehicle.closeDoor_out transportPassenger.c.passenger1GetOutOfVehicle.closeDoor_out;
-				perform transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out;
+				perform transportPassenger.a.passenger1GetInVehicle.unlockDoor_in;
+				perform transportPassenger.a.passenger1GetInVehicle.openDoor_in;
+				perform transportPassenger.a.passenger1GetInVehicle.enterVehicle;
+				perform transportPassenger.a.passenger1GetInVehicle.closeDoor_in;
+				perform transportPassenger.c.passenger1GetOutOfVehicle.openDoor_out;
+				perform transportPassenger.c.passenger1GetOutOfVehicle.exitVehicle;
+				perform transportPassenger.c.passenger1GetOutOfVehicle.closeDoor_out;
+				perform transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out;
 			}
 			part vehicle_b_1 :> vehicle_b = transportPassenger.vehicle {
-				attribute :>> position3dVector = (0,0,0) [spatialCF] {
-					(0,0,0) [spatialCF];
-				}
-				perform transportPassenger.b.providePower transportPassenger.b.providePower;
-				perform transportPassenger.trigger transportPassenger.trigger;
+				attribute :>> position3dVector = (0,0,0) [spatialCF];
+				perform transportPassenger.b.providePower;
+				perform transportPassenger.trigger;
 			}
-			connect  driver.handPort to vehicle_b_1.ignitionCmdPort {
-				end ref driver.handPort;
-				end ref vehicle_b_1.ignitionCmdPort;
-			}
-			connect  road to vehicle_b_1.vehicleToRoadPort {
-				end ref vehicle_b_1.vehicleToRoadPort;
-			}
+			connect driver.handPort to vehicle_b_1.ignitionCmdPort;
+			connect road to vehicle_b_1.vehicleToRoadPort;
 		}
 	}
 	package VehicleSuperSetModel {
@@ -1624,25 +1420,21 @@ The rationale and risk are contained in a metadata library. *\
 			comment about \* Parts that contribute to safety. *\
 			public import vehicle_b::**;
 			public filter @Safety;
-			@Safety;
 		}
 		package SecurityGroup {
 			comment about \* Parts that contribute to security. *\
 			public import vehicle_b::**;
 			public filter @Security;
-			@Security;
 		}
 		package SafetyandSecurityGroup {
 			comment about \* Parts that contribute to safety OR security. *\
 			public import vehicle_b::**;
-			public filter @Safety or [BodyExpression];
-			@Safety or [BodyExpression];
+			public filter @Safety or @Security;
 		}
 		package MandatorySafetyGroup {
 			comment about \* Parts that contribute to safety AND are mandatory. *\
 			public import vehicle_b::**;
-			public filter @Safety and [BodyExpression];
-			@Safety and [BodyExpression];
+			public filter @Safety and isMandatory;
 		}
 	}
 	package Views_Viewpoints {
@@ -1673,7 +1465,6 @@ The rationale and risk are contained in a metadata library. *\
 			view def TableView;
 			view def PartsTreeView {
 				public filter @SysML::PartUsage;
-				@SysML::PartUsage;
 			}
 			view def PartsInterconnection;
 		}
@@ -1687,7 +1478,6 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				protected expose PartsTree::**;
 				public filter @Safety;
-				@Safety;
 			}
 		}
 	}

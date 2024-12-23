@@ -735,7 +735,7 @@ rule IncludeUseCaseUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, CaseBody{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-			t.declaredName = s.OwnedReferenceSubsetting();
+//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -763,7 +763,7 @@ rule AssertConstraintUsage
 	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, CalculationBody{
 		if (s.declaredName == null){
 			t.notConstraintUsageKeyword = true;
-			t.declaredName = s.OwnedReferenceSubsetting();
+//			t.declaredName = s.OwnedReferenceSubsetting();
 			if (t.declaredName == null or t.declaredName == ""){
 				t.notConstraintUsageKeyword = false;
 			}
@@ -793,23 +793,13 @@ rule SatisfyRequirementUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, RequirementBody{
 		if (s.declaredName == null){
 			t.notConstraintUsageKeyword = true;
-			t.declaredName = s.OwnedReferenceSubsetting();
-			if (t.declaredName == null or t.declaredName == ""){
-				t.notConstraintUsageKeyword = false;
-			}
 		}
 		t.isNegated = s.isNegated;
 		for (satisfactionSubjectMember in s.ownedRelationship.getElementOf("SubjectMembership")){
 			if (satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().isTypeOf("FeatureValue")){
+				satisfactionSubjectMember.tagAllOwnedElement();
 				var featureReferenceExpression = satisfactionSubjectMember.ownedRelatedElement.first().ownedRelationship.first().ownedRelatedElement.first();
-				var membership = featureReferenceExpression.ownedRelationship.getElementOf("Membership");
-				if (membership.size() > 0){
-					t.satisfactionSubjectMember = membership.memberElement.first().declaredName;
-				}
-				else{
-					// TBD
-//					featureReferenceExpression.println("->");
-				}
+				t.satisfactionSubjectMember = featureReferenceExpression.FeatureReferenceExpression();
 			}
 		}
 	}
@@ -821,7 +811,7 @@ rule PerformActionUsageDeclaration
 	extends UsageDeclaration, ValuePart{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-			t.declaredName = s.OwnedReferenceSubsetting();
+//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -850,7 +840,7 @@ rule ExhibitStateUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, StateUsageBody{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-			t.declaredName = s.OwnedReferenceSubsetting();
+//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -957,11 +947,11 @@ rule RenderingUsage
 	extends OccurrenceUsagePrefix, Usage{
 // TBD
 		t.RenderingUsageType = s.getTypeOfRenderingUsage();
-		if (t.RenderingUsageType == "ViewRenderingUsage"){
-			if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
-				t.declaredName = s.OwnedReferenceSubsetting();
-			}
-		}
+//		if (t.RenderingUsageType == "ViewRenderingUsage"){
+//			if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
+//				t.declaredName = s.OwnedReferenceSubsetting();
+//			}
+//		}
 	}
 
 @abstract
@@ -1271,7 +1261,7 @@ rule EventOccurrenceUsage
 	extends OccurrenceUsagePrefix, FeatureSpecializationPart, UsageCompletion{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-			t.declaredName = s.OwnedReferenceSubsetting();
+//			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;

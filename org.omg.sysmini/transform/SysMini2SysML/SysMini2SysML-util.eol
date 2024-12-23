@@ -263,7 +263,7 @@ operation SysMini!ReferenceUsage ReferenceUsage() : String {
 	}
 	else if (self.ReferenceUsageType == "VariantReference"){
 		return self.declaredName.space() + 
-				self.featureSpecialization().space() + 
+				self.featureSpecialization() + 
 				self.UsageBody();
 	}
 	else if (self.ReferenceUsageType == "ReferenceUsage"){
@@ -300,7 +300,7 @@ operation SysMini!BindingConnectorAsUsage BindingConnectorAsUsage() : String {
 	var str = "";
 	str += self.UsagePrefix();
 	if (self.declaredName != null and self.declaredName != ""){
-		str += BindingKeyword().space();
+		str += BindingKeyword();
 		str += self.UsageDeclaration();
 	}
 	str += "bind".space();
@@ -317,7 +317,7 @@ operation SysMini!SuccessionAsUsage SuccessionAsUsage() : String {
 	if (self.SuccessionType == "SuccessionAsUsage"){
 		str += self.UsagePrefix();
 		if (self.declaredName != null and self.declaredName != ""){
-			str += SuccessionKeyword().space();
+			str += SuccessionKeyword();
 			str += self.UsageDeclaration();
 		}
 		str += "first".space();
@@ -406,12 +406,12 @@ operation SysMini!ConnectionUsage ConnectionUsage() : String {
 	var str = "";
 	str += self.OccurrenceUsagePrefix();
 	if (self.declaredName != null and self.declaredName != ""){
-		str += ConnectionUsageKeyword().space();
+		str += ConnectionUsageKeyword();
 	}
 	str += self.UsageDeclaration();
 	str += self.ValuePart();
 	if (self.connectorPart.size() > 1){
-		str += ConnectorKeyword().space();
+		str += ConnectorKeyword();
 		str += self.connectorPart.asSequence().getConnectorPartString();
 	}
 	str += self.UsageBody();
@@ -421,10 +421,10 @@ operation SysMini!ConnectionUsage ConnectionUsage() : String {
 operation SysMini!InterfaceUsage InterfaceUsage() : String {
 	var str = "";
 	str += self.OccurrenceUsagePrefix();
-	str += InterfaceKeyword().space();
+	str += InterfaceKeyword();
 	str += self.UsageDeclaration();
 	if (self.interfacePart.size() > 1){
-		str += ConnectorKeyword().space();
+		str += ConnectorKeyword();
 		str += self.interfacePart.asSequence().getConnectorPartString();
 	}
 	str += self.InterfaceBody();
@@ -435,11 +435,11 @@ operation SysMini!AllocationUsage AllocationUsage() : String {
 	var str = "";
 	str += self.OccurrenceUsagePrefix();
 	if (self.declaredName != null and self.declaredName != ""){
-		str += AllocationKeyword().space();
+		str += AllocationKeyword();
 		str += self.UsageDeclaration();
 	}
 	if (self.connectorPart.size() > 1){
-		str += AllocateKeyword().space();
+		str += AllocateKeyword();
 		str += self.connectorPart.asSequence().getConnectorPartString();
 	}
 	str += self.UsageBody();
