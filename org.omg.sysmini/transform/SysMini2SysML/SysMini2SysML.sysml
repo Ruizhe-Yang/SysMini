@@ -104,7 +104,9 @@ package SimpleVehicleModel {
 				}
 				attribute fuelKind : FuelKind;
 				attribute fuelMassMax :> mass;
-				assert constraint fuelConstraint;
+				assert constraint fuelConstraint {
+					[OperatorExpression];
+				}
 				port fuelOutPort : FuelPort;
 				port fuelInPort = ~FuelPort;
 			}
@@ -227,7 +229,9 @@ package SimpleVehicleModel {
 				end port lugNutPort : LugNutPort;
 				end port shankPort : ShankPort;
 				attribute maxTorque : TorqueValue;
-				;
+				{
+					[OperatorExpression];
+				}
 			}
 			interface def WheelHubInterface {
 				end port lugNutCompositePort : LugNutCompositePort;
@@ -279,14 +283,18 @@ package SimpleVehicleModel {
 				doc \* The actual mass shall be less than the required mass*\
 				attribute massRequired :> mass;
 				attribute massActual :> mass;
-				requirement;
+				requirement {
+					[OperatorExpression];
+				}
 			}
 			requirement def ReliabilityRequirement {
 				subject :>> Requirements::subj;
 				doc \* The actual reliability shall be greater than the required reliability*\
 				attribute reliabilityRequired : ScalarValues::Real;
 				attribute reliabilityActual : ScalarValues::Real;
-				requirement;
+				requirement {
+					[OperatorExpression];
+				}
 			}
 			requirement def TorqueGenerationRequirement {
 				doc \* The engine shall generate torque as a function of RPM as shown in Table 1. *\
@@ -302,7 +310,9 @@ package SimpleVehicleModel {
 driving scenario *\
 				attribute actualFuelEconomy :> distancePerVolume;
 				attribute requiredFuelEconomy :> distancePerVolume;
-				requirement;
+				requirement {
+					[OperatorExpression];
+				}
 			}
 		}
 		package AttributeDefinitions {
@@ -320,11 +330,19 @@ driving scenario *\
 				enum red :> Base::dataValues;
 			}
 			enum def {
-				enum = 60 [SI::millimetre];
-				enum = 80 [SI::millimetre];
-				enum = 100 [SI::millimetre];
+				enum = 60 [SI::millimetre] {
+					60 [SI::millimetre];
+				}
+				enum = 80 [SI::millimetre] {
+					80 [SI::millimetre];
+				}
+				enum = 100 [SI::millimetre] {
+					100 [SI::millimetre];
+				}
 			}
-			attribute cylinderDiameter : DiameterChoices = 80 [SI::millimetre];
+			attribute cylinderDiameter : DiameterChoices = 80 [SI::millimetre] {
+				80 [SI::millimetre];
+			}
 			enum def {
 				enum on :> Base::dataValues;
 				enum off :> Base::dataValues;
@@ -333,13 +351,27 @@ driving scenario *\
 				enum gas :> Base::dataValues;
 				enum diesel :> Base::dataValues;
 			}
-			distancePerVolume :> scalarQuantities = ISQSpaceTime::distance/ISQSpaceTime::volume;
-			timePerDistance :> scalarQuantities = ISQBase::duration/ISQSpaceTime::distance;
-			volumePerDistance :> scalarQuantities = ISQSpaceTime::volume/ISQSpaceTime::distance;
-			volumePerTime :> scalarQuantities = ISQSpaceTime::volume/ISQBase::duration;
-			kpl : MeasurementReferences::DerivedUnit = SI::kilometre/SI::litre;
-			rpm : MeasurementReferences::DerivedUnit = 1/SI::minute;
-			kW : MeasurementReferences::DerivedUnit = SIPrefixes::kilo*SI::watt;
+			distancePerVolume :> scalarQuantities = ISQSpaceTime::distance/ISQSpaceTime::volume {
+				ISQSpaceTime::distance/ISQSpaceTime::volume;
+			}
+			timePerDistance :> scalarQuantities = ISQBase::duration/ISQSpaceTime::distance {
+				ISQBase::duration/ISQSpaceTime::distance;
+			}
+			volumePerDistance :> scalarQuantities = ISQSpaceTime::volume/ISQSpaceTime::distance {
+				ISQSpaceTime::volume/ISQSpaceTime::distance;
+			}
+			volumePerTime :> scalarQuantities = ISQSpaceTime::volume/ISQBase::duration {
+				ISQSpaceTime::volume/ISQBase::duration;
+			}
+			kpl : MeasurementReferences::DerivedUnit = SI::kilometre/SI::litre {
+				SI::kilometre/SI::litre;
+			}
+			rpm : MeasurementReferences::DerivedUnit = 1/SI::minute {
+				1/SI::minute;
+			}
+			kW : MeasurementReferences::DerivedUnit = SIPrefixes::kilo*SI::watt {
+				SIPrefixes::kilo*SI::watt;
+			}
 		}
 		package IndividualDefinitions {
 			individual occurrence def VehicleRoadContext_1;
@@ -362,25 +394,37 @@ driving scenario *\
 			public import Metaobjects::null::*;
 			state failureModes [*];
 			metadata def <fm> failureMode {
-				:>> Metaobjects::baseType = failureModes meta SysML::StateUsage;
+				:>> Metaobjects::baseType = failureModes meta SysML::StateUsage {
+					failureModes meta SysML::StateUsage;
+				}
 			}
 			occurrence logicalOccurrences [*];
 			metadata def <l> logical {
-				:>> Metaobjects::baseType = logicalOccurrences meta SysML::Usage;
+				:>> Metaobjects::baseType = logicalOccurrences meta SysML::Usage {
+					logicalOccurrences meta SysML::Usage;
+				}
 			}
 			occurrence physicalOccurrences [*];
 			metadata def <p> physical {
-				:>> Metaobjects::baseType = physicalOccurrences meta SysML::Usage;
+				:>> Metaobjects::baseType = physicalOccurrences meta SysML::Usage {
+					physicalOccurrences meta SysML::Usage;
+				}
 			}
 		}
 		package GenericContext {
 			part def Context {
 				attribute time : DurationValue;
 				attribute spatialCF [1] : CartesianSpatial3dCoordinateFrame {
-					:>> null = [SequenceExpression];
+					:>> null = (SI::metre,SI::metre,SI::metre) {
+						(SI::metre,SI::metre,SI::metre);
+					}
 				}
-				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame = spatialCF/SI::second;
-				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame = velocityCF/SI::second;
+				attribute velocityCF [1] : CartesianVelocity3dCoordinateFrame = spatialCF/SI::second {
+					spatialCF/SI::second;
+				}
+				attribute accelarationCF [1] : CartesianAcceleration3dCoordinateFrame = velocityCF/SI::second {
+					velocityCF/SI::second;
+				}
 			}
 		}
 	}
@@ -424,23 +468,35 @@ driving scenario *\
 		package VehicleConfiguration_a {
 			package PartsTree {
 				part vehicle_a : Vehicle {
-					attribute mass :>> mass = dryMass + cargoMass + fuel.fuelMass;
+					attribute mass :>> mass = dryMass + cargoMass + fuelTank {
+						dryMass + cargoMass + fuelTank;
+					}
 					attribute dryMass :>> dryMass = NumericalFunctions::sum(NumericalFunctions::collection=partMasses);
-					attribute :>> cargoMass = 0 [SI::kilogram];
+					attribute :>> cargoMass = 0 [SI::kilogram] {
+						0 [SI::kilogram];
+					}
 					attribute partMasses [*];
 					part fuelTank : FuelTank {
-						attribute :>> mass = 75 [SI::kilogram];
+						attribute :>> mass = 75 [SI::kilogram] {
+							75 [SI::kilogram];
+						}
 						item :>> fuel {
-							attribute :>> fuelMass = 50 [SI::kilogram];
+							attribute :>> fuelMass = 50 [SI::kilogram] {
+								50 [SI::kilogram];
+							}
 						}
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 800 [SI::kilogram];
+						attribute mass :> mass = 800 [SI::kilogram] {
+							800 [SI::kilogram];
+						}
 						part frontAxle : Axle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 875 [SI::kilogram];
+						attribute mass :> mass = 875 [SI::kilogram] {
+							875 [SI::kilogram];
+						}
 						attribute driveTrainEfficiency : ScalarValues::Real = 0.6;
 						part rearAxle : Axle;
 						part rearWheels [2] : Wheel {
@@ -458,10 +514,16 @@ driving scenario *\
 			public import ModelingMetadata::*;
 			package PartsTree {
 				part vehicle_b : Vehicle {
-					[prefixMetadata] attribute mass = dryMass + cargoMass + fuel.fuelMass;
+					[prefixMetadata] attribute mass = dryMass + cargoMass + fuelTank {
+						dryMass + cargoMass + fuelTank;
+					}
 					attribute dryMass :>> dryMass = NumericalFunctions::sum(NumericalFunctions::collection=partMasses);
-					attribute :>> cargoMass default 0 [SI::kilogram];
-					attribute partMasses = [SequenceExpression];
+					attribute :>> cargoMass default 0 [SI::kilogram] {
+						0 [SI::kilogram];
+					}
+					attribute partMasses = (fuelTank.mass,frontAxleAssembly.mass,rearAxleAssembly.mass,engine.mass,transmission.mass,driveshaft.mass) {
+						(fuelTank.mass,frontAxleAssembly.mass,rearAxleAssembly.mass,engine.mass,transmission.mass,driveshaft.mass);
+					}
 					attribute avgFuelEconomy :> distancePerVolume;
 					port fuelCmdPort : FuelCmdPort {
 						item fuelCmd :>> pwrCmd;
@@ -476,25 +538,41 @@ driving scenario *\
 					perform senseTemperature senseTemperature;
 					exhibit state vehicleStates :>> vehicleStates;
 					item [1] :> Items::envelopingShapes {
-						length1 :>> ShapeItems::null = 4800 [SI::millimetre];
-						width1 :>> ShapeItems::null = 1840 [SI::millimetre];
-						height1 :>> ShapeItems::null = 1350 [SI::millimetre];
+						length1 :>> ShapeItems::null = 4800 [SI::millimetre] {
+							4800 [SI::millimetre];
+						}
+						width1 :>> ShapeItems::null = 1840 [SI::millimetre] {
+							1840 [SI::millimetre];
+						}
+						height1 :>> ShapeItems::null = 1350 [SI::millimetre] {
+							1350 [SI::millimetre];
+						}
 					}
 					part fuelTank : FuelTank {
-						attribute :>> mass = 75 [SI::kilogram];
-						item :>> fuel {
-							attribute :>> fuelMass = 60 [SI::kilogram];
+						attribute :>> mass = 75 [SI::kilogram] {
+							75 [SI::kilogram];
 						}
-						attribute :>> fuelMassMax = 60 [SI::kilogram];
+						item :>> fuel {
+							attribute :>> fuelMass = 60 [SI::kilogram] {
+								60 [SI::kilogram];
+							}
+						}
+						attribute :>> fuelMassMax = 60 [SI::kilogram] {
+							60 [SI::kilogram];
+						}
 					}
 					part frontAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 800 [SI::kilogram];
+						attribute mass :> mass = 800 [SI::kilogram] {
+							800 [SI::kilogram];
+						}
 						port shaftPort_d : ShaftPort_d;
 						part frontAxle : FrontAxle;
 						part frontWheels [2] : Wheel;
 					}
 					part rearAxleAssembly : AxleAssembly {
-						attribute mass :> mass = 875 [SI::kilogram];
+						attribute mass :> mass = 875 [SI::kilogram] {
+							875 [SI::kilogram];
+						}
 						attribute driveTrainEfficiency : ScalarValues::Real = 0.6;
 						port shaftPort_d : ShaftPort_d;
 						perform providePower.distributeTorque providePower.distributeTorque;
@@ -555,21 +633,25 @@ driving scenario *\
 						satisfy engineSpecification engineSpecification {
 							subject = [FeatureReferenceExpression];
 							requirement torqueGenerationRequirement :>> torqueGenerationRequirement {
-								subject generateTorque :>> generateTorque = engine.providePower.generateTorque;
+								subject generateTorque :>> generateTorque = vehicle_b;
 							}
 							requirement drivePowerOuputRequirement {
 								subject :>> Requirements::subj;
-								port torqueOutPort :>> torqueOutPort = engine.drivePwrPort;
+								port torqueOutPort :>> torqueOutPort = vehicle_b;
 							}
 						}
 					}
 					part transmission : Transmission {
-						attribute mass :> mass = 100 [SI::kilogram];
+						attribute mass :> mass = 100 [SI::kilogram] {
+							100 [SI::kilogram];
+						}
 						port shaftPort_a : ShaftPort_a;
 						perform providePower.amplifyTorque providePower.amplifyTorque;
 					}
 					part driveshaft : Driveshaft {
-						attribute mass :> mass = 100 [SI::kilogram];
+						attribute mass :> mass = 100 [SI::kilogram] {
+							100 [SI::kilogram];
+						}
 						port shaftPort_b : ShaftPort_b;
 						port shaftPort_c : ShaftPort_c;
 						perform providePower.transferTorque providePower.transferTorque;
@@ -645,8 +727,8 @@ driving scenario *\
 						subject = vehicle_b;
 						requirement vehicleMassRequirement {
 							subject :>> Requirements::subj;
-							attribute :>> massActual = [FeatureChainExpression];
-							attribute :>> fuelMassActual = fuelTank.fuel.fuelMass;
+							attribute :>> massActual = vehicle_b.mass;
+							attribute :>> fuelMassActual = vehicle_b;
 						}
 					}
 				}
@@ -654,9 +736,9 @@ driving scenario *\
 			package ActionTree {
 				action providePower : ProvidePower {
 					item fuelCmd : FuelCmd;
-					wheelToRoadTorque [2] :>> wheelToRoadTorque = [FeatureChainExpression];
+					wheelToRoadTorque [2] :>> wheelToRoadTorque = distributeTorque.wheelToRoadTorque;
 					action generateTorque : GenerateTorque {
-						item = [FeatureChainExpression];
+						item = providePower.fuelCmd;
 					}
 					action amplifyTorque : AmplifyTorque;
 					action transferTorque : TransferTorque;
@@ -679,13 +761,13 @@ driving scenario *\
 						perform action startVehicle {
 							{
 								ref = ignitionCmd;
-								ref = [FeatureChainExpression];
+								ref = driver.p1;
 								ref :>> Transfers::receiver;
 								ignitionCmd : IgnitionCmd;
 							}
 							{
 								ignitionCmd : IgnitionCmd;
-								ref = [FeatureChainExpression];
+								ref = vehicle.ignitionCmdPort;
 							}
 							flow of IgnitionCmdfrom trigger1.ignitionCmd to startEngine.ignitionCmd;
 							action startEngine {
@@ -695,13 +777,13 @@ driving scenario *\
 							flow of EngineStatusfrom startEngine.es to sendStatus.es;
 							{
 								ref = es;
-								ref = [FeatureChainExpression];
+								ref = vehicle.statusPort;
 								ref :>> Transfers::receiver;
 								es : EngineStatus;
 							}
 							{
 								es : EngineStatus;
-								ref = [FeatureChainExpression];
+								ref = driver.p2;
 							}
 						}
 						part driver : Driver {
@@ -736,7 +818,7 @@ driving scenario *\
 							part :>> vehicleController {
 								part :>> cruiseController {
 									port :>> setSpeedPort {
-										event occurrence = setSpeedPort.setSpeedReceived;
+										event occurrence = vehicle_b;
 									}
 									port :>> speedSensorPort {
 										event occurrence :> Occurrences::timeEnclosedOccurrences;
@@ -770,10 +852,10 @@ driving scenario *\
 							part :>> vehicleController {
 								part :>> cruiseController {
 									port :>> setSpeedPort {
-										event occurrence = setSpeedPort.setSpeedReceived;
+										event occurrence = vehicle_b;
 									}
 									port :>> speedSensorPort {
-										event occurrence = [FeatureChainExpression];
+										event occurrence = setSpeedPort.setSpeedReceived;
 										first setSpeedReceived then done {
 											end ref sendSensedSpeed.Connections::target;
 										}
@@ -806,11 +888,19 @@ driving scenario *\
 						subject :>> Requirements::subj;
 						doc \* The total mass of the vehicle shall be less than or equal to the required mass.
 Assume total mass includes a full tank of gas of 60 kg*\
-						attribute :>> massRequired = 2000 [SI::kilogram];
-						attribute :>> massActual default [FeatureChainExpression] + fuelMassActual;
+						attribute :>> massRequired = 2000 [SI::kilogram] {
+							2000 [SI::kilogram];
+						}
+						attribute :>> massActual default vehicle.dryMass + fuelMassActual {
+							vehicle.dryMass + fuelMassActual;
+						}
 						attribute fuelMassActual :> mass;
-						attribute fuelMassMax :> mass = 60 [SI::kilogram];
-						assumption;
+						attribute fuelMassMax :> mass = 60 [SI::kilogram] {
+							60 [SI::kilogram];
+						}
+						assumption {
+							[OperatorExpression];
+						}
 					}
 					allocate  vehicleMassRequirement to vehicle_b.mass {
 						end ref vehicle_b.mass;
@@ -821,13 +911,21 @@ Assume total mass includes a full tank of gas of 60 kg*\
 						attribute assumedCargoMass :> mass;
 						requirement cityFuelEconomyRequirement {
 							subject :>> Requirements::subj;
-							:>> requiredFuelEconomy = 10 [SI::kilometre/SI::litre];
-							assumption;
+							:>> requiredFuelEconomy = 10 [SI::kilometre/SI::litre] {
+								10 [SI::kilometre/SI::litre];
+							}
+							assumption {
+								[OperatorExpression];
+							}
 						}
 						[prefixMetadata] requirement highwayFuelEconomyRequirement {
 							subject :>> Requirements::subj;
-							:>> requiredFuelEconomy = 12.75 [SI::kilometre/SI::litre];
-							assumption;
+							:>> requiredFuelEconomy = 12.75 [SI::kilometre/SI::litre] {
+								12.75 [SI::kilometre/SI::litre];
+							}
+							assumption {
+								[OperatorExpression];
+							}
 						}
 					}
 				}
@@ -836,11 +934,13 @@ Assume total mass includes a full tank of gas of 60 kg*\
 					requirement engineMassRequirement {
 						subject :>> Requirements::subj;
 						doc \* The total mass of the engine shall be less than or equal to the required mass.*\
-						attribute :>> massRequired = 200 [SI::kilogram];
-						attribute :>> massActual = [FeatureChainExpression];
+						attribute :>> massRequired = 200 [SI::kilogram] {
+							200 [SI::kilogram];
+						}
+						attribute :>> massActual = engine1.mass;
 					}
 					requirement torqueGenerationRequirement : TorqueGenerationRequirement {
-						subject generateTorque default [FeatureChainExpression];
+						subject generateTorque default engine1.generateTorque;
 					}
 					requirement drivePowerOutputRequirement {
 						subject :>> Requirements::subj;
@@ -904,8 +1004,12 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				part wheel1 : Wheel {
 					port lugNutCompositePort :>> lugNutCompositePort {
 						port lugNutPort [5] {
-							attribute :>> threadDia = 14 [SI::millimetre];
-							attribute :>> threadPitch = 1.5 [SI::millimetre];
+							attribute :>> threadDia = 14 [SI::millimetre] {
+								14 [SI::millimetre];
+							}
+							attribute :>> threadPitch = 1.5 [SI::millimetre] {
+								1.5 [SI::millimetre];
+							}
 						}
 						port lugNutPort1 [1];
 						port lugNutPort2 [1];
@@ -915,9 +1019,15 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				part hub1 : Hub {
 					port shankCompositePort :>> shankCompositePort {
 						port shankPort [5] {
-							attribute :>> threadDia = 14 [SI::millimetre];
-							attribute :>> threadPitch = 1.5 [SI::millimetre];
-							attribute :>> shaftLength = 70 [SI::millimetre];
+							attribute :>> threadDia = 14 [SI::millimetre] {
+								14 [SI::millimetre];
+							}
+							attribute :>> threadPitch = 1.5 [SI::millimetre] {
+								1.5 [SI::millimetre];
+							}
+							attribute :>> shaftLength = 70 [SI::millimetre] {
+								70 [SI::millimetre];
+							}
 						}
 						port shankPort1 [1];
 						port shankPort2 [1];
@@ -926,13 +1036,19 @@ Assume total mass includes a full tank of gas of 60 kg*\
 				}
 				interface  wheelHubInterface : WheelHubInterface connect  lugNutCompositePort to shankCompositePort {
 					interface  wheelFastenerInterface1 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre];
+						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre] {
+							90*1.356 [SI::newton*SI::metre];
+						}
 					}
 					interface  wheelFastenerInterface2 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre];
+						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre] {
+							90*1.356 [SI::newton*SI::metre];
+						}
 					}
 					interface  wheelFastenerInterface3 :> wheelFastenerInterface connect  lugNutPort to shankPort {
-						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre];
+						attribute :>> maxTorque = 90*1.356 [SI::newton*SI::metre] {
+							90*1.356 [SI::newton*SI::metre];
+						}
 					}
 				}
 			}
@@ -976,8 +1092,12 @@ The high octane gasoline is about 0.76[l/kg].
 				bestFuelConsumption : ScalarValues::Real;
 				idlingFuelConsumption : ScalarValues::Real;
 				tpd_avg :> timePerDistance;
-				attribute f = bestFuelConsumption + idlingFuelConsumption*tpd_avg;
-				return out dpv :> distancePerVolume = 1/f;
+				attribute f = bestFuelConsumption + idlingFuelConsumption*tpd_avg {
+					bestFuelConsumption + idlingFuelConsumption*tpd_avg;
+				}
+				return out dpv :> distancePerVolume = 1/f {
+					1/f;
+				}
 			}
 			calc def AverageTravelTimePerDistance {
 				scenario : Scenario;
@@ -990,7 +1110,9 @@ The high octane gasoline is about 0.76[l/kg].
 			calc def IdlingFuelConsumptionPerTime {
 				engine : Engine;
 				attribute idlingFuelConsumptionPerDisplacement : ScalarValues::Real = 0.5;
-				return out f_a : ScalarValues::Real = [FeatureChainExpression]*idlingFuelConsumptionPerDisplacement;
+				return out f_a : ScalarValues::Real = engine.displacement*idlingFuelConsumptionPerDisplacement {
+					engine.displacement*idlingFuelConsumptionPerDisplacement;
+				}
 			}
 			attribute specificGravityOfGasoline : ScalarValues::Real = 0.76;
 			calc def BestFuelConsumptionPerDistance {
@@ -999,8 +1121,12 @@ The high octane gasoline is about 0.76[l/kg].
 				tpd_avg :> timePerDistance;
 				distance :> length;
 				attribute required_power_avg :> power;
-				;
-				return out f_b : ScalarValues::Real = bsfc*specificGravityOfGasoline*required_power_avg*tpd_avg;
+				{
+					[OperatorExpression];
+				}
+				return out f_b : ScalarValues::Real = bsfc*specificGravityOfGasoline*required_power_avg*tpd_avg {
+					bsfc*specificGravityOfGasoline*required_power_avg*tpd_avg;
+				}
 			}
 			calc def ComputeBSFC {
 				engine : Engine;
@@ -1015,9 +1141,9 @@ The high octane gasoline is about 0.76[l/kg].
 				attribute scenario : Scenario;
 				attribute distance = TraveledDistance(scenario);
 				attribute tpd_avg = AverageTravelTimePerDistance(scenario);
-				attribute bsfc = ComputeBSFC(engine=[FeatureChainExpression]);
-				attribute f_a = BestFuelConsumptionPerDistance(mass=[FeatureChainExpression], bsfc, tpd_avg, distance);
-				attribute f_b = IdlingFuelConsumptionPerTime(engine=[FeatureChainExpression]);
+				attribute bsfc = ComputeBSFC(engine=vehicle_b.engine);
+				attribute f_a = BestFuelConsumptionPerDistance(mass=vehicle_b.mass, bsfc, tpd_avg, distance);
+				attribute f_b = IdlingFuelConsumptionPerTime(engine=vehicle_b.engine);
 				return out attribute calculatedFuelEconomy :> distancePerVolume = FuelConsumption(bestFuelConsumption=f_a, idlingFuelConsumption=f_b, tpd_avg);
 			}
 		}
@@ -1069,8 +1195,12 @@ The rationale and risk are contained in a metadata library. *\
 				part vehicle_b_engine4cyl :> vehicleAlternatives {
 					part engine :>> engine {
 						part cylinders [4] :>> cylinders;
-						attribute mass :>> mass = 180 [SI::kilogram];
-						attribute peakHorsePower :>> peakHorsePower = 180 [SI::watt];
+						attribute mass :>> mass = 180 [SI::kilogram] {
+							180 [SI::kilogram];
+						}
+						attribute peakHorsePower :>> peakHorsePower = 180 [SI::watt] {
+							180 [SI::watt];
+						}
 						attribute fuelEfficiency :>> fuelEfficiency = 0.6;
 						attribute cost :>> cost = 1000;
 					}
@@ -1078,8 +1208,12 @@ The rationale and risk are contained in a metadata library. *\
 				part vehicle_b_engine6cyl :> vehicleAlternatives {
 					part engine :>> engine {
 						part cylinders [6] :>> cylinders;
-						attribute mass :>> mass = 220 [SI::kilogram];
-						attribute peakHorsePower :>> peakHorsePower = 220 [SI::watt];
+						attribute mass :>> mass = 220 [SI::kilogram] {
+							220 [SI::kilogram];
+						}
+						attribute peakHorsePower :>> peakHorsePower = 220 [SI::watt] {
+							220 [SI::watt];
+						}
 						attribute fuelEfficiency :>> fuelEfficiency = 0.5;
 						attribute cost :>> cost = 1500;
 					}
@@ -1090,11 +1224,11 @@ The rationale and risk are contained in a metadata library. *\
 				comment about \* Select vehicle alternative with the engine whose evaluation function returns the max value*\
 				calc :> evaluationFunction {
 					part vehicle :> vehicle_b_engine4cyl;
-					return out attribute eval : ScalarValues::Real = EngineEvaluation_4cyl(engineMass=engine.mass, enginePower=engine.peakHorsePower, engineFuelEfficiency=engine.fuelEfficiency, engineCost=engine.cost);
+					return out attribute eval : ScalarValues::Real = EngineEvaluation_4cyl(engineMass=vehicle, enginePower=vehicle, engineFuelEfficiency=vehicle, engineCost=vehicle);
 				}
 				calc :> evaluationFunction {
 					part vehicle :> vehicle_b_engine6cyl;
-					return out attribute eval : ScalarValues::Real = EngineEvaluation_6cyl(engineMass=engine.mass, enginePower=engine.peakHorsePower, engineFuelEfficiency=engine.fuelEfficiency, engineCost=engine.cost);
+					return out attribute eval : ScalarValues::Real = EngineEvaluation_6cyl(engineMass=vehicle, enginePower=vehicle, engineFuelEfficiency=vehicle, engineCost=vehicle);
 				}
 				return out part selectedVehicle :> vehicle_b;
 			}
@@ -1129,12 +1263,12 @@ The rationale and risk are contained in a metadata library. *\
 		package VerificationCases1 {
 			[prefixMetadata] verification massTests : MassTest {
 				subject vehicle_uut :> vehicle_b;
-				part vehicleVerificationSubSystem_1 = [FeatureChainExpression];
+				part vehicleVerificationSubSystem_1 = verificationContext.massVerificationSystem;
 				requirement {
 					subject :>> subj;
 					requirement {
 						subject :>> Requirements::subj;
-						:>> massActual = [FeatureChainExpression];
+						:>> massActual = weighVehicle.massMeasured;
 					}
 				}
 				action weighVehicle {
@@ -1167,15 +1301,23 @@ The rationale and risk are contained in a metadata library. *\
 		individual occurrence a : VehicleRoadContext_1 {
 			occurrence t0_t2_a {
 				snapshot occurrence t0_a {
-					attribute t0 :>> time = 0 [SI::second];
+					attribute t0 :>> time = 0 [SI::second] {
+						0 [SI::second];
+					}
 					snapshot occurrence t0_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t0_v : Vehicle_1 {
-						:>> position = 0 [SI::metre];
-						:>> velocity = 0 [SI::metre];
-						:>> acceleration = 1.96 [SI::metre/SI::second**2];
+						:>> position = 0 [SI::metre] {
+							0 [SI::metre];
+						}
+						:>> velocity = 0 [SI::metre] {
+							0 [SI::metre];
+						}
+						:>> acceleration = 1.96 [SI::metre/SI::second**2] {
+							1.96 [SI::metre/SI::second**2];
+						}
 						snapshot occurrence t0_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t0_leftFront : Wheel_1;
 							snapshot occurrence t0_rightFront : Wheel_2;
@@ -1183,15 +1325,23 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				snapshot occurrence t1_a {
-					attribute t1 :>> time = 1 [SI::second];
+					attribute t1 :>> time = 1 [SI::second] {
+						1 [SI::second];
+					}
 					snapshot occurrence t1_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t1_v : Vehicle_1 {
-						:>> position = 0.98 [SI::metre];
-						:>> velocity = 1.96 [SI::metre/SI::second];
-						:>> acceleration = 1.96 [SI::metre/SI::second**2];
+						:>> position = 0.98 [SI::metre] {
+							0.98 [SI::metre];
+						}
+						:>> velocity = 1.96 [SI::metre/SI::second] {
+							1.96 [SI::metre/SI::second];
+						}
+						:>> acceleration = 1.96 [SI::metre/SI::second**2] {
+							1.96 [SI::metre/SI::second**2];
+						}
 						snapshot occurrence t1_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t1_leftFront : Wheel_1;
 							snapshot occurrence t1_rightFront : Wheel_2;
@@ -1199,15 +1349,23 @@ The rationale and risk are contained in a metadata library. *\
 					}
 				}
 				snapshot occurrence t2_a {
-					attribute t2 :>> time = 2 [SI::second];
+					attribute t2 :>> time = 2 [SI::second] {
+						2 [SI::second];
+					}
 					snapshot occurrence t2_r : Road_1 {
 						:>> incline = 0;
 						:>> friction = 0.1;
 					}
 					snapshot occurrence t2_v : Vehicle_1 {
-						:>> position = 3.92 [SI::metre];
-						:>> velocity = 3.92 [SI::metre/SI::second];
-						:>> acceleration = 1.96 [SI::metre/SI::second**2];
+						:>> position = 3.92 [SI::metre] {
+							3.92 [SI::metre];
+						}
+						:>> velocity = 3.92 [SI::metre/SI::second] {
+							3.92 [SI::metre/SI::second];
+						}
+						:>> acceleration = 1.96 [SI::metre/SI::second**2] {
+							1.96 [SI::metre/SI::second**2];
+						}
 						snapshot occurrence t2_fa : FrontAxleAssembly_1 {
 							snapshot occurrence t2_leftFront : Wheel_1;
 							snapshot occurrence t2_rightFront : Wheel_2;
@@ -1274,7 +1432,9 @@ The rationale and risk are contained in a metadata library. *\
 				subject vehicle : Vehicle;
 				part driver [0..1];
 				part passenger [0..1];
-				assert constraint;
+				assert constraint {
+					[OperatorExpression];
+				}
 				requirement {
 					subject :>> UseCases::null;
 				}
@@ -1296,7 +1456,9 @@ The rationale and risk are contained in a metadata library. *\
 				subject vehicle : Vehicle;
 				part driver [0..1];
 				part passenger [0..1];
-				assert constraint;
+				assert constraint {
+					[OperatorExpression];
+				}
 				requirement {
 					subject :>> UseCases::null;
 				}
@@ -1385,8 +1547,8 @@ The rationale and risk are contained in a metadata library. *\
 		part missionContext : MissionContext {
 			[prefixMetadata] attribute transportTime;
 			perform transportPassenger transportPassenger;
-			part road : Road = [FeatureChainExpression];
-			part driver : Driver = [FeatureChainExpression] {
+			part road : Road = transportPassenger.road;
+			part driver : Driver = transportPassenger.driver {
 				perform transportPassenger.a.driverGetInVehicle.unlockDoor_in transportPassenger.a.driverGetInVehicle.unlockDoor_in;
 				perform transportPassenger.a.driverGetInVehicle.openDoor_in transportPassenger.a.driverGetInVehicle.openDoor_in;
 				perform transportPassenger.a.driverGetInVehicle.enterVehicle transportPassenger.a.driverGetInVehicle.enterVehicle;
@@ -1397,7 +1559,7 @@ The rationale and risk are contained in a metadata library. *\
 				perform transportPassenger.c.driverGetOutOfVehicle.lockDoor_out transportPassenger.c.driverGetOutOfVehicle.lockDoor_out;
 				perform transportPassenger.b.driveVehicleToDestination transportPassenger.b.driveVehicleToDestination;
 			}
-			part passenger1 : Passenger = [FeatureChainExpression] {
+			part passenger1 : Passenger = transportPassenger.passenger {
 				perform transportPassenger.a.passenger1GetInVehicle.unlockDoor_in transportPassenger.a.passenger1GetInVehicle.unlockDoor_in;
 				perform transportPassenger.a.passenger1GetInVehicle.openDoor_in transportPassenger.a.passenger1GetInVehicle.openDoor_in;
 				perform transportPassenger.a.passenger1GetInVehicle.enterVehicle transportPassenger.a.passenger1GetInVehicle.enterVehicle;
@@ -1407,8 +1569,10 @@ The rationale and risk are contained in a metadata library. *\
 				perform transportPassenger.c.passenger1GetOutOfVehicle.closeDoor_out transportPassenger.c.passenger1GetOutOfVehicle.closeDoor_out;
 				perform transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out transportPassenger.c.passenger1GetOutOfVehicle.lockDoor_out;
 			}
-			part vehicle_b_1 :> vehicle_b = [FeatureChainExpression] {
-				attribute :>> position3dVector = [SequenceExpression] [spatialCF];
+			part vehicle_b_1 :> vehicle_b = transportPassenger.vehicle {
+				attribute :>> position3dVector = (0,0,0) [spatialCF] {
+					(0,0,0) [spatialCF];
+				}
 				perform transportPassenger.b.providePower transportPassenger.b.providePower;
 				perform transportPassenger.trigger transportPassenger.trigger;
 			}
@@ -1445,7 +1609,9 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				part transmissionChoices : TransmissionChoices;
 				part sunroof [0..1] : Sunroof;
-				assert constraint selectionConstraint;
+				assert constraint selectionConstraint {
+					[OperatorExpression];
+				}
 				part driveshaft;
 				part frontAxleAssembly;
 				part rearAxleAssembly;
@@ -1458,21 +1624,25 @@ The rationale and risk are contained in a metadata library. *\
 			comment about \* Parts that contribute to safety. *\
 			public import vehicle_b::**;
 			public filter @Safety;
+			@Safety;
 		}
 		package SecurityGroup {
 			comment about \* Parts that contribute to security. *\
 			public import vehicle_b::**;
 			public filter @Security;
+			@Security;
 		}
 		package SafetyandSecurityGroup {
 			comment about \* Parts that contribute to safety OR security. *\
 			public import vehicle_b::**;
 			public filter @Safety or [BodyExpression];
+			@Safety or [BodyExpression];
 		}
 		package MandatorySafetyGroup {
 			comment about \* Parts that contribute to safety AND are mandatory. *\
 			public import vehicle_b::**;
 			public filter @Safety and [BodyExpression];
+			@Safety and [BodyExpression];
 		}
 	}
 	package Views_Viewpoints {
@@ -1503,6 +1673,7 @@ The rationale and risk are contained in a metadata library. *\
 			view def TableView;
 			view def PartsTreeView {
 				public filter @SysML::PartUsage;
+				@SysML::PartUsage;
 			}
 			view def PartsInterconnection;
 		}
@@ -1516,6 +1687,7 @@ The rationale and risk are contained in a metadata library. *\
 				}
 				protected expose PartsTree::**;
 				public filter @Safety;
+				@Safety;
 			}
 		}
 	}

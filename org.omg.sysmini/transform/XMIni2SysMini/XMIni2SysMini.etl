@@ -90,6 +90,9 @@ operation XMIni!Relationship relationshipTransform(rootNode : SysMini!Element){
 			case "TextualRepresentation":              element.addNodeTo(rootNode);
 			case "Documentation":                      element.addNodeTo(rootNode);
 			
+			//Expression
+			case "OperatorExpression":                 element.addNodeTo(rootNode);
+			
 			//Definition
 			case "OccurrenceDefinition":               element.addNodeTo(rootNode);
 			case "AttributeDefinition":                element.addNodeTo(rootNode);
@@ -1437,7 +1440,15 @@ rule MembershipImport
 			t.declaredName = s.importedMembership.ownedRelatedElement.first().declaredName;
 		}
 	}
-	
+
+@abstract
+rule OperatorExpression
+	transform s : XMIni!OperatorExpression
+	to t : SysMini!OperatorExpression{
+		t.valuePart = s.OwnedExpression();
+	}
+
+
 /* @lazy */
 @lazy
 rule NamespaceImportRule
@@ -2043,4 +2054,10 @@ rule MembershipRule
 	to t : SysMini!Membership
 	extends Membership{
 	}
-	
+
+@lazy
+rule OperatorExpressionRule
+	transform s : XMIni!OperatorExpression
+	to t : SysMini!OperatorExpression
+	extends OperatorExpression{
+	}

@@ -739,6 +739,10 @@ operation SysMini!ForLoopActionUsage ForLoopActionUsage() : String {
 	return "[ForLoopActionUsage]";
 }
 
+operation SysMini!OperatorExpression OperatorExpression() : String {
+	return self.valuePart;
+}
+
 /* Def Key Word*/
 operation RenderingDefKeyword() : String {
 	return RenderingKeyword() + "def".space();

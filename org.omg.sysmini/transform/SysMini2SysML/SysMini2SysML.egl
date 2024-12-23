@@ -132,6 +132,7 @@ operation SysMini!Element matchType() : String {
 		case "ForkNode":                     return self.ForkNode();
 		case "WhileLoopActionUsage":         return self.WhileLoopActionUsage();
 		case "ForLoopActionUsage":           return self.ForLoopActionUsage();
+		case "OperatorExpression":           return self.OperatorExpression();
 	}
 	return "";
 }

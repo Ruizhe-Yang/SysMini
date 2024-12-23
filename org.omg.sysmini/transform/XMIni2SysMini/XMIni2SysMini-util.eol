@@ -536,19 +536,7 @@ operation XMIni!Expression FeatureReferenceExpression(){
 	if (self.ownedRelationship.getElementOf("Membership").size() == 1){
 		//FeatureReferenceExpression
 		var featureReferenceExpression = self.ownedRelationship.getElementOf("Membership").first();
-		if (featureReferenceExpression.declaredName != null){
-			var str = featureReferenceExpression.declaredName;
-			if (str.split("::").first() == "SI"){
-				//featureReferenceExpression.println();
-			}
-			return str;
-		}
-		else if (featureReferenceExpression.memberElement.declaredName != null){
-			return featureReferenceExpression.memberElement.declaredName;
-		}
-		else if (featureReferenceExpression.memberElement.equivalent().featureSpecialization != null){
-			return featureReferenceExpression.memberElement.equivalent().featureSpecialization;
-		}
+		return featureReferenceExpression.Membership();
 	}
 	else if (self.ownedRelationship.getElementOf("FeatureMembership").size() == 1){
 // TBD  BodyExpression
@@ -561,18 +549,20 @@ operation XMIni!Expression FeatureReferenceExpression(){
 	}
 }
 
-operation XMIni!Expression SequenceExpression(){
-//	str = "";
-//	str += self.OwnedExpression();
-// TBD  ( ',' | {SysML::OperatorExpression.operand += current} operator = ',' operand += SequenceExpression)?
-//	var str = self.OwnedExpression();
-//	if (self.operator == ","){
-//		self.operand.println();
-//	}
-//	else{
-//		str += ",";
-//	}
-	return "[SequenceExpression]";
+operation XMIni!Membership Membership(){
+	if (self.declaredName != null){
+		return self.declaredName;
+	}
+	else if (self.memberElement.declaredName != null){
+		return self.memberElement.declaredName;
+	}
+	else if (self.memberElement.equivalent().featureSpecialization != null){
+		return self.memberElement.equivalent().featureSpecialization;
+	}
+	else{
+		"[Membership NULL]".println();
+		return "[Membership NULL]";
+	}
 }
 
 operation XMIni!Expression BaseExpression(){
@@ -592,15 +582,41 @@ operation XMIni!Expression FeatureChainExpression(){
 	if (self.hasProperty("memberElement")){
 		return self.memberElement.declaredName;
 	}
+	else if (self.ownedRelationship.getElementOf("ParameterMembership").size() == 1){
+		var str = "";
+		str += self.ownedRelationship.getElementOf("ParameterMembership").first().ParameterMembership();
+		if (self.ownedRelationship.getElementOf("Membership").size() == 1){
+			var membership = self.ownedRelationship.getElementOf("Membership").first();
+			str += "."+membership.Membership();
+		}
+		return str;
+	}
 	else if (self.ownedRelationship.getElementOf("OwningMembership").size() == 1){
-//		self.ownedRelationship.getElementOf("OwningMembership").first().ownedRelatedElement.first().FeatureChain().println();
 		return self.ownedRelationship.getElementOf("OwningMembership").first().ownedRelatedElement.first().FeatureChain();
+	}
+	else if (self.ownedRelationship.getElementOf("Membership").size() == 1){
+		var membership = self.ownedRelationship.getElementOf("Membership").first();
+		return membership.Membership();
 	}
 	else{
 		return "[FeatureChainExpression]";
-//	shang	return "";
 	}
 	
+}
+
+operation XMIni!Expression SequenceExpression(){
+	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
+	var frontPart = parameterMemberships.first().ParameterMembership();
+	var backPart = parameterMemberships.second().ParameterMembership();
+	if ((frontPart != null and backPart != null)){
+		if (frontPart.startsWith("(") and frontPart.endsWith(")")){
+			frontPart = frontPart.substring(1, frontPart.length()-1);
+		}
+		if (backPart.startsWith("(") and backPart.endsWith(")")){
+			backPart = backPart.substring(1, backPart.length()-1);
+		}
+	}
+	return "("+frontPart+","+backPart+")";
 }
 
 operation XMIni!Expression SelectExpression(){
@@ -632,6 +648,7 @@ operation XMIni!Expression OperatorExpression(){
 	}
 	return "[OperatorExpression]";
 }
+
 
 operation XMIni!Expression SquareBracketOperator(){
 	var parameterMemberships = self.ownedRelationship.getElementOf("ParameterMembership");
