@@ -508,7 +508,20 @@ rule PrefixMetadataUsage
 				else if (featureTyping.type.declaredName != null){
 					t.prefixMetadata = "#"+featureTyping.type.declaredName;
 				}
-				prefixMetadataUsage.tag();
+			prefixMetadataUsage.tag();
+			}
+		}
+		for (owningMembership in s.ownedRelationship.getElementOf("Annotation")){
+			var prefixMetadataUsage = owningMembership.ownedRelatedElement.getElementOf("MetadataUsage").first();
+			if (prefixMetadataUsage != null){
+				var featureTyping = prefixMetadataUsage.ownedRelationship.first();
+				if (featureTyping.declaredName != null){
+					t.prefixMetadata = "#"+featureTyping.declaredName;
+				}
+				else if (featureTyping.type.declaredName != null){
+					t.prefixMetadata = "#"+featureTyping.type.declaredName;
+				}
+			prefixMetadataUsage.tag();
 			}
 		}
 	}
@@ -1011,49 +1024,12 @@ rule InterfaceUsageDeclaration
 @abstract
 rule InterfacePart
 	transform s : XMIni!InterfaceUsage
-	to t : SysMini!InterfaceUsage
-	extends BinaryInterfacePart, NaryInterfacePart{
-	}
-
-@abstract
-rule BinaryInterfacePart
-	transform s : XMIni!Connector
-	to t : SysMini!Connector{
+	to t : SysMini!InterfaceUsage{
 		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
-			var interfaceEnd  = endFeatureMembership.ownedRelatedElement.first();
-			if (interfaceEnd.declaredName != null){
-				t.interfacePart.add(interfaceEnd.declaredName);
-			}
-			else{
-				var str = "";
-				str += interfaceEnd.getReferenceSubsetting();
-				str += interfaceEnd.getMultiplicityRange();
-				t.interfacePart.add(str);
-			}
-			interfaceEnd.tag();
+			t.interfacePart.add(endFeatureMembership.getEndFeatureMembership());
 		}
 	}
-	
 
-
-@abstract
-rule NaryInterfacePart
-	transform s : XMIni!Connector
-	to t : SysMini!Connector{
-		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
-			var interfaceEnd  = endFeatureMembership.ownedRelatedElement.first();
-			if (interfaceEnd.declaredName != null){
-				t.interfacePart.add(interfaceEnd.declaredName);
-			}
-			else{
-				var str = "";
-				str += interfaceEnd.getReferenceSubsetting();
-				str += interfaceEnd.getMultiplicityRange();
-				t.interfacePart.add(str);
-			}
-			interfaceEnd.tag();
-		}	
-	}
 	
 @abstract
 rule FlowConnectionDeclaration
@@ -1107,39 +1083,9 @@ rule ViewBody
 @abstract
 rule ConnectorPart
 	transform s : XMIni!ConnectionUsage
-	to t : SysMini!ConnectionUsage
-	extends BinaryConnectorPart, NaryConnectorPart{
-	}
-
-@abstract
-rule BinaryConnectorPart
-	transform s : XMIni!Connector
-	to t : SysMini!Connector{
+	to t : SysMini!ConnectionUsage{
 		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
-			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
-			if (referenceUsage.declaredName != null){
-				t.connectorPart.add(referenceUsage.declaredName);
-				referenceUsage.tag();
-			}
-			else {
-				t.connectorPart.add(referenceUsage.getConnectorEnd());
-			}
-		}
-	}
-
-@abstract
-rule NaryConnectorPart
-	transform s : XMIni!Connector
-	to t : SysMini!Connector{
-		for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
-			var referenceUsage = endFeatureMembership.ownedRelatedElement.first();
-			if (referenceUsage.declaredName != null){
-				t.connectorPart.add(referenceUsage.declaredName);
-				referenceUsage.tag();
-			}
-			else {
-				t.connectorPart.add(referenceUsage.getConnectorEnd());
-			}
+			t.connectorPart.add(endFeatureMembership.getEndFeatureMembership());
 		}
 	}
 
@@ -1367,7 +1313,7 @@ rule SuccessionAsUsage
 		t.SuccessionType = s.getTypeOfSuccessionAsUsage();
 		if (t.SuccessionType == "SuccessionAsUsage"){
 			for (endFeatureMembership in s.ownedRelationship.getElementOf("EndFeatureMembership")){
-				se.add(endFeatureMembership.ownedRelatedElement.first().getConnectorEnd());	
+				se.add(endFeatureMembership.getEndFeatureMembership());	
 			}
 		}
 		if (se.first() == ""){

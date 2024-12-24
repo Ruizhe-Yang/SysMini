@@ -133,7 +133,7 @@ operation XMIni!Feature getMultiplicityRange(){
 }
 
 operation XMIni!Feature getFeatureNote(){
-	for (owningMembership in self.ownedRelationship.first()){
+	for (owningMembership in self.ownedRelationship){
 		switch (owningMembership.type().name){
 			case "FeatureTyping":{
 				return ":";
@@ -171,13 +171,37 @@ operation clearImportPackage(text){
 
 
 operation XMIni!Feature getFeatureSpecialization(){
-	var owningMembership = self.ownedRelationship.first();
+	var str = "";
+	for (owningMembership in self.ownedRelationship){
+		switch (owningMembership.type().name){
+			case "FeatureTyping":{
+				 str = "FeatureTyping";
+				 break;
+			}
+			case "Subsetting":{
+				 str = "Subsetting";
+				 break;
+			}
+			case "OwnedReferenceSubsetting":{
+				 str = "OwnedReferenceSubsetting";
+				 break;		
+			}
+			case "Redefinition":{
+				 str = "Redefinition";
+				 break;
+			}
+		}
+	}
+	var owningMembership = self.ownedRelationship.getElementOf(str).first();
 	if (owningMembership.isKindOf(XMIni!Specialization) and (not owningMembership.isTypeOf("ConjugatedPortTyping"))){
 		var object = owningMembership.getDeclaredName();
 		if (object == "" or object == null){
 			if (owningMembership.isTypeOf("Redefinition")){
 				if (owningMembership.redefinedFeature.declaredName !=  null){
 					object = owningMembership.redefinedFeature.declaredName;
+				}
+				else if (owningMembership.redefinedFeature.isTypeOf("Feature")){
+					object = owningMembership.redefinedFeature.FeatureChain();
 				}
 				else{
 					object = owningMembership.redefinedFeature.equivalent().featureSpecialization;
@@ -187,14 +211,19 @@ operation XMIni!Feature getFeatureSpecialization(){
 				if (owningMembership.type.declaredName !=  null){
 					object = owningMembership.type.declaredName;
 				}
+				else if (owningMembership.type.isTypeOf("Feature")){
+					object = owningMembership.type.FeatureChain();
+				}
 				else{
 					object = owningMembership.type.equivalent().featureSpecialization;
 				}
-
 			}
 			else if (owningMembership.isTypeOf("Subsetting")){
 				if (owningMembership.subsettedFeature.declaredName !=  null){
 					object = owningMembership.subsettedFeature.declaredName;
+				}
+				else if (owningMembership.subsettedFeature.isTypeOf("Feature")){
+					object = owningMembership.subsettedFeature.FeatureChain();
 				}
 				else{
 					object = owningMembership.subsettedFeature.equivalent().featureSpecialization;
@@ -300,6 +329,7 @@ operation XMIni!Usage getConnectorEnd(){
 	var str = "";
 	if (self.declaredName != null and self.declaredName != ""){
 		str += self.declaredName;
+		str += " ::> ";
 	}
 	str += self.OwnedReferenceSubsetting();
 	str += self.getMultiplicityRange();
@@ -319,6 +349,11 @@ operation XMIni!SuccessionAsUsage getTypeOfSuccessionAsUsage() : String{
 //		second.ownedRelatedElement.first().ownedRelationship.getElementOf("ReferenceSubsetting").println("second:");
 //	}
 	return "SuccessionAsUsage";
+}
+
+operation XMIni!EndFeatureMembership getEndFeatureMembership(){
+	return self.ownedRelatedElement.first().getConnectorEnd();
+	interfaceEnd.tag();
 }
 
 operation XMIni!ReferenceUsage getTypeOfReferenceUsage(){

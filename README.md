@@ -19,6 +19,7 @@
 - TransitionUsage目前关闭
 - 存在Import多层引用问题，如501、502行
 - 缩写字符问题
+- featureSpecialization多个情况下的处理
 - Expression未测试完全
 - 全类校对
 - 全架构JAVA驱动实现
@@ -26,8 +27,10 @@
 ### 未解决的BUG
 
 - 一些引用会使用缩写，缩写目前无法被检索，如550、551行
-- 部分幽灵ReferenceUsage生成问题（可能会随着Usage处理完消除掉）
 - ReferenceUsage未处理清楚，如240行
-- PortUsage的MultiplicityRange出现位置问题，如624、630行
-- MultiplicityRange存在个数出现两次的问题，如640、642行
-- 若干意外的PerformActionUsage生成问题（可能是equivalent()调用后未实例化出现的问题，目前无）
+
+### 待确定的情况
+
+- 部分幽灵ReferenceUsage生成问题：可能会随着Usage处理完消除掉
+- PortUsage的MultiplicityRange出现位置问题，如624、630行：见xtext的367行，应该问题不大
+- 若干意外的PerformActionUsage生成问题：可能是equivalent()调用后未实例化出现的问题，目前又没有了

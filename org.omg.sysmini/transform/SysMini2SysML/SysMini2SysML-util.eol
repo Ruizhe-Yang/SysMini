@@ -653,9 +653,9 @@ operation SysMini!Dependency Dependency() : String {
 		str += self.Identification();
 		str += "from".space();
 	}
-	str += self.client.asSequence().getDependencyObject();
+	str += self.client.asSequence().getDependencyObject().space();
 	str += "to".space();
-	str += self.supplier.asSequence().getDependencyObject();
+	str += self.supplier.asSequence().getDependencyObject().space();
 	str += self.RelationshipBody();
 	return str;
 }
