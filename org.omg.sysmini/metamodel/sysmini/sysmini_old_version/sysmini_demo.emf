@@ -1,4 +1,4 @@
-package sysmini;
+package sysminidemo;
 
 class Subclassification extends Specialization {
 	ref Classifier[1] superclassifier;

@@ -705,7 +705,8 @@ rule FeatureSpecialization
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
 		t.featureNote = s.getFeatureNote();
-		t.featureSpecialization = clearImportPackage(s.getFeatureSpecialization());
+//		t.featureSpecialization = s.getFeatureSpecialization().clearImportPackage();
+		t.featureSpecialization = s.getFeatureSpecialization();
 		if (t.featureSpecialization == "" or t.featureSpecialization == null){
 			t.featureNote = "";
 		}
@@ -886,9 +887,7 @@ rule RequirementUsage
 rule ConstraintUsage
 	transform s : XMIni!ConstraintUsage
 	to t : SysMini!ConstraintUsage
-	extends OccurrenceUsagePrefix,
-			ConstraintUsageDeclaration,
-			CalculationBody{
+	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, CalculationBody{
 		if (s.eContainer().isTypeOf("RequirementConstraintMembership")){
 			var requirementConstraintMembership = s.eContainer();
 			t.RequirementConstraintMembershipKind = requirementConstraintMembership.kind.name.asString();

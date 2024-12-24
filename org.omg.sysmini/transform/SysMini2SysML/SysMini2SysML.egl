@@ -21,7 +21,7 @@ operation SysMini!Element getContent(content: String, layer: Integer) : String {
 		if (content.endsWith(" ")){
 			content = content.substring(0, content.length()-1);
 		}
-		if ((not content.endsWith("*\\")) and (not content.endsWith("}"))){
+		if ((not content.endsWith("*/")) and (not content.endsWith("}"))){
 			content += ";";
 		}
 	}

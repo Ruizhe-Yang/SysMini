@@ -40,9 +40,11 @@ operation SysMini!MembershipExpose MembershipExpose() : String {
 /* AnnotatingElement */
 operation SysMini!Comment Comment() : String {
 	var str = "";
-	if (self.annotation != null){
+	if (self.declaredName != null and self.declaredName != ""){
 		str += "comment".space();
 		str += self.declaredName.space(); 
+	}
+	if (self.annotation.size() > 0){
 		str += "about".space();
 		for (annotationString in self.annotation){
 			str += annotationString.space();
@@ -52,7 +54,9 @@ operation SysMini!Comment Comment() : String {
 	if (self.locale != null){
 		str += "locale".space() + self.locale.space();
 	}
-	str += "\\*".space() + self.text + "*\\".space();
+	str += "/";
+	str += "*".space() + self.text;
+	str += "*/".space();
 	return str;
 }
 
@@ -63,7 +67,9 @@ operation SysMini!Documentation Documentation() : String {
 	if (self.locale != null){
 		str += "locale".space() + self.locale.space();
 	}
-	str += "\\*".space() + self.text + "*\\".space();
+	str += "/";
+	str += "*".space() + self.text;
+	str += "*/".space();
 	return str;
 }
 
@@ -76,7 +82,9 @@ operation SysMini!TextualRepresentation TextualRepresentation() : String {
 	if (self.language != null){
 		str += "language".space() + self.language.space();
 	}
-	str += "\\*".space() + self.text + "*\\".space();
+	str += "/";
+	str += "*".space() + self.text;
+	str += "*/".space();
 	return str;
 }
 

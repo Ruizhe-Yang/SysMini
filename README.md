@@ -19,7 +19,7 @@
 - TransitionUsage目前关闭
 - 存在Import多层引用问题，如501、502行
 - 缩写字符问题
-- featureSpecialization多个情况下的处理
+- featureSpecialization多个情况下的处理（不太希望动）
 - Expression未测试完全
 - 全类校对
 - 全架构JAVA驱动实现
@@ -27,7 +27,7 @@
 ### 未解决的BUG
 
 - 一些引用会使用缩写，缩写目前无法被检索，如550、551行
-- ReferenceUsage未处理清楚，如240行
+- MetadataBodyUsage不对，ReferenceUsage未处理清楚，如240行
 
 ### 待确定的情况
 
