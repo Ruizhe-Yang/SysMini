@@ -12,7 +12,7 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Packet Example";
+	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Camera Example";
 	
     public static void main(String[] args) throws IOException {
     	run();
@@ -24,16 +24,15 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
         
         for (String FilePath : sysmlFilePaths) {
         	fileName = null;
-        	selfDirectoryPath = getFolderPath(targetFilePath);
+        	selfDirectoryPath = getFolderPath(FilePath);
         	String newPath = copyFolder(selfDirectoryPath, libraryDirectoryPath);
         	String[] result = findFiles(libraryDirectoryPath);
         	targetFilePath = FilePath;
         	System.out.println(targetFilePath+" is transforming...");
         	String[] config = {"-g", targetFilePath};
             String[] arg = mergeArrays(config, result);
-            SysML2XMI xmini = SysML2XMI.getInstance();
+            SysML2XMI xmini = new SysML2XMI();
             xmini.run(arg);
-            xmini.clear();
         	File libraryDirectory = new File(libraryDirectoryPath);
         	File targetFile = new File(targetFilePath+"x");
     		List<List<String>> ElementIDList = getAllElementHref(targetFile);
