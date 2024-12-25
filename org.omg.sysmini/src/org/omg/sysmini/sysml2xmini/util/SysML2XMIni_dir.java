@@ -12,9 +12,7 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Metadata Examples";
-	//Generate file 'xxx_.sysmlx'.
-	public static String fileName = "";
+	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Packet Example";
 	
     public static void main(String[] args) throws IOException {
     	run();
@@ -25,20 +23,25 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
         String[] sysmlFilePaths = findFiles(targetFileDirectory);
         
         for (String FilePath : sysmlFilePaths) {
-        	fileName = "";
+        	fileName = null;
+        	selfDirectoryPath = getFolderPath(targetFilePath);
+        	String newPath = copyFolder(selfDirectoryPath, libraryDirectoryPath);
         	String[] result = findFiles(libraryDirectoryPath);
         	targetFilePath = FilePath;
         	System.out.println(targetFilePath+" is transforming...");
         	String[] config = {"-g", targetFilePath};
             String[] arg = mergeArrays(config, result);
-//            SysML2XMI.main(arg);
-            new SysML2XMI().run(arg);
+            SysML2XMI xmini = SysML2XMI.getInstance();
+            xmini.run(arg);
+            xmini.clear();
         	File libraryDirectory = new File(libraryDirectoryPath);
         	File targetFile = new File(targetFilePath+"x");
-        	registerEcoreModels();
     		List<List<String>> ElementIDList = getAllElementHref(targetFile);
+    		registerEcoreModels();
+    		System.out.println(fileName);
     		modifyXMI(libraryDirectory, ElementIDList);
     		deleteFiles(libraryDirectoryPath);
+    		deleteFolder(newPath);
         }
         System.out.println("SysML2XMIni.java runtime ends.");
     }

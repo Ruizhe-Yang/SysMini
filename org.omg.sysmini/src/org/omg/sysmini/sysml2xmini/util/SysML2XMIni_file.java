@@ -23,8 +23,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.*;
 
 public class SysML2XMIni_file {
 	
@@ -33,15 +34,19 @@ public class SysML2XMIni_file {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\ASimpleVehicleModel.sysml";
+	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Packet Example\\PacketUsage.sysml";
 	//Generate file 'xxx_.sysmlx'.
 	public static String fileName = null;
+	//Directory path of the self.
+	public static String selfDirectoryPath = null;
 	
     public static void main(String[] args) throws IOException {
     	run();
     }
     
     public static void run() throws IOException {
+    	selfDirectoryPath = getFolderPath(targetFilePath);
+    	String newPath = copyFolder(selfDirectoryPath, libraryDirectoryPath);
         String[] result = findFiles(libraryDirectoryPath);
         String[] config = {"-g", targetFilePath};
         String[] arg = mergeArrays(config, result);
@@ -52,7 +57,83 @@ public class SysML2XMIni_file {
 		registerEcoreModels();
 		modifyXMI(libraryDirectory, ElementIDList);
 		deleteFiles(libraryDirectoryPath);
+		deleteFolder(newPath);
     	System.out.println("SysML2XMIni.java runtime ends.");
+    }
+    
+    public static String copyFolder(String sourceDir, String targetDir) {
+        File sourceFolder = new File(sourceDir);
+        File targetFolder = new File(targetDir);
+        if (!sourceFolder.exists()) {
+            System.out.println("The source folder does not exist!");
+            return null;
+        }
+        String folderName = sourceFolder.getName();
+        File newTargetFolder = new File(targetFolder, folderName);
+        if (!newTargetFolder.exists()) {
+            newTargetFolder.mkdir();
+        }
+        try {
+            copyDirectoryContents(sourceFolder, newTargetFolder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return newTargetFolder.getAbsolutePath();
+    }
+
+    private static void copyDirectoryContents(File sourceDir, File targetDir) throws IOException {
+        File[] files = sourceDir.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    File newDir = new File(targetDir, file.getName());
+                    newDir.mkdir();
+                    copyDirectoryContents(file, newDir);
+                } else {
+                    Files.copy(file.toPath(), new File(targetDir, file.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+        }
+    }
+
+    public static boolean deleteFolder(String folderPath) {
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            System.out.println("The folder does not exist!");
+            return false;
+        }
+        try {
+            deleteDirectoryContents(folder);
+            if (folder.delete()) {
+                return true;
+            } else {
+                System.out.println("Unable to delete folder: " + folderPath);
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    private static void deleteDirectoryContents(File folder) throws IOException {
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    deleteDirectoryContents(file);
+                }
+                if (!file.delete()) {
+                    System.out.println("Unable to delete file: " + file.getAbsolutePath());
+                }
+            }
+        }
+    }
+    
+    public static String getFolderPath(String filePath) {
+        Path path = Paths.get(filePath);
+        Path parentDir = path.getParent();
+        return (parentDir != null) ? parentDir.toString() : "NULL";
     }
     
     public static String[] mergeArrays(String[] array1, String[] array2) {
@@ -98,13 +179,13 @@ public class SysML2XMIni_file {
             System.out.println("Invalid folder path.");
             return;
         }
+        System.out.println("\nDelete all the required files.");
         deleteFilesRecursive(folder);
     }
 
     private static void deleteFilesRecursive(File folder) {
         File[] files = folder.listFiles();
         if (files == null) return;
-
         for (File file : files) {
             if (file.isDirectory()) {
                 deleteFilesRecursive(file);
@@ -113,7 +194,7 @@ public class SysML2XMIni_file {
                 if (fileName.endsWith(".sysmlx") || fileName.endsWith(".kermlx")) {
                     boolean deleted = file.delete();
                     if (deleted) {
-                        System.out.println("Deleted: " + file.getAbsolutePath());
+//                        System.out.println("Deleted: " + file.getAbsolutePath());
                     } else {
                         System.out.println("Failed to delete: " + file.getAbsolutePath());
                     }
@@ -154,8 +235,7 @@ public class SysML2XMIni_file {
             	targetXMI.eSet(declaredNameAttribute, newDeclaredName);
 //            	System.out.println("targetXMI: "+targetXMI);
             }
-            
-            System.out.println("Delete id:'"+id.get(0)+"' and add '"+newDeclaredName+"'.");
+//            System.out.println("Delete id:'"+id.get(0)+"' and add '"+newDeclaredName+"'.");
     	}
     	saveXMIFile(resource);
 
@@ -208,6 +288,7 @@ public class SysML2XMIni_file {
 	        }
 	        fileName = addUnderscoreToExtension(file);
 	        saveDocumentToFile(document, fileName);
+	        System.out.println("There are "+strss.size()+" objects to be converted...");
 	        return strss;
 	    }catch (Exception e) {
 	        e.printStackTrace();
@@ -226,6 +307,7 @@ public class SysML2XMIni_file {
             return absolutePath;
         }
     }
+    
     private static void saveDocumentToFile(Document document, String filePath) {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -317,7 +399,8 @@ public class SysML2XMIni_file {
                 boolean found = searchForElementId(rootElement, targetElementId);
                 if (found) {
                 	EObject element = getElement(rootElement, targetElementId);
-                    System.out.println("Found element in file: " + file.getAbsolutePath());
+                	System.out.print(".");
+//                    System.out.println("Found element in file: " + file.getAbsolutePath());
 //                    System.out.println("rootElement: "+rootElement.eClass());
                     return element;
                 }
