@@ -21,8 +21,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.equinox.common;bundle-version="3.5.0",
  org.omg.sysml.xtext,
  org.junit,
- junit-jupiter-api
-Import-Package: org.apache.commons.logging,
- org.apache.log4j,
+ org.eclipse.core.resources
+Import-Package: 
  org.omg.kerml.xtext.util,
  org.omg.sysml.xtext.util

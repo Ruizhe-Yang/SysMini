@@ -1,8 +1,13 @@
-for (e in M!Element.all){
-	e.declaredName.println();
+//"--------------".println();
+//for (e in Model!Element.all){
+//	e.println();
 //	if (e.type().name == "NamespaceImport"){
 //		e.eContainer.println();
 //	}
-}
+//}
 
 //M!Namespace.all.first().sysmini_child.first().println();
+
+"--------------".println();
+
+
