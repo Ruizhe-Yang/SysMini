@@ -176,20 +176,19 @@ operation XMIni!Feature getFeatureSpecialization(){
 		switch (owningMembership.type().name){
 			case "FeatureTyping":{
 				 str = "FeatureTyping";
-				 break;
 			}
 			case "Subsetting":{
 				 str = "Subsetting";
-				 break;
 			}
 			case "OwnedReferenceSubsetting":{
-				 str = "OwnedReferenceSubsetting";
-				 break;		
+				 str = "OwnedReferenceSubsetting";	
 			}
 			case "Redefinition":{
 				 str = "Redefinition";
-				 break;
 			}
+		}
+		if (str != ""){
+			break;
 		}
 	}
 	var owningMembership = self.ownedRelationship.getElementOf(str).first();
@@ -212,6 +211,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 					object = owningMembership.type.declaredName;
 				}
 				else if (owningMembership.type.isTypeOf("Feature")){
+					
 					object = owningMembership.type.FeatureChain();
 				}
 				else{
@@ -361,7 +361,7 @@ operation XMIni!ReferenceUsage getTypeOfReferenceUsage(){
 	if (self.eContainer().isTypeOf(XMIni!SubjectMembership)){
 		return "SubjectUsage";
 	}
-	if (self.eContainer().isTypeOf(XMIni!FeatureMembership)){
+	if (self.eContainer().eContainer().isTypeOf(XMIni!MetadataUsage) or self.eContainer().eContainer().isTypeOf(XMIni!ReferenceUsage)){
 		return "MetadataBodyUsage";
 	}
 	else{
@@ -513,11 +513,11 @@ operation XMIni!Expression NullExpression(){
 operation XMIni!Expression InvocationExpression(){
 	var str = "";
 	var ownedFeatureTyping = self.ownedRelationship.getElementOf("FeatureTyping").first();
-	if (ownedFeatureTyping.declaredName != null){
-		str += ownedFeatureTyping.declaredName;
-	}
-	else if (ownedFeatureTyping.type != null){
+	if (ownedFeatureTyping.type != null){
 		str += ownedFeatureTyping.type.declaredName;
+	}
+	else if (ownedFeatureTyping.declaredName != null){
+		str += ownedFeatureTyping.declaredName;
 	}
 	else{
 		str += ownedFeatureTyping.ownedRelatedElement.first().FeatureChain();

@@ -1,43 +1,61 @@
-package VehicleDefinitions {
-	doc /* Example vehicle definitions model.
-*/
-	private import ScalarValues.ScalarValues::*;
-	private import Quantities.Quantities::*;
-	private import MeasurementReferences.MeasurementReferences::*;
-	private import ISQ.ISQ::*;
-	private import SI.SI::*;
-	/* PART DEFINITIONS */
-	part def Vehicle {
-		attribute mass :> ISQBase.mass;
+package VehicleIndividuals {
+	private import VehicleUsages::*;
+	private import Time::*;
+	private import SI::*;
+	package IndividualDefinitions {
+		individual part def Vehicle1 {
+			doc /* This is an individual Vehicle with a mass of 1800 kg.*/
+			attribute :>> VehicleDefinitions::mass = 1800[SI::kilogram];
+		}
+		individual part def Vehicle2 {
+			doc /* This is an individual Vehicle with a mass of 1700 kg.*/
+			attribute :>> VehicleDefinitions::mass = 1700[SI::kilogram];
+		}
+		individual part def AxleAssembly1;
+		individual part def Wheel1;
+		individual part def Wheel2;
 	}
-	part def Transmission;
-	part def AxleAssembly;
-	part def Axle {
-		port leftMountingPoint : Ports.ports;
-		port rightMountingPoint : Ports.ports;
+	package IndividualSnapshots {
+		public import IndividualDefinitions::*;
+		attribute t0 : Time::DateTime;
+		attribute t1 : Time::DateTime;
+		snapshot part vehicle1_t0 : Vehicle1 {
+			doc /* This is a snapshot of Vehicle1 at time t0;*/
+			attribute t = t0;
+		}
+		part vehicle1_t0_t1 : Vehicle1 {
+			doc /* This is a time slice of Vehicle1 starting at snapshot vehicle1_t0 
+(time t0) and ending at time t1.*/
+			snapshot occurrence :>> Parts::start = vehicle1_t0;
+			snapshot occurrence :>> Parts::done {
+				attribute t = t1;
+			}
+		}
 	}
-	part def Wheel {
-		port hub : Ports.ports;
-	}
-	part def Lugbolt {
-		attribute tighteningTorque :> ISQMechanics.torque;
-	}
-	/* PORT DEFINITIONS */
-	port def DriveIF {
-		driveTorque :> ISQMechanics.torque;
-	}
-	port def AxleMountIF {
-		transferredTorque :> ISQMechanics.torque;
-	}
-	port def WheelHubIF {
-		appliedTorque :> ISQMechanics.torque;
-	}
-	/* INTERFACE DEFINITIONS */
-	interface def Mounting {
-		doc /* The definition of the interface for mounting a Wheel to an Axle. */
-		end port axleMount : Interfaces.source;
-		end port hub : Interfaces.target;
-		flow :> Connections.flowConnections axleMount.transferredTorque to hub.appliedTorque;
+	package IndividualConfigurations {
+		public import IndividualSnapshots::*;
+		individual part vehicle1_C2 : Vehicle1 {
+			doc /* This asserts that for some portion of its lifetime, Vehicle1 conforms
+to the configuration vehicle_C2;*/
+		}
+		snapshot part vehicle1_C2_t0 : Vehicle1 {
+			doc /* This is a snapshot of Vehicle1 in configuration vehicle1_C2 at time t0.*/
+			snapshot occurrence axleAssembly1_t0 : AxleAssembly1 {
+				doc /* frontAxleAssembly is a feature of vehicle1_C2.*/
+				snapshot occurrence leftFrontWheel_t0 : Wheel1 {
+					doc /* This asserts that Wheel1 is the leftFrontWheel of vehicle_C2_t0
+(leftFrontWheel is a feature of vehicle_C2::frontAxleAssembly).*/
+				}
+			}
+		}
+		snapshot part vehicle1_C2_t1 : Vehicle1 {
+			doc /* This is a snapshot of Vehicle1 in configuration vehicle_C2 at time t1.*/
+			snapshot occurrence axleAssembly1_t1 : AxleAssembly1 {
+				snapshot occurrence rightFrontWheel_t1 : Wheel1 {
+					doc /* This asserts that Wheel1 is the rightFrontWheel of vehicle_C2_t1.*/
+				}
+			}
+		}
 	}
 }
 

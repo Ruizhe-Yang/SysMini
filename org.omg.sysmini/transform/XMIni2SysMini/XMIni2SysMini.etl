@@ -1094,7 +1094,13 @@ rule Comment
 	to t : SysMini!Comment
 	extends Identification, Annotation{
 		t.locale = s.locale;
-		t.text = s.body;
+
+		if (s.body.endsWith("\n")){
+			t.text = s.body.subString(0, s.body.length()-1);
+		}
+		else{
+			t.text = s.body;
+		}
 	}
 
 @abstract
@@ -1103,7 +1109,12 @@ rule Documentation
 	to t : SysMini!Documentation
 	extends Identification{
 		t.locale = s.locale;
-		t.text = s.body;
+		if (s.body.endsWith("\n")){
+			t.text = s.body.subString(0, s.body.length()-1);
+		}
+		else{
+			t.text = s.body;
+		}
 	}
 
 @abstract
@@ -1112,7 +1123,12 @@ rule TextualRepresentation
 	to t : SysMini!TextualRepresentation
 	extends Identification{
 		t.language = s.language;
-		t.text = s.body;
+		if (s.body.endsWith("\n")){
+			t.text = s.body.subString(0, s.body.length()-1);
+		}
+		else{
+			t.text = s.body;
+		}
 	}
 	
 @abstract
@@ -1360,6 +1376,9 @@ rule NamespaceImport
 				allImportPackages.add(n.first());
 				t.declaredName = n.first();
 			}
+			else if (n.second() == "null"){
+				t.declaredName = n.first();
+			}
 		}
 	}
 	
@@ -1384,6 +1403,16 @@ rule MembershipImport
 	extends Import{
 		if (s.importedMembership != null){
 			t.declaredName = s.importedMembership.ownedRelatedElement.first().declaredName;
+		}
+		var n = t.declaredName.split("::");
+		if (n.size() == 2){
+			if (n.first() == n.second()){
+				allImportPackages.add(n.first());
+				t.declaredName = n.first();
+			}
+			else if (n.second() == "null"){
+				t.declaredName = n.first();
+			}
 		}
 	}
 

@@ -1140,13 +1140,11 @@ operation SysMini!FlowConnectionUsage FlowConnectionDeclaration(){
 	str += self.ValuePart();
 	if (self.itemFeature != null){
 		str += "of".space() + self.itemFeature;
-		if (self.source != null){
-			str += "from".space() + self.source.space() + "to".space() + self.target.space();
-		}
 	}
-	else{
-		str += self.source.space() + "to".space() + self.target.space();
-	}
+	str += "from".space();
+	str += self.source.space();
+	str += "to".space();
+	str += self.target.space();
 	return str;
 }
 
