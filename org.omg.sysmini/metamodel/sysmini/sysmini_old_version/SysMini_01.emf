@@ -45,7 +45,6 @@ abstract class Element {
 	attr boolean[1] isImpliedIncluded = "false";
 	attr boolean[1] isLibraryElement;
 	
-	
 	attr boolean sysmini_visibility;
 	attr String sysmini_self;
 	attr String sysmini_relationship;

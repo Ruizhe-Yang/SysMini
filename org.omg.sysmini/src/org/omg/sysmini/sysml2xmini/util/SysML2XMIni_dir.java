@@ -12,16 +12,14 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples\\Camera Example";
+	public static String targetFileDirectory = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml\\src\\examples";
 	
     public static void main(String[] args) throws IOException {
     	run();
     }
     
     public static void run() throws IOException {
-        
         String[] sysmlFilePaths = findFiles(targetFileDirectory);
-        
         for (String FilePath : sysmlFilePaths) {
         	fileName = null;
         	selfDirectoryPath = getFolderPath(FilePath);
@@ -44,5 +42,4 @@ public class SysML2XMIni_dir extends SysML2XMIni_file {
         }
         System.out.println("SysML2XMIni.java runtime ends.");
     }
-    
 }

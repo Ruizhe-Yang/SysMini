@@ -5,9 +5,12 @@
 
 ## 已完成的关键节点
 
-- VehicleDefinitions样例实现
 - emf、etl、egl的主体架构定型
-- 以ASimpleVehicleModel.sysml为例，实现了大多数转换
+- 大多数转换
+
+### 改动
+
+- KerML2XMI：98、115、116、123、125、（211、213）
 
 ## 当前存在的若干问题
 
