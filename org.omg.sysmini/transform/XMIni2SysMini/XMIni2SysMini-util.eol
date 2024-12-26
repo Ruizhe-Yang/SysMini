@@ -52,22 +52,16 @@ operation XMIni!RequirementUsage addRequirementUsageNodeTo(rootNode : SysMini!El
 		var node = self.equivalent();
 		rootNode.body.add(node);
 		self.elementTransform(node);
-	}
+	}                                
 }
 
 operation SysMini!Element clearFeatureSpecialization(){
 	var typeName = self.type().name;
 	if (self.isKindOf(SysMini!Feature) and self.featureSpecialization!= null and self.featureSpecialization!= ""){
-		if (sysmlTuple.select(e|e.key == self.featureSpecialization).size() == 1){
-//			typeName.print();
-//			self.featureSpecialization.println(" : ");
+		if (sysmlTuples.select(e|e.key == self.featureSpecialization).size() == 1){
 			self.featureNote = "";
 			self.featureSpecialization = "";
 		}
-//		if (){	
-//			self.featureNote = "";
-//			self.featureSpecialization = "";
-//		}
 	}
 }
 
@@ -265,7 +259,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 				}
 			}
 		}
-		return object;
+		return object.clearImportPackage();
 	}
 	return "";
 }
