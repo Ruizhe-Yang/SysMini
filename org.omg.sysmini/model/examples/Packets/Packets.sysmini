@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
+  <body xsi:type="Package" declaredName="Packets">
+    <body xsi:type="NamespaceImport" hasVisibility="true" declaredName="ScalarValues"/>
+    <body xsi:type="MembershipImport" hasVisibility="true" declaredName="Time"/>
+    <body xsi:type="AttributeUsage" declaredName="packet header" featureNote=":>" featureSpecialization="Base::dataValues"/>
+    <body xsi:type="AttributeUsage" declaredName="packet data field" featureNote=":>" featureSpecialization="Base::dataValues">
+      <body xsi:type="AttributeUsage" declaredName="packet secondary header" featureNote=":>>" featureSpecialization="packet header"/>
+      <body xsi:type="AttributeUsage" declaredName="user data field" featureNote=":>" featureSpecialization="Base::dataValues"/>
+    </body>
+    <body xsi:type="PartDefinition" declaredName="Data Packet">
+      <body xsi:type="AttributeUsage" declaredName="packet primary header" featureNote=":>>" featureSpecialization="packet header">
+        <body xsi:type="AttributeUsage" declaredName="packet version number" featureNote=":" featureSpecialization="Integer"/>
+        <body xsi:type="AttributeUsage" declaredName="packet identification" featureNote=":" featureSpecialization="String"/>
+        <body xsi:type="AttributeUsage" declaredName="packet data length" featureNote=":" featureSpecialization="Integer"/>
+      </body>
+      <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="packet data field"/>
+    </body>
+    <body xsi:type="PartDefinition" declaredName="Thermal Data Packet">
+      <body xsi:type="AttributeUsage" declaredName="packet data field" featureNote=":>>" featureSpecialization="packet data field">
+        <body xsi:type="AttributeUsage" declaredName="packet secondary header" featureNote=":>>" featureSpecialization="packet header">
+          <body xsi:type="AttributeUsage" declaredName="packet timestamp" featureNote=":" featureSpecialization="Time::DateTime"/>
+          <body xsi:type="AttributeUsage" declaredName="telemetry packet type" featureNote=":" featureSpecialization="String"/>
+        </body>
+        <body xsi:type="AttributeUsage" declaredName="user data field" featureNote=":>>" featureSpecialization="user data field">
+          <body xsi:type="AttributeUsage" declaredName="timestamp" featureNote=":" featureSpecialization="Time::DateTime"/>
+          <body xsi:type="AttributeUsage" declaredName="temperature" featureNote=":" featureSpecialization="Real"/>
+        </body>
+      </body>
+      <SubclassificationPart>Data Packet</SubclassificationPart>
+    </body>
+  </body>
+</Namespace>

@@ -1281,6 +1281,7 @@ operation SysMini!Feature FeatureSpecializationPart() : String {
 	return self.multiplicityRange.space() + 
 			self.featureNote.space() +
 			self.featureSpecialization.space();
+//			self.featureSpecialization.withQuotationMarks().space();
 }
 
 operation SysMini!Usage UsageCompletion() : String {
@@ -1355,9 +1356,25 @@ operation SysMini!Element Identification() : String {
 		str += "<"+self.declaredShortName+">".space();
 	}
 	if (self.declaredName != null) {
-		str += self.declaredName.space();
+//		str += self.declaredName.space();
+		str += self.declaredName.withQuotationMarks().space();
 	}
 	return str;
+}
+
+operation Any withQuotationMarks(){
+	if (self == null){
+		return "";
+	}
+	else{
+		var n = self.split(" ");
+		if (n.size() > 1){
+			return "'"+self+"'";
+		}
+		else{
+			return self;
+		}
+	}
 }
 
 operation SysMini!OccurrenceUsage ControlNodePrefix() : String {
@@ -1394,7 +1411,7 @@ operation SysMini!Classifier SubclassificationPart() : String {
 		var str = "";
 		str += SpecializesKeyword();
 		for (ownedSubclassification in self.SubclassificationPart){
-			str += ownedSubclassification;
+			str += ownedSubclassification.withQuotationMarks();
 			str += ",".space();
 		}
 		str = str.substring(0, str.length()-2);

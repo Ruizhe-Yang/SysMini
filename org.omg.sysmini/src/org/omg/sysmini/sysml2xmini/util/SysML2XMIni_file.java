@@ -35,7 +35,7 @@ public class SysML2XMIni_file {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\VehicleIndividuals.sysml";
+	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\Packet Example\\Packets.sysml";
 	//Generate file 'xxx_.sysmlx'.
 	public static String fileName = null;
 	//Directory path of the self.
