@@ -22,7 +22,6 @@
 - TransitionUsage目前关闭
 - 存在Import多层引用问题，如501、502行
 - 缩写字符问题
-- featureSpecialization多个情况下的处理（不太希望动）
 - Expression未测试完全
 - 全类校对
 

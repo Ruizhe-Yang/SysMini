@@ -91,10 +91,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//FeatureDirectionKind"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicityRange" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureNote" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureNote" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureSpecialization"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valuePart" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

@@ -271,7 +271,7 @@ operation SysMini!ReferenceUsage ReferenceUsage() : String {
 	}
 	else if (self.ReferenceUsageType == "VariantReference"){
 		return self.declaredName.space() + 
-				self.featureSpecialization() + 
+				self.featureSpecialization.getSequence().space() + 
 				self.UsageBody();
 	}
 	else if (self.ReferenceUsageType == "ReferenceUsage"){
@@ -362,7 +362,7 @@ operation SysMini!EventOccurrenceUsage EventOccurrenceUsage() : String {
 		return self.OccurrenceUsagePrefix() + 
 			'event'.space() + 
 			self.declaredName.space() +
-			self.featureSpecialization.space() + 
+			self.featureSpecialization.getSequence().space() + 
 			self.UsageCompletion();
 	}
 }
@@ -569,7 +569,7 @@ operation SysMini!PerformActionUsage PerformActionUsage() : String {
 		return self.OccurrenceUsagePrefix() + 
 			'perform'.space() + 
 			self.declaredName.space() +
-			self.featureSpecialization.space() + 
+			self.featureSpecialization.getSequence().space() + 
 			self.ValuePart() + 
 			self.ActionBody();
 	}
@@ -588,7 +588,7 @@ operation SysMini!ExhibitStateUsage ExhibitStateUsage() : String {
 		return self.OccurrenceUsagePrefix() + 
 			'exhibit'.space() + 
 			self.declaredName.space() +
-			self.featureSpecialization.space() + 
+			self.featureSpecialization.getSequence().space() + 
 			self.ValuePart() + 
 			self.StateUsageBody();
 	}
@@ -607,7 +607,7 @@ operation SysMini!IncludeUseCaseUsage IncludeUseCaseUsage() : String {
 		return self.OccurrenceUsagePrefix() + 
 			'include'.space() + 
 			self.declaredName.space() +
-			self.featureSpecialization.space() + 
+			self.featureSpecialization.getSequence().space() + 
 			self.ValuePart() + 
 			self.CaseBody();
 	}
@@ -620,7 +620,7 @@ operation SysMini!AssertConstraintUsage AssertConstraintUsage() : String {
 	str += self.isNegated();
 	if (self.notConstraintUsageKeyword){
 		str += self.declaredName.space();
-		str += self.featureSpecialization.space();
+		str += self.featureSpecialization.getSequence().space();
 	}
 	else{
 		str += ConstraintUsageKeyword();
@@ -637,7 +637,7 @@ operation SysMini!SatisfyRequirementUsage SatisfyRequirementUsage() : String {
 	str += "satisfy".space();
 	if (self.notConstraintUsageKeyword){
 		str += self.declaredName.space();
-		str += self.featureSpecialization.space();
+		str += self.featureSpecialization.getSequence().space();
 	}
 	else{
 		str += RequirementUsageKeyword();
@@ -1279,9 +1279,23 @@ operation SysMini!Feature FeatureDeclaration() : String {
 
 operation SysMini!Feature FeatureSpecializationPart() : String {
 	return self.multiplicityRange.space() + 
-			self.featureNote.space() +
-			self.featureSpecialization.space();
+			self.featureNote.getSequence().space() +
+			self.featureSpecialization.getSequence().space();
 //			self.featureSpecialization.withQuotationMarks().space();
+}
+
+operation Any getSequence(): String{
+	if (self != null and self.size() != 0){
+		var str = "";
+		for (s in self){
+			str += s;
+			str += ",";
+		}
+		return str.subString(0, str.length()-1);
+	}
+	else{
+		return "";
+	}
 }
 
 operation SysMini!Usage UsageCompletion() : String {
@@ -1299,7 +1313,8 @@ operation SysMini!Feature ValuePart() : String {
 			str += "default".space();
 		}
 		else{
-			str += "=".space();
+//			str += "=".space();
+			str += ":".space();
 		}
 		str += self.valuePart.space();
 		return str;

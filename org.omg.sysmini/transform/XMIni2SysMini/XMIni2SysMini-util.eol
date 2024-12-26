@@ -55,14 +55,37 @@ operation XMIni!RequirementUsage addRequirementUsageNodeTo(rootNode : SysMini!El
 	}                                
 }
 
+operation Any theFirst(): String{
+	if (self.first() == null or self.first() == ""){
+		return "";
+	}
+	else{
+		return self.first().asString();
+	}
+}
+
 operation SysMini!Element clearFeatureSpecialization(){
-	var typeName = self.type().name;
-	if (self.isKindOf(SysMini!Feature) and self.featureSpecialization!= null and self.featureSpecialization!= ""){
-		if (sysmlTuples.select(e|e.key == self.featureSpecialization).size() == 1){
-			self.featureNote = "";
-			self.featureSpecialization = "";
+	if (self.isKindOf(SysMini!Feature) and self.featureSpecialization.first() != null){
+		var typeName = self.type().name;
+		for (ii in 1.to(self.featureSpecialization.size())){
+//			self.featureNote.println();
+//			self.featureSpecialization.println();
+			var i = ii-1;
+			if (self.featureSpecialization.at(i) != null and self.featureSpecialization.at(i) != ""){
+//				sysmlTuples.select(e|e.key == self.featureSpecialization.at(i)).println();
+				if (sysmlTuples.select(e|e.key == self.featureSpecialization.at(i)).size() == 1){
+					self.featureNote.removeAt(i);
+					self.featureSpecialization.removeAt(i);
+				}
+			}
 		}
 	}
+//	if (self.isKindOf(SysMini!Feature) and self.featureSpecialization!= null and self.featureSpecialization!= ""){
+//		if (sysmlTuples.select(e|e.key == self.featureSpecialization).size() == 1){
+//			self.featureNote = "";
+//			self.featureSpecialization = "";
+//		}
+//	}
 }
 
 operation XMIni!RequirementUsage isObjectiveMembership(){
@@ -221,7 +244,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 					object = owningMembership.redefinedFeature.FeatureChain();
 				}
 				else{
-					object = owningMembership.redefinedFeature.equivalent().featureSpecialization;
+					object = owningMembership.redefinedFeature.equivalent().featureSpecialization.theFirst();
 				}
 			}
 			else if (owningMembership.isTypeOf("FeatureTyping")){
@@ -229,11 +252,11 @@ operation XMIni!Feature getFeatureSpecialization(){
 					object = owningMembership.type.declaredName.clearImportPackage();
 				}
 				else if (owningMembership.type.isTypeOf("Feature")){
-					
 					object = owningMembership.type.FeatureChain();
 				}
 				else{
-					object = owningMembership.type.equivalent().featureSpecialization;
+					object = owningMembership.type.equivalent().featureSpecialization.theFirst();
+
 				}
 			}
 			else if (owningMembership.isTypeOf("Subsetting")){
@@ -244,7 +267,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 					object = owningMembership.subsettedFeature.FeatureChain();
 				}
 				else{
-					object = owningMembership.subsettedFeature.equivalent().featureSpecialization;
+					object = owningMembership.subsettedFeature.equivalent().featureSpecialization.theFirst();
 				}
 			}
 			else if (owningMembership.isTypeOf("ReferenceSubsetting")){
@@ -255,7 +278,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 					object = owningMembership.referencedFeature.FeatureChain();
 				}
 				else{
-					object = owningMembership.referencedFeature.equivalent().featureSpecialization;
+					object = owningMembership.referencedFeature.equivalent().featureSpecialization.theFirst();
 				}
 			}
 		}
@@ -290,7 +313,7 @@ operation XMIni!Element TransitionSuccessionMember() : String {
 }
 
 operation XMIni!Specialization getDeclaredName(){
-	if (self.declaredName != null){
+	if (self.declaredName != null and self.declaredName != ""){
 		return self.declaredName;
 	}
 	else if (self.type.isTypeOf(XMIni!EClass)){
@@ -436,8 +459,8 @@ operation XMIni!Feature FeatureChain(){
 			str += ".";
 
 		}
-		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().featureSpecialization != null){
-			str += featureChain.chainingFeature.equivalent().featureSpecialization;
+		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().featureSpecialization.theFirst() != ""){
+			str += featureChain.chainingFeature.equivalent().featureSpecialization.theFirst();
 			str += ".";
 
 		}
@@ -630,8 +653,12 @@ operation XMIni!Membership Membership(){
 	else if (self.memberElement.declaredName != null){
 		return self.memberElement.declaredName.clearImportPackage();
 	}
-	else if (self.memberElement.equivalent().featureSpecialization != null){
-		return self.memberElement.equivalent().featureSpecialization;
+//	self.memberElement.equivalent().println();
+	else if (self.memberElement.equivalent().declaredName != "" and self.memberElement.equivalent().declaredName != null){
+		return self.memberElement.equivalent().declaredName;
+	}
+	if (self.memberElement.equivalent().featureSpecialization.theFirst() != ""){
+		return self.memberElement.equivalent().featureSpecialization.theFirst();
 	}
 	else{
 		"[Membership NULL]".println();

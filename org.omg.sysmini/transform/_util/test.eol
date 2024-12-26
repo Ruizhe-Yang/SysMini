@@ -9,5 +9,9 @@
 //M!Namespace.all.first().sysmini_child.first().println();
 
 "--------------".println();
-
+var s = OrderedSet{};
+for (i in 1.to(s.size())){
+	OrderedSet{}.size().println();
+	(s.first() == null).println();
+}
 

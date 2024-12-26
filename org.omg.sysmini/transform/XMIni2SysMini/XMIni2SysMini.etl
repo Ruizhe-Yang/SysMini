@@ -20,6 +20,7 @@ pre{
 								Tuple{"value"="ActionUsage",            	"key"="ownedActions"},
 								Tuple{"value"="AssertConstraintUsage",  	"key"="assertedConstraintChecks"},
 								Tuple{"value"="RenderingUsage",         	"key"="viewRendering"},
+								Tuple{"value"="InterfaceUsage",         	"key"="binaryInterfaces"},
 								Tuple{"value"="SatisfyRequirementUsage",	"key"="satisfiedRequirementChecks"}};
 	var systemLibrary = Sequence{"AnalysisTooling",       	"SampledFunctions",       	"StateSpaceRepresentation", 	"TradeStudies",
 	                            "CausationConnections", 	"CauseAndEffect",		  	"ShapeItems", 					"SpatialItems",
@@ -680,7 +681,8 @@ rule ValuePart
 			t.valuePart = featureValue.getExpression();
 		}
 		for (ConjugatedPortTyping in s.ownedRelationship.getElementOf("ConjugatedPortTyping")){
-			t.featureNote = ":";
+			t.featureNote.removeAt(t.featureNote.size()-1);
+			t.featureNote.add(":");
 			if (ConjugatedPortTyping.declaredName == null){
 				t.valuePart = "~" + ConjugatedPortTyping.conjugatedPortDefinition.eContents().first().originalPortDefinition.declaredName.clearImportPackage();
 			}
@@ -690,7 +692,7 @@ rule ValuePart
 					t.valuePart = "~"+ str;
 				}
 				else{
-					t.valuePart = "[extra conjugated port]";
+					t.valuePart = "'[extra conjugated port]'";
 				}
 //				else{
 //					if (extraConjugatedPortPackages.select(e|(e.declaredName != null) and (e.declaredName == t.declaredName)).size() == 1){
@@ -787,11 +789,18 @@ rule MultiplicityPart
 rule FeatureSpecialization 
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
-		t.featureNote = s.getFeatureNote();
-		t.featureSpecialization = s.getFeatureSpecialization();
-		if (t.featureSpecialization == "" or t.featureSpecialization == null){
-			t.featureNote = "";
+//		t.featureNote = s.getFeatureNote();
+		t.featureNote.add(s.getFeatureNote());
+//		t.featureSpecialization = s.getFeatureSpecialization();
+		t.featureSpecialization.add(s.getFeatureSpecialization());
+		if (t.featureSpecialization.size() == 0 or t.featureSpecialization.size() != t.featureNote.size() or t.featureSpecialization.first() == ""){
+			t.featureNote.removeAt(0);
 		}
+//		if (t.featureSpecialization == "" or t.featureSpecialization == null){
+//		if (t.featureSpecialization.theFirst() == null or t.featureSpecialization.theFirst() == ""){
+//			t.featureNote = "";
+//			t.featureNote.add("");
+//		}
 	}
 
 @abstract
@@ -874,7 +883,7 @@ rule AssertConstraintUsage
 	extends OccurrenceUsagePrefix, ConstraintUsageDeclaration, CalculationBody{
 		if (s.declaredName == null){
 			t.notConstraintUsageKeyword = true;
-//			t.declaredName = s.OwnedReferenceSubsetting();
+			t.declaredName = s.OwnedReferenceSubsetting();
 			if (t.declaredName == null or t.declaredName == ""){
 				t.notConstraintUsageKeyword = false;
 			}
@@ -922,6 +931,7 @@ rule PerformActionUsageDeclaration
 	extends UsageDeclaration, ValuePart{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
+			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -950,7 +960,7 @@ rule ExhibitStateUsage
 	extends OccurrenceUsagePrefix, UsageDeclaration, ValuePart, StateUsageBody{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
-//			t.declaredName = s.OwnedReferenceSubsetting();
+			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
@@ -1289,7 +1299,7 @@ rule PortUsage
 	transform s : XMIni!PortUsage
 	to t : SysMini!PortUsage
 	extends OccurrenceUsagePrefix, Usage{
-//		if (t.type().name == "PortUsage"){
+//	TBD	if (t.type().name == "PortUsage"){
 //			extraConjugatedPortPackages.println();
 //			if (extraConjugatedPortPackages.select(e|(e.declaredName != null) and (e.declaredName == t.declaredName)).size() == 1){
 //				var conjugatedPort = extraConjugatedPortPackages.select(e|e.declaredName == t.declaredName).first();
@@ -1326,6 +1336,7 @@ rule EventOccurrenceUsage
 	extends OccurrenceUsagePrefix, FeatureSpecializationPart, UsageCompletion{
 		if (s.ownedRelationship.getElementOf("ReferenceSubsetting").size()>0){
 			t.isExtendKeyWord = false;
+			t.declaredName = s.OwnedReferenceSubsetting();
 		}
 		else{
 			t.isExtendKeyWord = true;
