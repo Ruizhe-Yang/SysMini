@@ -1,5 +1,5 @@
 rule gen_sysmlv2
 	transform root : Namespace{
 	template : "SysMini2SysML.egl"	
-	target : "SysMini2SysML.sysml"
+	target : "SysML-gen.sysml"
 }

@@ -16,10 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" upperBound="-1" eType="#//Element"
         containment="true" eOpposite="#//Element/root"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Subclassification" eSuperTypes="#//Specialization">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superclassifier" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Subclassification" eSuperTypes="#//Specialization"/>
   <eClassifiers xsi:type="ecore:EClass" name="Specialization" eSuperTypes="#//Relationship"/>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true" eSuperTypes="#//Element"/>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionElement" eSuperTypes="#//Element"/>
@@ -67,8 +64,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSufficient" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureMembership" eSuperTypes="#//OwningMembership #//Featuring"/>
   <eClassifiers xsi:type="ecore:EClass" name="Featuring" abstract="true" eSuperTypes="#//Relationship"/>
@@ -234,6 +229,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Definition" eSuperTypes="#//Classifier">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isVariation" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SubclassificationPart"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceUsage" eSuperTypes="#//Usage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRef" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

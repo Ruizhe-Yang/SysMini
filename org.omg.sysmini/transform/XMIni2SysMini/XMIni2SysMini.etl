@@ -3,6 +3,35 @@ import "XMIni2SysMini-util.eol";
 pre{
 	"------------------ ETL Start ------------------".println();
 	var allImportPackages = new Sequence;
+//	var extraConjugatedPortPackages = new Sequence;
+	var sysmlTuple = Sequence{Tuple{"value"="PerformActionUsage",       "key"="performedActions"},
+							 	Tuple{"value"="ExhibitStateUsage",      "key"="exhibitedStates"},
+							 	Tuple{"value"="PortUsage",              "key"="ports"},
+							 	Tuple{"value"="FlowConnectionUsage",    "key"="flowConnections"},
+							 	Tuple{"value"="OccurrenceUsage",        "key"="Occurrences::occurrences"}, 
+								Tuple{"value"="AllocationUsage",        "key"="allocations"},
+								Tuple{"value"="ConnectionUsage",        "key"="binaryConnections"},
+								Tuple{"value"="PartUsage",              "key"="subparts"},
+								Tuple{"value"="BindingConnectorAsUsage","key"="Links::selfLinks"},
+								Tuple{"value"="SendActionUsage",        "key"="sendSubactions"},
+								Tuple{"value"="EventOccurrenceUsage",   "key"="Occurrences::timeEnclosedOccurrences"},
+								Tuple{"value"="SuccessionAsUsage",      "key"="Occurrences::happensBeforeLinks"},
+								Tuple{"value"="ActionUsage",            "key"="subactions"},
+								Tuple{"value"="AssertConstraintUsage",  "key"="assertedConstraintChecks"},
+								Tuple{"value"="RenderingUsage",         "key"="viewRendering"},
+								Tuple{"value"="SatisfyRequirementUsage","key"="satisfiedRequirementChecks"}};
+	var systemLibrary = Sequence{"AnalysisTooling", "SampledFunctions", "StateSpaceRepresentation", "TradeStudies", "CausationConnections", 
+		"CauseAndEffect", "ShapeItems", "SpatialItems", "ImageMetadata", "ModelingMetadata", "ParametersOfInterestMetadata", "RiskMetadata", "ISQ", "ISQAcoustics", "ISQAtomicNuclear", 
+		"ISQBase", "ISQCharacteristicNumbers", "ISQChemistryMolecular", "ISQCondensedMatter", "ISQElectromagnetism", "ISQInformation", "ISQLight", "ISQMechanics", "ISQSpaceTime", "ISQThermodynamics", 
+		"MeasurementRefCalculations", "MeasurementReferences", "Quantities", "QuantityCalculations", "SI", "SIPrefixes", "TensorCalculations", "Time", "USCustomaryUnits", "VectorCalculations", 
+		"DerivationConnections", "RequirementDerivation", "Collections", "ScalarValues", "VectorValues", "BaseFunctions", "BooleanFunctions", "CollectionFunctions", "ComplexFunctions", "ControlFunctions", 
+		"DataFunctions", "IntegerFunctions", "NaturalFunctions", "NumericalFunctions", "OccurrenceFunctions", "RationalFunctions", "RealFunctions", "ScalarFunctions", "SequenceFunctions", "StringFunctions", 
+		"TrigFunctions", "VectorFunctions", "Base", "Clocks", "ControlPerformances", "FeatureReferencingPerformances", "KerML", "Links", "Metaobjects", "Objects",
+		"Observation", "Occurrences", "Performances", "SpatialFrames", "StatePerformances", "Transfers", "TransitionPerformances", "Triggers", "Actions", "Allocations",
+		"AnalysisCases", "Attributes", "Calculations", "Cases", "Connections", "Constraints", "Interfaces", "Items", "Metadata", "Parts",
+		"Ports", "Requirements", "StandardViewDefinitions", "States", "SysML", "UseCases", "VerificationCases", "Views"};
+	var defaultSystemsLibrary = Sequence{"Actions", "Allocations","AnalysisCases", "Attributes", "Calculations", "Cases", "Connections", "Constraints", "Interfaces", "Items", "Metadata", "Parts",
+		"Ports", "Requirements", "StandardViewDefinitions", "States", "SysML", "UseCases", "VerificationCases", "Views"};
 	main();
 }
 
@@ -212,7 +241,7 @@ rule DefinitionPrefix
 rule Identification
 	transform s : XMIni!Element
 	to t : SysMini!Element{
-		t.declaredName = s.declaredName;
+		t.declaredName = s.declaredName.clearImportPackage();
 		t.declaredShortName = s.declaredShortName;
 	}
 
@@ -220,6 +249,18 @@ rule Identification
 rule SubclassificationPart
 	transform s : XMIni!Classifier
 	to t : SysMini!Classifier{
+		for (ownedSubclassification in s.ownedRelationship.getElementOf("Subclassification")){
+			var str = ownedSubclassification.declaredName;
+			if (str == null){
+				t.SubclassificationPart.add(ownedSubclassification.superclassifier.declaredName.clearImportPackage());
+			}
+			else{
+				var n = ownedSubclassification.declaredName.split("::");
+				if (n.size() == 2 and (not systemLibrary.includes(n.first()))){
+					t.SubclassificationPart.add(n.second());
+				}
+			}
+		}
 	}
 
 @abstract
@@ -620,7 +661,30 @@ rule ValuePart
 			t.valuePart = featureValue.getExpression();
 		}
 		for (ConjugatedPortTyping in s.ownedRelationship.getElementOf("ConjugatedPortTyping")){
-			t.valuePart = "~"+ConjugatedPortTyping.conjugatedPortDefinition.eContents().first().originalPortDefinition.declaredName;
+			t.featureNote = ":";
+			if (ConjugatedPortTyping.declaredName == null){
+				t.valuePart = "~" + ConjugatedPortTyping.conjugatedPortDefinition.eContents().first().originalPortDefinition.declaredName.clearImportPackage();
+			}
+			else {
+				var str = ConjugatedPortTyping.declaredName.clearImportPackage();
+				if (str != "null"){
+					t.valuePart = "~"+ str;
+				}
+				else{
+					t.valuePart = "[extra conjugated port]";
+				}
+//				else{
+//					if (extraConjugatedPortPackages.select(e|(e.declaredName != null) and (e.declaredName == t.declaredName)).size() == 1){
+//						var conjugatedPort = extraConjugatedPortPackages.select(e|e.declaredName == t.declaredName).first();
+//						t.featureSpecialization = "~" + conjugatedPort.featureSpecialization;
+//						extraConjugatedPortPackages.remove(conjugatedPort);
+//					}
+//					else{
+//						t.featureSpecialization = "";
+//						extraConjugatedPortPackages.add(t);
+//					}
+//				}
+			}
 		}
 	}
 
@@ -651,7 +715,7 @@ rule Membership
 	transform s : XMIni!Membership
 	to t : SysMini!Membership{
 		t.setVisibility(s);
-		t.declaredName = s.declaredName;
+		t.declaredName = s.declaredName.clearImportPackage();
 		if (s.eContainer().isKindOf(XMIni!Usage) and s.memberShortName == null and s.memberName == null){
 			t.MembershipType = "InitialNodeMember";
 		}
@@ -705,8 +769,8 @@ rule FeatureSpecialization
 	transform s : XMIni!Feature
 	to t : SysMini!Feature{
 		t.featureNote = s.getFeatureNote();
-//		t.featureSpecialization = s.getFeatureSpecialization().clearImportPackage();
-		t.featureSpecialization = s.getFeatureSpecialization();
+		t.featureSpecialization = s.getFeatureSpecialization().clearImportPackage();
+//		t.featureSpecialization = s.getFeatureSpecialization();
 		if (t.featureSpecialization == "" or t.featureSpecialization == null){
 			t.featureNote = "";
 		}
@@ -1094,7 +1158,6 @@ rule Comment
 	to t : SysMini!Comment
 	extends Identification, Annotation{
 		t.locale = s.locale;
-
 		if (s.body.endsWith("\n")){
 			t.text = s.body.subString(0, s.body.length()-1);
 		}
@@ -1166,10 +1229,10 @@ rule MetadataTyping
 	transform s : XMIni!MetadataUsage
 	to t : SysMini!MetadataUsage{
 		if (s.ownedRelationship.getElementOf("FeatureTyping").first().type != null){
-			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().type.declaredName;
+			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().type.declaredName.clearImportPackage();
 		}
 		else{
-			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().declaredName;
+			t.declaredName = s.ownedRelationship.getElementOf("FeatureTyping").first().declaredName.clearImportPackage();
 		}
 //		s.ownedRelationship.getElementOf("FeatureTyping").first().tag();
 	}
@@ -1208,6 +1271,17 @@ rule PortUsage
 	transform s : XMIni!PortUsage
 	to t : SysMini!PortUsage
 	extends OccurrenceUsagePrefix, Usage{
+//		if (t.type().name == "PortUsage"){
+//			extraConjugatedPortPackages.println();
+//			if (extraConjugatedPortPackages.select(e|(e.declaredName != null) and (e.declaredName == t.declaredName)).size() == 1){
+//				var conjugatedPort = extraConjugatedPortPackages.select(e|e.declaredName == t.declaredName).first();
+//				conjugatedPort.featureSpecialization = "~" + t.featureSpecialization;
+//				extraConjugatedPortPackages.remove(conjugatedPort);
+//			}
+//			else{
+//				extraConjugatedPortPackages.add(t);
+//			}
+//		}
 	}
 
 	

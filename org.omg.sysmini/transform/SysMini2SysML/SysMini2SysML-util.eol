@@ -964,6 +964,10 @@ operation RenderingUsageKeyword() : String {
 
 
 /* Key Word*/
+operation SpecializesKeyword() : String {
+	return ":>".space();
+}
+
 operation ReferenceKeyword() : String {
 	return "ref".space();
 }
@@ -1386,8 +1390,19 @@ operation SysMini!Type MetadataBody() : String {
 }
 
 operation SysMini!Classifier SubclassificationPart() : String {
-	// TBD
-	return "";
+	if (self.SubclassificationPart.size() > 0){
+		var str = "";
+		str += SpecializesKeyword();
+		for (ownedSubclassification in self.SubclassificationPart){
+			str += ownedSubclassification;
+			str += ",".space();
+		}
+		str = str.substring(0, str.length()-2);
+		return str;
+	}
+	else{
+		return "";
+	}
 }
 
 operation SysMini!InterfaceUsage InterfaceUsageDeclaration() : String {

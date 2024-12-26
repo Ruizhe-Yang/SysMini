@@ -22,6 +22,7 @@ import org.omg.sysml.xtext.util.SysML2XMI;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,11 +35,15 @@ public class SysML2XMIni_file {
 	//Directory path of the 'sysml.library'.
 	public static String libraryDirectoryPath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\sysml.library";
 	//File path of the target file 'xxx.sysml'.
-	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\VehicleUsages.sysml";
+	public static String targetFilePath = "E:\\GitYang\\SysMini\\org.omg.sysmini.runtime\\model\\vehicle example\\VehicleIndividuals.sysml";
 	//Generate file 'xxx_.sysmlx'.
 	public static String fileName = null;
 	//Directory path of the self.
 	public static String selfDirectoryPath = null;
+	//Keywords
+	private static String[] systemsLibrary = {"Actions", "Allocations",
+			"AnalysisCases", "Attributes", "Calculations", "Cases", "Connections", "Constraints", "Interfaces", "Items", "Metadata", "Parts",
+			"Ports", "Requirements", "StandardViewDefinitions", "States", "SysML", "UseCases", "VerificationCases", "Views"};
 	
     public static void main(String[] args) throws IOException {
     	run();
@@ -235,6 +240,7 @@ public class SysML2XMIni_file {
             	targetXMI.eSet(declaredNameAttribute, newDeclaredName);
 //            	System.out.println("targetXMI: "+targetXMI);
             }
+           
 //            System.out.println("Delete id:'"+id.get(0)+"' and add '"+newDeclaredName+"'.");
     	}
     	saveXMIFile(resource);
@@ -249,7 +255,14 @@ public class SysML2XMIni_file {
     private static String extractBetweenBackslashAndHash(String input) {
         int backslashIndex = input.lastIndexOf('\\');
         if (backslashIndex != -1 ) {
-        	return input.substring(backslashIndex + 1, input.length() - 7)+"::";
+        	String className = input.substring(backslashIndex + 1, input.length() - 7);
+        	System.out.print("className: '"+className+"'");
+        	if (Arrays.asList(systemsLibrary).contains(className)) {
+        		return "";
+        	}
+        	else {
+        		return className + "::";
+        	}
         }
         return "";
     }

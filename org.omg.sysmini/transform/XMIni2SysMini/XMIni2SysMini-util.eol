@@ -20,6 +20,7 @@ operation XMIni!Relationship skipRelationshipTo(rootNode : SysMini!Element){
 operation XMIni!Element addNodeTo(rootNode : SysMini!Element){
 	if (self.isEntity()){
 		var node = self.equivalent();
+		node.clearFeatureSpecialization();
 		rootNode.body.add(node);
 		self.elementTransform(node);
 	}
@@ -51,6 +52,22 @@ operation XMIni!RequirementUsage addRequirementUsageNodeTo(rootNode : SysMini!El
 		var node = self.equivalent();
 		rootNode.body.add(node);
 		self.elementTransform(node);
+	}
+}
+
+operation SysMini!Element clearFeatureSpecialization(){
+	var typeName = self.type().name;
+	if (self.isKindOf(SysMini!Feature) and self.featureSpecialization!= null and self.featureSpecialization!= ""){
+		if (sysmlTuple.select(e|e.key == self.featureSpecialization).size() == 1){
+//			typeName.print();
+//			self.featureSpecialization.println(" : ");
+			self.featureNote = "";
+			self.featureSpecialization = "";
+		}
+//		if (){	
+//			self.featureNote = "";
+//			self.featureSpecialization = "";
+//		}
 	}
 }
 
@@ -152,10 +169,17 @@ operation XMIni!Feature getFeatureNote(){
 }
 
 
-operation String clearImportPackage(){
-	if (text != null and self != ""){
+operation Any clearImportPackage(){
+	var text = self;
+	if (text != null and text != ""){
 		var n = text.split("::");
 		if (n.size() == 2){
+			if (not systemLibrary.includes(n.first())){
+				text = n.second();
+			}
+			if (defaultSystemsLibrary.includes(n.first())){
+				text = n.second();
+			}
 			for (package in allImportPackages){
 				if (package ==  n.first()){
 					text = n.second();
@@ -193,11 +217,11 @@ operation XMIni!Feature getFeatureSpecialization(){
 	}
 	var owningMembership = self.ownedRelationship.getElementOf(str).first();
 	if (owningMembership.isKindOf(XMIni!Specialization) and (not owningMembership.isTypeOf("ConjugatedPortTyping"))){
-		var object = owningMembership.getDeclaredName();
+		var object = owningMembership.getDeclaredName().clearImportPackage();
 		if (object == "" or object == null){
 			if (owningMembership.isTypeOf("Redefinition")){
 				if (owningMembership.redefinedFeature.declaredName !=  null){
-					object = owningMembership.redefinedFeature.declaredName;
+					object = owningMembership.redefinedFeature.declaredName.clearImportPackage();
 				}
 				else if (owningMembership.redefinedFeature.isTypeOf("Feature")){
 					object = owningMembership.redefinedFeature.FeatureChain();
@@ -208,7 +232,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 			}
 			else if (owningMembership.isTypeOf("FeatureTyping")){
 				if (owningMembership.type.declaredName !=  null){
-					object = owningMembership.type.declaredName;
+					object = owningMembership.type.declaredName.clearImportPackage();
 				}
 				else if (owningMembership.type.isTypeOf("Feature")){
 					
@@ -220,7 +244,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 			}
 			else if (owningMembership.isTypeOf("Subsetting")){
 				if (owningMembership.subsettedFeature.declaredName !=  null){
-					object = owningMembership.subsettedFeature.declaredName;
+					object = owningMembership.subsettedFeature.declaredName.clearImportPackage();
 				}
 				else if (owningMembership.subsettedFeature.isTypeOf("Feature")){
 					object = owningMembership.subsettedFeature.FeatureChain();
@@ -231,7 +255,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 			}
 			else if (owningMembership.isTypeOf("ReferenceSubsetting")){
 				if (owningMembership.referencedFeature.declaredName !=  null){
-					object = owningMembership.referencedFeature.declaredName;
+					object = owningMembership.referencedFeature.declaredName.clearImportPackage();
 				}
 				else if (owningMembership.referencedFeature.isTypeOf("Feature")){
 					object = owningMembership.referencedFeature.FeatureChain();
@@ -243,6 +267,7 @@ operation XMIni!Feature getFeatureSpecialization(){
 		}
 		return object;
 	}
+	return "";
 }
 
 operation XMIni!Element TransitionSourceMember() : String {
@@ -299,7 +324,12 @@ operation XMIni!FeatureMembership getFlowEndMember(){
 				}
 				else if (o.isTypeOf("FeatureMembership") and o.ownedRelatedElement.size() == 1){
 					var featureChainPrefix = o.ownedRelatedElement.first();
-					str += featureChainPrefix.ownedRelationship.first().redefinedFeature.declaredName;
+					if (featureChainPrefix.ownedRelationship.first().declaredName == null){
+						str += featureChainPrefix.ownedRelationship.first().redefinedFeature.declaredName.clearImportPackage();
+					}
+					else{
+						str += featureChainPrefix.ownedRelationship.first().declaredName.clearImportPackage();
+					}
 					featureChainPrefix.tag();
 				}
 			}
@@ -404,11 +434,11 @@ operation XMIni!Feature FeatureChain(){
 	var str = "";
 	for (featureChain in self.ownedRelationship.getElementOf("FeatureChaining")){
 		if (featureChain.chainingFeature != null and featureChain.chainingFeature.declaredName != null){
-			str += featureChain.chainingFeature.declaredName;
+			str += featureChain.chainingFeature.declaredName.clearImportPackage();
 			str += ".";
 		}
 		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.equivalent().declaredName != null){
-			str += featureChain.chainingFeature.equivalent().declaredName;
+			str += featureChain.chainingFeature.equivalent().declaredName.clearImportPackage();
 			str += ".";
 
 		}
@@ -418,11 +448,11 @@ operation XMIni!Feature FeatureChain(){
 
 		}
 		else if (featureChain.chainingFeature != null and featureChain.chainingFeature.ownedRelationship.first().isTypeOf("Redefinition")){
-			str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName;
+			str += featureChain.chainingFeature.ownedRelationship.first().redefinedFeature.declaredName.clearImportPackage();
 			str += ".";
 		}
 		else{
-			str += featureChain.declaredName;
+			str += featureChain.declaredName.clearImportPackage();
 			str += ".";
 		}
 	}
@@ -514,10 +544,10 @@ operation XMIni!Expression InvocationExpression(){
 	var str = "";
 	var ownedFeatureTyping = self.ownedRelationship.getElementOf("FeatureTyping").first();
 	if (ownedFeatureTyping.type != null){
-		str += ownedFeatureTyping.type.declaredName;
+		str += ownedFeatureTyping.type.declaredName.clearImportPackage();
 	}
 	else if (ownedFeatureTyping.declaredName != null){
-		str += ownedFeatureTyping.declaredName;
+		str += ownedFeatureTyping.declaredName.clearImportPackage();
 	}
 	else{
 		str += ownedFeatureTyping.ownedRelatedElement.first().FeatureChain();
@@ -537,10 +567,10 @@ operation XMIni!Expression ArgumentList(){
 			var strr = "";
 			var parameterRedefinition = t.ownedRelatedElement.first().ownedRelationship.getElementOf("Redefinition").first();
 			if (parameterRedefinition.declaredName != null){
-				strr += parameterRedefinition.declaredName;
+				strr += parameterRedefinition.declaredName.clearImportPackage();
 			}
 			else if (parameterRedefinition.redefinedFeature.declaredName != null){
-				strr += parameterRedefinition.redefinedFeature.declaredName;
+				strr += parameterRedefinition.redefinedFeature.declaredName.clearImportPackage();
 			}
 			else{
 			}
@@ -601,10 +631,10 @@ operation XMIni!Expression FeatureReferenceExpression(){
 
 operation XMIni!Membership Membership(){
 	if (self.declaredName != null){
-		return self.declaredName;
+		return self.declaredName.clearImportPackage();
 	}
 	else if (self.memberElement.declaredName != null){
-		return self.memberElement.declaredName;
+		return self.memberElement.declaredName.clearImportPackage();
 	}
 	else if (self.memberElement.equivalent().featureSpecialization != null){
 		return self.memberElement.equivalent().featureSpecialization;
@@ -630,7 +660,7 @@ operation XMIni!Expression BaseExpression(){
 
 operation XMIni!Expression FeatureChainExpression(){
 	if (self.hasProperty("memberElement")){
-		return self.memberElement.declaredName;
+		return self.memberElement.declaredName.clearImportPackage();
 	}
 	else if (self.ownedRelationship.getElementOf("ParameterMembership").size() == 1){
 		var str = "";
@@ -738,7 +768,7 @@ operation XMIni!ParameterMembership ParameterMembership(){
 }
 
 operation XMIni!ReturnParameterMembership ReturnParameterMembership(){
-	return self.ownedRelatedElement.first().ownedRelationship.first().declaredName;
+	return self.ownedRelatedElement.first().ownedRelationship.first().declaredName.clearImportPackage();
 }
 
 operation XMIni!Expression MultiplicativeOperator(){
@@ -764,10 +794,10 @@ operation XMIni!Expression MetaCastOperator(){
 operation XMIni!Expression ClassificationTestOperator(){
 	var featureTyping = self.ownedRelationship.getElementOf("FeatureMembership").first().ownedRelatedElement.first().ownedRelationship.first();
 	if (featureTyping.declaredName != null){
-		return self.operator+featureTyping.declaredName;
+		return self.operator+featureTyping.declaredName.clearImportPackage();
 	}
 	else{
-		return self.operator+featureTyping.type.declaredName;
+		return self.operator+featureTyping.type.declaredName.clearImportPackage();
 	}
 }
 

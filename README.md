@@ -5,7 +5,7 @@
 
 ## 已完成的关键节点
 
-- 单个文件
+- 单个sysml转xmini
 - emf、etl、egl的主体架构定型
 - 大多数转换
 
@@ -32,6 +32,7 @@
 - 一次性对一个文件夹进行转换的代码存在问题，SysML2XMI中的函数一次只能执行一个
 - 一些引用会使用缩写，缩写目前无法被检索，如550、551行
 - MetadataBodyUsage不对，ReferenceUsage未处理清楚，如240行
+- ConjugatedPort引用外部模型为空问题
 
 ### 待确定的情况
 

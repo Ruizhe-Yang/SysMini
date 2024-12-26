@@ -7,15 +7,23 @@
     <body xsi:type="Package" declaredName="IndividualDefinitions">
       <body xsi:type="PartDefinition" declaredName="Vehicle1" isIndividual="true">
         <body xsi:type="Documentation" text="This is an individual Vehicle with a mass of 1800 kg."/>
-        <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="VehicleDefinitions::mass" valuePart="1800[SI::kilogram]"/>
+        <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="mass" valuePart="1800[SI::kilogram]"/>
+        <SubclassificationPart>Vehicle</SubclassificationPart>
       </body>
       <body xsi:type="PartDefinition" declaredName="Vehicle2" isIndividual="true">
         <body xsi:type="Documentation" text="This is an individual Vehicle with a mass of 1700 kg."/>
-        <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="VehicleDefinitions::mass" valuePart="1700[SI::kilogram]"/>
+        <body xsi:type="AttributeUsage" featureNote=":>>" featureSpecialization="mass" valuePart="1700[SI::kilogram]"/>
+        <SubclassificationPart>Vehicle</SubclassificationPart>
       </body>
-      <body xsi:type="PartDefinition" declaredName="AxleAssembly1" isIndividual="true"/>
-      <body xsi:type="PartDefinition" declaredName="Wheel1" isIndividual="true"/>
-      <body xsi:type="PartDefinition" declaredName="Wheel2" isIndividual="true"/>
+      <body xsi:type="PartDefinition" declaredName="AxleAssembly1" isIndividual="true">
+        <SubclassificationPart>AxleAssembly</SubclassificationPart>
+      </body>
+      <body xsi:type="PartDefinition" declaredName="Wheel1" isIndividual="true">
+        <SubclassificationPart>Wheel</SubclassificationPart>
+      </body>
+      <body xsi:type="PartDefinition" declaredName="Wheel2" isIndividual="true">
+        <SubclassificationPart>Wheel</SubclassificationPart>
+      </body>
     </body>
     <body xsi:type="Package" declaredName="IndividualSnapshots">
       <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="IndividualDefinitions"/>
@@ -27,8 +35,8 @@
       </body>
       <body xsi:type="PartUsage" declaredName="vehicle1_t0_t1" featureNote=":" featureSpecialization="Vehicle1">
         <body xsi:type="Documentation" text="This is a time slice of Vehicle1 starting at snapshot vehicle1_t0 &#xA;(time t0) and ending at time t1."/>
-        <body xsi:type="OccurrenceUsage" featureNote=":>>" featureSpecialization="Parts::start" valuePart="vehicle1_t0" portionKind="snapshot"/>
-        <body xsi:type="OccurrenceUsage" featureNote=":>>" featureSpecialization="Parts::done" portionKind="snapshot">
+        <body xsi:type="OccurrenceUsage" featureNote=":>>" featureSpecialization="start" valuePart="vehicle1_t0" portionKind="snapshot"/>
+        <body xsi:type="OccurrenceUsage" featureNote=":>>" featureSpecialization="done" portionKind="snapshot">
           <body xsi:type="AttributeUsage" declaredName="t" featureNote="" featureSpecialization="" valuePart="t1"/>
         </body>
       </body>

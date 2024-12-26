@@ -2,7 +2,7 @@ package org.omg.sysmini.sysml2xmini.util;
 
 //import java.io.File;
 
-public class EpsilonFunction {
+public class EOL {
 	
     public static void main(String[] args) {
     	run();

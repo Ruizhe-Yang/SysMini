@@ -13,7 +13,6 @@ abstract class Element {
 }
 
 class Subclassification extends Specialization {
-	attr String[*] superclassifier;
 }
 
 class Specialization extends Relationship {
@@ -74,7 +73,6 @@ class TextualRepresentation extends AnnotatingElement {
 class Type extends Namespace {
 	attr boolean[1] isAbstract = false;
 	attr boolean[1] isSufficient = false;
-	attr boolean[1] isConjugated;
 }
 
 class FeatureMembership extends OwningMembership, Featuring {
@@ -330,6 +328,7 @@ class VariantMembership extends OwningMembership {
 
 class Definition extends Classifier {
 	attr boolean[1] isVariation;
+	attr String[*] SubclassificationPart;
 }
 
 class ReferenceUsage extends Usage {
