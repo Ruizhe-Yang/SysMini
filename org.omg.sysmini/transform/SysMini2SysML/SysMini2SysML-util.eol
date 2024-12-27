@@ -1628,6 +1628,10 @@ operation SysMini!Element isOwningElementOf(str:String):Boolean{
 	}
 }
 
+operation OrderedSet getElementOf(typeName : String){
+	return self.select(e|e.type().name == typeName);
+}
+
 operation Any space(){
 	if (self == null or self == ""){
 		return "";

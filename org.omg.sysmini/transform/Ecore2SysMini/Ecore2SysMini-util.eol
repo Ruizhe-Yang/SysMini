@@ -1,0 +1,66 @@
+operation Ecore!EObject addRootNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		var namespaceImport = new SysMini!NamespaceImport;
+		namespaceImport.declaredName = "Ecore";
+		node.body.add(namespaceImport);
+		for (child in self.eContents()){
+			child.addNodeTo(node);
+		}
+	}
+}
+
+operation Ecore!EObject addNodeTo(rootNode : SysMini!Element){
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		for (child in self.eContents()){
+			child.addNodeTo(node);
+		}
+	}
+}
+
+operation Ecore!EObject isEntity(){
+	if (self.isTypeOf(Ecore!EGenericType) or
+		self.isTypeOf(Ecore!EOperation) or  
+		self.isTypeOf(Ecore!EAnnotation)
+		){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+operation Ecore!ETypedElement getRange(){
+	if (self.lowerBound == 0 and self.upperBound == 1){
+		return "[1]";
+	}
+	else if (self.lowerBound == 0 and self.upperBound == -1){
+		return "[*]";
+	}
+	else if (self.upperBound == -1){
+		return "["+self.lowerBound+"..*]";
+	}
+	else if (self.lowerBound == self.upperBound){
+		return "["+self.lowerBound+"]";
+	}
+	else if (self.lowerBound < self.upperBound){
+		return "["+self.lowerBound+".."+self.upperBound+"]";
+	}
+	return "";
+}
+
+operation Sequence getElementOf(typeName : String){
+	return self.select(e|e.type().name == typeName);
+}
+
+operation String clearKeyWord(){
+	if (KeyWords.includes(self)){
+		return "'"+self+"'";
+	}
+	else{
+		return self;
+	}
+}

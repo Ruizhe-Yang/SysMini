@@ -1,5 +1,7 @@
-package bpmdi {
+package BPMNDI {
 	private import Ecore::*;
+	private import DI::*;
+	private import DC::*;
 	part def BPMNPlane :> Plane{
 		ref bpmnElement [1] : BaseElement;
 	}
