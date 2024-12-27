@@ -16,6 +16,6 @@
 
 "--------------".println();
 
-for (e in Ecore!Element.all){
+for (e in Ecore!EClass.all){
 	e.println();
 }
