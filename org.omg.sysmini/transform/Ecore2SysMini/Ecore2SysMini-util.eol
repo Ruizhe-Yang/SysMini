@@ -2,13 +2,37 @@ operation Ecore!EObject addRootNodeTo(rootNode : SysMini!Element){
 	if (self.isEntity()){
 		var node = self.equivalent();
 		rootNode.body.add(node);
-		var namespaceImport = new SysMini!NamespaceImport;
-		namespaceImport.declaredName = "Ecore";
-		node.body.add(namespaceImport);
+		
+		node.addNamespaceImport("ecore");
+		var namespaceImportPackage = Sequence{"ecore", node.declaredName};
+		for (eReference in Ecore!EReference){
+			if (eReference.isExtendedEcore(namespaceImportPackage)){
+				var newNamespaceImport = eReference.eType.eContainer.name;
+				node.addNamespaceImport(newNamespaceImport);
+				namespaceImportPackage.add(newNamespaceImport);			
+			}
+		}
+		
 		for (child in self.eContents()){
 			child.addNodeTo(node);
 		}
 	}
+}
+
+operation Ecore!EReference isExtendedEcore(namespaceImportPackage : Sequence){
+	var eReferenceName = self.eType.eContainer().name.asString();
+	if (namespaceImportPackage.includes(eReferenceName)){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+operation SysMini!Package addNamespaceImport(name:String){
+	var namespaceImport = new SysMini!NamespaceImport;
+	namespaceImport.declaredName = name;
+	self.body.add(namespaceImport);
 }
 
 operation Ecore!EObject addNodeTo(rootNode : SysMini!Element){

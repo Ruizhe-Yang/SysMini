@@ -28,6 +28,7 @@ rule EClass
 	transform s : Ecore!EClass
 	to t : SysMini!PartDefinition{
 		t.declaredName = s.name.clearKeyWord();
+		t.isAbstract = s.Abstract;
 		if (s.eContents().getElementOf("EGenericType").size() > 0){
 			for (eGenericType in s.eContents().getElementOf("EGenericType")){
 				t.SubclassificationPart.add(eGenericType.eClassifier.name);

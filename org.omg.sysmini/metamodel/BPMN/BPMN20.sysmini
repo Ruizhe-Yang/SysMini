@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
   <body xsi:type="Package" declaredName="bpmn2">
-    <body xsi:type="NamespaceImport" declaredName="Ecore"/>
+    <body xsi:type="NamespaceImport" declaredName="ecore"/>
+    <body xsi:type="NamespaceImport" declaredName="bpmdi"/>
+    <body xsi:type="NamespaceImport" declaredName="dc"/>
+    <body xsi:type="NamespaceImport" declaredName="di"/>
     <body xsi:type="PartDefinition" declaredName="Interface">
       <body xsi:type="AttributeUsage" declaredName="name" multiplicityRange="[1]">
         <featureNote>:</featureNote>
@@ -17,10 +20,10 @@
       </body>
       <SubclassificationPart>RootElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="RootElement">
+    <body xsi:type="PartDefinition" declaredName="RootElement" isAbstract="true">
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="BaseElement">
+    <body xsi:type="PartDefinition" declaredName="BaseElement" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="id" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
@@ -210,7 +213,7 @@
       </body>
       <SubclassificationPart>CallableElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="CallableElement">
+    <body xsi:type="PartDefinition" declaredName="CallableElement" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="name" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
@@ -510,7 +513,7 @@
       <SubclassificationPart>CallableElement</SubclassificationPart>
       <SubclassificationPart>FlowElementsContainer</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="FlowElementsContainer">
+    <body xsi:type="PartDefinition" declaredName="FlowElementsContainer" isAbstract="true">
       <body xsi:type="PartUsage" declaredName="flowElements" multiplicityRange="[*]">
         <featureNote>:</featureNote>
         <featureSpecialization>FlowElement</featureSpecialization>
@@ -521,7 +524,7 @@
       </body>
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="FlowElement">
+    <body xsi:type="PartDefinition" declaredName="FlowElement" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="name" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
@@ -585,7 +588,7 @@
       </body>
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="FlowNode">
+    <body xsi:type="PartDefinition" declaredName="FlowNode" isAbstract="true">
       <body xsi:type="ReferenceUsage" declaredName="outgoing" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
@@ -686,7 +689,7 @@
       <SubclassificationPart>Collaboration</SubclassificationPart>
       <SubclassificationPart>FlowElementsContainer</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="Artifact">
+    <body xsi:type="PartDefinition" declaredName="Artifact" isAbstract="true">
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ParticipantAssociation">
@@ -724,7 +727,7 @@
       <SubclassificationPart>BaseElement</SubclassificationPart>
       <SubclassificationPart>InteractionNode</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="InteractionNode">
+    <body xsi:type="PartDefinition" declaredName="InteractionNode" isAbstract="true">
       <body xsi:type="ReferenceUsage" declaredName="incomingConversationLinks" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
         <featureNote>:</featureNote>
         <featureSpecialization>ConversationLink</featureSpecialization>
@@ -804,7 +807,7 @@
       </body>
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="ConversationNode">
+    <body xsi:type="PartDefinition" declaredName="ConversationNode" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="name" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
@@ -907,7 +910,7 @@
     <body xsi:type="PartDefinition" declaredName="Task">
       <SubclassificationPart>Activity</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="Activity">
+    <body xsi:type="PartDefinition" declaredName="Activity" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="isForCompensation" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
@@ -955,7 +958,7 @@
       <SubclassificationPart>FlowNode</SubclassificationPart>
       <SubclassificationPart>InteractionNode</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="LoopCharacteristics">
+    <body xsi:type="PartDefinition" declaredName="LoopCharacteristics" isAbstract="true">
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="BoundaryEvent">
@@ -969,7 +972,7 @@
       </body>
       <SubclassificationPart>CatchEvent</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="CatchEvent">
+    <body xsi:type="PartDefinition" declaredName="CatchEvent" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="parallelMultiple" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
@@ -996,7 +999,7 @@
       </body>
       <SubclassificationPart>Event</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="Event">
+    <body xsi:type="PartDefinition" declaredName="Event" isAbstract="true">
       <body xsi:type="PartUsage" declaredName="properties" multiplicityRange="[*]">
         <featureNote>:</featureNote>
         <featureSpecialization>Property</featureSpecialization>
@@ -1004,7 +1007,7 @@
       <SubclassificationPart>FlowNode</SubclassificationPart>
       <SubclassificationPart>InteractionNode</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="EventDefinition">
+    <body xsi:type="PartDefinition" declaredName="EventDefinition" isAbstract="true">
       <SubclassificationPart>RootElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="DataOutputAssociation">
@@ -1074,7 +1077,7 @@
       </body>
       <SubclassificationPart>GlobalTask</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="Gateway">
+    <body xsi:type="PartDefinition" declaredName="Gateway" isAbstract="true">
       <body xsi:type="AttributeUsage" declaredName="gatewayDirection" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>GatewayDirection</featureSpecialization>
@@ -1175,7 +1178,7 @@
     <body xsi:type="PartDefinition" declaredName="IntermediateThrowEvent">
       <SubclassificationPart>ThrowEvent</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="ThrowEvent">
+    <body xsi:type="PartDefinition" declaredName="ThrowEvent" isAbstract="true">
       <body xsi:type="PartUsage" declaredName="inputSet" multiplicityRange="[1]">
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
@@ -1412,7 +1415,7 @@
       </body>
       <SubclassificationPart>RootElement</SubclassificationPart>
     </body>
-    <body xsi:type="PartDefinition" declaredName="ChoreographyActivity">
+    <body xsi:type="PartDefinition" declaredName="ChoreographyActivity" isAbstract="true">
       <body xsi:type="ReferenceUsage" declaredName="participantRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>

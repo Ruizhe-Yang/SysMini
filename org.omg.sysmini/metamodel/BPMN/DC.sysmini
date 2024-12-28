@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
   <body xsi:type="Package" declaredName="dc">
-    <body xsi:type="NamespaceImport" declaredName="Ecore"/>
+    <body xsi:type="NamespaceImport" declaredName="ecore"/>
     <body xsi:type="PartDefinition" declaredName="Font">
       <body xsi:type="AttributeUsage" declaredName="name" multiplicityRange="[1]">
         <featureNote>:</featureNote>
