@@ -2,7 +2,7 @@ import "Ecore2SysMini-util.eol";
 
 pre{
 	"------------------ ETL Start ------------------".println();
-	var KeyWords = Sequence{"default", "event", "value", "import", "language", "from", "to"};
+	var KeyWords = Sequence{"default", "event", "value", "import", "language", "from", "to", "interface"};
 	main();
 }
 

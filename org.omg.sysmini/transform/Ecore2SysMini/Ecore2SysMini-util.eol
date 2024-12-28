@@ -2,26 +2,37 @@ operation Ecore!EObject addRootNodeTo(rootNode : SysMini!Element){
 	if (self.isEntity()){
 		var node = self.equivalent();
 		rootNode.body.add(node);
-		
-		node.addNamespaceImport("ecore");
+		node.addNamespaceImport("ecore", false);
 		var namespaceImportPackage = Sequence{"ecore", node.declaredName};
 		for (eReference in Ecore!EReference){
 			if (eReference.isExtendedEcore(namespaceImportPackage)){
-				var newNamespaceImport = eReference.eType.eContainer.name;
-				node.addNamespaceImport(newNamespaceImport);
+				var newNamespaceImport = eReference.eType.eContainer().name;
+				node.addNamespaceImport(newNamespaceImport, true);
 				namespaceImportPackage.add(newNamespaceImport);			
 			}
 		}
-		
+		for (eGenericType in Ecore!EGenericType){
+			if (eGenericType.isExtendedEcore(namespaceImportPackage)){
+				var newNamespaceImport = eGenericType.eClassifier.eContainer().name;
+				node.addNamespaceImport(newNamespaceImport, true);
+				namespaceImportPackage.add(newNamespaceImport);			
+			}
+		}
 		for (child in self.eContents()){
 			child.addNodeTo(node);
 		}
 	}
 }
 
-operation Ecore!EReference isExtendedEcore(namespaceImportPackage : Sequence){
-	var eReferenceName = self.eType.eContainer().name.asString();
-	if (namespaceImportPackage.includes(eReferenceName)){
+operation Ecore!EObject isExtendedEcore(namespaceImportPackage : Sequence){
+	var eName = String;
+	if (self.isKindOf(Ecore!EReference)){
+		eName = self.eType.eContainer().name.asString();
+	}
+	else if (self.isTypeOf(Ecore!EGenericType)){
+		eName = self.eClassifier.eContainer().name.asString();
+	}
+	if (namespaceImportPackage.includes(eName)){
 		return false;
 	}
 	else{
@@ -29,9 +40,13 @@ operation Ecore!EReference isExtendedEcore(namespaceImportPackage : Sequence){
 	}
 }
 
-operation SysMini!Package addNamespaceImport(name:String){
+operation SysMini!Package addNamespaceImport(name:String, isPublic : Boolean){
 	var namespaceImport = new SysMini!NamespaceImport;
 	namespaceImport.declaredName = name;
+	namespaceImport.hasVisibility = true;
+	if (isPublic){
+		namespaceImport.visibility = SysMini!VisibilityKind#public;
+	}
 	self.body.add(namespaceImport);
 }
 
