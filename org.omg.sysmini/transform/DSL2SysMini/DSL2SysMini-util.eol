@@ -1,0 +1,83 @@
+operation DSL!EObject addRootNodeTo(rootNode : SysMini!EObject){
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		node.addNamespaceImport("ecore", false);
+		var namespaceImportPackage = Sequence{"ecore", node.declaredName};
+//		for (eReference in Ecore!EReference){
+//			if (eReference.isExtendedEcore(namespaceImportPackage)){
+//				var newNamespaceImport = eReference.eType.eContainer().name;
+//				node.addNamespaceImport(newNamespaceImport, true);
+//				namespaceImportPackage.add(newNamespaceImport);			
+//			}
+//		}
+//		for (eGenericType in Ecore!EGenericType){
+//			if (eGenericType.isExtendedEcore(namespaceImportPackage)){
+//				var newNamespaceImport = eGenericType.eClassifier.eContainer().name;
+//				node.addNamespaceImport(newNamespaceImport, true);
+//				namespaceImportPackage.add(newNamespaceImport);			
+//			}
+//		}
+		for (child in self.eContents()){
+			child.addNodeTo(node);
+		}
+	}
+}
+
+operation DSL!EObject isExtendedEcore(namespaceImportPackage : Sequence){
+	var eName = String;
+	if (self.isKindOf(Ecore!EReference)){
+		eName = self.eType.eContainer().name.asString();
+	}
+	else if (self.isTypeOf(Ecore!EGenericType)){
+		eName = self.eClassifier.eContainer().name.asString();
+	}
+	if (namespaceImportPackage.includes(eName)){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+operation SysMini!Package addNamespaceImport(name:String, isPublic : Boolean){
+	var namespaceImport = new SysMini!NamespaceImport;
+	namespaceImport.declaredName = name;
+	namespaceImport.hasVisibility = true;
+	if (isPublic){
+		namespaceImport.visibility = SysMini!VisibilityKind#public;
+	}
+	self.body.add(namespaceImport);
+}
+
+operation DSL!EObject addNodeTo(rootNode : SysMini!Element){
+	self.println();
+	node.println();
+	if (self.isEntity()){
+		var node = self.equivalent();
+		rootNode.body.add(node);
+		for (child in self.eContents()){
+			child.addNodeTo(node);
+		}
+	}
+}
+
+operation DSL!EObject isEntity(){
+	return true;
+}
+
+operation DSL!EObject isRoot(){
+	"isRoot()".println();
+	if (type == 1){
+		type = 0;
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+operation Sequence getElementOf(typeName : String){
+	return self.select(e|e.type().name == typeName);
+}
+

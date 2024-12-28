@@ -1,0 +1,32 @@
+import "DSL2SysMini-util.eol";
+
+pre{
+	"------------------ ETL Start ------------------".println();
+	var type = 1;
+	main();
+}
+
+post{
+	"------------------ ETL Over  ------------------".println();
+}
+
+operation main(){
+	var rootEcore = DSL!EObject.all.first();
+	
+	var rootSysMini = new SysMini!Namespace;
+	rootEcore.addRootNodeTo(rootSysMini);
+}
+
+@lazy
+rule Package
+	transform s : DSL!Definitions
+	to t : SysMini!Package{
+//		guard : s.isRoot()
+	}
+
+@lazy
+rule EveryEObject
+	transform s : DSL!EObject
+	to t : SysMini!PartUsage{
+		guard : not s.isRoot()
+	}
