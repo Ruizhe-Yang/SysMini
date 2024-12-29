@@ -12,7 +12,6 @@ post{
 
 operation main(){
 	var rootEcore = DSL!EObject.all.first();
-	
 	var rootSysMini = new SysMini!Namespace;
 	rootEcore.addRootNodeTo(rootSysMini);
 }
