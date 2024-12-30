@@ -2,104 +2,169 @@ import "DSL2SysMini-util.eol";
 
 pre{
 	"------------------ ETL Start ------------------".println();
-	main();
+	var eObjectSequence = new Sequence;
+	init_bpmdi();
+	main_bpmdi();
 }
 
 post{
 	"------------------ ETL Over  ------------------".println();
 }
 
+operation init_bpmdi(){
+	var idBPMNPlane = 0;
+	for (eBPMNPlane in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNPlane))){
+		var eBPMNPlaneTuple = Tuple{"key"=eBPMNPlane.type().name.asString()+"_"+(idBPMNPlane++).asString(),"value"= eBPMNPlane};
+		eObjectSequence.add(eBPMNPlaneTuple);
+	}
+	var idBPMNShape = 0;
+	for (eBPMNShape in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNShape))){
+		var eBPMNShapeTuple = Tuple{"key"=eBPMNShape.type().name.asString()+"_"+(idBPMNShape++).asString(),"value"= eBPMNShape};
+		eObjectSequence.add(eBPMNShapeTuple);
+	}
+	var idBPMNLabel = 0;
+	for (eBPMNLabel in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabel))){
+		var eBPMNLabelTuple = Tuple{"key"=eBPMNLabel.type().name.asString()+"_"+(idBPMNLabel++).asString(),"value"= eBPMNLabel};
+		eObjectSequence.add(eBPMNLabelTuple);
+	}
+	var idBPMNLabelStyle = 0;
+	for (eBPMNLabelStyle in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabelStyle))){
+		var eBPMNLabelStyleTuple = Tuple{"key"=eBPMNLabelStyle.type().name.asString()+"_"+(idBPMNLabelStyle++).asString(),"value"= eBPMNLabelStyle};
+		eObjectSequence.add(eBPMNLabelStyleTuple);
+	}
+	var idBPMNEdge = 0;
+	for (eBPMNEdge in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNEdge))){
+		var eBPMNEdgeTuple = Tuple{"key"=eBPMNEdge.type().name.asString()+"_"+(idBPMNEdge++).asString(),"value"= eBPMNEdge};
+		eObjectSequence.add(eBPMNEdgeTuple);
+	}
+	var idBPMNDiagram = 0;
+	for (eBPMNDiagram in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNDiagram))){
+		var eBPMNDiagramTuple = Tuple{"key"=eBPMNDiagram.type().name.asString()+"_"+(idBPMNDiagram++).asString(),"value"= eBPMNDiagram};
+		eObjectSequence.add(eBPMNDiagramTuple);
+	}
+}
+
+operation main_bpmdi(){
+	var rootEcore = DSL!EObject.all.first();
+	var rootSysMini = new SysMini!Namespace;
+	var rootPackage = new SysMini!Package;
+	rootPackage.declaredName = "bpmdi";
+	rootSysMini.body.add(rootPackage);
+	rootEcore.addNodeTo(rootPackage);
+}
+
 @abstract
 rule Base
 	transform s : DSL!EObject
 	to t : SysMini!PartUsage{
-	if (s.hasProperty("name")){
-		t.declaredName = s.name;
-	}
-	}
+	t.declaredName = s.getDeclaredName();
+	t.featureNote.add(":");
+	t.featureSpecialization.add(s.getfeatureSpecialization());
+}
 	
 @lazy
 rule BPMNPlane
 	transform s : DSL!BPMNPlane
 	to t : SysMini!PartUsage
 	extends Base{
-	}
+}
 
 @lazy
 rule BPMNShape
 	transform s : DSL!BPMNShape
 	to t : SysMini!PartUsage
 	extends Base{
-	if (s.isHorizontal.getEAttribute() != ""){
+	if (s.isHorizontal.getEAttribute() != null){
 		var isHorizontal = new SysMini!AttributeUsage;
 		isHorizontal.featureNote.add(":>>");
 		isHorizontal.featureSpecialization.add("isHorizontal");
 		isHorizontal.valuePart = s.isHorizontal.getEAttribute();
 		t.body.add(isHorizontal);
-		}
-	if (s.isExpanded.getEAttribute() != ""){
+	}
+	if (s.isExpanded.getEAttribute() != null){
 		var isExpanded = new SysMini!AttributeUsage;
 		isExpanded.featureNote.add(":>>");
 		isExpanded.featureSpecialization.add("isExpanded");
 		isExpanded.valuePart = s.isExpanded.getEAttribute();
 		t.body.add(isExpanded);
-		}
-	if (s.isMarkerVisible.getEAttribute() != ""){
+	}
+	if (s.isMarkerVisible.getEAttribute() != null){
 		var isMarkerVisible = new SysMini!AttributeUsage;
 		isMarkerVisible.featureNote.add(":>>");
 		isMarkerVisible.featureSpecialization.add("isMarkerVisible");
 		isMarkerVisible.valuePart = s.isMarkerVisible.getEAttribute();
 		t.body.add(isMarkerVisible);
-		}
-	if (s.isMessageVisible.getEAttribute() != ""){
+	}
+	if (s.isMessageVisible.getEAttribute() != null){
 		var isMessageVisible = new SysMini!AttributeUsage;
 		isMessageVisible.featureNote.add(":>>");
 		isMessageVisible.featureSpecialization.add("isMessageVisible");
 		isMessageVisible.valuePart = s.isMessageVisible.getEAttribute();
 		t.body.add(isMessageVisible);
-		}
-	if (s.participantBandKind.getEAttribute() != ""){
+	}
+	if (s.participantBandKind.getEAttribute() != null){
 		var participantBandKind = new SysMini!AttributeUsage;
 		participantBandKind.featureNote.add(":>>");
 		participantBandKind.featureSpecialization.add("participantBandKind");
 		participantBandKind.valuePart = s.participantBandKind.getEAttribute();
 		t.body.add(participantBandKind);
-		}
 	}
+}
 
 @lazy
 rule BPMNLabel
 	transform s : DSL!BPMNLabel
 	to t : SysMini!PartUsage
 	extends Base{
-	}
+}
 
 @lazy
 rule BPMNLabelStyle
 	transform s : DSL!BPMNLabelStyle
 	to t : SysMini!PartUsage
 	extends Base{
-	}
+}
 
 @lazy
 rule BPMNEdge
 	transform s : DSL!BPMNEdge
 	to t : SysMini!PartUsage
 	extends Base{
-	if (s.messageVisibleKind.getEAttribute() != ""){
+	if (s.messageVisibleKind.getEAttribute() != null){
 		var messageVisibleKind = new SysMini!AttributeUsage;
 		messageVisibleKind.featureNote.add(":>>");
 		messageVisibleKind.featureSpecialization.add("messageVisibleKind");
 		messageVisibleKind.valuePart = s.messageVisibleKind.getEAttribute();
 		t.body.add(messageVisibleKind);
-		}
 	}
+}
 
 @lazy
 rule BPMNDiagram
 	transform s : DSL!BPMNDiagram
 	to t : SysMini!PartUsage
 	extends Base{
+	if (s.name.getEAttribute() != null){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
 	}
+	if (s.documentation.getEAttribute() != null){
+		var documentation = new SysMini!AttributeUsage;
+		documentation.featureNote.add(":>>");
+		documentation.featureSpecialization.add("documentation");
+		documentation.valuePart = s.documentation.getEAttribute();
+		t.body.add(documentation);
+	}
+	if (s.resolution.getEAttribute() != null){
+		var resolution = new SysMini!AttributeUsage;
+		resolution.featureNote.add(":>>");
+		resolution.featureSpecialization.add("resolution");
+		resolution.valuePart = s.resolution.getEAttribute();
+		t.body.add(resolution);
+	}
+}
 
 

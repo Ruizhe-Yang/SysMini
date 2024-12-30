@@ -1,23 +1,45 @@
 [% import "Ecore2ETL-util.eol"; %]
+[%var fileName = root.name;%]
 import "DSL2SysMini-util.eol";
 
 pre{
 	"------------------ ETL Start ------------------".println();
-	main();
+	var eObjectSequence = new Sequence;
+	init_[%=fileName%]();
+	main_[%=fileName%]();
 }
 
 post{
 	"------------------ ETL Over  ------------------".println();
 }
 
+operation init_[%=fileName%](){
+	[%for (eClass in root.eClassifiers.select(s|s.type().name == "EClass")){%]
+	var id[%=eClass.name%] = 0;
+	for (e[%=eClass.name%] in DSL!EObject.all.select(s|s.isTypeOf(DSL![%=eClass.name%]))){
+		var e[%=eClass.name%]Tuple = Tuple{"key"=e[%=eClass.name%].type().name.asString()+"_"+(id[%=eClass.name%]++).asString(),"value"= e[%=eClass.name%]};
+		eObjectSequence.add(e[%=eClass.name%]Tuple);
+	}
+	[%}%]
+}
+
+operation main_[%=fileName%](){
+	var rootEcore = DSL!EObject.all.first();
+	var rootSysMini = new SysMini!Namespace;
+	var rootPackage = new SysMini!Package;
+	rootPackage.declaredName = "[%=fileName%]";
+	rootSysMini.body.add(rootPackage);
+	rootEcore.addNodeTo(rootPackage);
+}
+
 @abstract
 rule Base
 	transform s : DSL!EObject
 	to t : SysMini!PartUsage{
-	if (s.hasProperty("name")){
-		t.declaredName = s.name;
-	}
-	}
+	t.declaredName = s.getDeclaredName();
+	t.featureNote.add(":");
+	t.featureSpecialization.add(s.getfeatureSpecialization());
+}
 	
 [%=root.main()%]
 [% operation Ecore!EClass writeEClass(){%]
@@ -26,16 +48,16 @@ rule [%=self.name%]
 	transform s : DSL![%=self.name%]
 	to t : SysMini!PartUsage
 	extends Base{
-	[%	for (eAttribute in self.eContents().select(s|s.type().name == "EAttribute")){%]
-	if (s.[%=eAttribute.name%].getEAttribute() != ""){
+	[%	for (eAttribute in self.eAllStructuralFeatures.select(s|s.type().name == "EAttribute")){%]
+	if (s.[%=eAttribute.name%].getEAttribute() != null){
 		var [%=eAttribute.name%] = new SysMini!AttributeUsage;
 		[%=eAttribute.name%].featureNote.add(":>>");
 		[%=eAttribute.name%].featureSpecialization.add("[%=eAttribute.name%]");
 		[%=eAttribute.name%].valuePart = s.[%=eAttribute.name%].getEAttribute();
 		t.body.add([%=eAttribute.name%]);
-		}
-	[%}%]
 	}
+	[%}%]
+}
 
 [%}%]
 

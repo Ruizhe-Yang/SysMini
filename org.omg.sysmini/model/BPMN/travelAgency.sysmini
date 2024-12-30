@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
-  <body xsi:type="Package" declaredName="SysML-gen">
-    <body xsi:type="PartUsage">
+  <body xsi:type="Package" declaredName="bpmn2">
+    <body xsi:type="PartUsage" declaredName="Definitions_1">
+      <body xsi:type="AttributeUsage" valuePart="&quot;_VgLhQajBEeK_xvwrSf5u4w&quot;">
+        <featureNote>:>></featureNote>
+        <featureSpecialization>id</featureSpecialization>
+      </body>
       <body xsi:type="AttributeUsage" valuePart="&quot;http://www.w3.org/1999/XPath&quot;">
         <featureNote>:>></featureNote>
         <featureSpecialization>expressionLanguage</featureSpecialization>
@@ -10,328 +14,884 @@
         <featureNote>:>></featureNote>
         <featureSpecialization>typeLanguage</featureSpecialization>
       </body>
-      <body xsi:type="PartUsage" declaredName="TravelAgency">
+      <body xsi:type="PartUsage" declaredName="Process_1">
+        <body xsi:type="AttributeUsage" valuePart="&quot;_VgLhQKjBEeK_xvwrSf5u4w&quot;">
+          <featureNote>:>></featureNote>
+          <featureSpecialization>id</featureSpecialization>
+        </body>
+        <body xsi:type="AttributeUsage" valuePart="&quot;TravelAgency&quot;">
+          <featureNote>:>></featureNote>
+          <featureSpecialization>name</featureSpecialization>
+        </body>
         <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=None, value=0, instance=None, literal=None, ]">
           <featureNote>:>></featureNote>
           <featureSpecialization>processType</featureSpecialization>
         </body>
-        <body xsi:type="AttributeUsage" valuePart="false">
-          <featureNote>:>></featureNote>
-          <featureSpecialization>isClosed</featureSpecialization>
+        <body xsi:type="PartUsage" declaredName="Task_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_yJjVcKjBEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Chose alternative&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>Task</featureSpecialization>
         </body>
-        <body xsi:type="AttributeUsage" valuePart="false">
-          <featureNote>:>></featureNote>
-          <featureSpecialization>isExecutable</featureSpecialization>
+        <body xsi:type="PartUsage" declaredName="SendTask_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_yp_JAKjBEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Send credit card information&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SendTask</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Chose alternative"/>
-        <body xsi:type="PartUsage" declaredName="Send credit card information"/>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="StartEvent_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_5F1LEKjBEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_1">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_5lGhAKjBEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>StartEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_6Y-N8KjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Search hotel room"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="ParallelGateway_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_9dquAKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage" declaredName="Search Flight"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Unspecified, value=0, instance=Unspecified, literal=Unspecified, ]">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>gatewayDirection</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ParallelGateway</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Evaluate Flight within customer critaria"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_9drVEKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="ManualTask_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;__M0-gKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage" declaredName="Evaluate hotels within customer critaria"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="&quot;Search hotel room&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>name</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="1">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>startQuantity</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage" declaredName="Package flights and hotels for customer review"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="1">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Present flights and hotels to customer"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_3">
+          <body xsi:type="AttributeUsage" valuePart="&quot;__M1lkKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="ManualTask_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;__vFXAKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Search Flight&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_4">
+          <body xsi:type="AttributeUsage" valuePart="&quot;__vF-EKjBEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ManualTask_3">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_GvXi4KjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Evaluate Flight within customer critaria&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_5">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_GvYJ8KjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ParallelGateway_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_H5i3AKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Unspecified, value=0, instance=Unspecified, literal=Unspecified, ]">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>gatewayDirection</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ParallelGateway</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_6">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_H5jeEKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ManualTask_4">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_JAQncKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Evaluate hotels within customer critaria&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_7">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_JAR1kKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_8">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_Lmr3IKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ManualTask_5">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_QD63cKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Package flights and hotels for customer review&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_9">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_QD8FkKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ManualTask_6">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_REim8KjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Present flights and hotels to customer&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_10">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_REj1EKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_11">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_VNq_gajCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="StartEvent_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_fl4wgKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_2">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_1pBQgKjCEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>StartEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_12">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_fl5XkKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="StartEvent_3">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_gLpI8KjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_3">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_2nV58KjCEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>StartEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_13">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_gLpwAKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="StartEvent_4">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_gsrZcKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="TimerEventDefinition_1">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_2KgM8KjCEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>TimerEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>StartEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_14">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_gssAgKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>instantiate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="EventBasedGateway_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_mKHSgKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Unspecified, value=0, instance=Unspecified, literal=Unspecified, ]">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>gatewayDirection</featureSpecialization>
           </body>
           <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Parallel, value=0, instance=Parallel, literal=Parallel, ]">
             <featureNote>:>></featureNote>
             <featureSpecialization>eventGatewayType</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>EventBasedGateway</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_15">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_nVHtEKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_16">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_n03kIKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_17">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_oNSrMKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_18">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_onOOIKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Request credit card information"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="ManualTask_7">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_wHPC8KjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage" declaredName="Notify customer to start again"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="&quot;Request credit card information&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>name</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage" declaredName="Update  record customer"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="1">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>startQuantity</featureSpecialization>
           </body>
-        </body>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+          <body xsi:type="AttributeUsage" valuePart="1">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ManualTask</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_19">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_wHPqAKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ServiceTask_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_xgIIgKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Notify customer to start again&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ServiceTask</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_20">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_xgIvkKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="ScriptTask_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_zJLxAKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Update  record customer&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>ScriptTask</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_21">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_zJMYEKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="EndEvent_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_4iFvYKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>EndEvent</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_22">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_4iGWcKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="StartEvent_5">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_6bfhAKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="LinkEventDefinition_1">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_7pEucKjCEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>LinkEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>StartEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_23">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_6bgIEKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="EndEvent_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;__GfQgKjCEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>EndEvent</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_G5c2gKjDEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="TimerEventDefinition_2">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_KEJ38KjDEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>TimerEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_24">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_NNqmkKjDEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_e_FH0KjFEeKByZYE3SKnNQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_4">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_f9mlkKjFEeKByZYE3SKnNQ&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_3">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_mePoEKjFEeKByZYE3SKnNQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_5">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_oUjXgKjHEeKfxP_htjREQQ&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_4">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_vjRoAKjHEeKfxP_htjREQQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_6">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_wZXigKjHEeKfxP_htjREQQ&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_5">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_7e0soKjKEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_7">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_8Yp3oKjKEeKSNoCYL5SGfQ&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_6">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_9F0foKjKEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_8">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_91khkKjKEeKSNoCYL5SGfQ&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="StartEvent_6">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_5Jf-kKjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>StartEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Request a trip"/>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
+        <body xsi:type="PartUsage" declaredName="Task_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_52XEkKjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+            <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="AttributeUsage" valuePart="&quot;Request a trip&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>startQuantity</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="1">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>completionQuantity</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>Task</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_25">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_52aH4KjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="BoundaryEvent_7">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_9_kVoKjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="true">
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage"/>
-        </body>
-        <body xsi:type="PartUsage">
-          <body xsi:type="AttributeUsage" valuePart="false">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>isImmediate</featureSpecialization>
+          <body xsi:type="PartUsage" declaredName="MessageEventDefinition_9">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_-ZlYIKjLEeKSNoCYL5SGfQ&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>MessageEventDefinition</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>BoundaryEvent</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Customer">
+        <body xsi:type="PartUsage" declaredName="SequenceFlow_26">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_LKKcwKjOEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>SequenceFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="LaneSet_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_bnUeoKjBEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="&quot;Customer&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>name</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage" declaredName="Travel booking">
+          <body xsi:type="PartUsage" declaredName="Lane_1">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_bnYJAKjBEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
             <body xsi:type="AttributeUsage" valuePart="&quot;Travel booking&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>name</featureSpecialization>
             </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>Lane</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>LaneSet</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage" declaredName="Travel Agency">
+        <body xsi:type="PartUsage" declaredName="LaneSet_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_gxuG8KjBEeK_xvwrSf5u4w&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
           <body xsi:type="AttributeUsage" valuePart="&quot;Travel Agency&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>name</featureSpecialization>
           </body>
-          <body xsi:type="PartUsage" declaredName="Travel">
+          <body xsi:type="PartUsage" declaredName="Lane_2">
+            <body xsi:type="AttributeUsage" valuePart="&quot;_gxuuAKjBEeK_xvwrSf5u4w&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>id</featureSpecialization>
+            </body>
             <body xsi:type="AttributeUsage" valuePart="&quot;Travel&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>name</featureSpecialization>
             </body>
+            <featureNote>:</featureNote>
+            <featureSpecialization>Lane</featureSpecialization>
           </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>LaneSet</featureSpecialization>
         </body>
+        <featureNote>:</featureNote>
+        <featureSpecialization>Process</featureSpecialization>
       </body>
-      <body xsi:type="PartUsage">
-        <body xsi:type="AttributeUsage" valuePart="false">
+      <body xsi:type="PartUsage" declaredName="Collaboration_1">
+        <body xsi:type="AttributeUsage" valuePart="&quot;_mzUyIKjDEeK_xvwrSf5u4w&quot;">
           <featureNote>:>></featureNote>
-          <featureSpecialization>isClosed</featureSpecialization>
+          <featureSpecialization>id</featureSpecialization>
         </body>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage"/>
-        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage" declaredName="MessageFlow_1">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_7LA_0KjKEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>MessageFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="MessageFlow_2">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_CF0OwKjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>MessageFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="MessageFlow_3">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_Ns60wKjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>MessageFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="MessageFlow_4">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_Oci64KjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>MessageFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="MessageFlow_5">
+          <body xsi:type="AttributeUsage" valuePart="&quot;_YXW-MKjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>MessageFlow</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="MessageFlow_6">
+          <body xsi:type="AttributeUsage" valuePart="&quot;__TvTQKjLEeKSNoCYL5SGfQ&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>id</featureSpecialization>
+          </body>
+          <featureNote>:</featureNote>
+          <featureSpecialization>MessageFlow</featureSpecialization>
+        </body>
+        <featureNote>:</featureNote>
+        <featureSpecialization>Collaboration</featureSpecialization>
       </body>
+      <featureNote>:</featureNote>
+      <featureSpecialization>Definitions</featureSpecialization>
     </body>
   </body>
 </Namespace>

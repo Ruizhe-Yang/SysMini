@@ -1,13 +1,3 @@
-operation main(){
-	var rootEcore = DSL!EObject.all.first();
-	var rootSysMini = new SysMini!Namespace;
-	var rootPackage = new SysMini!Package;
-	rootPackage.declaredName = "SysML-gen";
-	rootSysMini.body.add(rootPackage);
-	rootEcore.addNodeTo(rootPackage);
-}
-
-
 operation DSL!EObject addNodeTo(rootNode : SysMini!Element){
 	if (self.isEntity()){
 		var node = self.equivalent();
@@ -15,6 +5,9 @@ operation DSL!EObject addNodeTo(rootNode : SysMini!Element){
 		for (child in self.eContents()){
 			child.addNodeTo(node);
 		}
+//		for (childERefference in self.eAllStructuralFeatures.select(s|s.type().name == "ERefference")){
+//			
+//		}
 	}
 }
 
@@ -22,30 +15,37 @@ operation DSL!EObject isEntity(){
 	return true;
 }
 
-operation DSL!EObject isRoot(){
-	if (type == 1){
-		type = 0;
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
 operation Sequence getElementOf(typeName : String){
 	return self.select(e|e.type().name == typeName);
 }
 
 operation Any getEAttribute(){
-	self.type().print();
-	self.println(" ");
+//	self.type().print();
+//	self.println(" ");
 	if (self == "" or self == null){
-		return "";
+		return null;
 	}
 	else if (self.type().hasProperty("name") and self.type().name == "String"){
 		return "\""+self+"\"";
 	}
+	else if (self.type().hasProperty("name") and self.type().name == "Boolean"){
+		if (self == false){
+			return null;
+		}
+		else{
+			return self.asString();
+		}
+	}
 	else{
 		return self.asString();
 	}
+}
+
+operation DSL!EObject getDeclaredName(){
+	var eObjectTuple = eObjectSequence.select(s|s.value == self).first();
+	return eObjectTuple.key;
+}
+
+operation DSL!EObject getfeatureSpecialization(){
+	return self.type().name;
 }
