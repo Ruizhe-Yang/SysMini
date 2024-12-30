@@ -3,12 +3,16 @@ import "DSL2SysMini-util.eol";
 pre{
 	"------------------ ETL Start ------------------".println();
 	var eObjectSequence = new Sequence;
+	var eEReferenceSequence = new Sequence;
 	init_bpmdi();
 	main_bpmdi();
 }
 
 post{
 	"------------------ ETL Over  ------------------".println();
+	for (ee in eEReferenceSequence){
+		ee.println();
+	}
 }
 
 operation init_bpmdi(){
@@ -17,31 +21,115 @@ operation init_bpmdi(){
 		var eBPMNPlaneTuple = Tuple{"key"=eBPMNPlane.type().name.asString()+"_"+(idBPMNPlane++).asString(),"value"= eBPMNPlane};
 		eObjectSequence.add(eBPMNPlaneTuple);
 	}
+	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
+	eEReferenceSequence.add(eowningDiagramTuple);
+	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eowningElementTuple);
+	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eownedElementTuple);
+	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
+	eEReferenceSequence.add(emodelElementTuple);
+	var estyleTuple = Tuple{"key"='style', "value"='Style'};
+	eEReferenceSequence.add(estyleTuple);
+	var eplaneElementTuple = Tuple{"key"='planeElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eplaneElementTuple);
+	var ebpmnElementTuple = Tuple{"key"='bpmnElement', "value"='BaseElement'};
+	eEReferenceSequence.add(ebpmnElementTuple);
 	var idBPMNShape = 0;
 	for (eBPMNShape in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNShape))){
 		var eBPMNShapeTuple = Tuple{"key"=eBPMNShape.type().name.asString()+"_"+(idBPMNShape++).asString(),"value"= eBPMNShape};
 		eObjectSequence.add(eBPMNShapeTuple);
 	}
+	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
+	eEReferenceSequence.add(eowningDiagramTuple);
+	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eowningElementTuple);
+	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eownedElementTuple);
+	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
+	eEReferenceSequence.add(emodelElementTuple);
+	var estyleTuple = Tuple{"key"='style', "value"='Style'};
+	eEReferenceSequence.add(estyleTuple);
+	var eboundsTuple = Tuple{"key"='bounds', "value"='Bounds'};
+	eEReferenceSequence.add(eboundsTuple);
+	var eownedLabelTuple = Tuple{"key"='ownedLabel', "value"='Label'};
+	eEReferenceSequence.add(eownedLabelTuple);
+	var ebpmnElementTuple = Tuple{"key"='bpmnElement', "value"='BaseElement'};
+	eEReferenceSequence.add(ebpmnElementTuple);
+	var elabelTuple = Tuple{"key"='label', "value"='BPMNLabel'};
+	eEReferenceSequence.add(elabelTuple);
+	var echoreographyActivityShapeTuple = Tuple{"key"='choreographyActivityShape', "value"='BPMNShape'};
+	eEReferenceSequence.add(echoreographyActivityShapeTuple);
 	var idBPMNLabel = 0;
 	for (eBPMNLabel in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabel))){
 		var eBPMNLabelTuple = Tuple{"key"=eBPMNLabel.type().name.asString()+"_"+(idBPMNLabel++).asString(),"value"= eBPMNLabel};
 		eObjectSequence.add(eBPMNLabelTuple);
 	}
+	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
+	eEReferenceSequence.add(eowningDiagramTuple);
+	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eowningElementTuple);
+	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eownedElementTuple);
+	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
+	eEReferenceSequence.add(emodelElementTuple);
+	var estyleTuple = Tuple{"key"='style', "value"='Style'};
+	eEReferenceSequence.add(estyleTuple);
+	var eboundsTuple = Tuple{"key"='bounds', "value"='Bounds'};
+	eEReferenceSequence.add(eboundsTuple);
+	var elabelStyleTuple = Tuple{"key"='labelStyle', "value"='BPMNLabelStyle'};
+	eEReferenceSequence.add(elabelStyleTuple);
 	var idBPMNLabelStyle = 0;
 	for (eBPMNLabelStyle in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabelStyle))){
 		var eBPMNLabelStyleTuple = Tuple{"key"=eBPMNLabelStyle.type().name.asString()+"_"+(idBPMNLabelStyle++).asString(),"value"= eBPMNLabelStyle};
 		eObjectSequence.add(eBPMNLabelStyleTuple);
 	}
+	var efontTuple = Tuple{"key"='font', "value"='Font'};
+	eEReferenceSequence.add(efontTuple);
 	var idBPMNEdge = 0;
 	for (eBPMNEdge in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNEdge))){
 		var eBPMNEdgeTuple = Tuple{"key"=eBPMNEdge.type().name.asString()+"_"+(idBPMNEdge++).asString(),"value"= eBPMNEdge};
 		eObjectSequence.add(eBPMNEdgeTuple);
 	}
+	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
+	eEReferenceSequence.add(eowningDiagramTuple);
+	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eowningElementTuple);
+	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(eownedElementTuple);
+	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
+	eEReferenceSequence.add(emodelElementTuple);
+	var estyleTuple = Tuple{"key"='style', "value"='Style'};
+	eEReferenceSequence.add(estyleTuple);
+	var esourceTuple = Tuple{"key"='source', "value"='DiagramElement'};
+	eEReferenceSequence.add(esourceTuple);
+	var etargetTuple = Tuple{"key"='target', "value"='DiagramElement'};
+	eEReferenceSequence.add(etargetTuple);
+	var ewaypointTuple = Tuple{"key"='waypoint', "value"='Point'};
+	eEReferenceSequence.add(ewaypointTuple);
+	var eownedLabelTuple = Tuple{"key"='ownedLabel', "value"='Label'};
+	eEReferenceSequence.add(eownedLabelTuple);
+	var elabelTuple = Tuple{"key"='label', "value"='BPMNLabel'};
+	eEReferenceSequence.add(elabelTuple);
+	var ebpmnElementTuple = Tuple{"key"='bpmnElement', "value"='BaseElement'};
+	eEReferenceSequence.add(ebpmnElementTuple);
+	var esourceElementTuple = Tuple{"key"='sourceElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(esourceElementTuple);
+	var etargetElementTuple = Tuple{"key"='targetElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(etargetElementTuple);
 	var idBPMNDiagram = 0;
 	for (eBPMNDiagram in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNDiagram))){
 		var eBPMNDiagramTuple = Tuple{"key"=eBPMNDiagram.type().name.asString()+"_"+(idBPMNDiagram++).asString(),"value"= eBPMNDiagram};
 		eObjectSequence.add(eBPMNDiagramTuple);
 	}
+	var eownedStyleTuple = Tuple{"key"='ownedStyle', "value"='Style'};
+	eEReferenceSequence.add(eownedStyleTuple);
+	var erootElementTuple = Tuple{"key"='rootElement', "value"='DiagramElement'};
+	eEReferenceSequence.add(erootElementTuple);
+	var eplaneTuple = Tuple{"key"='plane', "value"='BPMNPlane'};
+	eEReferenceSequence.add(eplaneTuple);
+	var elabelStyleTuple = Tuple{"key"='labelStyle', "value"='BPMNLabelStyle'};
+	eEReferenceSequence.add(elabelStyleTuple);
 }
 
 operation main_bpmdi(){

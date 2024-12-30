@@ -5,12 +5,16 @@ import "DSL2SysMini-util.eol";
 pre{
 	"------------------ ETL Start ------------------".println();
 	var eObjectSequence = new Sequence;
+	var eEReferenceSequence = new Sequence;
 	init_[%=fileName%]();
 	main_[%=fileName%]();
 }
 
 post{
 	"------------------ ETL Over  ------------------".println();
+	for (ee in eEReferenceSequence){
+		ee.println();
+	}
 }
 
 operation init_[%=fileName%](){
@@ -20,6 +24,10 @@ operation init_[%=fileName%](){
 		var e[%=eClass.name%]Tuple = Tuple{"key"=e[%=eClass.name%].type().name.asString()+"_"+(id[%=eClass.name%]++).asString(),"value"= e[%=eClass.name%]};
 		eObjectSequence.add(e[%=eClass.name%]Tuple);
 	}
+	[%	for (eReference in eClass.eAllStructuralFeatures.select(s|s.type().name == "EReference")){%]
+	var e[%=eReference.name%]Tuple = Tuple{"key"='[%=eReference.name%]', "value"='[%=eReference.eType.name%]'};
+	eEReferenceSequence.add(e[%=eReference.name%]Tuple);
+	[%}%]
 	[%}%]
 }
 
