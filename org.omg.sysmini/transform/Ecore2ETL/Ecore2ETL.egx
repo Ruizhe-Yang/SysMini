@@ -1,0 +1,9 @@
+rule gen_sysmlv2
+	transform root : EPackage{
+	template : "Ecore2ETL.egl"
+	target : root.getFileName()
+}
+
+operation Ecore!EPackage getFileName(){
+	return "ETL-gen/"+self.name+".etl";
+}

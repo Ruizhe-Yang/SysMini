@@ -57,12 +57,24 @@ rule EReference_val
 		t.featureSpecialization.add(s.eContents().first().eClassifier.name);
 	}
 
+//@lazy
+//rule EReference_ref
+//	transform s : Ecore!EReference
+//	to t : SysMini!ReferenceUsage{
+//		guard : s.containment==false
+//		t.ReferenceUsageType = "ReferenceUsage";
+//		t.declaredName = s.name.clearKeyWord();
+//		t.multiplicityRange = s.getRange();
+//		t.featureNote.add(":");
+//		t.featureSpecialization.add(s.eContents().first().eClassifier.name);
+//	}
+
 @lazy
 rule EReference_ref
 	transform s : Ecore!EReference
-	to t : SysMini!ReferenceUsage{
+	to t : SysMini!PartUsage{
 		guard : s.containment==false
-		t.ReferenceUsageType = "ReferenceUsage";
+		t.isReference = true;
 		t.declaredName = s.name.clearKeyWord();
 		t.multiplicityRange = s.getRange();
 		t.featureNote.add(":");

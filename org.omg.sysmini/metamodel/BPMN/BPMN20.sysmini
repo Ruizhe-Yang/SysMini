@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
   <body xsi:type="Package" declaredName="bpmn2">
-    <body xsi:type="NamespaceImport" declaredName="ecore"/>
-    <body xsi:type="NamespaceImport" declaredName="bpmdi"/>
-    <body xsi:type="NamespaceImport" declaredName="dc"/>
-    <body xsi:type="NamespaceImport" declaredName="di"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" declaredName="ecore"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="bpmdi"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="dc"/>
+    <body xsi:type="NamespaceImport" hasVisibility="true" visibility="public" declaredName="di"/>
     <body xsi:type="PartDefinition" declaredName="Interface">
       <body xsi:type="AttributeUsage" declaredName="name" multiplicityRange="[1]">
         <featureNote>:</featureNote>
@@ -14,7 +14,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Operation</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="implementationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="implementationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
@@ -28,7 +28,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="extensionDefinitions" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="extensionDefinitions" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ExtensionDefinition</featureSpecialization>
       </body>
@@ -72,7 +72,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="extensionDefinition" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="extensionDefinition" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ExtensionDefinition</featureSpecialization>
       </body>
@@ -82,7 +82,7 @@
       </body>
     </body>
     <body xsi:type="PartDefinition" declaredName="ExtensionAttributeValue">
-      <body xsi:type="ReferenceUsage" declaredName="valueRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="valueRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
@@ -90,7 +90,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="extensionAttributeDefinition" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="extensionAttributeDefinition" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ExtensionAttributeDefinition</featureSpecialization>
       </body>
@@ -115,19 +115,19 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="inMessageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="inMessageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outMessageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outMessageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="errorRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="errorRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Error</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="implementationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="implementationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
@@ -138,7 +138,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="itemRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="itemRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -149,7 +149,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>ItemKind</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="structureRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="structureRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
@@ -157,7 +157,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="'import'" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="'import'" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Import</featureSpecialization>
       </body>
@@ -186,7 +186,7 @@
       </body>
     </body>
     <body xsi:type="PartDefinition" declaredName="Error">
-      <body xsi:type="ReferenceUsage" declaredName="structureRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="structureRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -222,7 +222,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>InputOutputSpecification</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="supportedInterfaceRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="supportedInterfaceRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Interface</featureSpecialization>
       </body>
@@ -256,19 +256,19 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="dataInputRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="dataInputRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataInput</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="optionalInputRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="optionalInputRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataInput</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="whileExecutingInputRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="whileExecutingInputRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataInput</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outputSetRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outputSetRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>OutputSet</featureSpecialization>
       </body>
@@ -283,22 +283,22 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="inputSetWithOptional" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="inputSetWithOptional" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="inputSetWithWhileExecuting" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="inputSetWithWhileExecuting" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="inputSetRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="inputSetRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
       </body>
       <SubclassificationPart>ItemAwareElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ItemAwareElement">
-      <body xsi:type="ReferenceUsage" declaredName="itemSubjectRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="itemSubjectRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -316,15 +316,15 @@
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="OutputSet">
-      <body xsi:type="ReferenceUsage" declaredName="dataOutputRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="dataOutputRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataOutput</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="optionalOutputRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="optionalOutputRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataOutput</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="whileExecutingOutputRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="whileExecutingOutputRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataOutput</featureSpecialization>
       </body>
@@ -332,7 +332,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="inputSetRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="inputSetRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
       </body>
@@ -347,30 +347,30 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outputSetWithOptional" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outputSetWithOptional" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>OutputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outputSetWithWhileExecuting" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outputSetWithWhileExecuting" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>OutputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outputSetRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outputSetRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>OutputSet</featureSpecialization>
       </body>
       <SubclassificationPart>ItemAwareElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="InputOutputBinding">
-      <body xsi:type="ReferenceUsage" declaredName="inputDataRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="inputDataRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outputDataRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outputDataRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>OutputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="operationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="operationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Operation</featureSpecialization>
       </body>
@@ -380,7 +380,7 @@
       </body>
     </body>
     <body xsi:type="PartDefinition" declaredName="ResourceRole">
-      <body xsi:type="ReferenceUsage" declaredName="resourceRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="resourceRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Resource</featureSpecialization>
       </body>
@@ -418,7 +418,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="type" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="type" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -429,7 +429,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Expression</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="parameterRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="parameterRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ResourceParameter</featureSpecialization>
       </body>
@@ -478,11 +478,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Property</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="supports" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="supports" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Process</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="definitionalCollaborationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="definitionalCollaborationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Collaboration</featureSpecialization>
       </body>
@@ -506,7 +506,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Process</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="decomposes" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="decomposes" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Process</featureSpecialization>
       </body>
@@ -537,7 +537,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Monitoring</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="categoryValueRef" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="categoryValueRef" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>CategoryValue</featureSpecialization>
       </body>
@@ -548,7 +548,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="categorizedFlowElements" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="categorizedFlowElements" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>FlowElement</featureSpecialization>
       </body>
@@ -574,11 +574,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>LaneSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="partitionElementRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="partitionElementRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>BaseElement</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="flowNodeRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="flowNodeRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>FlowNode</featureSpecialization>
       </body>
@@ -589,15 +589,15 @@
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="FlowNode" isAbstract="true">
-      <body xsi:type="ReferenceUsage" declaredName="outgoing" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outgoing" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="incoming" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="incoming" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="lanes" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="lanes" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Lane</featureSpecialization>
       </body>
@@ -612,11 +612,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Expression</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="targetRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="targetRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>FlowNode</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="sourceRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="sourceRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>FlowNode</featureSpecialization>
       </body>
@@ -643,7 +643,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="choreographyRef" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="choreographyRef" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Choreography</featureSpecialization>
       </body>
@@ -693,11 +693,11 @@
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ParticipantAssociation">
-      <body xsi:type="ReferenceUsage" declaredName="innerParticipantRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="innerParticipantRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outerParticipantRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outerParticipantRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
@@ -708,7 +708,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="interfaceRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="interfaceRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Interface</featureSpecialization>
       </body>
@@ -716,11 +716,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>ParticipantMultiplicity</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="endPointRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="endPointRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EndPoint</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="processRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="processRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Process</featureSpecialization>
       </body>
@@ -728,17 +728,17 @@
       <SubclassificationPart>InteractionNode</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="InteractionNode" isAbstract="true">
-      <body xsi:type="ReferenceUsage" declaredName="incomingConversationLinks" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="incomingConversationLinks" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ConversationLink</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outgoingConversationLinks" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outgoingConversationLinks" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ConversationLink</featureSpecialization>
       </body>
     </body>
     <body xsi:type="PartDefinition" declaredName="ConversationLink">
-      <body xsi:type="ReferenceUsage" declaredName="sourceRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="sourceRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InteractionNode</featureSpecialization>
       </body>
@@ -746,7 +746,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="targetRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="targetRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InteractionNode</featureSpecialization>
       </body>
@@ -767,11 +767,11 @@
       </body>
     </body>
     <body xsi:type="PartDefinition" declaredName="MessageFlowAssociation">
-      <body xsi:type="ReferenceUsage" declaredName="innerMessageFlowRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="innerMessageFlowRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>MessageFlow</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outerMessageFlowRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outerMessageFlowRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>MessageFlow</featureSpecialization>
       </body>
@@ -782,26 +782,26 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="sourceRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="sourceRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InteractionNode</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="targetRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="targetRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>InteractionNode</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="messageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
       <SubclassificationPart>BaseElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ConversationAssociation">
-      <body xsi:type="ReferenceUsage" declaredName="innerConversationNodeRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="innerConversationNodeRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ConversationNode</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="outerConversationNodeRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="outerConversationNodeRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ConversationNode</featureSpecialization>
       </body>
@@ -812,11 +812,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="participantRefs" multiplicityRange="[2..*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="participantRefs" multiplicityRange="[2..*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="messageFlowRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageFlowRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>MessageFlow</featureSpecialization>
       </body>
@@ -828,7 +828,7 @@
       <SubclassificationPart>InteractionNode</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="CorrelationKey">
-      <body xsi:type="ReferenceUsage" declaredName="correlationPropertyRef" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="correlationPropertyRef" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>CorrelationProperty</featureSpecialization>
       </body>
@@ -847,7 +847,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="type" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="type" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -858,7 +858,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>FormalExpression</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="messageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
@@ -869,18 +869,18 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="body" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="body" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="evaluatesToTypeRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="evaluatesToTypeRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
       <SubclassificationPart>Expression</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="CorrelationSubscription">
-      <body xsi:type="ReferenceUsage" declaredName="correlationKeyRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="correlationKeyRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>CorrelationKey</featureSpecialization>
       </body>
@@ -895,7 +895,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>FormalExpression</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="correlationPropertyRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="correlationPropertyRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>CorrelationProperty</featureSpecialization>
       </body>
@@ -923,7 +923,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>ResourceRole</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="'default'" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="'default'" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
       </body>
@@ -935,7 +935,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>InputOutputSpecification</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="boundaryEventRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="boundaryEventRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>BoundaryEvent</featureSpecialization>
       </body>
@@ -966,7 +966,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="attachedToRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="attachedToRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Activity</featureSpecialization>
       </body>
@@ -981,7 +981,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>OutputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="eventDefinitionRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="eventDefinitionRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EventDefinition</featureSpecialization>
       </body>
@@ -1022,11 +1022,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Assignment</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="targetRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="targetRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemAwareElement</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="sourceRef" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="sourceRef" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemAwareElement</featureSpecialization>
       </body>
@@ -1110,21 +1110,21 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Expression</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="'default'" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="'default'" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
       </body>
       <SubclassificationPart>Gateway</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ExclusiveGateway">
-      <body xsi:type="ReferenceUsage" declaredName="'default'" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="'default'" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
       </body>
       <SubclassificationPart>Gateway</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="InclusiveGateway">
-      <body xsi:type="ReferenceUsage" declaredName="'default'" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="'default'" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>SequenceFlow</featureSpecialization>
       </body>
@@ -1142,11 +1142,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>RelationshipDirection</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="sources" multiplicityRange="[1..*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="sources" multiplicityRange="[1..*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="targets" multiplicityRange="[1..*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="targets" multiplicityRange="[1..*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EObject</featureSpecialization>
       </body>
@@ -1183,7 +1183,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>InputSet</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="eventDefinitionRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="eventDefinitionRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EventDefinition</featureSpecialization>
       </body>
@@ -1215,7 +1215,7 @@
       <SubclassificationPart>EventDefinition</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ErrorEventDefinition">
-      <body xsi:type="ReferenceUsage" declaredName="errorRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="errorRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Error</featureSpecialization>
       </body>
@@ -1225,14 +1225,14 @@
       <SubclassificationPart>EventDefinition</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="EscalationEventDefinition">
-      <body xsi:type="ReferenceUsage" declaredName="escalationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="escalationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Escalation</featureSpecialization>
       </body>
       <SubclassificationPart>EventDefinition</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="Escalation">
-      <body xsi:type="ReferenceUsage" declaredName="structureRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="structureRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -1254,7 +1254,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="activityRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="activityRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Activity</featureSpecialization>
       </body>
@@ -1280,22 +1280,22 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="target" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="target" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>LinkEventDefinition</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="source" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="source" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>LinkEventDefinition</featureSpecialization>
       </body>
       <SubclassificationPart>EventDefinition</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="MessageEventDefinition">
-      <body xsi:type="ReferenceUsage" declaredName="messageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="operationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="operationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Operation</featureSpecialization>
       </body>
@@ -1309,14 +1309,14 @@
       <SubclassificationPart>EventDefinition</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="SignalEventDefinition">
-      <body xsi:type="ReferenceUsage" declaredName="signalRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="signalRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Signal</featureSpecialization>
       </body>
       <SubclassificationPart>EventDefinition</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="Signal">
-      <body xsi:type="ReferenceUsage" declaredName="structureRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="structureRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemDefinition</featureSpecialization>
       </body>
@@ -1354,7 +1354,7 @@
       <SubclassificationPart>RootElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="DataStoreReference">
-      <body xsi:type="ReferenceUsage" declaredName="dataStoreRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="dataStoreRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataStore</featureSpecialization>
       </body>
@@ -1362,7 +1362,7 @@
       <SubclassificationPart>ItemAwareElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="DataObjectReference">
-      <body xsi:type="ReferenceUsage" declaredName="dataObjectRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="dataObjectRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>DataObject</featureSpecialization>
       </body>
@@ -1370,7 +1370,7 @@
       <SubclassificationPart>ItemAwareElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="CallConversation">
-      <body xsi:type="ReferenceUsage" declaredName="calledCollaborationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="calledCollaborationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Collaboration</featureSpecialization>
       </body>
@@ -1398,7 +1398,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="participantRef" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="participantRef" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
@@ -1409,18 +1409,18 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="participantRef" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="participantRef" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
       <SubclassificationPart>RootElement</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ChoreographyActivity" isAbstract="true">
-      <body xsi:type="ReferenceUsage" declaredName="participantRefs" multiplicityRange="[*]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="participantRefs" multiplicityRange="[*]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="initiatingParticipantRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="initiatingParticipantRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
@@ -1441,7 +1441,7 @@
       <body xsi:type="EnumerationUsage" declaredName="MultiInstanceParallel"/>
     </body>
     <body xsi:type="PartDefinition" declaredName="CallChoreography">
-      <body xsi:type="ReferenceUsage" declaredName="calledChoreographyRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="calledChoreographyRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Choreography</featureSpecialization>
       </body>
@@ -1460,14 +1460,14 @@
       <SubclassificationPart>FlowElementsContainer</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="ChoreographyTask">
-      <body xsi:type="ReferenceUsage" declaredName="messageFlowRef" multiplicityRange="[0..2]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageFlowRef" multiplicityRange="[0..2]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>MessageFlow</featureSpecialization>
       </body>
       <SubclassificationPart>ChoreographyActivity</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="GlobalChoreographyTask">
-      <body xsi:type="ReferenceUsage" declaredName="initiatingParticipantRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="initiatingParticipantRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Participant</featureSpecialization>
       </body>
@@ -1485,7 +1485,7 @@
       <SubclassificationPart>Artifact</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="Group">
-      <body xsi:type="ReferenceUsage" declaredName="categoryValueRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="categoryValueRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>CategoryValue</featureSpecialization>
       </body>
@@ -1496,11 +1496,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>AssociationDirection</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="sourceRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="sourceRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>BaseElement</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="targetRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="targetRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>BaseElement</featureSpecialization>
       </body>
@@ -1527,7 +1527,7 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="operationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="operationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Operation</featureSpecialization>
       </body>
@@ -1564,11 +1564,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>Expression</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="loopDataInputRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="loopDataInputRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemAwareElement</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="loopDataOutputRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="loopDataOutputRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>ItemAwareElement</featureSpecialization>
       </body>
@@ -1588,11 +1588,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>ComplexBehaviorDefinition</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="oneBehaviorEventRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="oneBehaviorEventRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EventDefinition</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="noneBehaviorEventRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="noneBehaviorEventRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>EventDefinition</featureSpecialization>
       </body>
@@ -1625,7 +1625,7 @@
       <SubclassificationPart>LoopCharacteristics</SubclassificationPart>
     </body>
     <body xsi:type="PartDefinition" declaredName="CallActivity">
-      <body xsi:type="ReferenceUsage" declaredName="calledElementRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="calledElementRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>CallableElement</featureSpecialization>
       </body>
@@ -1636,11 +1636,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EString</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="operationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="operationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Operation</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="messageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
@@ -1655,11 +1655,11 @@
         <featureNote>:</featureNote>
         <featureSpecialization>EBoolean</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="operationRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="operationRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Operation</featureSpecialization>
       </body>
-      <body xsi:type="ReferenceUsage" declaredName="messageRef" multiplicityRange="[1]" ReferenceUsageType="ReferenceUsage">
+      <body xsi:type="PartUsage" declaredName="messageRef" multiplicityRange="[1]" isReference="true">
         <featureNote>:</featureNote>
         <featureSpecialization>Message</featureSpecialization>
       </body>
