@@ -1313,8 +1313,8 @@ operation SysMini!Feature ValuePart() : String {
 			str += "default".space();
 		}
 		else{
-//			str += "=".space();
-			str += ":".space();
+			str += "=".space();
+//			str += ":".space();
 		}
 		str += self.valuePart.space();
 		return str;

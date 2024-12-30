@@ -5,5 +5,5 @@ rule gen_sysmlv2
 }
 
 operation SysMini!Namespace getFileName(){
-	return "SysML-gen/"+self.eContents().first().declaredName+".sysml";
+	return "../../model/SysML-gen/"+self.eContents().first().declaredName+".sysml";
 }

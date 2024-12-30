@@ -1,6 +1,337 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Namespace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="sysmini">
-  <body xsi:type="Package">
-    <body xsi:type="NamespaceImport" hasVisibility="true" declaredName="ecore"/>
+  <body xsi:type="Package" declaredName="SysML-gen">
+    <body xsi:type="PartUsage">
+      <body xsi:type="AttributeUsage" valuePart="&quot;http://www.w3.org/1999/XPath&quot;">
+        <featureNote>:>></featureNote>
+        <featureSpecialization>expressionLanguage</featureSpecialization>
+      </body>
+      <body xsi:type="AttributeUsage" valuePart="&quot;http://www.w3.org/2001/XMLSchema&quot;">
+        <featureNote>:>></featureNote>
+        <featureSpecialization>typeLanguage</featureSpecialization>
+      </body>
+      <body xsi:type="PartUsage" declaredName="TravelAgency">
+        <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=None, value=0, instance=None, literal=None, ]">
+          <featureNote>:>></featureNote>
+          <featureSpecialization>processType</featureSpecialization>
+        </body>
+        <body xsi:type="AttributeUsage" valuePart="false">
+          <featureNote>:>></featureNote>
+          <featureSpecialization>isClosed</featureSpecialization>
+        </body>
+        <body xsi:type="AttributeUsage" valuePart="false">
+          <featureNote>:>></featureNote>
+          <featureSpecialization>isExecutable</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Chose alternative"/>
+        <body xsi:type="PartUsage" declaredName="Send credit card information"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isInterrupting</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Search hotel room"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Search Flight"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Evaluate Flight within customer critaria"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Evaluate hotels within customer critaria"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Package flights and hotels for customer review"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Present flights and hotels to customer"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isInterrupting</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isInterrupting</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isInterrupting</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>instantiate</featureSpecialization>
+          </body>
+          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Parallel, value=0, instance=Parallel, literal=Parallel, ]">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>eventGatewayType</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Request credit card information"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Notify customer to start again"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Update  record customer"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isInterrupting</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isInterrupting</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Request a trip"/>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="true">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>cancelActivity</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage"/>
+        </body>
+        <body xsi:type="PartUsage">
+          <body xsi:type="AttributeUsage" valuePart="false">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>isImmediate</featureSpecialization>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Customer">
+          <body xsi:type="AttributeUsage" valuePart="&quot;Customer&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" declaredName="Travel booking">
+            <body xsi:type="AttributeUsage" valuePart="&quot;Travel booking&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>name</featureSpecialization>
+            </body>
+          </body>
+        </body>
+        <body xsi:type="PartUsage" declaredName="Travel Agency">
+          <body xsi:type="AttributeUsage" valuePart="&quot;Travel Agency&quot;">
+            <featureNote>:>></featureNote>
+            <featureSpecialization>name</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" declaredName="Travel">
+            <body xsi:type="AttributeUsage" valuePart="&quot;Travel&quot;">
+              <featureNote>:>></featureNote>
+              <featureSpecialization>name</featureSpecialization>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body xsi:type="PartUsage">
+        <body xsi:type="AttributeUsage" valuePart="false">
+          <featureNote>:>></featureNote>
+          <featureSpecialization>isClosed</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage"/>
+        <body xsi:type="PartUsage"/>
+      </body>
+    </body>
   </body>
 </Namespace>

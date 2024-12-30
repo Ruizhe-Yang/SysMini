@@ -1,0 +1,105 @@
+import "DSL2SysMini-util.eol";
+
+pre{
+	"------------------ ETL Start ------------------".println();
+	main();
+}
+
+post{
+	"------------------ ETL Over  ------------------".println();
+}
+
+@abstract
+rule Base
+	transform s : DSL!EObject
+	to t : SysMini!PartUsage{
+	if (s.hasProperty("name")){
+		t.declaredName = s.name;
+	}
+	}
+	
+@lazy
+rule BPMNPlane
+	transform s : DSL!BPMNPlane
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule BPMNShape
+	transform s : DSL!BPMNShape
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.isHorizontal.getEAttribute() != ""){
+		var isHorizontal = new SysMini!AttributeUsage;
+		isHorizontal.featureNote.add(":>>");
+		isHorizontal.featureSpecialization.add("isHorizontal");
+		isHorizontal.valuePart = s.isHorizontal.getEAttribute();
+		t.body.add(isHorizontal);
+		}
+	if (s.isExpanded.getEAttribute() != ""){
+		var isExpanded = new SysMini!AttributeUsage;
+		isExpanded.featureNote.add(":>>");
+		isExpanded.featureSpecialization.add("isExpanded");
+		isExpanded.valuePart = s.isExpanded.getEAttribute();
+		t.body.add(isExpanded);
+		}
+	if (s.isMarkerVisible.getEAttribute() != ""){
+		var isMarkerVisible = new SysMini!AttributeUsage;
+		isMarkerVisible.featureNote.add(":>>");
+		isMarkerVisible.featureSpecialization.add("isMarkerVisible");
+		isMarkerVisible.valuePart = s.isMarkerVisible.getEAttribute();
+		t.body.add(isMarkerVisible);
+		}
+	if (s.isMessageVisible.getEAttribute() != ""){
+		var isMessageVisible = new SysMini!AttributeUsage;
+		isMessageVisible.featureNote.add(":>>");
+		isMessageVisible.featureSpecialization.add("isMessageVisible");
+		isMessageVisible.valuePart = s.isMessageVisible.getEAttribute();
+		t.body.add(isMessageVisible);
+		}
+	if (s.participantBandKind.getEAttribute() != ""){
+		var participantBandKind = new SysMini!AttributeUsage;
+		participantBandKind.featureNote.add(":>>");
+		participantBandKind.featureSpecialization.add("participantBandKind");
+		participantBandKind.valuePart = s.participantBandKind.getEAttribute();
+		t.body.add(participantBandKind);
+		}
+	}
+
+@lazy
+rule BPMNLabel
+	transform s : DSL!BPMNLabel
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule BPMNLabelStyle
+	transform s : DSL!BPMNLabelStyle
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule BPMNEdge
+	transform s : DSL!BPMNEdge
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.messageVisibleKind.getEAttribute() != ""){
+		var messageVisibleKind = new SysMini!AttributeUsage;
+		messageVisibleKind.featureNote.add(":>>");
+		messageVisibleKind.featureSpecialization.add("messageVisibleKind");
+		messageVisibleKind.valuePart = s.messageVisibleKind.getEAttribute();
+		t.body.add(messageVisibleKind);
+		}
+	}
+
+@lazy
+rule BPMNDiagram
+	transform s : DSL!BPMNDiagram
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+

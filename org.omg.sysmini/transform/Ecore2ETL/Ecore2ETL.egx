@@ -5,5 +5,6 @@ rule gen_sysmlv2
 }
 
 operation Ecore!EPackage getFileName(){
-	return "ETL-gen/"+self.name+".etl";
+//	self.name.println();
+	return "../DSL2SysMini/"+self.name+".etl";
 }

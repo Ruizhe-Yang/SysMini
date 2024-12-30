@@ -1,0 +1,1778 @@
+import "DSL2SysMini-util.eol";
+
+pre{
+	"------------------ ETL Start ------------------".println();
+	main();
+}
+
+post{
+	"------------------ ETL Over  ------------------".println();
+}
+
+@abstract
+rule Base
+	transform s : DSL!EObject
+	to t : SysMini!PartUsage{
+	if (s.hasProperty("name")){
+		t.declaredName = s.name;
+	}
+	}
+	
+@lazy
+rule Interface
+	transform s : DSL!Interface
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule RootElement
+	transform s : DSL!RootElement
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule BaseElement
+	transform s : DSL!BaseElement
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	if (s.description.getEAttribute() != ""){
+		var description = new SysMini!AttributeUsage;
+		description.featureNote.add(":>>");
+		description.featureSpecialization.add("description");
+		description.valuePart = s.description.getEAttribute();
+		t.body.add(description);
+		}
+	}
+
+@lazy
+rule ExtensionDefinition
+	transform s : DSL!ExtensionDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule ExtensionAttributeDefinition
+	transform s : DSL!ExtensionAttributeDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.type.getEAttribute() != ""){
+		var type = new SysMini!AttributeUsage;
+		type.featureNote.add(":>>");
+		type.featureSpecialization.add("type");
+		type.valuePart = s.type.getEAttribute();
+		t.body.add(type);
+		}
+	if (s.isReference.getEAttribute() != ""){
+		var isReference = new SysMini!AttributeUsage;
+		isReference.featureNote.add(":>>");
+		isReference.featureSpecialization.add("isReference");
+		isReference.valuePart = s.isReference.getEAttribute();
+		t.body.add(isReference);
+		}
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule ExtensionAttributeValue
+	transform s : DSL!ExtensionAttributeValue
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule Documentation
+	transform s : DSL!Documentation
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.text.getEAttribute() != ""){
+		var text = new SysMini!AttributeUsage;
+		text.featureNote.add(":>>");
+		text.featureSpecialization.add("text");
+		text.valuePart = s.text.getEAttribute();
+		t.body.add(text);
+		}
+	if (s.textFormat.getEAttribute() != ""){
+		var textFormat = new SysMini!AttributeUsage;
+		textFormat.featureNote.add(":>>");
+		textFormat.featureSpecialization.add("textFormat");
+		textFormat.valuePart = s.textFormat.getEAttribute();
+		t.body.add(textFormat);
+		}
+	}
+
+@lazy
+rule Operation
+	transform s : DSL!Operation
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule Message
+	transform s : DSL!Message
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ItemDefinition
+	transform s : DSL!ItemDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.itemKind.getEAttribute() != ""){
+		var itemKind = new SysMini!AttributeUsage;
+		itemKind.featureNote.add(":>>");
+		itemKind.featureSpecialization.add("itemKind");
+		itemKind.valuePart = s.itemKind.getEAttribute();
+		t.body.add(itemKind);
+		}
+	if (s.isCollection.getEAttribute() != ""){
+		var isCollection = new SysMini!AttributeUsage;
+		isCollection.featureNote.add(":>>");
+		isCollection.featureSpecialization.add("isCollection");
+		isCollection.valuePart = s.isCollection.getEAttribute();
+		t.body.add(isCollection);
+		}
+	}
+
+@lazy
+rule Import
+	transform s : DSL!Import
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.importType.getEAttribute() != ""){
+		var importType = new SysMini!AttributeUsage;
+		importType.featureNote.add(":>>");
+		importType.featureSpecialization.add("importType");
+		importType.valuePart = s.importType.getEAttribute();
+		t.body.add(importType);
+		}
+	if (s.location.getEAttribute() != ""){
+		var location = new SysMini!AttributeUsage;
+		location.featureNote.add(":>>");
+		location.featureSpecialization.add("location");
+		location.valuePart = s.location.getEAttribute();
+		t.body.add(location);
+		}
+	if (s.namespace.getEAttribute() != ""){
+		var namespace = new SysMini!AttributeUsage;
+		namespace.featureNote.add(":>>");
+		namespace.featureSpecialization.add("namespace");
+		namespace.valuePart = s.namespace.getEAttribute();
+		t.body.add(namespace);
+		}
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule Error
+	transform s : DSL!Error
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.errorCode.getEAttribute() != ""){
+		var errorCode = new SysMini!AttributeUsage;
+		errorCode.featureNote.add(":>>");
+		errorCode.featureSpecialization.add("errorCode");
+		errorCode.valuePart = s.errorCode.getEAttribute();
+		t.body.add(errorCode);
+		}
+	}
+
+@lazy
+rule EndPoint
+	transform s : DSL!EndPoint
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Auditing
+	transform s : DSL!Auditing
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule GlobalTask
+	transform s : DSL!GlobalTask
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule CallableElement
+	transform s : DSL!CallableElement
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule InputOutputSpecification
+	transform s : DSL!InputOutputSpecification
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule InputSet
+	transform s : DSL!InputSet
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule DataInput
+	transform s : DSL!DataInput
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.isCollection.getEAttribute() != ""){
+		var isCollection = new SysMini!AttributeUsage;
+		isCollection.featureNote.add(":>>");
+		isCollection.featureSpecialization.add("isCollection");
+		isCollection.valuePart = s.isCollection.getEAttribute();
+		t.body.add(isCollection);
+		}
+	}
+
+@lazy
+rule ItemAwareElement
+	transform s : DSL!ItemAwareElement
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule DataState
+	transform s : DSL!DataState
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule OutputSet
+	transform s : DSL!OutputSet
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule DataOutput
+	transform s : DSL!DataOutput
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.isCollection.getEAttribute() != ""){
+		var isCollection = new SysMini!AttributeUsage;
+		isCollection.featureNote.add(":>>");
+		isCollection.featureSpecialization.add("isCollection");
+		isCollection.valuePart = s.isCollection.getEAttribute();
+		t.body.add(isCollection);
+		}
+	}
+
+@lazy
+rule InputOutputBinding
+	transform s : DSL!InputOutputBinding
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule ResourceRole
+	transform s : DSL!ResourceRole
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule Resource
+	transform s : DSL!Resource
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ResourceParameter
+	transform s : DSL!ResourceParameter
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.isRequired.getEAttribute() != ""){
+		var isRequired = new SysMini!AttributeUsage;
+		isRequired.featureNote.add(":>>");
+		isRequired.featureSpecialization.add("isRequired");
+		isRequired.valuePart = s.isRequired.getEAttribute();
+		t.body.add(isRequired);
+		}
+	}
+
+@lazy
+rule ResourceParameterBinding
+	transform s : DSL!ResourceParameterBinding
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule Expression
+	transform s : DSL!Expression
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ResourceAssignmentExpression
+	transform s : DSL!ResourceAssignmentExpression
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule Monitoring
+	transform s : DSL!Monitoring
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Performer
+	transform s : DSL!Performer
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Process
+	transform s : DSL!Process
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.processType.getEAttribute() != ""){
+		var processType = new SysMini!AttributeUsage;
+		processType.featureNote.add(":>>");
+		processType.featureSpecialization.add("processType");
+		processType.valuePart = s.processType.getEAttribute();
+		t.body.add(processType);
+		}
+	if (s.isClosed.getEAttribute() != ""){
+		var isClosed = new SysMini!AttributeUsage;
+		isClosed.featureNote.add(":>>");
+		isClosed.featureSpecialization.add("isClosed");
+		isClosed.valuePart = s.isClosed.getEAttribute();
+		t.body.add(isClosed);
+		}
+	if (s.isExecutable.getEAttribute() != ""){
+		var isExecutable = new SysMini!AttributeUsage;
+		isExecutable.featureNote.add(":>>");
+		isExecutable.featureSpecialization.add("isExecutable");
+		isExecutable.valuePart = s.isExecutable.getEAttribute();
+		t.body.add(isExecutable);
+		}
+	}
+
+@lazy
+rule FlowElementsContainer
+	transform s : DSL!FlowElementsContainer
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule FlowElement
+	transform s : DSL!FlowElement
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule CategoryValue
+	transform s : DSL!CategoryValue
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.value.getEAttribute() != ""){
+		var value = new SysMini!AttributeUsage;
+		value.featureNote.add(":>>");
+		value.featureSpecialization.add("value");
+		value.valuePart = s.value.getEAttribute();
+		t.body.add(value);
+		}
+	}
+
+@lazy
+rule LaneSet
+	transform s : DSL!LaneSet
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule Lane
+	transform s : DSL!Lane
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule FlowNode
+	transform s : DSL!FlowNode
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule SequenceFlow
+	transform s : DSL!SequenceFlow
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.isImmediate.getEAttribute() != ""){
+		var isImmediate = new SysMini!AttributeUsage;
+		isImmediate.featureNote.add(":>>");
+		isImmediate.featureSpecialization.add("isImmediate");
+		isImmediate.valuePart = s.isImmediate.getEAttribute();
+		t.body.add(isImmediate);
+		}
+	}
+
+@lazy
+rule Property
+	transform s : DSL!Property
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule Collaboration
+	transform s : DSL!Collaboration
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.isClosed.getEAttribute() != ""){
+		var isClosed = new SysMini!AttributeUsage;
+		isClosed.featureNote.add(":>>");
+		isClosed.featureSpecialization.add("isClosed");
+		isClosed.valuePart = s.isClosed.getEAttribute();
+		t.body.add(isClosed);
+		}
+	}
+
+@lazy
+rule Choreography
+	transform s : DSL!Choreography
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Artifact
+	transform s : DSL!Artifact
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ParticipantAssociation
+	transform s : DSL!ParticipantAssociation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Participant
+	transform s : DSL!Participant
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule InteractionNode
+	transform s : DSL!InteractionNode
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ConversationLink
+	transform s : DSL!ConversationLink
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ParticipantMultiplicity
+	transform s : DSL!ParticipantMultiplicity
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.minimum.getEAttribute() != ""){
+		var minimum = new SysMini!AttributeUsage;
+		minimum.featureNote.add(":>>");
+		minimum.featureSpecialization.add("minimum");
+		minimum.valuePart = s.minimum.getEAttribute();
+		t.body.add(minimum);
+		}
+	if (s.maximum.getEAttribute() != ""){
+		var maximum = new SysMini!AttributeUsage;
+		maximum.featureNote.add(":>>");
+		maximum.featureSpecialization.add("maximum");
+		maximum.valuePart = s.maximum.getEAttribute();
+		t.body.add(maximum);
+		}
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule MessageFlowAssociation
+	transform s : DSL!MessageFlowAssociation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule MessageFlow
+	transform s : DSL!MessageFlow
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ConversationAssociation
+	transform s : DSL!ConversationAssociation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ConversationNode
+	transform s : DSL!ConversationNode
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule CorrelationKey
+	transform s : DSL!CorrelationKey
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule CorrelationProperty
+	transform s : DSL!CorrelationProperty
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule CorrelationPropertyRetrievalExpression
+	transform s : DSL!CorrelationPropertyRetrievalExpression
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule FormalExpression
+	transform s : DSL!FormalExpression
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.language.getEAttribute() != ""){
+		var language = new SysMini!AttributeUsage;
+		language.featureNote.add(":>>");
+		language.featureSpecialization.add("language");
+		language.valuePart = s.language.getEAttribute();
+		t.body.add(language);
+		}
+	}
+
+@lazy
+rule CorrelationSubscription
+	transform s : DSL!CorrelationSubscription
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule CorrelationPropertyBinding
+	transform s : DSL!CorrelationPropertyBinding
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule GlobalManualTask
+	transform s : DSL!GlobalManualTask
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ManualTask
+	transform s : DSL!ManualTask
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Task
+	transform s : DSL!Task
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Activity
+	transform s : DSL!Activity
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.isForCompensation.getEAttribute() != ""){
+		var isForCompensation = new SysMini!AttributeUsage;
+		isForCompensation.featureNote.add(":>>");
+		isForCompensation.featureSpecialization.add("isForCompensation");
+		isForCompensation.valuePart = s.isForCompensation.getEAttribute();
+		t.body.add(isForCompensation);
+		}
+	if (s.startQuantity.getEAttribute() != ""){
+		var startQuantity = new SysMini!AttributeUsage;
+		startQuantity.featureNote.add(":>>");
+		startQuantity.featureSpecialization.add("startQuantity");
+		startQuantity.valuePart = s.startQuantity.getEAttribute();
+		t.body.add(startQuantity);
+		}
+	if (s.completionQuantity.getEAttribute() != ""){
+		var completionQuantity = new SysMini!AttributeUsage;
+		completionQuantity.featureNote.add(":>>");
+		completionQuantity.featureSpecialization.add("completionQuantity");
+		completionQuantity.valuePart = s.completionQuantity.getEAttribute();
+		t.body.add(completionQuantity);
+		}
+	}
+
+@lazy
+rule LoopCharacteristics
+	transform s : DSL!LoopCharacteristics
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule BoundaryEvent
+	transform s : DSL!BoundaryEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.cancelActivity.getEAttribute() != ""){
+		var cancelActivity = new SysMini!AttributeUsage;
+		cancelActivity.featureNote.add(":>>");
+		cancelActivity.featureSpecialization.add("cancelActivity");
+		cancelActivity.valuePart = s.cancelActivity.getEAttribute();
+		t.body.add(cancelActivity);
+		}
+	}
+
+@lazy
+rule CatchEvent
+	transform s : DSL!CatchEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.parallelMultiple.getEAttribute() != ""){
+		var parallelMultiple = new SysMini!AttributeUsage;
+		parallelMultiple.featureNote.add(":>>");
+		parallelMultiple.featureSpecialization.add("parallelMultiple");
+		parallelMultiple.valuePart = s.parallelMultiple.getEAttribute();
+		t.body.add(parallelMultiple);
+		}
+	}
+
+@lazy
+rule Event
+	transform s : DSL!Event
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule EventDefinition
+	transform s : DSL!EventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule DataOutputAssociation
+	transform s : DSL!DataOutputAssociation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule DataAssociation
+	transform s : DSL!DataAssociation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Assignment
+	transform s : DSL!Assignment
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule DataInputAssociation
+	transform s : DSL!DataInputAssociation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule UserTask
+	transform s : DSL!UserTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	}
+
+@lazy
+rule Rendering
+	transform s : DSL!Rendering
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule HumanPerformer
+	transform s : DSL!HumanPerformer
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule PotentialOwner
+	transform s : DSL!PotentialOwner
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule GlobalUserTask
+	transform s : DSL!GlobalUserTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	}
+
+@lazy
+rule Gateway
+	transform s : DSL!Gateway
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.gatewayDirection.getEAttribute() != ""){
+		var gatewayDirection = new SysMini!AttributeUsage;
+		gatewayDirection.featureNote.add(":>>");
+		gatewayDirection.featureSpecialization.add("gatewayDirection");
+		gatewayDirection.valuePart = s.gatewayDirection.getEAttribute();
+		t.body.add(gatewayDirection);
+		}
+	}
+
+@lazy
+rule EventBasedGateway
+	transform s : DSL!EventBasedGateway
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.instantiate.getEAttribute() != ""){
+		var instantiate = new SysMini!AttributeUsage;
+		instantiate.featureNote.add(":>>");
+		instantiate.featureSpecialization.add("instantiate");
+		instantiate.valuePart = s.instantiate.getEAttribute();
+		t.body.add(instantiate);
+		}
+	if (s.eventGatewayType.getEAttribute() != ""){
+		var eventGatewayType = new SysMini!AttributeUsage;
+		eventGatewayType.featureNote.add(":>>");
+		eventGatewayType.featureSpecialization.add("eventGatewayType");
+		eventGatewayType.valuePart = s.eventGatewayType.getEAttribute();
+		t.body.add(eventGatewayType);
+		}
+	}
+
+@lazy
+rule ComplexGateway
+	transform s : DSL!ComplexGateway
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ExclusiveGateway
+	transform s : DSL!ExclusiveGateway
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule InclusiveGateway
+	transform s : DSL!InclusiveGateway
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ParallelGateway
+	transform s : DSL!ParallelGateway
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Relationship
+	transform s : DSL!Relationship
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.type.getEAttribute() != ""){
+		var type = new SysMini!AttributeUsage;
+		type.featureNote.add(":>>");
+		type.featureSpecialization.add("type");
+		type.valuePart = s.type.getEAttribute();
+		t.body.add(type);
+		}
+	if (s.direction.getEAttribute() != ""){
+		var direction = new SysMini!AttributeUsage;
+		direction.featureNote.add(":>>");
+		direction.featureSpecialization.add("direction");
+		direction.valuePart = s.direction.getEAttribute();
+		t.body.add(direction);
+		}
+	}
+
+@lazy
+rule Extension
+	transform s : DSL!Extension
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.mustUnderstand.getEAttribute() != ""){
+		var mustUnderstand = new SysMini!AttributeUsage;
+		mustUnderstand.featureNote.add(":>>");
+		mustUnderstand.featureSpecialization.add("mustUnderstand");
+		mustUnderstand.valuePart = s.mustUnderstand.getEAttribute();
+		t.body.add(mustUnderstand);
+		}
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule IntermediateCatchEvent
+	transform s : DSL!IntermediateCatchEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule IntermediateThrowEvent
+	transform s : DSL!IntermediateThrowEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ThrowEvent
+	transform s : DSL!ThrowEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule EndEvent
+	transform s : DSL!EndEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule StartEvent
+	transform s : DSL!StartEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.isInterrupting.getEAttribute() != ""){
+		var isInterrupting = new SysMini!AttributeUsage;
+		isInterrupting.featureNote.add(":>>");
+		isInterrupting.featureSpecialization.add("isInterrupting");
+		isInterrupting.valuePart = s.isInterrupting.getEAttribute();
+		t.body.add(isInterrupting);
+		}
+	}
+
+@lazy
+rule CancelEventDefinition
+	transform s : DSL!CancelEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ErrorEventDefinition
+	transform s : DSL!ErrorEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule TerminateEventDefinition
+	transform s : DSL!TerminateEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule EscalationEventDefinition
+	transform s : DSL!EscalationEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Escalation
+	transform s : DSL!Escalation
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.escalationCode.getEAttribute() != ""){
+		var escalationCode = new SysMini!AttributeUsage;
+		escalationCode.featureNote.add(":>>");
+		escalationCode.featureSpecialization.add("escalationCode");
+		escalationCode.valuePart = s.escalationCode.getEAttribute();
+		t.body.add(escalationCode);
+		}
+	if (s.id.getEAttribute() != ""){
+		var id = new SysMini!AttributeUsage;
+		id.featureNote.add(":>>");
+		id.featureSpecialization.add("id");
+		id.valuePart = s.id.getEAttribute();
+		t.body.add(id);
+		}
+	}
+
+@lazy
+rule CompensateEventDefinition
+	transform s : DSL!CompensateEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.waitForCompletion.getEAttribute() != ""){
+		var waitForCompletion = new SysMini!AttributeUsage;
+		waitForCompletion.featureNote.add(":>>");
+		waitForCompletion.featureSpecialization.add("waitForCompletion");
+		waitForCompletion.valuePart = s.waitForCompletion.getEAttribute();
+		t.body.add(waitForCompletion);
+		}
+	}
+
+@lazy
+rule TimerEventDefinition
+	transform s : DSL!TimerEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule LinkEventDefinition
+	transform s : DSL!LinkEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule MessageEventDefinition
+	transform s : DSL!MessageEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ConditionalEventDefinition
+	transform s : DSL!ConditionalEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule SignalEventDefinition
+	transform s : DSL!SignalEventDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Signal
+	transform s : DSL!Signal
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ImplicitThrowEvent
+	transform s : DSL!ImplicitThrowEvent
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule DataObject
+	transform s : DSL!DataObject
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.isCollection.getEAttribute() != ""){
+		var isCollection = new SysMini!AttributeUsage;
+		isCollection.featureNote.add(":>>");
+		isCollection.featureSpecialization.add("isCollection");
+		isCollection.valuePart = s.isCollection.getEAttribute();
+		t.body.add(isCollection);
+		}
+	}
+
+@lazy
+rule DataStore
+	transform s : DSL!DataStore
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.capacity.getEAttribute() != ""){
+		var capacity = new SysMini!AttributeUsage;
+		capacity.featureNote.add(":>>");
+		capacity.featureSpecialization.add("capacity");
+		capacity.valuePart = s.capacity.getEAttribute();
+		t.body.add(capacity);
+		}
+	if (s.isUnlimited.getEAttribute() != ""){
+		var isUnlimited = new SysMini!AttributeUsage;
+		isUnlimited.featureNote.add(":>>");
+		isUnlimited.featureSpecialization.add("isUnlimited");
+		isUnlimited.valuePart = s.isUnlimited.getEAttribute();
+		t.body.add(isUnlimited);
+		}
+	}
+
+@lazy
+rule DataStoreReference
+	transform s : DSL!DataStoreReference
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule DataObjectReference
+	transform s : DSL!DataObjectReference
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule CallConversation
+	transform s : DSL!CallConversation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Conversation
+	transform s : DSL!Conversation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule SubConversation
+	transform s : DSL!SubConversation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule GlobalConversation
+	transform s : DSL!GlobalConversation
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule PartnerEntity
+	transform s : DSL!PartnerEntity
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule PartnerRole
+	transform s : DSL!PartnerRole
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ChoreographyActivity
+	transform s : DSL!ChoreographyActivity
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.loopType.getEAttribute() != ""){
+		var loopType = new SysMini!AttributeUsage;
+		loopType.featureNote.add(":>>");
+		loopType.featureSpecialization.add("loopType");
+		loopType.valuePart = s.loopType.getEAttribute();
+		t.body.add(loopType);
+		}
+	}
+
+@lazy
+rule CallChoreography
+	transform s : DSL!CallChoreography
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule SubChoreography
+	transform s : DSL!SubChoreography
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule ChoreographyTask
+	transform s : DSL!ChoreographyTask
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule GlobalChoreographyTask
+	transform s : DSL!GlobalChoreographyTask
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule TextAnnotation
+	transform s : DSL!TextAnnotation
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.text.getEAttribute() != ""){
+		var text = new SysMini!AttributeUsage;
+		text.featureNote.add(":>>");
+		text.featureSpecialization.add("text");
+		text.valuePart = s.text.getEAttribute();
+		t.body.add(text);
+		}
+	if (s.textFormat.getEAttribute() != ""){
+		var textFormat = new SysMini!AttributeUsage;
+		textFormat.featureNote.add(":>>");
+		textFormat.featureSpecialization.add("textFormat");
+		textFormat.valuePart = s.textFormat.getEAttribute();
+		t.body.add(textFormat);
+		}
+	}
+
+@lazy
+rule Group
+	transform s : DSL!Group
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule Association
+	transform s : DSL!Association
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.associationDirection.getEAttribute() != ""){
+		var associationDirection = new SysMini!AttributeUsage;
+		associationDirection.featureNote.add(":>>");
+		associationDirection.featureSpecialization.add("associationDirection");
+		associationDirection.valuePart = s.associationDirection.getEAttribute();
+		t.body.add(associationDirection);
+		}
+	}
+
+@lazy
+rule Category
+	transform s : DSL!Category
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	}
+
+@lazy
+rule ServiceTask
+	transform s : DSL!ServiceTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	}
+
+@lazy
+rule SubProcess
+	transform s : DSL!SubProcess
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.triggeredByEvent.getEAttribute() != ""){
+		var triggeredByEvent = new SysMini!AttributeUsage;
+		triggeredByEvent.featureNote.add(":>>");
+		triggeredByEvent.featureSpecialization.add("triggeredByEvent");
+		triggeredByEvent.valuePart = s.triggeredByEvent.getEAttribute();
+		t.body.add(triggeredByEvent);
+		}
+	}
+
+@lazy
+rule MultiInstanceLoopCharacteristics
+	transform s : DSL!MultiInstanceLoopCharacteristics
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.isSequential.getEAttribute() != ""){
+		var isSequential = new SysMini!AttributeUsage;
+		isSequential.featureNote.add(":>>");
+		isSequential.featureSpecialization.add("isSequential");
+		isSequential.valuePart = s.isSequential.getEAttribute();
+		t.body.add(isSequential);
+		}
+	if (s.behavior.getEAttribute() != ""){
+		var behavior = new SysMini!AttributeUsage;
+		behavior.featureNote.add(":>>");
+		behavior.featureSpecialization.add("behavior");
+		behavior.valuePart = s.behavior.getEAttribute();
+		t.body.add(behavior);
+		}
+	}
+
+@lazy
+rule ComplexBehaviorDefinition
+	transform s : DSL!ComplexBehaviorDefinition
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule StandardLoopCharacteristics
+	transform s : DSL!StandardLoopCharacteristics
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.testBefore.getEAttribute() != ""){
+		var testBefore = new SysMini!AttributeUsage;
+		testBefore.featureNote.add(":>>");
+		testBefore.featureSpecialization.add("testBefore");
+		testBefore.valuePart = s.testBefore.getEAttribute();
+		t.body.add(testBefore);
+		}
+	}
+
+@lazy
+rule CallActivity
+	transform s : DSL!CallActivity
+	to t : SysMini!PartUsage
+	extends Base{
+	}
+
+@lazy
+rule SendTask
+	transform s : DSL!SendTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	}
+
+@lazy
+rule ReceiveTask
+	transform s : DSL!ReceiveTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	if (s.instantiate.getEAttribute() != ""){
+		var instantiate = new SysMini!AttributeUsage;
+		instantiate.featureNote.add(":>>");
+		instantiate.featureSpecialization.add("instantiate");
+		instantiate.valuePart = s.instantiate.getEAttribute();
+		t.body.add(instantiate);
+		}
+	}
+
+@lazy
+rule ScriptTask
+	transform s : DSL!ScriptTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.scriptFormat.getEAttribute() != ""){
+		var scriptFormat = new SysMini!AttributeUsage;
+		scriptFormat.featureNote.add(":>>");
+		scriptFormat.featureSpecialization.add("scriptFormat");
+		scriptFormat.valuePart = s.scriptFormat.getEAttribute();
+		t.body.add(scriptFormat);
+		}
+	if (s.script.getEAttribute() != ""){
+		var script = new SysMini!AttributeUsage;
+		script.featureNote.add(":>>");
+		script.featureSpecialization.add("script");
+		script.valuePart = s.script.getEAttribute();
+		t.body.add(script);
+		}
+	}
+
+@lazy
+rule BusinessRuleTask
+	transform s : DSL!BusinessRuleTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	}
+
+@lazy
+rule AdHocSubProcess
+	transform s : DSL!AdHocSubProcess
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.ordering.getEAttribute() != ""){
+		var ordering = new SysMini!AttributeUsage;
+		ordering.featureNote.add(":>>");
+		ordering.featureSpecialization.add("ordering");
+		ordering.valuePart = s.ordering.getEAttribute();
+		t.body.add(ordering);
+		}
+	if (s.cancelRemainingInstances.getEAttribute() != ""){
+		var cancelRemainingInstances = new SysMini!AttributeUsage;
+		cancelRemainingInstances.featureNote.add(":>>");
+		cancelRemainingInstances.featureSpecialization.add("cancelRemainingInstances");
+		cancelRemainingInstances.valuePart = s.cancelRemainingInstances.getEAttribute();
+		t.body.add(cancelRemainingInstances);
+		}
+	}
+
+@lazy
+rule Transaction
+	transform s : DSL!Transaction
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.protocol.getEAttribute() != ""){
+		var protocol = new SysMini!AttributeUsage;
+		protocol.featureNote.add(":>>");
+		protocol.featureSpecialization.add("protocol");
+		protocol.valuePart = s.protocol.getEAttribute();
+		t.body.add(protocol);
+		}
+	if (s.method.getEAttribute() != ""){
+		var method = new SysMini!AttributeUsage;
+		method.featureNote.add(":>>");
+		method.featureSpecialization.add("method");
+		method.valuePart = s.method.getEAttribute();
+		t.body.add(method);
+		}
+	}
+
+@lazy
+rule GlobalScriptTask
+	transform s : DSL!GlobalScriptTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.scriptLanguage.getEAttribute() != ""){
+		var scriptLanguage = new SysMini!AttributeUsage;
+		scriptLanguage.featureNote.add(":>>");
+		scriptLanguage.featureSpecialization.add("scriptLanguage");
+		scriptLanguage.valuePart = s.scriptLanguage.getEAttribute();
+		t.body.add(scriptLanguage);
+		}
+	if (s.script.getEAttribute() != ""){
+		var script = new SysMini!AttributeUsage;
+		script.featureNote.add(":>>");
+		script.featureSpecialization.add("script");
+		script.valuePart = s.script.getEAttribute();
+		t.body.add(script);
+		}
+	}
+
+@lazy
+rule GlobalBusinessRuleTask
+	transform s : DSL!GlobalBusinessRuleTask
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.implementation.getEAttribute() != ""){
+		var implementation = new SysMini!AttributeUsage;
+		implementation.featureNote.add(":>>");
+		implementation.featureSpecialization.add("implementation");
+		implementation.valuePart = s.implementation.getEAttribute();
+		t.body.add(implementation);
+		}
+	}
+
+@lazy
+rule Definitions
+	transform s : DSL!Definitions
+	to t : SysMini!PartUsage
+	extends Base{
+	if (s.name.getEAttribute() != ""){
+		var name = new SysMini!AttributeUsage;
+		name.featureNote.add(":>>");
+		name.featureSpecialization.add("name");
+		name.valuePart = s.name.getEAttribute();
+		t.body.add(name);
+		}
+	if (s.targetNamespace.getEAttribute() != ""){
+		var targetNamespace = new SysMini!AttributeUsage;
+		targetNamespace.featureNote.add(":>>");
+		targetNamespace.featureSpecialization.add("targetNamespace");
+		targetNamespace.valuePart = s.targetNamespace.getEAttribute();
+		t.body.add(targetNamespace);
+		}
+	if (s.expressionLanguage.getEAttribute() != ""){
+		var expressionLanguage = new SysMini!AttributeUsage;
+		expressionLanguage.featureNote.add(":>>");
+		expressionLanguage.featureSpecialization.add("expressionLanguage");
+		expressionLanguage.valuePart = s.expressionLanguage.getEAttribute();
+		t.body.add(expressionLanguage);
+		}
+	if (s.typeLanguage.getEAttribute() != ""){
+		var typeLanguage = new SysMini!AttributeUsage;
+		typeLanguage.featureNote.add(":>>");
+		typeLanguage.featureSpecialization.add("typeLanguage");
+		typeLanguage.valuePart = s.typeLanguage.getEAttribute();
+		t.body.add(typeLanguage);
+		}
+	if (s.exporter.getEAttribute() != ""){
+		var exporter = new SysMini!AttributeUsage;
+		exporter.featureNote.add(":>>");
+		exporter.featureSpecialization.add("exporter");
+		exporter.valuePart = s.exporter.getEAttribute();
+		t.body.add(exporter);
+		}
+	if (s.exporterVersion.getEAttribute() != ""){
+		var exporterVersion = new SysMini!AttributeUsage;
+		exporterVersion.featureNote.add(":>>");
+		exporterVersion.featureSpecialization.add("exporterVersion");
+		exporterVersion.valuePart = s.exporterVersion.getEAttribute();
+		t.body.add(exporterVersion);
+		}
+	}
+
+
