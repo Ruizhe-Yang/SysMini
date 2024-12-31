@@ -5,9 +5,6 @@ operation DSL!EObject addNodeTo(rootNode : SysMini!Element){
 		for (child in self.eContents()){
 			child.addNodeTo(node);
 		}
-//		for (childERefference in self.eAllStructuralFeatures.select(s|s.type().name == "ERefference")){
-//			
-//		}
 	}
 }
 

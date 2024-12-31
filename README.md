@@ -6,8 +6,9 @@
 ## 已完成的关键节点
 
 - 单个sysml转xmini
-- emf、etl、egl的主体架构定型
-- 大多数转换
+- 各个emf、etl、egl的主体架构定型
+- SysMini和SysML大多数转换
+- 以BPMN模型为例，实现了自动化DSL2SysML转换
 
 ### 改动
 

@@ -12,3 +12,10 @@ operation String clearKeyWord(i){
 		return self;
 	}
 }
+
+operation Ecore!EPackage main(){ 
+	var eClassSequence = root.eClassifiers.select(s|s.type().name == "EClass");
+	for (eClass in eClassSequence){
+		eClass.writeEClass();
+	} 
+}
