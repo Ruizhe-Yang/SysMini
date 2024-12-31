@@ -14,6 +14,10 @@
         <featureNote>:>></featureNote>
         <featureSpecialization>typeLanguage</featureSpecialization>
       </body>
+      <body xsi:type="PartUsage" valuePart="(Process_1, Collaboration_1)" isReference="true">
+        <featureNote>:></featureNote>
+        <featureSpecialization>rootElements</featureSpecialization>
+      </body>
       <body xsi:type="PartUsage" declaredName="Process_1">
         <body xsi:type="AttributeUsage" valuePart="&quot;_VgLhQKjBEeK_xvwrSf5u4w&quot;">
           <featureNote>:>></featureNote>
@@ -23,9 +27,13 @@
           <featureNote>:>></featureNote>
           <featureSpecialization>name</featureSpecialization>
         </body>
-        <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=None, value=0, instance=None, literal=None, ]">
-          <featureNote>:>></featureNote>
-          <featureSpecialization>processType</featureSpecialization>
+        <body xsi:type="PartUsage" valuePart="(Task_1, SendTask_1, StartEvent_1, SequenceFlow_1, ParallelGateway_1, SequenceFlow_2, ManualTask_1, SequenceFlow_3, ManualTask_2, SequenceFlow_4, ManualTask_3, SequenceFlow_5, ParallelGateway_2, SequenceFlow_6, ManualTask_4, SequenceFlow_7, SequenceFlow_8, ManualTask_5, SequenceFlow_9, ManualTask_6, SequenceFlow_10, SequenceFlow_11, StartEvent_2, SequenceFlow_12, StartEvent_3, SequenceFlow_13, StartEvent_4, SequenceFlow_14, EventBasedGateway_1, SequenceFlow_15, SequenceFlow_16, SequenceFlow_17, SequenceFlow_18, ManualTask_7, SequenceFlow_19, ServiceTask_1, SequenceFlow_20, ScriptTask_1, SequenceFlow_21, EndEvent_1, SequenceFlow_22, StartEvent_5, SequenceFlow_23, EndEvent_2, BoundaryEvent_1, SequenceFlow_24, BoundaryEvent_2, BoundaryEvent_3, BoundaryEvent_4, BoundaryEvent_5, BoundaryEvent_6, StartEvent_6, Task_2, SequenceFlow_25, BoundaryEvent_7, SequenceFlow_26)" isReference="true">
+          <featureNote>:></featureNote>
+          <featureSpecialization>flowElements</featureSpecialization>
+        </body>
+        <body xsi:type="PartUsage" valuePart="(LaneSet_1, LaneSet_2)" isReference="true">
+          <featureNote>:></featureNote>
+          <featureSpecialization>laneSets</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="Task_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_yJjVcKjBEeK_xvwrSf5u4w&quot;">
@@ -44,8 +52,18 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="Lane_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>boundaryEventRefs</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>Task</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SendTask_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_yp_JAKjBEeK_xvwrSf5u4w&quot;">
@@ -64,8 +82,18 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="Lane_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>boundaryEventRefs</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SendTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="StartEvent_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_5F1LEKjBEeK_xvwrSf5u4w&quot;">
@@ -76,44 +104,86 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_1, SequenceFlow_2)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_1">
             <body xsi:type="AttributeUsage" valuePart="&quot;_5lGhAKjBEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>StartEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_6Y-N8KjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ParallelGateway_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_9dquAKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
-          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Unspecified, value=0, instance=Unspecified, literal=Unspecified, ]">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>gatewayDirection</featureSpecialization>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_3, SequenceFlow_4)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ParallelGateway</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_9drVEKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ParallelGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;__M0-gKjBEeK_xvwrSf5u4w&quot;">
@@ -132,16 +202,40 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_3">
           <body xsi:type="AttributeUsage" valuePart="&quot;__M1lkKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ParallelGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;__vFXAKjBEeK_xvwrSf5u4w&quot;">
@@ -160,16 +254,40 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_4">
           <body xsi:type="AttributeUsage" valuePart="&quot;__vF-EKjBEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ParallelGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_3">
           <body xsi:type="AttributeUsage" valuePart="&quot;_GvXi4KjCEeK_xvwrSf5u4w&quot;">
@@ -188,36 +306,84 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>boundaryEventRefs</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_5">
           <body xsi:type="AttributeUsage" valuePart="&quot;_GvYJ8KjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ParallelGateway_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_H5i3AKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
-          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Unspecified, value=0, instance=Unspecified, literal=Unspecified, ]">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>gatewayDirection</featureSpecialization>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_9" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_6, SequenceFlow_8)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ParallelGateway</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_6">
           <body xsi:type="AttributeUsage" valuePart="&quot;_H5jeEKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ParallelGateway_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_4">
           <body xsi:type="AttributeUsage" valuePart="&quot;_JAQncKjCEeK_xvwrSf5u4w&quot;">
@@ -236,24 +402,58 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_8" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_7">
           <body xsi:type="AttributeUsage" valuePart="&quot;_JAR1kKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_8">
           <body xsi:type="AttributeUsage" valuePart="&quot;_Lmr3IKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ParallelGateway_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_5">
           <body xsi:type="AttributeUsage" valuePart="&quot;_QD63cKjCEeK_xvwrSf5u4w&quot;">
@@ -272,16 +472,40 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_10" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_9" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_9">
           <body xsi:type="AttributeUsage" valuePart="&quot;_QD8FkKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ParallelGateway_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_6">
           <body xsi:type="AttributeUsage" valuePart="&quot;_REim8KjCEeK_xvwrSf5u4w&quot;">
@@ -300,24 +524,54 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_11, SequenceFlow_15)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_10" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_10">
           <body xsi:type="AttributeUsage" valuePart="&quot;_REj1EKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_11">
           <body xsi:type="AttributeUsage" valuePart="&quot;_VNq_gajCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="StartEvent_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_fl4wgKjCEeK_xvwrSf5u4w&quot;">
@@ -328,24 +582,50 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_19" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_12, SequenceFlow_16)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_2">
             <body xsi:type="AttributeUsage" valuePart="&quot;_1pBQgKjCEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>StartEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_12">
           <body xsi:type="AttributeUsage" valuePart="&quot;_fl5XkKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="StartEvent_3">
           <body xsi:type="AttributeUsage" valuePart="&quot;_gLpI8KjCEeK_xvwrSf5u4w&quot;">
@@ -356,24 +636,50 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_21" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_13, SequenceFlow_18)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_3">
             <body xsi:type="AttributeUsage" valuePart="&quot;_2nV58KjCEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>StartEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_13">
           <body xsi:type="AttributeUsage" valuePart="&quot;_gLpwAKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="StartEvent_4">
           <body xsi:type="AttributeUsage" valuePart="&quot;_gsrZcKjCEeK_xvwrSf5u4w&quot;">
@@ -384,72 +690,144 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_20" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_14, SequenceFlow_17)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="TimerEventDefinition_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="TimerEventDefinition_1">
             <body xsi:type="AttributeUsage" valuePart="&quot;_2KgM8KjCEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>TimerEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>StartEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_14">
           <body xsi:type="AttributeUsage" valuePart="&quot;_gssAgKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="EventBasedGateway_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_mKHSgKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
-          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Unspecified, value=0, instance=Unspecified, literal=Unspecified, ]">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>gatewayDirection</featureSpecialization>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_16, SequenceFlow_17, SequenceFlow_18)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
           </body>
-          <body xsi:type="AttributeUsage" valuePart="EEnumLiteral [name=Parallel, value=0, instance=Parallel, literal=Parallel, ]">
-            <featureNote>:>></featureNote>
-            <featureSpecialization>eventGatewayType</featureSpecialization>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_15" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>EventBasedGateway</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_15">
           <body xsi:type="AttributeUsage" valuePart="&quot;_nVHtEKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="EventBasedGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_16">
           <body xsi:type="AttributeUsage" valuePart="&quot;_n03kIKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="EventBasedGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_17">
           <body xsi:type="AttributeUsage" valuePart="&quot;_oNSrMKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="EventBasedGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_18">
           <body xsi:type="AttributeUsage" valuePart="&quot;_onOOIKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="EventBasedGateway_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ManualTask_7">
           <body xsi:type="AttributeUsage" valuePart="&quot;_wHPC8KjCEeK_xvwrSf5u4w&quot;">
@@ -468,16 +846,44 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_23" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_19" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(BoundaryEvent_1, BoundaryEvent_4)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>boundaryEventRefs</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ManualTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_19">
           <body xsi:type="AttributeUsage" valuePart="&quot;_wHPqAKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ServiceTask_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_xgIIgKjCEeK_xvwrSf5u4w&quot;">
@@ -496,16 +902,44 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_26" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_20, SequenceFlow_24)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>boundaryEventRefs</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ServiceTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_20">
           <body xsi:type="AttributeUsage" valuePart="&quot;_xgIvkKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ServiceTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="ScriptTask_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_zJLxAKjCEeK_xvwrSf5u4w&quot;">
@@ -524,32 +958,76 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_22" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="(SequenceFlow_21, SequenceFlow_26)" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>ScriptTask</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_21">
           <body xsi:type="AttributeUsage" valuePart="&quot;_zJMYEKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ScriptTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="EndEvent_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_4iFvYKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_22" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>EndEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_22">
           <body xsi:type="AttributeUsage" valuePart="&quot;_4iGWcKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="EndEvent_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ScriptTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="StartEvent_5">
           <body xsi:type="AttributeUsage" valuePart="&quot;_6bfhAKjCEeK_xvwrSf5u4w&quot;">
@@ -560,32 +1038,64 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_23" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="LinkEventDefinition_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="LinkEventDefinition_1">
             <body xsi:type="AttributeUsage" valuePart="&quot;_7pEucKjCEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>LinkEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>StartEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_23">
           <body xsi:type="AttributeUsage" valuePart="&quot;_6bgIEKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="EndEvent_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;__GfQgKjCEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="Lane_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>EndEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_G5c2gKjDEeK_xvwrSf5u4w&quot;">
@@ -596,24 +1106,50 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_24" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="TimerEventDefinition_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="TimerEventDefinition_2">
             <body xsi:type="AttributeUsage" valuePart="&quot;_KEJ38KjDEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>TimerEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_24">
           <body xsi:type="AttributeUsage" valuePart="&quot;_NNqmkKjDEeK_xvwrSf5u4w&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ServiceTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_e_FH0KjFEeKByZYE3SKnNQ&quot;">
@@ -624,16 +1160,28 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ServiceTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_4">
             <body xsi:type="AttributeUsage" valuePart="&quot;_f9mlkKjFEeKByZYE3SKnNQ&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_3">
           <body xsi:type="AttributeUsage" valuePart="&quot;_mePoEKjFEeKByZYE3SKnNQ&quot;">
@@ -644,16 +1192,28 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SendTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_5">
             <body xsi:type="AttributeUsage" valuePart="&quot;_oUjXgKjHEeKfxP_htjREQQ&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_4">
           <body xsi:type="AttributeUsage" valuePart="&quot;_vjRoAKjHEeKfxP_htjREQQ&quot;">
@@ -664,16 +1224,28 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_6">
             <body xsi:type="AttributeUsage" valuePart="&quot;_wZXigKjHEeKfxP_htjREQQ&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_5">
           <body xsi:type="AttributeUsage" valuePart="&quot;_7e0soKjKEeKSNoCYL5SGfQ&quot;">
@@ -684,16 +1256,28 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Task_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_7">
             <body xsi:type="AttributeUsage" valuePart="&quot;_8Yp3oKjKEeKSNoCYL5SGfQ&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_6">
           <body xsi:type="AttributeUsage" valuePart="&quot;_9F0foKjKEeKSNoCYL5SGfQ&quot;">
@@ -704,16 +1288,28 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_8" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_8">
             <body xsi:type="AttributeUsage" valuePart="&quot;_91khkKjKEeKSNoCYL5SGfQ&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="StartEvent_6">
           <body xsi:type="AttributeUsage" valuePart="&quot;_5Jf-kKjLEeKSNoCYL5SGfQ&quot;">
@@ -724,8 +1320,18 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>isInterrupting</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_25" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>outgoing</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>StartEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="Task_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_52XEkKjLEeKSNoCYL5SGfQ&quot;">
@@ -744,16 +1350,40 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>completionQuantity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="SequenceFlow_25" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>incoming</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Lane_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>boundaryEventRefs</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>Task</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_25">
           <body xsi:type="AttributeUsage" valuePart="&quot;_52aH4KjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="Task_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="BoundaryEvent_7">
           <body xsi:type="AttributeUsage" valuePart="&quot;_9_kVoKjLEeKSNoCYL5SGfQ&quot;">
@@ -764,24 +1394,46 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>cancelActivity</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="MessageEventDefinition_9" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Task_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>attachedToRef</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="MessageEventDefinition_9">
             <body xsi:type="AttributeUsage" valuePart="&quot;_-ZlYIKjLEeKSNoCYL5SGfQ&quot;">
               <featureNote>:>></featureNote>
               <featureSpecialization>id</featureSpecialization>
             </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>MessageEventDefinition</featureSpecialization>
+            <featureSpecialization>eventDefinitions</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>BoundaryEvent</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="SequenceFlow_26">
           <body xsi:type="AttributeUsage" valuePart="&quot;_LKKcwKjOEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="ScriptTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ServiceTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>SequenceFlow</featureSpecialization>
+          <featureSpecialization>flowElements</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="LaneSet_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_bnUeoKjBEeK_xvwrSf5u4w&quot;">
@@ -792,6 +1444,10 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>name</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="Lane_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="Lane_1">
             <body xsi:type="AttributeUsage" valuePart="&quot;_bnYJAKjBEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
@@ -801,11 +1457,19 @@
               <featureNote>:>></featureNote>
               <featureSpecialization>name</featureSpecialization>
             </body>
+            <body xsi:type="PartUsage" valuePart="(Task_1, SendTask_1, EndEvent_2, StartEvent_6, Task_2)" isReference="true">
+              <featureNote>:></featureNote>
+              <featureSpecialization>flowNodeRefs</featureSpecialization>
+            </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>Lane</featureSpecialization>
+            <featureSpecialization>lanes</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>LaneSet</featureSpecialization>
+          <featureSpecialization>laneSets</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="LaneSet_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_gxuG8KjBEeK_xvwrSf5u4w&quot;">
@@ -816,6 +1480,10 @@
             <featureNote>:>></featureNote>
             <featureSpecialization>name</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="Lane_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>lanes</featureSpecialization>
+          </body>
           <body xsi:type="PartUsage" declaredName="Lane_2">
             <body xsi:type="AttributeUsage" valuePart="&quot;_gxuuAKjBEeK_xvwrSf5u4w&quot;">
               <featureNote>:>></featureNote>
@@ -825,70 +1493,146 @@
               <featureNote>:>></featureNote>
               <featureSpecialization>name</featureSpecialization>
             </body>
+            <body xsi:type="PartUsage" valuePart="(StartEvent_1, ParallelGateway_1, ManualTask_1, ManualTask_2, ManualTask_3, ParallelGateway_2, ManualTask_4, ManualTask_5, ManualTask_6, StartEvent_2, StartEvent_3, StartEvent_4, EventBasedGateway_1, ManualTask_7, ServiceTask_1, ScriptTask_1, EndEvent_1, StartEvent_5)" isReference="true">
+              <featureNote>:></featureNote>
+              <featureSpecialization>flowNodeRefs</featureSpecialization>
+            </body>
             <featureNote>:</featureNote>
+            <featureNote>:></featureNote>
             <featureSpecialization>Lane</featureSpecialization>
+            <featureSpecialization>lanes</featureSpecialization>
           </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>LaneSet</featureSpecialization>
+          <featureSpecialization>laneSets</featureSpecialization>
         </body>
         <featureNote>:</featureNote>
+        <featureNote>:></featureNote>
         <featureSpecialization>Process</featureSpecialization>
+        <featureSpecialization>rootElements</featureSpecialization>
       </body>
       <body xsi:type="PartUsage" declaredName="Collaboration_1">
         <body xsi:type="AttributeUsage" valuePart="&quot;_mzUyIKjDEeK_xvwrSf5u4w&quot;">
           <featureNote>:>></featureNote>
           <featureSpecialization>id</featureSpecialization>
         </body>
+        <body xsi:type="PartUsage" valuePart="(MessageFlow_1, MessageFlow_2, MessageFlow_3, MessageFlow_4, MessageFlow_5, MessageFlow_6)" isReference="true">
+          <featureNote>:></featureNote>
+          <featureSpecialization>messageFlows</featureSpecialization>
+        </body>
         <body xsi:type="PartUsage" declaredName="MessageFlow_1">
           <body xsi:type="AttributeUsage" valuePart="&quot;_7LA_0KjKEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_6" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="Task_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>MessageFlow</featureSpecialization>
+          <featureSpecialization>messageFlows</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="MessageFlow_2">
           <body xsi:type="AttributeUsage" valuePart="&quot;_CF0OwKjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_5" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>MessageFlow</featureSpecialization>
+          <featureSpecialization>messageFlows</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="MessageFlow_3">
           <body xsi:type="AttributeUsage" valuePart="&quot;_Ns60wKjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_4" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="SendTask_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>MessageFlow</featureSpecialization>
+          <featureSpecialization>messageFlows</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="MessageFlow_4">
           <body xsi:type="AttributeUsage" valuePart="&quot;_Oci64KjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_3" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="ManualTask_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>MessageFlow</featureSpecialization>
+          <featureSpecialization>messageFlows</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="MessageFlow_5">
           <body xsi:type="AttributeUsage" valuePart="&quot;_YXW-MKjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="EndEvent_2" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>MessageFlow</featureSpecialization>
+          <featureSpecialization>messageFlows</featureSpecialization>
         </body>
         <body xsi:type="PartUsage" declaredName="MessageFlow_6">
           <body xsi:type="AttributeUsage" valuePart="&quot;__TvTQKjLEeKSNoCYL5SGfQ&quot;">
             <featureNote>:>></featureNote>
             <featureSpecialization>id</featureSpecialization>
           </body>
+          <body xsi:type="PartUsage" valuePart="BoundaryEvent_7" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>sourceRef</featureSpecialization>
+          </body>
+          <body xsi:type="PartUsage" valuePart="StartEvent_1" isReference="true">
+            <featureNote>:></featureNote>
+            <featureSpecialization>targetRef</featureSpecialization>
+          </body>
           <featureNote>:</featureNote>
+          <featureNote>:></featureNote>
           <featureSpecialization>MessageFlow</featureSpecialization>
+          <featureSpecialization>messageFlows</featureSpecialization>
         </body>
         <featureNote>:</featureNote>
+        <featureNote>:></featureNote>
         <featureSpecialization>Collaboration</featureSpecialization>
+        <featureSpecialization>rootElements</featureSpecialization>
       </body>
       <featureNote>:</featureNote>
       <featureSpecialization>Definitions</featureSpecialization>

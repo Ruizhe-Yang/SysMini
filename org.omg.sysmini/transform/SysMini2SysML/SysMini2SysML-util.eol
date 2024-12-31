@@ -1278,10 +1278,18 @@ operation SysMini!Feature FeatureDeclaration() : String {
 }
 
 operation SysMini!Feature FeatureSpecializationPart() : String {
-	return self.multiplicityRange.space() + 
-			self.featureNote.getSequence().space() +
-			self.featureSpecialization.getSequence().space();
-//			self.featureSpecialization.withQuotationMarks().space();
+	var str = "";
+	if (self.featureNote.size() > 1){
+		str += self.multiplicityRange.space();
+	}
+	for (i in 1.to(self.featureNote.size())){
+		str += self.featureNote.at(i-1).space();
+		str += self.featureSpecialization.at(i-1).space();
+	}
+	if (self.featureNote.size() == 1){
+		str += self.multiplicityRange.space();
+	}
+	return str;
 }
 
 operation Any getSequence(): String{

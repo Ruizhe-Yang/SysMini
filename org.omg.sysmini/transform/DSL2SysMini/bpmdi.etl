@@ -4,6 +4,7 @@ pre{
 	"------------------ ETL Start ------------------".println();
 	var eObjectSequence = new Sequence;
 	var eEReferenceSequence = new Sequence;
+	var KeyWords = Sequence{"default", "event", "value", "import", "language", "from", "to", "interface"};
 	init_bpmdi();
 	main_bpmdi();
 }
@@ -148,6 +149,10 @@ rule Base
 	t.declaredName = s.getDeclaredName();
 	t.featureNote.add(":");
 	t.featureSpecialization.add(s.getfeatureSpecialization());
+	if (s.eContainingFeature != null and s.eContainingFeature.name != null){
+		t.featureNote.add(":>");
+		t.featureSpecialization.add(s.eContainingFeature().name);
+	}
 }
 	
 @lazy
@@ -155,6 +160,62 @@ rule BPMNPlane
 	transform s : DSL!BPMNPlane
 	to t : SysMini!PartUsage
 	extends Base{
+	if (s.owningDiagram.getEReference() != null){
+		var owningDiagram = new SysMini!PartUsage;
+		owningDiagram.isReference = true;
+		owningDiagram.featureNote.add(":>");
+		owningDiagram.featureSpecialization.add("owningDiagram");
+		owningDiagram.valuePart = s.owningDiagram.getEReference();
+		t.body.add(owningDiagram);
+	}
+	if (s.owningElement.getEReference() != null){
+		var owningElement = new SysMini!PartUsage;
+		owningElement.isReference = true;
+		owningElement.featureNote.add(":>");
+		owningElement.featureSpecialization.add("owningElement");
+		owningElement.valuePart = s.owningElement.getEReference();
+		t.body.add(owningElement);
+	}
+	if (s.ownedElement.getEReference() != null){
+		var ownedElement = new SysMini!PartUsage;
+		ownedElement.isReference = true;
+		ownedElement.featureNote.add(":>");
+		ownedElement.featureSpecialization.add("ownedElement");
+		ownedElement.valuePart = s.ownedElement.getEReference();
+		t.body.add(ownedElement);
+	}
+	if (s.modelElement.getEReference() != null){
+		var modelElement = new SysMini!PartUsage;
+		modelElement.isReference = true;
+		modelElement.featureNote.add(":>");
+		modelElement.featureSpecialization.add("modelElement");
+		modelElement.valuePart = s.modelElement.getEReference();
+		t.body.add(modelElement);
+	}
+	if (s.style.getEReference() != null){
+		var style = new SysMini!PartUsage;
+		style.isReference = true;
+		style.featureNote.add(":>");
+		style.featureSpecialization.add("style");
+		style.valuePart = s.style.getEReference();
+		t.body.add(style);
+	}
+	if (s.planeElement.getEReference() != null){
+		var planeElement = new SysMini!PartUsage;
+		planeElement.isReference = true;
+		planeElement.featureNote.add(":>");
+		planeElement.featureSpecialization.add("planeElement");
+		planeElement.valuePart = s.planeElement.getEReference();
+		t.body.add(planeElement);
+	}
+	if (s.bpmnElement.getEReference() != null){
+		var bpmnElement = new SysMini!PartUsage;
+		bpmnElement.isReference = true;
+		bpmnElement.featureNote.add(":>");
+		bpmnElement.featureSpecialization.add("bpmnElement");
+		bpmnElement.valuePart = s.bpmnElement.getEReference();
+		t.body.add(bpmnElement);
+	}
 }
 
 @lazy
@@ -197,6 +258,86 @@ rule BPMNShape
 		participantBandKind.valuePart = s.participantBandKind.getEAttribute();
 		t.body.add(participantBandKind);
 	}
+	if (s.owningDiagram.getEReference() != null){
+		var owningDiagram = new SysMini!PartUsage;
+		owningDiagram.isReference = true;
+		owningDiagram.featureNote.add(":>");
+		owningDiagram.featureSpecialization.add("owningDiagram");
+		owningDiagram.valuePart = s.owningDiagram.getEReference();
+		t.body.add(owningDiagram);
+	}
+	if (s.owningElement.getEReference() != null){
+		var owningElement = new SysMini!PartUsage;
+		owningElement.isReference = true;
+		owningElement.featureNote.add(":>");
+		owningElement.featureSpecialization.add("owningElement");
+		owningElement.valuePart = s.owningElement.getEReference();
+		t.body.add(owningElement);
+	}
+	if (s.ownedElement.getEReference() != null){
+		var ownedElement = new SysMini!PartUsage;
+		ownedElement.isReference = true;
+		ownedElement.featureNote.add(":>");
+		ownedElement.featureSpecialization.add("ownedElement");
+		ownedElement.valuePart = s.ownedElement.getEReference();
+		t.body.add(ownedElement);
+	}
+	if (s.modelElement.getEReference() != null){
+		var modelElement = new SysMini!PartUsage;
+		modelElement.isReference = true;
+		modelElement.featureNote.add(":>");
+		modelElement.featureSpecialization.add("modelElement");
+		modelElement.valuePart = s.modelElement.getEReference();
+		t.body.add(modelElement);
+	}
+	if (s.style.getEReference() != null){
+		var style = new SysMini!PartUsage;
+		style.isReference = true;
+		style.featureNote.add(":>");
+		style.featureSpecialization.add("style");
+		style.valuePart = s.style.getEReference();
+		t.body.add(style);
+	}
+	if (s.bounds.getEReference() != null){
+		var bounds = new SysMini!PartUsage;
+		bounds.isReference = true;
+		bounds.featureNote.add(":>");
+		bounds.featureSpecialization.add("bounds");
+		bounds.valuePart = s.bounds.getEReference();
+		t.body.add(bounds);
+	}
+	if (s.ownedLabel.getEReference() != null){
+		var ownedLabel = new SysMini!PartUsage;
+		ownedLabel.isReference = true;
+		ownedLabel.featureNote.add(":>");
+		ownedLabel.featureSpecialization.add("ownedLabel");
+		ownedLabel.valuePart = s.ownedLabel.getEReference();
+		t.body.add(ownedLabel);
+	}
+	if (s.bpmnElement.getEReference() != null){
+		var bpmnElement = new SysMini!PartUsage;
+		bpmnElement.isReference = true;
+		bpmnElement.featureNote.add(":>");
+		bpmnElement.featureSpecialization.add("bpmnElement");
+		bpmnElement.valuePart = s.bpmnElement.getEReference();
+		t.body.add(bpmnElement);
+	}
+	if (s.label.getEReference() != null){
+		var label = new SysMini!PartUsage;
+		label.isReference = true;
+		label.featureNote.add(":>");
+		label.featureSpecialization.add("label");
+		label.valuePart = s.label.getEReference();
+		t.body.add(label);
+	}
+	if (s.choreographyActivityShape.getEReference() != null){
+		var choreographyActivityShape = new SysMini!PartUsage;
+		choreographyActivityShape.isReference = true;
+		choreographyActivityShape.featureNote.add(":>");
+		choreographyActivityShape.featureSpecialization.add("choreographyActivityShape");
+		choreographyActivityShape.valuePart = s.choreographyActivityShape.getEReference();
+		t.body.add(choreographyActivityShape);
+	}
 }
 
 @lazy
@@ -204,6 +345,62 @@ rule BPMNLabel
 	transform s : DSL!BPMNLabel
 	to t : SysMini!PartUsage
 	extends Base{
+	if (s.owningDiagram.getEReference() != null){
+		var owningDiagram = new SysMini!PartUsage;
+		owningDiagram.isReference = true;
+		owningDiagram.featureNote.add(":>");
+		owningDiagram.featureSpecialization.add("owningDiagram");
+		owningDiagram.valuePart = s.owningDiagram.getEReference();
+		t.body.add(owningDiagram);
+	}
+	if (s.owningElement.getEReference() != null){
+		var owningElement = new SysMini!PartUsage;
+		owningElement.isReference = true;
+		owningElement.featureNote.add(":>");
+		owningElement.featureSpecialization.add("owningElement");
+		owningElement.valuePart = s.owningElement.getEReference();
+		t.body.add(owningElement);
+	}
+	if (s.ownedElement.getEReference() != null){
+		var ownedElement = new SysMini!PartUsage;
+		ownedElement.isReference = true;
+		ownedElement.featureNote.add(":>");
+		ownedElement.featureSpecialization.add("ownedElement");
+		ownedElement.valuePart = s.ownedElement.getEReference();
+		t.body.add(ownedElement);
+	}
+	if (s.modelElement.getEReference() != null){
+		var modelElement = new SysMini!PartUsage;
+		modelElement.isReference = true;
+		modelElement.featureNote.add(":>");
+		modelElement.featureSpecialization.add("modelElement");
+		modelElement.valuePart = s.modelElement.getEReference();
+		t.body.add(modelElement);
+	}
+	if (s.style.getEReference() != null){
+		var style = new SysMini!PartUsage;
+		style.isReference = true;
+		style.featureNote.add(":>");
+		style.featureSpecialization.add("style");
+		style.valuePart = s.style.getEReference();
+		t.body.add(style);
+	}
+	if (s.bounds.getEReference() != null){
+		var bounds = new SysMini!PartUsage;
+		bounds.isReference = true;
+		bounds.featureNote.add(":>");
+		bounds.featureSpecialization.add("bounds");
+		bounds.valuePart = s.bounds.getEReference();
+		t.body.add(bounds);
+	}
+	if (s.labelStyle.getEReference() != null){
+		var labelStyle = new SysMini!PartUsage;
+		labelStyle.isReference = true;
+		labelStyle.featureNote.add(":>");
+		labelStyle.featureSpecialization.add("labelStyle");
+		labelStyle.valuePart = s.labelStyle.getEReference();
+		t.body.add(labelStyle);
+	}
 }
 
 @lazy
@@ -211,6 +408,14 @@ rule BPMNLabelStyle
 	transform s : DSL!BPMNLabelStyle
 	to t : SysMini!PartUsage
 	extends Base{
+	if (s.font.getEReference() != null){
+		var font = new SysMini!PartUsage;
+		font.isReference = true;
+		font.featureNote.add(":>");
+		font.featureSpecialization.add("font");
+		font.valuePart = s.font.getEReference();
+		t.body.add(font);
+	}
 }
 
 @lazy
@@ -224,6 +429,110 @@ rule BPMNEdge
 		messageVisibleKind.featureSpecialization.add("messageVisibleKind");
 		messageVisibleKind.valuePart = s.messageVisibleKind.getEAttribute();
 		t.body.add(messageVisibleKind);
+	}
+	if (s.owningDiagram.getEReference() != null){
+		var owningDiagram = new SysMini!PartUsage;
+		owningDiagram.isReference = true;
+		owningDiagram.featureNote.add(":>");
+		owningDiagram.featureSpecialization.add("owningDiagram");
+		owningDiagram.valuePart = s.owningDiagram.getEReference();
+		t.body.add(owningDiagram);
+	}
+	if (s.owningElement.getEReference() != null){
+		var owningElement = new SysMini!PartUsage;
+		owningElement.isReference = true;
+		owningElement.featureNote.add(":>");
+		owningElement.featureSpecialization.add("owningElement");
+		owningElement.valuePart = s.owningElement.getEReference();
+		t.body.add(owningElement);
+	}
+	if (s.ownedElement.getEReference() != null){
+		var ownedElement = new SysMini!PartUsage;
+		ownedElement.isReference = true;
+		ownedElement.featureNote.add(":>");
+		ownedElement.featureSpecialization.add("ownedElement");
+		ownedElement.valuePart = s.ownedElement.getEReference();
+		t.body.add(ownedElement);
+	}
+	if (s.modelElement.getEReference() != null){
+		var modelElement = new SysMini!PartUsage;
+		modelElement.isReference = true;
+		modelElement.featureNote.add(":>");
+		modelElement.featureSpecialization.add("modelElement");
+		modelElement.valuePart = s.modelElement.getEReference();
+		t.body.add(modelElement);
+	}
+	if (s.style.getEReference() != null){
+		var style = new SysMini!PartUsage;
+		style.isReference = true;
+		style.featureNote.add(":>");
+		style.featureSpecialization.add("style");
+		style.valuePart = s.style.getEReference();
+		t.body.add(style);
+	}
+	if (s.source.getEReference() != null){
+		var source = new SysMini!PartUsage;
+		source.isReference = true;
+		source.featureNote.add(":>");
+		source.featureSpecialization.add("source");
+		source.valuePart = s.source.getEReference();
+		t.body.add(source);
+	}
+	if (s.target.getEReference() != null){
+		var target = new SysMini!PartUsage;
+		target.isReference = true;
+		target.featureNote.add(":>");
+		target.featureSpecialization.add("target");
+		target.valuePart = s.target.getEReference();
+		t.body.add(target);
+	}
+	if (s.waypoint.getEReference() != null){
+		var waypoint = new SysMini!PartUsage;
+		waypoint.isReference = true;
+		waypoint.featureNote.add(":>");
+		waypoint.featureSpecialization.add("waypoint");
+		waypoint.valuePart = s.waypoint.getEReference();
+		t.body.add(waypoint);
+	}
+	if (s.ownedLabel.getEReference() != null){
+		var ownedLabel = new SysMini!PartUsage;
+		ownedLabel.isReference = true;
+		ownedLabel.featureNote.add(":>");
+		ownedLabel.featureSpecialization.add("ownedLabel");
+		ownedLabel.valuePart = s.ownedLabel.getEReference();
+		t.body.add(ownedLabel);
+	}
+	if (s.label.getEReference() != null){
+		var label = new SysMini!PartUsage;
+		label.isReference = true;
+		label.featureNote.add(":>");
+		label.featureSpecialization.add("label");
+		label.valuePart = s.label.getEReference();
+		t.body.add(label);
+	}
+	if (s.bpmnElement.getEReference() != null){
+		var bpmnElement = new SysMini!PartUsage;
+		bpmnElement.isReference = true;
+		bpmnElement.featureNote.add(":>");
+		bpmnElement.featureSpecialization.add("bpmnElement");
+		bpmnElement.valuePart = s.bpmnElement.getEReference();
+		t.body.add(bpmnElement);
+	}
+	if (s.sourceElement.getEReference() != null){
+		var sourceElement = new SysMini!PartUsage;
+		sourceElement.isReference = true;
+		sourceElement.featureNote.add(":>");
+		sourceElement.featureSpecialization.add("sourceElement");
+		sourceElement.valuePart = s.sourceElement.getEReference();
+		t.body.add(sourceElement);
+	}
+	if (s.targetElement.getEReference() != null){
+		var targetElement = new SysMini!PartUsage;
+		targetElement.isReference = true;
+		targetElement.featureNote.add(":>");
+		targetElement.featureSpecialization.add("targetElement");
+		targetElement.valuePart = s.targetElement.getEReference();
+		t.body.add(targetElement);
 	}
 }
 
@@ -252,6 +561,38 @@ rule BPMNDiagram
 		resolution.featureSpecialization.add("resolution");
 		resolution.valuePart = s.resolution.getEAttribute();
 		t.body.add(resolution);
+	}
+	if (s.ownedStyle.getEReference() != null){
+		var ownedStyle = new SysMini!PartUsage;
+		ownedStyle.isReference = true;
+		ownedStyle.featureNote.add(":>");
+		ownedStyle.featureSpecialization.add("ownedStyle");
+		ownedStyle.valuePart = s.ownedStyle.getEReference();
+		t.body.add(ownedStyle);
+	}
+	if (s.rootElement.getEReference() != null){
+		var rootElement = new SysMini!PartUsage;
+		rootElement.isReference = true;
+		rootElement.featureNote.add(":>");
+		rootElement.featureSpecialization.add("rootElement");
+		rootElement.valuePart = s.rootElement.getEReference();
+		t.body.add(rootElement);
+	}
+	if (s.plane.getEReference() != null){
+		var plane = new SysMini!PartUsage;
+		plane.isReference = true;
+		plane.featureNote.add(":>");
+		plane.featureSpecialization.add("plane");
+		plane.valuePart = s.plane.getEReference();
+		t.body.add(plane);
+	}
+	if (s.labelStyle.getEReference() != null){
+		var labelStyle = new SysMini!PartUsage;
+		labelStyle.isReference = true;
+		labelStyle.featureNote.add(":>");
+		labelStyle.featureSpecialization.add("labelStyle");
+		labelStyle.valuePart = s.labelStyle.getEReference();
+		t.body.add(labelStyle);
 	}
 }
 

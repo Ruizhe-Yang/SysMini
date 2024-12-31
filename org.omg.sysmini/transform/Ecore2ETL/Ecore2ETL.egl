@@ -1,20 +1,22 @@
 [% import "Ecore2ETL-util.eol"; %]
 [%var fileName = root.name;%]
+[%var KeyWords = Sequence{"default", "import", "from", "to"};%]
 import "DSL2SysMini-util.eol";
 
 pre{
 	"------------------ ETL Start ------------------".println();
 	var eObjectSequence = new Sequence;
 	var eEReferenceSequence = new Sequence;
+	var KeyWords = Sequence{"default", "event", "value", "import", "language", "from", "to", "interface"};
 	init_[%=fileName%]();
 	main_[%=fileName%]();
 }
 
 post{
 	"------------------ ETL Over  ------------------".println();
-	for (ee in eEReferenceSequence){
-		ee.println();
-	}
+//	for (ee in eEReferenceSequence){
+//		ee.println();
+//	}
 }
 
 operation init_[%=fileName%](){
@@ -24,7 +26,7 @@ operation init_[%=fileName%](){
 		var e[%=eClass.name%]Tuple = Tuple{"key"=e[%=eClass.name%].type().name.asString()+"_"+(id[%=eClass.name%]++).asString(),"value"= e[%=eClass.name%]};
 		eObjectSequence.add(e[%=eClass.name%]Tuple);
 	}
-	[%	for (eReference in eClass.eAllStructuralFeatures.select(s|s.type().name == "EReference")){%]
+	[%	for (eReference in eClass.eAllReferences.select(s|s.type().name == "EReference")){%]
 	var e[%=eReference.name%]Tuple = Tuple{"key"='[%=eReference.name%]', "value"='[%=eReference.eType.name%]'};
 	eEReferenceSequence.add(e[%=eReference.name%]Tuple);
 	[%}%]
@@ -47,6 +49,10 @@ rule Base
 	t.declaredName = s.getDeclaredName();
 	t.featureNote.add(":");
 	t.featureSpecialization.add(s.getfeatureSpecialization());
+	if (s.eContainingFeature != null and s.eContainingFeature.name != null){
+		t.featureNote.add(":>");
+		t.featureSpecialization.add(s.eContainingFeature().name);
+	}
 }
 	
 [%=root.main()%]
@@ -56,13 +62,23 @@ rule [%=self.name%]
 	transform s : DSL![%=self.name%]
 	to t : SysMini!PartUsage
 	extends Base{
-	[%	for (eAttribute in self.eAllStructuralFeatures.select(s|s.type().name == "EAttribute")){%]
+	[%	for (eAttribute in self.eAllAttributes){%]
 	if (s.[%=eAttribute.name%].getEAttribute() != null){
 		var [%=eAttribute.name%] = new SysMini!AttributeUsage;
 		[%=eAttribute.name%].featureNote.add(":>>");
 		[%=eAttribute.name%].featureSpecialization.add("[%=eAttribute.name%]");
 		[%=eAttribute.name%].valuePart = s.[%=eAttribute.name%].getEAttribute();
 		t.body.add([%=eAttribute.name%]);
+	}
+	[%}%]
+	[%	for (eReference in self.eAllReferences){%]
+	if (s.[%=eReference.name.clearKeyWord(2)%].getEReference() != null){
+		var [%=eReference.name.clearKeyWord(0)%] = new SysMini!PartUsage;
+		[%=eReference.name.clearKeyWord(0)%].isReference = true;
+		[%=eReference.name.clearKeyWord(0)%].featureNote.add(":>");
+		[%=eReference.name.clearKeyWord(0)%].featureSpecialization.add("[%=eReference.name.clearKeyWord(1)%]");
+		[%=eReference.name.clearKeyWord(0)%].valuePart = s.[%=eReference.name.clearKeyWord(0)%].getEReference();
+		t.body.add([%=eReference.name.clearKeyWord(0)%]);
 	}
 	[%}%]
 }

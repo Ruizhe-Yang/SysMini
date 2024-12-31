@@ -1,0 +1,14 @@
+operation String clearKeyWord(i){
+	if (KeyWords.includes(self) and i == 0){
+		return self+"_";
+	}
+	else if (KeyWords.includes(self) and i == 1){
+		return "'"+self+"'";
+	}
+	else if (KeyWords.includes(self) and i == 2){
+		return "~"+self;
+	}
+	else{
+		return self;
+	}
+}
