@@ -6,7 +6,6 @@ import "DSL2SysMini-util.eol";
 pre{
 	"------------------ ETL Start ------------------".println();
 	var eObjectSequence = new Sequence;
-	var eEReferenceSequence = new Sequence;
 	var KeyWords = Sequence{"default", "event", "value", "import", "language", "from", "to", "interface"};
 	init_[%=fileName%]();
 	main_[%=fileName%]();
@@ -14,32 +13,29 @@ pre{
 
 post{
 	"------------------ ETL Over  ------------------".println();
-//	for (ee in eEReferenceSequence){
-//		ee.println();
-//	}
-}
-
-operation init_[%=fileName%](){
-	[%for (eClass in root.eClassifiers.select(s|s.type().name == "EClass")){%]
-	var id[%=eClass.name%] = 0;
-	for (e[%=eClass.name%] in DSL!EObject.all.select(s|s.isTypeOf(DSL![%=eClass.name%]))){
-		var e[%=eClass.name%]Tuple = Tuple{"key"=e[%=eClass.name%].type().name.asString()+"_"+(id[%=eClass.name%]++).asString(),"value"= e[%=eClass.name%]};
-		eObjectSequence.add(e[%=eClass.name%]Tuple);
-	}
-	[%	for (eReference in eClass.eAllReferences.select(s|s.type().name == "EReference")){%]
-	var e[%=eReference.name%]Tuple = Tuple{"key"='[%=eReference.name%]', "value"='[%=eReference.eType.name%]'};
-	eEReferenceSequence.add(e[%=eReference.name%]Tuple);
-	[%}%]
-	[%}%]
 }
 
 operation main_[%=fileName%](){
 	var rootEcore = DSL!EObject.all.first();
 	var rootSysMini = new SysMini!Namespace;
 	var rootPackage = new SysMini!Package;
-	rootPackage.declaredName = "[%=fileName%]";
+	rootPackage.declaredName = "[%=fileName%]_model";
 	rootSysMini.body.add(rootPackage);
+	var namespaceImport = new SysMini!NamespaceImport;
+	namespaceImport.declaredName = "[%=fileName%]";
+	rootPackage.body.add(namespaceImport);
 	rootEcore.addNodeTo(rootPackage);
+}
+
+operation init_[%=fileName%](){
+	[%for (eClass in root.eClassifiers.select(s|s.type().name == "EClass")){%]
+	//name creates for [%=eClass.name%]
+	var id[%=eClass.name%] = 0;
+	for (e[%=eClass.name%] in DSL!EObject.all.select(s|s.isTypeOf(DSL![%=eClass.name%]))){
+		var e[%=eClass.name%]Tuple = Tuple{"key"=e[%=eClass.name%].type().name.asString()+"_"+(id[%=eClass.name%]++).asString(),"value"= e[%=eClass.name%]};
+		eObjectSequence.add(e[%=eClass.name%]Tuple);
+	}
+	[%}%]
 }
 
 @abstract
@@ -63,6 +59,7 @@ rule [%=self.name%]
 	to t : SysMini!PartUsage
 	extends Base{
 	[%	for (eAttribute in self.eAllAttributes){%]
+	//[%=self.name%] -> EAttribute : [%=eAttribute.name%]
 	if (s.[%=eAttribute.name%].getEAttribute() != null){
 		var [%=eAttribute.name%] = new SysMini!AttributeUsage;
 		[%=eAttribute.name%].featureNote.add(":>>");
@@ -72,6 +69,7 @@ rule [%=self.name%]
 	}
 	[%}%]
 	[%	for (eReference in self.eAllReferences){%]
+	//[%=self.name%] -> EReference : [%=eReference.name.clearKeyWord(0)%]
 	if (s.[%=eReference.name.clearKeyWord(2)%].getEReference() != null){
 		var [%=eReference.name.clearKeyWord(0)%] = new SysMini!PartUsage;
 		[%=eReference.name.clearKeyWord(0)%].isReference = true;

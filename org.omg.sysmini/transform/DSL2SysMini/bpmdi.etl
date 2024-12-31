@@ -3,7 +3,6 @@ import "DSL2SysMini-util.eol";
 pre{
 	"------------------ ETL Start ------------------".println();
 	var eObjectSequence = new Sequence;
-	var eEReferenceSequence = new Sequence;
 	var KeyWords = Sequence{"default", "event", "value", "import", "language", "from", "to", "interface"};
 	init_bpmdi();
 	main_bpmdi();
@@ -11,135 +10,57 @@ pre{
 
 post{
 	"------------------ ETL Over  ------------------".println();
-	for (ee in eEReferenceSequence){
-		ee.println();
-	}
-}
-
-operation init_bpmdi(){
-	var idBPMNPlane = 0;
-	for (eBPMNPlane in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNPlane))){
-		var eBPMNPlaneTuple = Tuple{"key"=eBPMNPlane.type().name.asString()+"_"+(idBPMNPlane++).asString(),"value"= eBPMNPlane};
-		eObjectSequence.add(eBPMNPlaneTuple);
-	}
-	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
-	eEReferenceSequence.add(eowningDiagramTuple);
-	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eowningElementTuple);
-	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eownedElementTuple);
-	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
-	eEReferenceSequence.add(emodelElementTuple);
-	var estyleTuple = Tuple{"key"='style', "value"='Style'};
-	eEReferenceSequence.add(estyleTuple);
-	var eplaneElementTuple = Tuple{"key"='planeElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eplaneElementTuple);
-	var ebpmnElementTuple = Tuple{"key"='bpmnElement', "value"='BaseElement'};
-	eEReferenceSequence.add(ebpmnElementTuple);
-	var idBPMNShape = 0;
-	for (eBPMNShape in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNShape))){
-		var eBPMNShapeTuple = Tuple{"key"=eBPMNShape.type().name.asString()+"_"+(idBPMNShape++).asString(),"value"= eBPMNShape};
-		eObjectSequence.add(eBPMNShapeTuple);
-	}
-	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
-	eEReferenceSequence.add(eowningDiagramTuple);
-	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eowningElementTuple);
-	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eownedElementTuple);
-	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
-	eEReferenceSequence.add(emodelElementTuple);
-	var estyleTuple = Tuple{"key"='style', "value"='Style'};
-	eEReferenceSequence.add(estyleTuple);
-	var eboundsTuple = Tuple{"key"='bounds', "value"='Bounds'};
-	eEReferenceSequence.add(eboundsTuple);
-	var eownedLabelTuple = Tuple{"key"='ownedLabel', "value"='Label'};
-	eEReferenceSequence.add(eownedLabelTuple);
-	var ebpmnElementTuple = Tuple{"key"='bpmnElement', "value"='BaseElement'};
-	eEReferenceSequence.add(ebpmnElementTuple);
-	var elabelTuple = Tuple{"key"='label', "value"='BPMNLabel'};
-	eEReferenceSequence.add(elabelTuple);
-	var echoreographyActivityShapeTuple = Tuple{"key"='choreographyActivityShape', "value"='BPMNShape'};
-	eEReferenceSequence.add(echoreographyActivityShapeTuple);
-	var idBPMNLabel = 0;
-	for (eBPMNLabel in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabel))){
-		var eBPMNLabelTuple = Tuple{"key"=eBPMNLabel.type().name.asString()+"_"+(idBPMNLabel++).asString(),"value"= eBPMNLabel};
-		eObjectSequence.add(eBPMNLabelTuple);
-	}
-	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
-	eEReferenceSequence.add(eowningDiagramTuple);
-	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eowningElementTuple);
-	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eownedElementTuple);
-	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
-	eEReferenceSequence.add(emodelElementTuple);
-	var estyleTuple = Tuple{"key"='style', "value"='Style'};
-	eEReferenceSequence.add(estyleTuple);
-	var eboundsTuple = Tuple{"key"='bounds', "value"='Bounds'};
-	eEReferenceSequence.add(eboundsTuple);
-	var elabelStyleTuple = Tuple{"key"='labelStyle', "value"='BPMNLabelStyle'};
-	eEReferenceSequence.add(elabelStyleTuple);
-	var idBPMNLabelStyle = 0;
-	for (eBPMNLabelStyle in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabelStyle))){
-		var eBPMNLabelStyleTuple = Tuple{"key"=eBPMNLabelStyle.type().name.asString()+"_"+(idBPMNLabelStyle++).asString(),"value"= eBPMNLabelStyle};
-		eObjectSequence.add(eBPMNLabelStyleTuple);
-	}
-	var efontTuple = Tuple{"key"='font', "value"='Font'};
-	eEReferenceSequence.add(efontTuple);
-	var idBPMNEdge = 0;
-	for (eBPMNEdge in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNEdge))){
-		var eBPMNEdgeTuple = Tuple{"key"=eBPMNEdge.type().name.asString()+"_"+(idBPMNEdge++).asString(),"value"= eBPMNEdge};
-		eObjectSequence.add(eBPMNEdgeTuple);
-	}
-	var eowningDiagramTuple = Tuple{"key"='owningDiagram', "value"='Diagram'};
-	eEReferenceSequence.add(eowningDiagramTuple);
-	var eowningElementTuple = Tuple{"key"='owningElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eowningElementTuple);
-	var eownedElementTuple = Tuple{"key"='ownedElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(eownedElementTuple);
-	var emodelElementTuple = Tuple{"key"='modelElement', "value"='EObject'};
-	eEReferenceSequence.add(emodelElementTuple);
-	var estyleTuple = Tuple{"key"='style', "value"='Style'};
-	eEReferenceSequence.add(estyleTuple);
-	var esourceTuple = Tuple{"key"='source', "value"='DiagramElement'};
-	eEReferenceSequence.add(esourceTuple);
-	var etargetTuple = Tuple{"key"='target', "value"='DiagramElement'};
-	eEReferenceSequence.add(etargetTuple);
-	var ewaypointTuple = Tuple{"key"='waypoint', "value"='Point'};
-	eEReferenceSequence.add(ewaypointTuple);
-	var eownedLabelTuple = Tuple{"key"='ownedLabel', "value"='Label'};
-	eEReferenceSequence.add(eownedLabelTuple);
-	var elabelTuple = Tuple{"key"='label', "value"='BPMNLabel'};
-	eEReferenceSequence.add(elabelTuple);
-	var ebpmnElementTuple = Tuple{"key"='bpmnElement', "value"='BaseElement'};
-	eEReferenceSequence.add(ebpmnElementTuple);
-	var esourceElementTuple = Tuple{"key"='sourceElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(esourceElementTuple);
-	var etargetElementTuple = Tuple{"key"='targetElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(etargetElementTuple);
-	var idBPMNDiagram = 0;
-	for (eBPMNDiagram in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNDiagram))){
-		var eBPMNDiagramTuple = Tuple{"key"=eBPMNDiagram.type().name.asString()+"_"+(idBPMNDiagram++).asString(),"value"= eBPMNDiagram};
-		eObjectSequence.add(eBPMNDiagramTuple);
-	}
-	var eownedStyleTuple = Tuple{"key"='ownedStyle', "value"='Style'};
-	eEReferenceSequence.add(eownedStyleTuple);
-	var erootElementTuple = Tuple{"key"='rootElement', "value"='DiagramElement'};
-	eEReferenceSequence.add(erootElementTuple);
-	var eplaneTuple = Tuple{"key"='plane', "value"='BPMNPlane'};
-	eEReferenceSequence.add(eplaneTuple);
-	var elabelStyleTuple = Tuple{"key"='labelStyle', "value"='BPMNLabelStyle'};
-	eEReferenceSequence.add(elabelStyleTuple);
 }
 
 operation main_bpmdi(){
 	var rootEcore = DSL!EObject.all.first();
 	var rootSysMini = new SysMini!Namespace;
 	var rootPackage = new SysMini!Package;
-	rootPackage.declaredName = "bpmdi";
+	rootPackage.declaredName = "bpmdi_model";
 	rootSysMini.body.add(rootPackage);
+	var namespaceImport = new SysMini!NamespaceImport;
+	namespaceImport.declaredName = "bpmdi";
+	rootPackage.body.add(namespaceImport);
 	rootEcore.addNodeTo(rootPackage);
+}
+
+operation init_bpmdi(){
+	//name creates for BPMNPlane
+	var idBPMNPlane = 0;
+	for (eBPMNPlane in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNPlane))){
+		var eBPMNPlaneTuple = Tuple{"key"=eBPMNPlane.type().name.asString()+"_"+(idBPMNPlane++).asString(),"value"= eBPMNPlane};
+		eObjectSequence.add(eBPMNPlaneTuple);
+	}
+	//name creates for BPMNShape
+	var idBPMNShape = 0;
+	for (eBPMNShape in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNShape))){
+		var eBPMNShapeTuple = Tuple{"key"=eBPMNShape.type().name.asString()+"_"+(idBPMNShape++).asString(),"value"= eBPMNShape};
+		eObjectSequence.add(eBPMNShapeTuple);
+	}
+	//name creates for BPMNLabel
+	var idBPMNLabel = 0;
+	for (eBPMNLabel in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabel))){
+		var eBPMNLabelTuple = Tuple{"key"=eBPMNLabel.type().name.asString()+"_"+(idBPMNLabel++).asString(),"value"= eBPMNLabel};
+		eObjectSequence.add(eBPMNLabelTuple);
+	}
+	//name creates for BPMNLabelStyle
+	var idBPMNLabelStyle = 0;
+	for (eBPMNLabelStyle in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabelStyle))){
+		var eBPMNLabelStyleTuple = Tuple{"key"=eBPMNLabelStyle.type().name.asString()+"_"+(idBPMNLabelStyle++).asString(),"value"= eBPMNLabelStyle};
+		eObjectSequence.add(eBPMNLabelStyleTuple);
+	}
+	//name creates for BPMNEdge
+	var idBPMNEdge = 0;
+	for (eBPMNEdge in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNEdge))){
+		var eBPMNEdgeTuple = Tuple{"key"=eBPMNEdge.type().name.asString()+"_"+(idBPMNEdge++).asString(),"value"= eBPMNEdge};
+		eObjectSequence.add(eBPMNEdgeTuple);
+	}
+	//name creates for BPMNDiagram
+	var idBPMNDiagram = 0;
+	for (eBPMNDiagram in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNDiagram))){
+		var eBPMNDiagramTuple = Tuple{"key"=eBPMNDiagram.type().name.asString()+"_"+(idBPMNDiagram++).asString(),"value"= eBPMNDiagram};
+		eObjectSequence.add(eBPMNDiagramTuple);
+	}
 }
 
 @abstract
@@ -160,6 +81,7 @@ rule BPMNPlane
 	transform s : DSL!BPMNPlane
 	to t : SysMini!PartUsage
 	extends Base{
+	//BPMNPlane -> EReference : owningDiagram
 	if (s.owningDiagram.getEReference() != null){
 		var owningDiagram = new SysMini!PartUsage;
 		owningDiagram.isReference = true;
@@ -168,6 +90,7 @@ rule BPMNPlane
 		owningDiagram.valuePart = s.owningDiagram.getEReference();
 		t.body.add(owningDiagram);
 	}
+	//BPMNPlane -> EReference : owningElement
 	if (s.owningElement.getEReference() != null){
 		var owningElement = new SysMini!PartUsage;
 		owningElement.isReference = true;
@@ -176,6 +99,7 @@ rule BPMNPlane
 		owningElement.valuePart = s.owningElement.getEReference();
 		t.body.add(owningElement);
 	}
+	//BPMNPlane -> EReference : ownedElement
 	if (s.ownedElement.getEReference() != null){
 		var ownedElement = new SysMini!PartUsage;
 		ownedElement.isReference = true;
@@ -184,6 +108,7 @@ rule BPMNPlane
 		ownedElement.valuePart = s.ownedElement.getEReference();
 		t.body.add(ownedElement);
 	}
+	//BPMNPlane -> EReference : modelElement
 	if (s.modelElement.getEReference() != null){
 		var modelElement = new SysMini!PartUsage;
 		modelElement.isReference = true;
@@ -192,6 +117,7 @@ rule BPMNPlane
 		modelElement.valuePart = s.modelElement.getEReference();
 		t.body.add(modelElement);
 	}
+	//BPMNPlane -> EReference : style
 	if (s.style.getEReference() != null){
 		var style = new SysMini!PartUsage;
 		style.isReference = true;
@@ -200,6 +126,7 @@ rule BPMNPlane
 		style.valuePart = s.style.getEReference();
 		t.body.add(style);
 	}
+	//BPMNPlane -> EReference : planeElement
 	if (s.planeElement.getEReference() != null){
 		var planeElement = new SysMini!PartUsage;
 		planeElement.isReference = true;
@@ -208,6 +135,7 @@ rule BPMNPlane
 		planeElement.valuePart = s.planeElement.getEReference();
 		t.body.add(planeElement);
 	}
+	//BPMNPlane -> EReference : bpmnElement
 	if (s.bpmnElement.getEReference() != null){
 		var bpmnElement = new SysMini!PartUsage;
 		bpmnElement.isReference = true;
@@ -223,6 +151,7 @@ rule BPMNShape
 	transform s : DSL!BPMNShape
 	to t : SysMini!PartUsage
 	extends Base{
+	//BPMNShape -> EAttribute : isHorizontal
 	if (s.isHorizontal.getEAttribute() != null){
 		var isHorizontal = new SysMini!AttributeUsage;
 		isHorizontal.featureNote.add(":>>");
@@ -230,6 +159,7 @@ rule BPMNShape
 		isHorizontal.valuePart = s.isHorizontal.getEAttribute();
 		t.body.add(isHorizontal);
 	}
+	//BPMNShape -> EAttribute : isExpanded
 	if (s.isExpanded.getEAttribute() != null){
 		var isExpanded = new SysMini!AttributeUsage;
 		isExpanded.featureNote.add(":>>");
@@ -237,6 +167,7 @@ rule BPMNShape
 		isExpanded.valuePart = s.isExpanded.getEAttribute();
 		t.body.add(isExpanded);
 	}
+	//BPMNShape -> EAttribute : isMarkerVisible
 	if (s.isMarkerVisible.getEAttribute() != null){
 		var isMarkerVisible = new SysMini!AttributeUsage;
 		isMarkerVisible.featureNote.add(":>>");
@@ -244,6 +175,7 @@ rule BPMNShape
 		isMarkerVisible.valuePart = s.isMarkerVisible.getEAttribute();
 		t.body.add(isMarkerVisible);
 	}
+	//BPMNShape -> EAttribute : isMessageVisible
 	if (s.isMessageVisible.getEAttribute() != null){
 		var isMessageVisible = new SysMini!AttributeUsage;
 		isMessageVisible.featureNote.add(":>>");
@@ -251,6 +183,7 @@ rule BPMNShape
 		isMessageVisible.valuePart = s.isMessageVisible.getEAttribute();
 		t.body.add(isMessageVisible);
 	}
+	//BPMNShape -> EAttribute : participantBandKind
 	if (s.participantBandKind.getEAttribute() != null){
 		var participantBandKind = new SysMini!AttributeUsage;
 		participantBandKind.featureNote.add(":>>");
@@ -258,6 +191,7 @@ rule BPMNShape
 		participantBandKind.valuePart = s.participantBandKind.getEAttribute();
 		t.body.add(participantBandKind);
 	}
+	//BPMNShape -> EReference : owningDiagram
 	if (s.owningDiagram.getEReference() != null){
 		var owningDiagram = new SysMini!PartUsage;
 		owningDiagram.isReference = true;
@@ -266,6 +200,7 @@ rule BPMNShape
 		owningDiagram.valuePart = s.owningDiagram.getEReference();
 		t.body.add(owningDiagram);
 	}
+	//BPMNShape -> EReference : owningElement
 	if (s.owningElement.getEReference() != null){
 		var owningElement = new SysMini!PartUsage;
 		owningElement.isReference = true;
@@ -274,6 +209,7 @@ rule BPMNShape
 		owningElement.valuePart = s.owningElement.getEReference();
 		t.body.add(owningElement);
 	}
+	//BPMNShape -> EReference : ownedElement
 	if (s.ownedElement.getEReference() != null){
 		var ownedElement = new SysMini!PartUsage;
 		ownedElement.isReference = true;
@@ -282,6 +218,7 @@ rule BPMNShape
 		ownedElement.valuePart = s.ownedElement.getEReference();
 		t.body.add(ownedElement);
 	}
+	//BPMNShape -> EReference : modelElement
 	if (s.modelElement.getEReference() != null){
 		var modelElement = new SysMini!PartUsage;
 		modelElement.isReference = true;
@@ -290,6 +227,7 @@ rule BPMNShape
 		modelElement.valuePart = s.modelElement.getEReference();
 		t.body.add(modelElement);
 	}
+	//BPMNShape -> EReference : style
 	if (s.style.getEReference() != null){
 		var style = new SysMini!PartUsage;
 		style.isReference = true;
@@ -298,6 +236,7 @@ rule BPMNShape
 		style.valuePart = s.style.getEReference();
 		t.body.add(style);
 	}
+	//BPMNShape -> EReference : bounds
 	if (s.bounds.getEReference() != null){
 		var bounds = new SysMini!PartUsage;
 		bounds.isReference = true;
@@ -306,6 +245,7 @@ rule BPMNShape
 		bounds.valuePart = s.bounds.getEReference();
 		t.body.add(bounds);
 	}
+	//BPMNShape -> EReference : ownedLabel
 	if (s.ownedLabel.getEReference() != null){
 		var ownedLabel = new SysMini!PartUsage;
 		ownedLabel.isReference = true;
@@ -314,6 +254,7 @@ rule BPMNShape
 		ownedLabel.valuePart = s.ownedLabel.getEReference();
 		t.body.add(ownedLabel);
 	}
+	//BPMNShape -> EReference : bpmnElement
 	if (s.bpmnElement.getEReference() != null){
 		var bpmnElement = new SysMini!PartUsage;
 		bpmnElement.isReference = true;
@@ -322,6 +263,7 @@ rule BPMNShape
 		bpmnElement.valuePart = s.bpmnElement.getEReference();
 		t.body.add(bpmnElement);
 	}
+	//BPMNShape -> EReference : label
 	if (s.label.getEReference() != null){
 		var label = new SysMini!PartUsage;
 		label.isReference = true;
@@ -330,6 +272,7 @@ rule BPMNShape
 		label.valuePart = s.label.getEReference();
 		t.body.add(label);
 	}
+	//BPMNShape -> EReference : choreographyActivityShape
 	if (s.choreographyActivityShape.getEReference() != null){
 		var choreographyActivityShape = new SysMini!PartUsage;
 		choreographyActivityShape.isReference = true;
@@ -345,6 +288,7 @@ rule BPMNLabel
 	transform s : DSL!BPMNLabel
 	to t : SysMini!PartUsage
 	extends Base{
+	//BPMNLabel -> EReference : owningDiagram
 	if (s.owningDiagram.getEReference() != null){
 		var owningDiagram = new SysMini!PartUsage;
 		owningDiagram.isReference = true;
@@ -353,6 +297,7 @@ rule BPMNLabel
 		owningDiagram.valuePart = s.owningDiagram.getEReference();
 		t.body.add(owningDiagram);
 	}
+	//BPMNLabel -> EReference : owningElement
 	if (s.owningElement.getEReference() != null){
 		var owningElement = new SysMini!PartUsage;
 		owningElement.isReference = true;
@@ -361,6 +306,7 @@ rule BPMNLabel
 		owningElement.valuePart = s.owningElement.getEReference();
 		t.body.add(owningElement);
 	}
+	//BPMNLabel -> EReference : ownedElement
 	if (s.ownedElement.getEReference() != null){
 		var ownedElement = new SysMini!PartUsage;
 		ownedElement.isReference = true;
@@ -369,6 +315,7 @@ rule BPMNLabel
 		ownedElement.valuePart = s.ownedElement.getEReference();
 		t.body.add(ownedElement);
 	}
+	//BPMNLabel -> EReference : modelElement
 	if (s.modelElement.getEReference() != null){
 		var modelElement = new SysMini!PartUsage;
 		modelElement.isReference = true;
@@ -377,6 +324,7 @@ rule BPMNLabel
 		modelElement.valuePart = s.modelElement.getEReference();
 		t.body.add(modelElement);
 	}
+	//BPMNLabel -> EReference : style
 	if (s.style.getEReference() != null){
 		var style = new SysMini!PartUsage;
 		style.isReference = true;
@@ -385,6 +333,7 @@ rule BPMNLabel
 		style.valuePart = s.style.getEReference();
 		t.body.add(style);
 	}
+	//BPMNLabel -> EReference : bounds
 	if (s.bounds.getEReference() != null){
 		var bounds = new SysMini!PartUsage;
 		bounds.isReference = true;
@@ -393,6 +342,7 @@ rule BPMNLabel
 		bounds.valuePart = s.bounds.getEReference();
 		t.body.add(bounds);
 	}
+	//BPMNLabel -> EReference : labelStyle
 	if (s.labelStyle.getEReference() != null){
 		var labelStyle = new SysMini!PartUsage;
 		labelStyle.isReference = true;
@@ -408,6 +358,7 @@ rule BPMNLabelStyle
 	transform s : DSL!BPMNLabelStyle
 	to t : SysMini!PartUsage
 	extends Base{
+	//BPMNLabelStyle -> EReference : font
 	if (s.font.getEReference() != null){
 		var font = new SysMini!PartUsage;
 		font.isReference = true;
@@ -423,6 +374,7 @@ rule BPMNEdge
 	transform s : DSL!BPMNEdge
 	to t : SysMini!PartUsage
 	extends Base{
+	//BPMNEdge -> EAttribute : messageVisibleKind
 	if (s.messageVisibleKind.getEAttribute() != null){
 		var messageVisibleKind = new SysMini!AttributeUsage;
 		messageVisibleKind.featureNote.add(":>>");
@@ -430,6 +382,7 @@ rule BPMNEdge
 		messageVisibleKind.valuePart = s.messageVisibleKind.getEAttribute();
 		t.body.add(messageVisibleKind);
 	}
+	//BPMNEdge -> EReference : owningDiagram
 	if (s.owningDiagram.getEReference() != null){
 		var owningDiagram = new SysMini!PartUsage;
 		owningDiagram.isReference = true;
@@ -438,6 +391,7 @@ rule BPMNEdge
 		owningDiagram.valuePart = s.owningDiagram.getEReference();
 		t.body.add(owningDiagram);
 	}
+	//BPMNEdge -> EReference : owningElement
 	if (s.owningElement.getEReference() != null){
 		var owningElement = new SysMini!PartUsage;
 		owningElement.isReference = true;
@@ -446,6 +400,7 @@ rule BPMNEdge
 		owningElement.valuePart = s.owningElement.getEReference();
 		t.body.add(owningElement);
 	}
+	//BPMNEdge -> EReference : ownedElement
 	if (s.ownedElement.getEReference() != null){
 		var ownedElement = new SysMini!PartUsage;
 		ownedElement.isReference = true;
@@ -454,6 +409,7 @@ rule BPMNEdge
 		ownedElement.valuePart = s.ownedElement.getEReference();
 		t.body.add(ownedElement);
 	}
+	//BPMNEdge -> EReference : modelElement
 	if (s.modelElement.getEReference() != null){
 		var modelElement = new SysMini!PartUsage;
 		modelElement.isReference = true;
@@ -462,6 +418,7 @@ rule BPMNEdge
 		modelElement.valuePart = s.modelElement.getEReference();
 		t.body.add(modelElement);
 	}
+	//BPMNEdge -> EReference : style
 	if (s.style.getEReference() != null){
 		var style = new SysMini!PartUsage;
 		style.isReference = true;
@@ -470,6 +427,7 @@ rule BPMNEdge
 		style.valuePart = s.style.getEReference();
 		t.body.add(style);
 	}
+	//BPMNEdge -> EReference : source
 	if (s.source.getEReference() != null){
 		var source = new SysMini!PartUsage;
 		source.isReference = true;
@@ -478,6 +436,7 @@ rule BPMNEdge
 		source.valuePart = s.source.getEReference();
 		t.body.add(source);
 	}
+	//BPMNEdge -> EReference : target
 	if (s.target.getEReference() != null){
 		var target = new SysMini!PartUsage;
 		target.isReference = true;
@@ -486,6 +445,7 @@ rule BPMNEdge
 		target.valuePart = s.target.getEReference();
 		t.body.add(target);
 	}
+	//BPMNEdge -> EReference : waypoint
 	if (s.waypoint.getEReference() != null){
 		var waypoint = new SysMini!PartUsage;
 		waypoint.isReference = true;
@@ -494,6 +454,7 @@ rule BPMNEdge
 		waypoint.valuePart = s.waypoint.getEReference();
 		t.body.add(waypoint);
 	}
+	//BPMNEdge -> EReference : ownedLabel
 	if (s.ownedLabel.getEReference() != null){
 		var ownedLabel = new SysMini!PartUsage;
 		ownedLabel.isReference = true;
@@ -502,6 +463,7 @@ rule BPMNEdge
 		ownedLabel.valuePart = s.ownedLabel.getEReference();
 		t.body.add(ownedLabel);
 	}
+	//BPMNEdge -> EReference : label
 	if (s.label.getEReference() != null){
 		var label = new SysMini!PartUsage;
 		label.isReference = true;
@@ -510,6 +472,7 @@ rule BPMNEdge
 		label.valuePart = s.label.getEReference();
 		t.body.add(label);
 	}
+	//BPMNEdge -> EReference : bpmnElement
 	if (s.bpmnElement.getEReference() != null){
 		var bpmnElement = new SysMini!PartUsage;
 		bpmnElement.isReference = true;
@@ -518,6 +481,7 @@ rule BPMNEdge
 		bpmnElement.valuePart = s.bpmnElement.getEReference();
 		t.body.add(bpmnElement);
 	}
+	//BPMNEdge -> EReference : sourceElement
 	if (s.sourceElement.getEReference() != null){
 		var sourceElement = new SysMini!PartUsage;
 		sourceElement.isReference = true;
@@ -526,6 +490,7 @@ rule BPMNEdge
 		sourceElement.valuePart = s.sourceElement.getEReference();
 		t.body.add(sourceElement);
 	}
+	//BPMNEdge -> EReference : targetElement
 	if (s.targetElement.getEReference() != null){
 		var targetElement = new SysMini!PartUsage;
 		targetElement.isReference = true;
@@ -541,6 +506,7 @@ rule BPMNDiagram
 	transform s : DSL!BPMNDiagram
 	to t : SysMini!PartUsage
 	extends Base{
+	//BPMNDiagram -> EAttribute : name
 	if (s.name.getEAttribute() != null){
 		var name = new SysMini!AttributeUsage;
 		name.featureNote.add(":>>");
@@ -548,6 +514,7 @@ rule BPMNDiagram
 		name.valuePart = s.name.getEAttribute();
 		t.body.add(name);
 	}
+	//BPMNDiagram -> EAttribute : documentation
 	if (s.documentation.getEAttribute() != null){
 		var documentation = new SysMini!AttributeUsage;
 		documentation.featureNote.add(":>>");
@@ -555,6 +522,7 @@ rule BPMNDiagram
 		documentation.valuePart = s.documentation.getEAttribute();
 		t.body.add(documentation);
 	}
+	//BPMNDiagram -> EAttribute : resolution
 	if (s.resolution.getEAttribute() != null){
 		var resolution = new SysMini!AttributeUsage;
 		resolution.featureNote.add(":>>");
@@ -562,6 +530,7 @@ rule BPMNDiagram
 		resolution.valuePart = s.resolution.getEAttribute();
 		t.body.add(resolution);
 	}
+	//BPMNDiagram -> EReference : ownedStyle
 	if (s.ownedStyle.getEReference() != null){
 		var ownedStyle = new SysMini!PartUsage;
 		ownedStyle.isReference = true;
@@ -570,6 +539,7 @@ rule BPMNDiagram
 		ownedStyle.valuePart = s.ownedStyle.getEReference();
 		t.body.add(ownedStyle);
 	}
+	//BPMNDiagram -> EReference : rootElement
 	if (s.rootElement.getEReference() != null){
 		var rootElement = new SysMini!PartUsage;
 		rootElement.isReference = true;
@@ -578,6 +548,7 @@ rule BPMNDiagram
 		rootElement.valuePart = s.rootElement.getEReference();
 		t.body.add(rootElement);
 	}
+	//BPMNDiagram -> EReference : plane
 	if (s.plane.getEReference() != null){
 		var plane = new SysMini!PartUsage;
 		plane.isReference = true;
@@ -586,6 +557,7 @@ rule BPMNDiagram
 		plane.valuePart = s.plane.getEReference();
 		t.body.add(plane);
 	}
+	//BPMNDiagram -> EReference : labelStyle
 	if (s.labelStyle.getEReference() != null){
 		var labelStyle = new SysMini!PartUsage;
 		labelStyle.isReference = true;

@@ -80,12 +80,38 @@ operation Sequence getSequenceExpression(){
 
 operation DSL!EObject getExtendedDeclaredName(){
 	var eObjectTuple = eObjectSequence.select(s|s.value == self).first();
-	return eObjectTuple.key;
+	var str = eObjectTuple.value.extendEContainer("");
+	if (str.length()>1){
+		str = str.subString(1, str.length());
+		str += "."+eObjectTuple.key;
+	}
+	else{
+		str = eObjectTuple.key;
+	}
+	return str;
 }
+
+operation DSL!EObject extendEContainer(str : String){
+	if (self.eContainer() != null and self.eContainer().getDeclaredName() != null){
+		str = self.eContainer().extendEContainer(str);
+		if (self.eContainer().eContainer().isUndefined()){
+			return "";
+		}
+		return str+"."+self.eContainer().getDeclaredName();
+	}
+	else{
+		return str;
+	}
+} 
 
 operation DSL!EObject getDeclaredName(){
 	var eObjectTuple = eObjectSequence.select(s|s.value == self).first();
-	return eObjectTuple.key;
+	if (eObjectTuple != null){
+		return eObjectTuple.key;
+	}
+	else{
+		return null;
+	}
 }
 
 operation DSL!EObject getfeatureSpecialization(){
