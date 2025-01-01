@@ -29,7 +29,7 @@ operation main_[%=fileName%](){
 
 operation init_[%=fileName%](){
 	[%for (eClass in root.eClassifiers.select(s|s.type().name == "EClass")){%]
-	//A new name -> [%=eClass.name%].
+	//[%=eClass.name%] -> Instantiation
 	var id[%=eClass.name%] = 0;
 	for (e[%=eClass.name%] in DSL!EObject.all.select(s|s.isTypeOf(DSL![%=eClass.name%]))){
 		var e[%=eClass.name%]Tuple = Tuple{"key"=e[%=eClass.name%].type().name.asString()+"_"+(id[%=eClass.name%]++).asString(),"value"= e[%=eClass.name%]};

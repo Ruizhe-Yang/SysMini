@@ -25,37 +25,37 @@ operation main_bpmdi(){
 }
 
 operation init_bpmdi(){
-	//A new name -> BPMNPlane.
+	//BPMNPlane -> Instantiation
 	var idBPMNPlane = 0;
 	for (eBPMNPlane in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNPlane))){
 		var eBPMNPlaneTuple = Tuple{"key"=eBPMNPlane.type().name.asString()+"_"+(idBPMNPlane++).asString(),"value"= eBPMNPlane};
 		eObjectSequence.add(eBPMNPlaneTuple);
 	}
-	//A new name -> BPMNShape.
+	//BPMNShape -> Instantiation
 	var idBPMNShape = 0;
 	for (eBPMNShape in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNShape))){
 		var eBPMNShapeTuple = Tuple{"key"=eBPMNShape.type().name.asString()+"_"+(idBPMNShape++).asString(),"value"= eBPMNShape};
 		eObjectSequence.add(eBPMNShapeTuple);
 	}
-	//A new name -> BPMNLabel.
+	//BPMNLabel -> Instantiation
 	var idBPMNLabel = 0;
 	for (eBPMNLabel in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabel))){
 		var eBPMNLabelTuple = Tuple{"key"=eBPMNLabel.type().name.asString()+"_"+(idBPMNLabel++).asString(),"value"= eBPMNLabel};
 		eObjectSequence.add(eBPMNLabelTuple);
 	}
-	//A new name -> BPMNLabelStyle.
+	//BPMNLabelStyle -> Instantiation
 	var idBPMNLabelStyle = 0;
 	for (eBPMNLabelStyle in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNLabelStyle))){
 		var eBPMNLabelStyleTuple = Tuple{"key"=eBPMNLabelStyle.type().name.asString()+"_"+(idBPMNLabelStyle++).asString(),"value"= eBPMNLabelStyle};
 		eObjectSequence.add(eBPMNLabelStyleTuple);
 	}
-	//A new name -> BPMNEdge.
+	//BPMNEdge -> Instantiation
 	var idBPMNEdge = 0;
 	for (eBPMNEdge in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNEdge))){
 		var eBPMNEdgeTuple = Tuple{"key"=eBPMNEdge.type().name.asString()+"_"+(idBPMNEdge++).asString(),"value"= eBPMNEdge};
 		eObjectSequence.add(eBPMNEdgeTuple);
 	}
-	//A new name -> BPMNDiagram.
+	//BPMNDiagram -> Instantiation
 	var idBPMNDiagram = 0;
 	for (eBPMNDiagram in DSL!EObject.all.select(s|s.isTypeOf(DSL!BPMNDiagram))){
 		var eBPMNDiagramTuple = Tuple{"key"=eBPMNDiagram.type().name.asString()+"_"+(idBPMNDiagram++).asString(),"value"= eBPMNDiagram};
