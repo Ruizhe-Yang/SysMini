@@ -43,7 +43,7 @@ rule EAttribute
 		t.declaredName = s.name.clearKeyWord();
 		t.multiplicityRange = s.getRange();
 		t.featureNote.add(":");
-		t.featureSpecialization.add(s.eContents().first().eClassifier.name);
+		t.featureSpecialization.add(s.eContents().select(i|i.isTypeOf(Ecore!EGenericType)).first().eClassifier.name);
 	}
 	
 @lazy
@@ -54,7 +54,7 @@ rule EReference_val
 		t.declaredName = s.name.clearKeyWord();
 		t.multiplicityRange = s.getRange();
 		t.featureNote.add(":");
-		t.featureSpecialization.add(s.eContents().first().eClassifier.name);
+		t.featureSpecialization.add(s.eContents().select(i|i.isTypeOf(Ecore!EGenericType)).first().eClassifier.name);
 	}
 
 //@lazy
@@ -78,7 +78,7 @@ rule EReference_ref
 		t.declaredName = s.name.clearKeyWord();
 		t.multiplicityRange = s.getRange();
 		t.featureNote.add(":");
-		t.featureSpecialization.add(s.eContents().first().eClassifier.name);
+		t.featureSpecialization.add(s.eContents().select(i|i.isTypeOf(Ecore!EGenericType)).first().eClassifier.name);
 	}
 	
 @lazy
