@@ -1,4 +1,4 @@
-package bpmn2_model {
+package bpmn2_model_t{
 	private import bpmn2::*;
 	part Definitions_1 : Definitions {
 		attribute :>> id = "_VgLhQajBEeK_xvwrSf5u4w";

@@ -1282,9 +1282,11 @@ operation SysMini!Feature FeatureSpecializationPart() : String {
 	if (self.featureNote.size() > 1){
 		str += self.multiplicityRange.space();
 	}
-	for (i in 1.to(self.featureNote.size())){
-		str += self.featureNote.at(i-1).space();
-		str += self.featureSpecialization.at(i-1).space();
+	if (self.featureNote.size() != 0){
+		for (i in 1.to(self.featureNote.size())){
+			str += self.featureNote.at(i-1).space();
+			str += self.featureSpecialization.at(i-1).space();
+		}
 	}
 	if (self.featureNote.size() == 1){
 		str += self.multiplicityRange.space();
