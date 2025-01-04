@@ -13,7 +13,7 @@
 - 存在Import多层引用问题，如501、502行
 - DeclaredShortName缩写字符问题
 - Expression未测试完全
-- 校对
+- 全部校对
 
 ### 未解决的BUG
 
