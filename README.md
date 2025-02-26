@@ -1,9 +1,15 @@
-# SysMini: A Framework for Integrating SysML v2 and Domain-Specific Languages
+# ~~SysMini: A Framework for Integrating SysML v2 and Domain-Specific Languages~~
+
+**该部分工作迁移至[SysMLine](https://github.com/Ruizhe-Yang/SysMLine/)中，现已版本冻结。**
 
 ![LOGO](https://github.com/Ruizhe-Yang/SysMini/blob/main/logo.png)
 ![SysMini Architecture](https://github.com/Ruizhe-Yang/SysMini/blob/main/SysMini%20architecture.png)
 
-## 当前存在的若干问题
+## 当前版本实现的工作
+
+完成技术验证、实现双向转换功能、开发了五个转换工具。
+
+## 该版本存在的若干问题
 
 ### 未完成的工作
 

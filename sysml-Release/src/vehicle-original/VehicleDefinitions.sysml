@@ -12,7 +12,7 @@ package VehicleDefinitions {
 	
 	/* PART DEFINITIONS */
 	
-	part def Vehicle {
+	part def Vehicle{
 		attribute mass :> ISQ::mass;
 	}
 	part def Transmission;	
@@ -48,7 +48,7 @@ package VehicleDefinitions {
 		doc /* The definition of the interface for mounting a Wheel to an Axle. */
 		end port axleMount: AxleMountIF;
 		end port hub: WheelHubIF;
-		
 		flow axleMount.transferredTorque to hub.appliedTorque;
 	}
+
 }

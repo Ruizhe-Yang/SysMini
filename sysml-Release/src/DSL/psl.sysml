@@ -8,7 +8,7 @@ package psl {
 	}
 	part def Task {
 		attribute title : EString [1];
-		attribute start : EInt [1];
+		attribute 'start' : EInt [1];
 		attribute duration : EInt [1];
 		part effort : Effort [*];
 	}
